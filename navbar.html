@@ -1,0 +1,281 @@
+<!-- Navbar -->
+<header
+  id="main-navbar"
+  class="flex items-center justify-between p-4 md:p-6 md:px-20 fixed top-0 left-0 right-0 z-50 bg-white "
+>
+  <!-- Logo -->
+  <div class="flex items-center space-x-2 cursor-pointer" onclick="window.location.href='/index.html'">
+    <img src="/assets/mglogo.svg" alt="Logo" class="h-12" />
+  </div>
+  
+  <button
+    id="mobile-menu-button"
+    class="md:hidden focus:outline-none"
+    aria-label="Toggle menu"
+  >
+    <i data-lucide="menu" class="w-6 h-6"></i>
+  </button>
+
+  <!-- Desktop Navigation -->
+  <nav class="hidden md:flex space-x-6 items-center">
+    <a
+      href="/about.html"
+      class="text-[#1D1B20] font-medium hover:text-[#003C84]"
+      >About Us</a
+    >
+
+    <!-- Services dropdown -->
+    <div class="group relative inline-block">
+      <button
+        class="text-[#1D1B20] flex items-center font-medium hover:text-[#003C84] focus:outline-none"
+      >
+        Services
+        <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
+      </button>
+      <div
+        class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52"
+      >
+        <a
+          href="/services/managed.html"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          >Managed Services</a
+        >
+        <a
+          href="/services/consulting.html"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          >Staffing Services</a
+        >
+      </div>
+    </div>
+
+    <!-- Products dropdown -->
+    <div class="group relative inline-block">
+      <button
+        class="text-[#1D1B20] flex items-center font-medium hover:text-[#003C84] focus:outline-none"
+      >
+        Products
+        <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
+      </button>
+      <div
+        class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52"
+      >
+        <a
+          href="/products/optiSaasAi.html"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          >OptiSaaSAI</a
+        >
+        <a
+          href="/products/tms.html"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          >TMS</a
+        >
+      </div>
+    </div>
+    <a
+        href="/contact.html"
+        class="text-[#1D1B20] font-medium py-2 border-b border-gray-100"
+        >Contact Us</a
+      >
+  </nav>
+
+  <!-- Contact Button (Desktop) -->
+  <div class="hidden md:block">
+    <a href="/contact.html">
+      <button
+        class="bg-[#003C84] text-white px-4 py-2 rounded-full hover:bg-blue-700"
+      >
+        Get in Touch
+      </button>
+    </a>
+  </div>
+
+  <!-- Mobile Navigation (hidden by default) -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-white z-50 hidden flex-col p-6 pt-20 overflow-y-auto"
+  >
+    <button
+      id="close-menu-button"
+      class="absolute top-4 right-4 focus:outline-none"
+      aria-label="Close menu"
+
+    >
+      <i data-lucide="x" class="w-6 h-6"></i>
+    </button>
+
+    <nav class="flex flex-col space-y-4">
+      <a
+        href="/index.html"
+        class="text-[#1D1B20] font-medium py-2 border-b border-gray-100"
+        >Home</a
+      >
+      <a
+        href="/about.html"
+        class="text-[#1D1B20] font-medium py-2 border-b border-gray-100"
+        >About Us</a
+      >
+
+      <!-- Mobile Services dropdown -->
+      <div class="mobile-dropdown">
+        <button
+          class="mobile-dropdown-toggle w-full text-left flex justify-between items-center text-[#1D1B20] font-medium py-2 border-b border-gray-100"
+        >
+          Services
+          <i
+            data-lucide="chevron-down"
+            class="transition-transform w-4 h-4"
+          ></i>
+        </button>
+        <div class="mobile-dropdown-content hidden pl-4 py-2 space-y-2">
+          <a
+            href="/services/managed.html"
+            class="block py-2 text-sm text-gray-700"
+            >Managed Services</a
+          >
+          <a
+            href="/services/consulting.html"
+            class="block py-2 text-sm text-gray-700"
+            >Staffing Services</a
+          >
+        </div>
+      </div>
+
+      <!-- Mobile Solutions dropdown -->
+      <div class="mobile-dropdown">
+        <button
+          class="mobile-dropdown-toggle w-full text-left flex justify-between items-center text-[#1D1B20] font-medium py-2 border-b border-gray-100"
+        >
+          Solutions
+          <i
+            data-lucide="chevron-down"
+            class="transition-transform w-4 h-4"
+          ></i>
+        </button>
+        <div class="mobile-dropdown-content hidden pl-4 py-2 space-y-2">
+          <a
+            href="/solutions/softwareDevelopmenr.html"
+            class="block py-2 text-sm text-gray-700"
+            >Software Development</a
+          >
+          <a
+            href="/solutions/design.html"
+            class="block py-2 text-sm text-gray-700"
+            >Design</a
+          >
+        </div>
+      </div>
+
+      <!-- Mobile Products dropdown -->
+      <div class="mobile-dropdown">
+        <button
+          class="mobile-dropdown-toggle w-full text-left flex justify-between items-center text-[#1D1B20] font-medium py-2 border-b border-gray-100"
+        >
+          Products
+          <i
+            data-lucide="chevron-down"
+            class="transition-transform w-4 h-4"
+          ></i>
+        </button>
+        <div class="mobile-dropdown-content hidden pl-4 py-2 space-y-2">
+          <a
+            href="/products/optiSaasAi.html"
+            class="block py-2 text-sm text-gray-700"
+            >OptiSaaSAI</a
+          >
+          <a href="/products/tms.html" class="block py-2 text-sm text-gray-700"
+            >TMS</a
+          >
+        </div>
+      </div>
+
+      <!-- Contact Button (Mobile) -->
+      <div class="pt-4">
+        <a href="/contact.html">
+          <button
+            class="bg-[#003C84] text-white px-4 py-2 rounded-full hover:bg-blue-700 w-full"
+          >
+            Contact Us
+          </button>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Add padding to the body to prevent content from being hidden behind the fixed header -->
+<style>
+  body {
+    padding-top: 80px; /* Adjust this value based on your header height */
+  }
+  
+  @media (min-width: 768px) {
+    body {
+      padding-top: 88px; /* Adjust for larger header on desktop */
+    }
+  }
+</style>
+
+<!-- Include Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  // Initialize Lucide icons
+  lucide.createIcons();
+
+  // Mobile menu functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const closeMenuButton = document.getElementById("close-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    // Check if the mobile menu button and menu exist
+    if (!mobileMenuButton || !mobileMenu) {
+      console.error("Mobile menu button or menu is missing.");
+      return;
+    }
+
+    // Toggle mobile menu visibility when the button is clicked
+    mobileMenuButton.addEventListener("click", function () {
+      console.log("Mobile menu button clicked"); // To confirm button click
+      mobileMenu.classList.toggle("hidden");
+      mobileMenu.classList.toggle("flex");
+      document.body.classList.toggle("overflow-hidden");
+
+      // Log message when mobile menu is opened or closed
+      if (!mobileMenu.classList.contains("hidden")) {
+        console.log("Mobile menu opened");
+      } else {
+        console.log("Mobile menu closed");
+      }
+    });
+
+    // Close mobile menu when the close button is clicked
+    closeMenuButton.addEventListener("click", function () {
+      mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("flex");
+      document.body.classList.remove("overflow-hidden");
+      console.log("Mobile menu closed");
+    });
+
+    // Mobile dropdowns
+    const mobileDropdownToggles = document.querySelectorAll(
+      ".mobile-dropdown-toggle"
+    );
+
+    mobileDropdownToggles.forEach((toggle) => {
+      toggle.addEventListener("click", function () {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+        // Toggle dropdown content visibility
+        content.classList.toggle("hidden");
+
+        // Rotate the icon based on dropdown state
+        if (content.classList.contains("hidden")) {
+          icon.style.transform = "rotate(0deg)";
+        } else {
+          icon.style.transform = "rotate(180deg)";
+        }
+      });
+    });
+  });
+</script>
