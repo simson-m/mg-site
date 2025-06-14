@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symbiosis Consulting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/global.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        fetch("/navbar.html")
+          .then((res) => res.text())
+          .then((data) => {
+            document.getElementById("navbar").innerHTML = data;
+            lucide.createIcons(); // Initialize icons after insertion
+
+            // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+            const mobileMenuButton =
+              document.getElementById("mobile-menu-button");
+            const closeMenuButton =
+              document.getElementById("close-menu-button");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            if (!mobileMenuButton || !mobileMenu) {
+              console.error("Mobile menu button or menu is missing.");
+              return;
+            }
+
+            mobileMenuButton.addEventListener("click", function () {
+              console.log("Mobile menu button clicked");
+              mobileMenu.classList.toggle("hidden");
+              mobileMenu.classList.toggle("flex");
+              document.body.classList.toggle("overflow-hidden");
+            });
+
+            closeMenuButton.addEventListener("click", function () {
+              mobileMenu.classList.add("hidden");
+              mobileMenu.classList.remove("flex");
+              document.body.classList.remove("overflow-hidden");
+            });
+
+            const mobileDropdownToggles = document.querySelectorAll(
+              ".mobile-dropdown-toggle"
+            );
+
+            mobileDropdownToggles.forEach((toggle) => {
+              toggle.addEventListener("click", function () {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+                content.classList.toggle("hidden");
+                icon.style.transform = content.classList.contains("hidden")
+                  ? "rotate(0deg)"
+                  : "rotate(180deg)";
+              });
+            });
+          });
+      });
+    </script>
+    <style>
+      .testimonial-slide {
+        transition: opacity 0.5s ease-in-out;
+      }
+      .testimonial-slide:not(.active) {
+        display: none;
+        opacity: 0;
+      }
+      .testimonial-slide.active {
+        display: flex;
+        opacity: 1;
+      }
+      .hero-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-800">
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <section
+      class="relative w-full h-96 md:h-screen md:max-h-[500px] lg:max-h-[500px] overflow-hidden bg-gray-900"
+    >
+      <!-- Background Image -->
+      <div
+        class="absolute inset-0 w-full h-full bg-cover bg-center"
+        style="background-image: url('/assets/about_bg.png')"
+      ></div>
+
+      <div
+        class="relative h-full flex flex-col justify-center px-6 md:px-12 lg:px-24 text-white max-w-full mx-auto"
+      >
+        <!-- Small Caption Text -->
+        <p class="text-sm md:text-base font-medium mb-2 md:mb-3">Innovate</p>
+
+        <!-- Main Heading -->
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
+          Empowering Your Business
+        </h1>
+
+        <!-- Subheading Text -->
+        <p class="text-sm md:text-base mb-6 md:mb-8">
+          Discover tailored IT solutions that drive efficiency and growth for
+          your organization.
+        </p>
+
+        <!-- Call to Action Buttons -->
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/contact.html"
+            class="bg-white text-blue-900 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition duration-300"
+          >
+            Learn More
+          </a>
+          <a
+            href="/contact.html"
+            class="border border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:bg-opacity-10 transition duration-300"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-6 md:px-20 max-w-full mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight"
+          >
+            Discover the Expertise Behind Symbiosis Consulting's Innovative IT
+            Solutions
+          </h2>
+        </div>
+
+        <div>
+          <p class="text-gray-700 text-base md:text-lg">
+            Symbiosis Consulting has been a trusted partner for businesses
+            seeking comprehensive IT solutions for over a decade. Based in
+            Shakopee, MN, we specialize in Enterprise IT Applications
+            Development and Recruiting Services. Our commitment to excellence
+            has made us a preferred choice for Fortune 1000 clients and national
+            integrators across the United States.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero Banner Section -->
+    <section class="w-full overflow-hidden">
+      <div class="relative w-full">
+        <img
+          src="/assets/about.png"
+          alt="About Symbiosis"
+          class="w-full h-48 sm:h-64 md:h-80 lg:h-[80vh] object-cover px-0 sm:px-4 md:px-10 lg:px-20"
+        />
+      </div>
+    </section>
+
+    <!-- Why Our Expertise Section -->
+    <section
+      class="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 md:px-10 lg:px-20 max-w-full mx-auto"
+    >
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start md:items-center"
+      >
+        <div class="mb-4 md:mb-0">
+          <h2
+            class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-tight"
+          >
+            Why Our Expertise Makes a Difference for Your Business Success
+          </h2>
+        </div>
+
+        <div>
+          <p class="text-sm sm:text-base md:text-lg text-gray-700">
+            At Symbiosis Consulting, our success is driven by our talented IT
+            professionals. With extensive industry knowledge and a collaborative
+            approach, we partner with clients to transform their visions into
+            reality. Whether you require immediate expertise or a strategic ally
+            for digital transformation, we are here to elevate your business.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Symbiosis Section -->
+    <section class="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 md:px-10 lg:px-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <!-- Text Content -->
+        <div class="order-2 md:order-1">
+          <h2
+            class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-7 leading-tight"
+          >
+            Why Choose Symbiosis for Your IT Needs?
+          </h2>
+          <div
+            class="text-sm sm:text-base text-[#1D1B20] mb-4 pr-0 md:pr-6 leading-relaxed"
+          >
+            In an ever-evolving landscape, Symbiosis Consulting is your
+            steadfast partner in technology. We empower your business to
+            innovate and thrive, ensuring you stay ahead of the competition.
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="flex justify-center order-1 md:order-2 mb-6 md:mb-0">
+          <img
+            src="/assets/symbiosis.png"
+            alt="IT Solutions"
+            class="rounded-xl shadow-lg w-full h-48 sm:h-64 md:h-80 lg:h-[60vh] object-cover"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <div
+      class="max-w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-20 py-8 sm:py-12"
+    >
+      <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+        <!-- Heading Section -->
+        <div class="w-full md:w-1/2 mb-6 md:mb-0">
+          <h1
+            class="text-2xl sm:text-3xl md:text-4xl font-bold text-black leading-tight"
+          >
+            Our Core Values: The Heart of Symbiosis Consulting Service
+          </h1>
+        </div>
+
+        <!-- Values Section -->
+        <div class="w-full md:w-1/2">
+          <ul class="space-y-3 sm:space-y-4">
+            <li class="flex flex-col sm:flex-row sm:items-start">
+              <span
+                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
+                >Best People-
+              </span>
+              <span class="text-sm sm:text-base">
+                We attract, nurture, and develop the best talent with a strong
+                'can-do' attitude.
+              </span>
+            </li>
+
+            <li class="flex flex-col sm:flex-row sm:items-start">
+              <span
+                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
+                >Client Value Creation-
+              </span>
+              <span class="text-sm sm:text-base">
+                We focus on execution excellence and building long-term, win-win
+                relationships to improve our clients' performance.
+              </span>
+            </li>
+
+            <li class="flex flex-col sm:flex-row sm:items-start">
+              <span
+                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
+                >One Global Network-
+              </span>
+              <span class="text-sm sm:text-base">
+                We harness the power of global collaboration to deliver
+                consistent, high-quality service anywhere in the world.
+              </span>
+            </li>
+
+            <li class="flex flex-col sm:flex-row sm:items-start">
+              <span
+                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
+                >Respect for the Individual-
+              </span>
+              <span class="text-sm sm:text-base">
+                We embrace diversity, foster inclusivity, and treat everyone
+                with fairness and dignity.
+              </span>
+            </li>
+
+            <li class="flex flex-col sm:flex-row sm:items-start">
+              <span
+                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
+                >Sincerity & Dedication-
+              </span>
+              <span class="text-sm sm:text-base">
+                We put genuine effort into everything we do, striving to deliver
+                the best for both our clients and our employees.
+              </span>
+            </li>
+
+            <li class="flex flex-col sm:flex-row sm:items-start">
+              <span
+                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
+                >Employee Satisfaction-
+              </span>
+              <span class="text-sm sm:text-base">
+                We don't just aim to satisfy, we aim to delight our team members
+                by aligning all our energies with their success and well-being.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col">
+      <div class="flex-grow"></div>
+
+      <!-- Footer Section -->
+      <footer
+        class="bg-gradient-to-t from-blue-50 to-white p-4 sm:p-6 lg:p-8 text-center"
+      >
+        <div class="container mx-auto px-4 py-4 sm:py-6 lg:py-8">
+          <!-- Logo -->
+          <div class="flex justify-center mb-5">
+            <img
+              src="/assets/logo.png"
+              alt="Symbiosis Logo"
+              class="h-8 sm:h-10"
+            />
+          </div>
+
+          <!-- Mobile Footer Navigation -->
+          <div class="block sm:hidden mb-8">
+            <div class="grid grid-cols-2 gap-y-4 gap-x-2 text-center">
+              <a
+                href="/index.html"
+                class="text-[#1D1B20] font-medium hover:text-blue-600"
+                >Home</a
+              >
+              <a
+                href="/about.html"
+                class="text-[#1D1B20] font-medium hover:text-blue-600"
+                >About Us</a
+              >
+              <a
+                href="/services/managed.html"
+                class="text-[#1D1B20] font-medium hover:text-blue-600"
+                >Services</a
+              >
+              <a
+                href="/solutions/softwareDevelopmenr.html"
+                class="text-[#1D1B20] font-medium hover:text-blue-600"
+                >Solutions</a
+              >
+              <a
+                href="/products/optiSaasAi.html"
+                class="text-[#1D1B20] font-medium hover:text-blue-600"
+                >Products</a
+              >
+              <a
+                href="/contact.html"
+                class="text-[#1D1B20] font-medium hover:text-blue-600"
+                >Contact Us</a
+              >
+            </div>
+          </div>
+
+          <!-- Tablet/Desktop Footer Navigation -->
+          <div
+            class="hidden sm:flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-12"
+          >
+            <a
+              href="/index.html"
+              class="text-[#1D1B20] font-medium hover:text-blue-600"
+              >Home</a
+            >
+            <a
+              href="/about.html"
+              class="text-[#1D1B20] font-medium hover:text-blue-600"
+              >About Us</a
+            >
+
+            <!-- Services dropdown -->
+            <div class="group relative inline-block">
+              <button
+                class="text-[#1D1B20] flex items-center font-medium hover:text-[#003C84] focus:outline-none"
+              >
+                Services
+                <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
+              </button>
+              <div
+                class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52 text-left z-10"
+              >
+                <a
+                  href="/services/managed.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Managed Services</a
+                >
+                <a
+                  href="/services/consulting.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Staffing Services</a
+                >
+              </div>
+            </div>
+
+            <!-- Solutions dropdown -->
+            <div class="group relative inline-block">
+              <button
+                class="text-[#1D1B20] flex items-center font-medium hover:text-[#003C84] focus:outline-none"
+              >
+                Solutions
+                <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
+              </button>
+              <div
+                class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52 text-left z-10"
+              >
+                <a
+                  href="/solutions/softwareDevelopmenr.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Software Development</a
+                >
+                <a
+                  href="/solutions/design.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Design</a
+                >
+              </div>
+            </div>
+
+            <!-- Products dropdown -->
+            <div class="group relative inline-block">
+              <button
+                class="text-[#1D1B20] flex items-center font-medium hover:text-[#003C84] focus:outline-none"
+              >
+                Products
+                <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
+              </button>
+              <div
+                class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52 text-left z-10"
+              >
+                <a
+                  href="/products/optiSaasAi.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >OptiSaaSAI</a
+                >
+                <a
+                  href="/products/tms.html"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >TMS gowri</a
+                >
+              </div>
+            </div>
+
+            <a
+              href="/contact.html"
+              class="text-[#1D1B20] font-medium hover:text-blue-600"
+              >Contact Us</a
+            >
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t border-gray-300 mb-4 sm:mb-6"></div>
+
+          <!-- Bottom section -->
+          <div class="flex flex-col sm:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 sm:mb-0">
+              <a href="#" class="flex items-center">
+                <span class="text-sm sm:text-base text-[#1D1B20]">
+                  © 2025 Symbiosis Consulting. All rights reserved.
+                </span>
+              </a>
+            </div>
+
+            <!-- Legal Links -->
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-6">
+              <a
+                href="/privacyPolicy.html"
+                class="text-sm sm:text-base text-gray-600 underline hover:text-blue-600"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/termsAndConditions.html"
+                class="text-sm sm:text-base text-gray-600 underline hover:text-blue-600"
+              >
+                Terms of Use
+              </a>
+              <a
+                href="/cookiePolicy.html"
+                class="text-sm sm:text-base text-gray-600 underline hover:text-blue-600"
+              >
+                Cookie Preferences
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
