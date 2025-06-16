@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="global.css" />
+    <!-- <link rel="stylesheet" href="styleguide.css" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        /** @type {import('tailwindcss').Config} */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: "var(--black)",
+                        gray: "var(--gray)",
+                        "textbody-text": "var(--textbody-text)",
+                    },
+                    fontFamily: {
+                        "body-body-1-regular": "var(--body-body-1-regular-font-family)",
+                    },
+                },
+            },
+            plugins: [],
+        };
+    </script>
+</head>
+
+<body>
+
+
+    <header class="w-full py-6 px-12 flex justify-between items-center">
+        <div class="logo flex items-center pl-[60px]">
+            <img src="assets/mindgraphLogo.png" alt="MindGraph Logo" class="h-12">
+        </div>
+        <nav class="flex items-center space-x-6">
+            <a href="#" class="text-[#202124]">About Us</a>
+            <a href="#" class="text-[#202124] flex items-center">Services <img src="assets/dropdownArrow.svg"
+                    alt="Dropdown" class="ml-1 w-4 h-4"></a>
+            <a href="#" class="text-[#202124] flex items-center">Products <img src="assets/dropdownArrow.svg"
+                    alt="Dropdown" class="ml-1 w-4 h-4"></a>
+            <a href="#" class="text-[#202124]">Contact Us</a>
+        </nav>
+        <button
+            class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+            Get in Touch
+            <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
+        </button>
+    </header>
+
+    <!-- Hero Banner-->
+    <div>
+        <div class=" h-[230px] flex justify-center items-center bg-cover"
+            style="background-image: url('assets/servicesBanner.png');">
+            <div class="text-white font-semibold text-5xl text-center">
+                Services
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Service Section-->
+    <section class="py-16 px-4 md:pl-20 bg-white">
+        <!-- Heading -->
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+                AI & Data Intelligence Services
+            </h2>
+            <p class="text-[#666666] ">
+                Unlock the power of data and AI to automate decisions, predict outcomes, and drive business growth.
+                We handle everything from strategy and pipelines to real-time analytics and model deployment.
+            </p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Left Image -->
+            <div>
+                <img src="assets/aiService.png" alt="AI Service" class="w-full h-[450px]  object-cover">
+            </div>
+
+            <!-- Right Text Content -->
+            <div class="flex flex-col gap-10 text-gray-800">
+                <!-- What We Offer -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>AI strategy development and roadmap planning</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Data engineering and pipeline automation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Advanced analytics and machine learning model deployment</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Real-time dashboards and decision intelligence platforms</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>MLOps and model lifecycle management</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Why Choose Us -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>AI-first approach tailored to business goals</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Proven frameworks for scalable data and ML operations</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Domain-specific use case accelerators</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Expertise in cloud-native AI and governance</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>End-to-end service from strategy to insight delivery</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Application Developement Section-->
+    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF]">
+        <!-- Heading -->
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+                Application & Development Services
+            </h2>
+            <p class="text-[#666666] ">
+                Design, build, and support powerful business applications with a focus on performance, scalability, and
+                user experience. From custom development to lifecycle management, we ensure your apps evolve with your
+                business.
+            </p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Left Image -->
+            <div>
+                <img src="assets/appService.png" alt="AI Service" class="w-full h-[450px] object-cover">
+            </div>
+
+            <!-- Right Text Content -->
+            <div class="flex flex-col gap-10 text-gray-800">
+                <!-- What We Offer -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Custom application development (web, mobile, enterprise)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Application modernization and migration</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>End-to-end product lifecycle management</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>API integration and microservices architecture</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Performance tuning and ongoing enhancements</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Why Choose Us -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>User-first design with enterprise-grade development</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Agile delivery and DevOps-driven processes</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Cross-platform expertise for seamless UX</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Rapid MVP to production pipeline</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Strong focus on scalability and security</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAP Service Section-->
+    <section class="py-16 px-4 md:pl-20 bg-white">
+        <!-- Heading -->
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+                SAP Enterprise Services
+            </h2>
+            <p class="text-[#666666] ">
+                Keep your SAP systems running smoothly with expert support across application performance, cloud
+                hosting, upgrades, and business continuity planning.</p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Left Image -->
+            <div>
+                <img src="assets/sapService.png" alt="AI Service" class="w-full h-[450px]  object-cover">
+            </div>
+
+            <!-- Right Text Content -->
+            <div class="flex flex-col gap-10 text-gray-800">
+                <!-- What We Offer -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>SAP BASIS and application management</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>SAP on Cloud hosting and optimization</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>SAP S/4HANA migration readiness and support</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Business continuity and disaster recovery planning</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Performance and version upgrades</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Why Choose Us -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Certified SAP professionals with multi-industry experience</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Cloud-native SAP deployment expertise</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>End-to-end operational support with SLAs</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Risk-free migration strategy and governance</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Optimized for performance and business alignment</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CRM Section-->
+    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF]">
+        <!-- Heading -->
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+                CRM & ERP Solutions
+            </h2>
+            <p class="text-[#666666] ">
+                Connect customer engagement and business operations with smart, scalable CRM and ERP platforms tailored
+                to your needs.
+            </p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Left Image -->
+            <div>
+                <img src="assets/crmService.png" alt="AI Service" class="w-full h-[450px] object-cover">
+            </div>
+
+            <!-- Right Text Content -->
+            <div class="flex flex-col gap-10 text-gray-800">
+                <!-- What We Offer -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Salesforce, Zoho, and Microsoft Dynamics CRM implementation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>SAP, Oracle, and Microsoft Dynamics ERP support</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>System integration and automation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Custom workflows and reporting dashboards</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>CRM and ERP security, compliance, and training</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Why Choose Us -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Expertise in both CRM and ERP ecosystems</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Tailored configurations aligned to business needs</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Focus on automation and user adoption</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Secure and compliant architecture</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Data-driven personalization and reporting</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Cloud Infra Section-->
+    <section class="py-16 px-4 md:pl-20 bg-white">
+        <!-- Heading -->
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+                Cloud Infrastructure Services
+            </h2>
+            <p class="text-[#666666] ">
+                Deploy, scale, and manage your cloud environment (AWS, Azure, GCP) with ease—ensuring performance,
+                security, and cost-efficiency every step of the way.
+            </p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Left Image -->
+            <div>
+                <img src="assets/cloudService.png" alt="AI Service" class="w-full h-[450px]  object-cover">
+            </div>
+
+            <!-- Right Text Content -->
+            <div class="flex flex-col gap-10 text-gray-800">
+                <!-- What We Offer -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Cloud strategy and architecture design</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Cloud migration and modernization</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Infrastructure as code and automation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Monitoring, optimization, and governance</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Security and compliance management</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Why Choose Us -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Cloud-agnostic approach across AWS, Azure, GCP</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Automated infrastructure and CI/CD pipelines</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Built-in security and performance monitoring</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Cost optimization and resource planning</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Seamless integration with enterprise systems</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Consulting Section-->
+    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF]">
+        <!-- Heading -->
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+                Consulting & Advisory Services
+            </h2>
+            <p class="text-[#666666] ">
+                Drive innovation and digital maturity with strategic guidance across business and technology
+                domains—focused on sectors like energy, defence, BFSI, healthcare, and logistics.
+            </p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Left Image -->
+            <div>
+                <img src="assets/cloudService.png" alt="AI Service" class="w-full h-[450px] object-cover">
+            </div>
+
+            <!-- Right Text Content -->
+            <div class="flex flex-col gap-10 text-gray-800">
+                <!-- What We Offer -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Industry-specific digital transformation consulting</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>AI and data strategy development</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Technology architecture and innovation planning</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Process modernization and change management</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Regulatory and compliance consulting</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Why Choose Us -->
+                <div>
+                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Deep domain expertise in complex industries</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>End-to-end alignment of business and tech goals</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Strategic and execution-ready recommendations</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Flexible engagement models for advisory and execution</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg"></span>
+                            <span>Trusted by leading enterprises and public sector clients
+
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Review Section-->
+    <section class="flex justify-center py-12 px-4 bg-white pt-[150px]">
+        <div
+            class="relative max-w-6xl w-full rounded-[40px_0px_0px_0px] [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] shadow-md p-6 md:p-10 flex flex-col md:flex-row items-center">
+
+            <!-- Floating quote symbol (top-right) -->
+            <div class="absolute top-[-35px]  text-6xl text-[#9beef1] select-none"><img src="assets/Shape.svg"></div>
+
+            <!-- Left: Testimonial -->
+            <div class="flex-1">
+                <p class="text-[#919CA2] mb-6 pr-[340px]">
+                    Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
+                    and engaging with your target audience on all the social media channels.
+                </p>
+                <div>
+                    <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
+                    <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+                </div>
+            </div>
+
+            <!-- Right: Logo Card with arrows -->
+
+            <div class=" w-[200px] h-[200px]  absolute top-[-70px] right-[30px]  shadow-[0px_0px_12.8px_#0000001a]">
+                <div class=" w-[200px] h-[200px] relative bg-white shadow-[0px_0px_4px_#0000000d]">
+
+                    <img src="assets/kpmg.png" alt="KPMG Logo"
+                        class="h-[30px] object-contain absolute top-[90px] left-[60px]" />
+
+                </div>
+            </div>
+            <!-- Arrows below image -->
+            <div class="flex gap-4 mt-auto absolute top-[145px] right-[90px]">
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowL.svg">
+                </button>
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowR.svg">
+
+                </button>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- Footer-->
+    <div class="bg-white pt-20">
+        <div class="px-[150px] flex items-center justify-between">
+            <img class="" src="assets/mindgraphLogo.png" />
+            <div>
+                <nav class="flex items-center space-x-6">
+                    <a href="#" class="text-[#7E7E7E]">Home</a>
+
+                    <a href="#" class="text-[#7E7E7E]">About Us</a>
+                    <a href="#" class="text-[#7E7E7E] flex items-center">Services <img src="assets/dropdown.svg"
+                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="#" class="text-[#7E7E7E] flex items-center">Products <img src="assets/dropdown.svg"
+                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="#" class="text-[#7E7E7E]">Blogs</a>
+                    <a href="#" class="text-[#7E7E7E]">Careers</a>
+                </nav>
+            </div>
+            <div class="flex">
+                <img src="assets/fb.svg">
+                <img src="assets/x.svg">
+                <img src="assets/youtube.svg">
+                <img src="assets/insta.svg">
+                <img src="assets/lnkedin.svg">
+
+
+            </div>
+
+        </div>
+        <div>
+            <img src="assets/line.svg" class="mt-[20px] px-[130px]">
+        </div>
+        <div>
+            <p
+                class=" mt-[20px] pb-[30px] [font-family:'Roboto',Helvetica] font-normal text-transparent text-sm text-center tracking-[0] leading-[normal]">
+                <span class="text-[#8a8a8f]">© Copyright 2025, </span>
+                <span class="font-semibold text-[#667085]">MindGraph</span>
+                <span class="text-[#8a8a8f]">. All Rights Reserved.</span>
+            </p>
+        </div>
+
+</body>
+
+</html>

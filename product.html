@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="global.css" />
+    <!-- <link rel="stylesheet" href="styleguide.css" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        /** @type {import('tailwindcss').Config} */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: "var(--black)",
+                        gray: "var(--gray)",
+                        "textbody-text": "var(--textbody-text)",
+                    },
+                    fontFamily: {
+                        "body-body-1-regular": "var(--body-body-1-regular-font-family)",
+                    },
+                },
+            },
+            plugins: [],
+        };
+    </script>
+</head>
+
+<body>
+
+
+    <header class="w-full py-6 px-12 flex justify-between items-center">
+        <div class="logo flex items-center pl-[60px]">
+            <img src="assets/mindgraphLogo.png" alt="MindGraph Logo" class="h-12">
+        </div>
+        <nav class="flex items-center space-x-6">
+            <a href="#" class="text-[#202124]">About Us</a>
+            <a href="#" class="text-[#202124] flex items-center">Services <img src="assets/dropdownArrow.svg"
+                    alt="Dropdown" class="ml-1 w-4 h-4"></a>
+            <a href="#" class="text-[#202124] flex items-center">Products <img src="assets/dropdownArrow.svg"
+                    alt="Dropdown" class="ml-1 w-4 h-4"></a>
+            <a href="#" class="text-[#202124]">Contact Us</a>
+        </nav>
+        <button
+            class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+            Get in Touch
+            <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
+        </button>
+    </header>
+
+    <!-- Hero Banner-->
+    <div>
+        <div class=" h-[230px] flex justify-center items-center bg-cover"
+            style="background-image: url('assets/background.png');">
+            <div class="text-white font-semibold text-5xl text-center">
+                Products
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Empowering Section-->
+    <div class="my-[100px] ">
+        <p class="text-[#687da9] text-5xl text-center font-medium">
+            Empowering Innovation with AI-Driven Solutions
+        </p>
+        <p class="text-[#666666] font-normal  text-base text-center tracking-[0.08px] leading-5 mt-[20px] mx-[200px]">
+            At Mindgraph, we build intelligent platforms that empower organizations to make smarter decisions, automate
+            operations, and unlock data-driven insights. Explore our product suite built to transform diverse
+            domains—from
+            customer experience to IT operations, healthcare, ESG compliance, and document management.
+        </p>
+    </div>
+
+    <!-- CustomerDLens Product Section-->
+    <section class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
+
+            <!-- Left: Blue Sidebar Panel with Floating Image -->
+            <div class=" w-full lg:w-1/2 flex justify-center">
+                <!-- Blue Panel -->
+                <div class="absolute w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg "></div>
+
+                <!-- Image (Dashboard) -->
+                <img src="assets/customerDlenAI.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
+            </div>
+
+            <!-- Right: Content -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">CustomerDLens.ai</h3>
+                <h4 class="text-xl text-[#1783F7] mb-4">Transforming Data into Decisions</h4>
+                <p class="text-[#666666] mb-8">
+                    Unlock a 360° customer view with our AI-powered data platform. From ingestion to advanced analytics,
+                    CustomerDLens.ai turns complex data into business intelligence.
+                </p>
+
+                <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
+                <ul class="space-y-1 text-[#666666] text-base">
+                    <li class="flex items-center gap-2 ">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        No-code data ingestion from diverse sources (APIs, Databricks, files, etc.)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Real-time pipeline monitoring with cleansing & validation
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        360° customer view via unified Customer Data Fabric
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Dynamic segmentation using Slice & Dice Algorithm
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        AI-powered recommendations through GEN-AI
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Anomaly detection and historical tracking via Data Quality Dashboard
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SaaS Beam Section-->
+    <section class="bg-[#F7FBFF] py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-16">
+
+            <!-- Left Text Content -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">SaaS Beam</h3>
+                <h4 class="text-xl text-[#1783F7] mb-4">The Future of SaaS & Cloud Management</h4>
+                <p class="text-[#666666] mb-8">
+                    Gain complete control over your SaaS ecosystem with SaaS Beam—designed to reduce costs, prevent
+                    shadow IT, and align SaaS investments with business goals.
+                </p>
+
+                <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
+                <ul class="space-y-2 text-[#666666] text-base">
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Unified dashboard for SaaS and cloud spend visibility
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        AI-driven SaaS Advisor for usage optimization
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Multicloud monitoring with budget threshold alerts
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Centralized SaaS marketplace with reviews and insights
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Automated contract lifecycle and renewal tracking
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Portfolio management across departments and teams
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Image Card with Sidebar -->
+            <div class="w-full lg:w-1/2 flex justify-center ">
+                <!-- Light blue background box -->
+                <div class="absolute  w-[600px] h-[460px] bg-white "></div>
+
+                <!-- Dashboard Image -->
+                <img src="assets/dashboard.png" alt="SaaS Beam Dashboard" class="w-[600px]   relative top-[-120px]" />
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SmartSustain AI Section-->
+    <section class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
+
+            <!-- Left: Blue Sidebar Panel with Floating Image -->
+            <div class=" w-full lg:w-1/2 flex justify-center">
+                <!-- Blue Panel -->
+                <div class="absolute w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg "></div>
+
+                <!-- Image (Dashboard) -->
+                <img src="assets/customerDlenAI.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
+            </div>
+
+            <!-- Right: Content -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">SmartSustain.AI</h3>
+                <h4 class="text-xl  text-[#1783F7] mb-4">Data-Driven Sustainability for Future-Ready
+                    Organizations</h4>
+                <p class="text-[#666666] mb-8">
+                    Streamline ESG reporting with a fully customizable platform that supports compliance with global
+                    standards like GRI and ISSB.
+                </p>
+
+                <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
+                <ul class="space-y-1 text-[#666666] text-base">
+                    <li class="flex items-center gap-2 ">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        ESG modules: Environmental, Social, Governance, and Compliance
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Scope 1, 2, and 3 emissions tracking with supplier inputs
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Bulk data upload for efficient reporting
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        ESG Maturity Assessment and Peer Benchmarking
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        ISSB & GRI gap assessments for standard compliance
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Role-based access for decentralized data collection and review
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patient360 AI Section-->
+    <section class="bg-[#F7FBFF] py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-16">
+
+            <!-- Left Text Content -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">Patient360.ai</h3>
+                <h4 class="text-xl  text-[#1783F7] mb-4">Revolutionizing Healthcare with a Comprehensive Data
+                    Platform</h4>
+                <p class="text-[#666666] mb-8">
+                    A healthcare-specific CDP offering seamless doctor-patient engagement, appointment scheduling, and
+                    real-time data-driven decisions.
+                </p>
+
+                <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
+                <ul class="space-y-2 text-[#666666] text-base">
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Appointment scheduling with automated SMS/Email reminders
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Secure doctor-patient messaging with chatbot and video consults
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Real-time health tracking and patient risk scoring
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Multi-channel alerts for critical test results and prescriptions
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Unified patient profiles with EMR/EHR integration
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        HIPAA-compliant data encryption and role-based access
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Image Card with Sidebar -->
+            <div class="w-full lg:w-1/2 flex justify-center ">
+                <!-- Light blue background box -->
+                <div class="absolute  w-[600px] h-[460px] bg-white "></div>
+
+                <!-- Dashboard Image -->
+                <img src="assets/dashboard.png" alt="SaaS Beam Dashboard" class="w-[560px]  relative top-[-120px]" />
+            </div>
+
+        </div>
+    </section>
+
+    <!-- AutoDocx AI Section-->
+    <section class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
+
+            <!-- Left: Blue Sidebar Panel with Floating Image -->
+            <div class=" w-full lg:w-1/2 flex justify-center">
+                <!-- Blue Panel -->
+                <div class="absolute w-[600px] h-[380px] bg-[#f3f7ff] rounded-lg "></div>
+
+                <!-- Image (Dashboard) -->
+                <img src="assets/customerDlenAI.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
+            </div>
+
+            <!-- Right: Content -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">AutoDocX.AI</h3>
+                <h4 class="text-xl text-[#1783F7] mb-4">Unlock Your Document’s Full Potential with AI
+                    Organizations</h4>
+                <p class="text-[#666666] mb-8">
+                    Reimagine document handling with AutoDocX.AI—an AI-powered platform for organizing, searching, and
+                    securing documents.
+                </p>
+
+                <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
+                <ul class="space-y-1 text-[#666666] text-base">
+                    <li class="flex items-center gap-2 ">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Smart tagging and categorization of documents using AI
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Fast document search with context-aware results
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Supports multiple formats: PDFs, Word, Excel, etc.
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Session-based team collaboration with shared IDs
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Encrypted storage ensuring document privacy and compliance
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- MamthOps Section-->
+    <section class="bg-[#F7FBFF] py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-16">
+
+            <!-- Left Text Content -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">MathOps</h3>
+                <h4 class="text-xl  text-[#1783F7] mb-4">Empowering IT Operations with AI-Driven Analytics
+                </h4>
+                <p class="text-[#666666] mb-8">
+                    Move from reactive to proactive IT management with real-time monitoring, predictive insights, and
+                    unified dashboards.
+                </p>
+
+                <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
+                <ul class="space-y-2 text-[#666666] text-base">
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Real-time infrastructure and app performance monitoring
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Predictive analytics for anomaly detection and root cause
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Customizable dashboards with 360° entity views
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Automated ticket generation and multichannel alerts
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Seamless integration with ticketing and notification tools
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- Right Image Card with Sidebar -->
+            <div class="w-full lg:w-1/2 flex justify-center ">
+                <!-- Light blue background box -->
+                <div class="absolute  w-[600px] h-[400px] bg-white "></div>
+
+                <!-- Dashboard Image -->
+                <img src="assets/mathOpsAI.png" alt="SaaS Beam Dashboard" class="w-[560px]  relative top-[-120px]" />
+            </div>
+
+        </div>
+    </section>
+
+    <!-- OpsBeat Section-->
+    <section class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
+
+            <!-- Left: Blue Sidebar Panel with Floating Image -->
+            <div class=" w-full lg:w-1/2 flex justify-center">
+                <!-- Blue Panel -->
+                <div class="absolute w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg "></div>
+
+                <!-- Image (Dashboard) -->
+                <img src="assets/opsBeat.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
+            </div>
+
+            <!-- Right: Content -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">OpsBeat</h3>
+                <h4 class="text-xl  text-[#1783F7] mb-4">Revolutionizing IT Operations Management
+                </h4>
+                <p class="text-[#666666] mb-8">
+                    A powerful AI-driven IT service management tool designed to streamline workflows and enhance system
+                    performance.
+                </p>
+
+                <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
+                <ul class="space-y-1 text-[#666666] text-base">
+                    <li class="flex items-center gap-2 ">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Low-code/no-code workflow builder
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Centralized dashboard for IT service insights
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Multichannel support via WhatsApp, SMS, Email
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Aggregate APIs for cross-system metric calculation
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        AI-powered sentiment analysis and predictive alerts
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        Extensible workflow engine for custom automation
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Section-->
+    <section class="flex justify-center py-12 px-4 bg-white">
+        <div
+            class="relative max-w-6xl w-full rounded-[40px_0px_0px_0px] [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] shadow-md p-6 md:p-10 flex flex-col md:flex-row items-center">
+
+            <!-- Floating quote symbol (top-right) -->
+            <div class="absolute top-[-35px]  text-6xl text-[#9beef1] select-none"><img src="assets/Shape.svg"></div>
+
+            <!-- Left: Testimonial -->
+            <div class="flex-1">
+                <p class="text-[#919CA2] mb-6 pr-[340px]">
+                    Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
+                    and engaging with your target audience on all the social media channels.
+                </p>
+                <div>
+                    <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
+                    <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+                </div>
+            </div>
+
+            <!-- Right: Logo Card with arrows -->
+
+            <div class=" w-[200px] h-[200px]  absolute top-[-70px] right-[30px]  shadow-[0px_0px_12.8px_#0000001a]">
+                <div class=" w-[200px] h-[200px] relative bg-white shadow-[0px_0px_4px_#0000000d]">
+
+                    <img src="assets/kpmg.png" alt="KPMG Logo"
+                        class="h-[30px] object-contain absolute top-[90px] left-[60px]" />
+
+                </div>
+            </div>
+            <!-- Arrows below image -->
+            <div class="flex gap-4 mt-auto absolute top-[145px] right-[90px]">
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowL.svg">
+                </button>
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowR.svg">
+
+                </button>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- Footer-->
+    <div class="bg-white pt-20">
+        <div class="px-[150px] flex items-center justify-between">
+            <img class="" src="assets/mindgraphLogo.png" />
+            <div>
+                <nav class="flex items-center space-x-6">
+                    <a href="#" class="text-[#7E7E7E]">Home</a>
+
+                    <a href="#" class="text-[#7E7E7E]">About Us</a>
+                    <a href="#" class="text-[#7E7E7E] flex items-center">Services <img src="assets/dropdown.svg"
+                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="#" class="text-[#7E7E7E] flex items-center">Products <img src="assets/dropdown.svg"
+                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="#" class="text-[#7E7E7E]">Blogs</a>
+                    <a href="#" class="text-[#7E7E7E]">Careers</a>
+                </nav>
+            </div>
+            <div class="flex">
+                <img src="assets/fb.svg">
+                <img src="assets/x.svg">
+                <img src="assets/youtube.svg">
+                <img src="assets/insta.svg">
+                <img src="assets/lnkedin.svg">
+
+
+            </div>
+
+        </div>
+        <div>
+            <img src="assets/line.svg" class="mt-[20px] px-[130px]">
+        </div>
+        <div>
+            <p
+                class=" mt-[20px] pb-[30px] [font-family:'Roboto',Helvetica] font-normal text-transparent text-sm text-center tracking-[0] leading-[normal]">
+                <span class="text-[#8a8a8f]">© Copyright 2025, </span>
+                <span class="font-semibold text-[#667085]">MindGraph</span>
+                <span class="text-[#8a8a8f]">. All Rights Reserved.</span>
+            </p>
+        </div>
+
+</body>
+
+</html>
