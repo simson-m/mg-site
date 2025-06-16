@@ -1,496 +1,535 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Symbiosis Consulting</title>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="global.css" />
+    <!-- <link rel="stylesheet" href="styleguide.css" /> -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/global.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        fetch("/navbar.html")
-          .then((res) => res.text())
-          .then((data) => {
-            document.getElementById("navbar").innerHTML = data;
-            lucide.createIcons(); // Initialize icons after insertion
-
-            // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
-            const mobileMenuButton =
-              document.getElementById("mobile-menu-button");
-            const closeMenuButton =
-              document.getElementById("close-menu-button");
-            const mobileMenu = document.getElementById("mobile-menu");
-
-            if (!mobileMenuButton || !mobileMenu) {
-              console.error("Mobile menu button or menu is missing.");
-              return;
-            }
-
-            mobileMenuButton.addEventListener("click", function () {
-              console.log("Mobile menu button clicked");
-              mobileMenu.classList.toggle("hidden");
-              mobileMenu.classList.toggle("flex");
-              document.body.classList.toggle("overflow-hidden");
-            });
-
-            closeMenuButton.addEventListener("click", function () {
-              mobileMenu.classList.add("hidden");
-              mobileMenu.classList.remove("flex");
-              document.body.classList.remove("overflow-hidden");
-            });
-
-            const mobileDropdownToggles = document.querySelectorAll(
-              ".mobile-dropdown-toggle"
-            );
-
-            mobileDropdownToggles.forEach((toggle) => {
-              toggle.addEventListener("click", function () {
-                const content = this.nextElementSibling;
-                const icon = this.querySelector('[data-lucide="chevron-down"]');
-
-                content.classList.toggle("hidden");
-                icon.style.transform = content.classList.contains("hidden")
-                  ? "rotate(0deg)"
-                  : "rotate(180deg)";
-              });
-            });
-          });
-      });
+        /** @type {import('tailwindcss').Config} */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: "var(--black)",
+                        gray: "var(--gray)",
+                        "textbody-text": "var(--textbody-text)",
+                    },
+                    fontFamily: {
+                        "body-body-1-regular": "var(--body-body-1-regular-font-family)",
+                    },
+                },
+            },
+            plugins: [],
+        };
     </script>
-    <style>
-      .testimonial-slide {
-        transition: opacity 0.5s ease-in-out;
-      }
-      .testimonial-slide:not(.active) {
-        display: none;
-        opacity: 0;
-      }
-      .testimonial-slide.active {
-        display: flex;
-        opacity: 1;
-      }
-      .hero-overlay {
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-    </style>
-  </head>
-  <body class="bg-white text-gray-800">
-    <!-- Navbar -->
-    <div id="navbar"></div>
+</head>
 
-    <section
-      class="relative w-full h-96 md:h-screen md:max-h-[500px] lg:max-h-[500px] overflow-hidden bg-gray-900"
-    >
-      <!-- Background Image -->
-      <div
-        class="absolute inset-0 w-full h-full bg-cover bg-center"
-        style="background-image: url('/assets/about_bg.png')"
-      ></div>
+<body>
 
-      <div
-        class="relative h-full flex flex-col justify-center px-6 md:px-12 lg:px-24 text-white max-w-full mx-auto"
-      >
-        <!-- Small Caption Text -->
-        <p class="text-sm md:text-base font-medium mb-2 md:mb-3">Innovate</p>
 
-        <!-- Main Heading -->
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
-          Empowering Your Business
-        </h1>
-
-        <!-- Subheading Text -->
-        <p class="text-sm md:text-base mb-6 md:mb-8">
-          Discover tailored IT solutions that drive efficiency and growth for
-          your organization.
-        </p>
-
-        <!-- Call to Action Buttons -->
-        <div class="flex flex-wrap gap-4">
-          <a
-            href="/contact.html"
-            class="bg-white text-blue-900 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition duration-300"
-          >
-            Learn More
-          </a>
-          <a
-            href="/contact.html"
-            class="border border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:bg-opacity-10 transition duration-300"
-          >
-            Contact Us
-          </a>
+    <header class="w-full py-6 px-12 flex justify-between items-center">
+        <div class="logo flex items-center pl-[60px]">
+            <img src="assets/mindgraphLogo.png" alt="MindGraph Logo" class="h-12">
         </div>
-      </div>
-    </section>
+        <nav class="flex items-center space-x-6">
+            <a href="#" class="text-[#202124]">About Us</a>
+            <a href="#" class="text-[#202124] flex items-center">Services <img src="assets/dropdownArrow.svg"
+                    alt="Dropdown" class="ml-1 w-4 h-4"></a>
+            <a href="#" class="text-[#202124] flex items-center">Products <img src="assets/dropdownArrow.svg"
+                    alt="Dropdown" class="ml-1 w-4 h-4"></a>
+            <a href="#" class="text-[#202124]">Contact Us</a>
+        </nav>
+        <button
+            class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+            Get in Touch
+            <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
+        </button>
+    </header>
 
-    <section class="py-16 px-6 md:px-20 max-w-full mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div>
-          <h2
-            class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight"
-          >
-            Discover the Expertise Behind Symbiosis Consulting's Innovative IT
-            Solutions
-          </h2>
+
+    <!-- Hero Banner-->
+    <div>
+        <div class=" h-[230px] flex justify-center items-center bg-cover"
+            style="background-image: url('assets/aboutUsBanner.png');">
+            <div class="text-white font-semibold text-5xl text-center">
+                About Us
+            </div>
         </div>
-
-        <div>
-          <p class="text-gray-700 text-base md:text-lg">
-            Symbiosis Consulting has been a trusted partner for businesses
-            seeking comprehensive IT solutions for over a decade. Based in
-            Shakopee, MN, we specialize in Enterprise IT Applications
-            Development and Recruiting Services. Our commitment to excellence
-            has made us a preferred choice for Fortune 1000 clients and national
-            integrators across the United States.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Hero Banner Section -->
-    <section class="w-full overflow-hidden">
-      <div class="relative w-full">
-        <img
-          src="/assets/about.png"
-          alt="About Symbiosis"
-          class="w-full h-48 sm:h-64 md:h-80 lg:h-[80vh] object-cover px-0 sm:px-4 md:px-10 lg:px-20"
-        />
-      </div>
-    </section>
-
-    <!-- Why Our Expertise Section -->
-    <section
-      class="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 md:px-10 lg:px-20 max-w-full mx-auto"
-    >
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start md:items-center"
-      >
-        <div class="mb-4 md:mb-0">
-          <h2
-            class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-tight"
-          >
-            Why Our Expertise Makes a Difference for Your Business Success
-          </h2>
-        </div>
-
-        <div>
-          <p class="text-sm sm:text-base md:text-lg text-gray-700">
-            At Symbiosis Consulting, our success is driven by our talented IT
-            professionals. With extensive industry knowledge and a collaborative
-            approach, we partner with clients to transform their visions into
-            reality. Whether you require immediate expertise or a strategic ally
-            for digital transformation, we are here to elevate your business.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Choose Symbiosis Section -->
-    <section class="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 md:px-10 lg:px-20">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-        <!-- Text Content -->
-        <div class="order-2 md:order-1">
-          <h2
-            class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-7 leading-tight"
-          >
-            Why Choose Symbiosis for Your IT Needs?
-          </h2>
-          <div
-            class="text-sm sm:text-base text-[#1D1B20] mb-4 pr-0 md:pr-6 leading-relaxed"
-          >
-            In an ever-evolving landscape, Symbiosis Consulting is your
-            steadfast partner in technology. We empower your business to
-            innovate and thrive, ensuring you stay ahead of the competition.
-          </div>
-        </div>
-
-        <!-- Image -->
-        <div class="flex justify-center order-1 md:order-2 mb-6 md:mb-0">
-          <img
-            src="/assets/symbiosis.png"
-            alt="IT Solutions"
-            class="rounded-xl shadow-lg w-full h-48 sm:h-64 md:h-80 lg:h-[60vh] object-cover"
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- Core Values Section -->
-    <div
-      class="max-w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-20 py-8 sm:py-12"
-    >
-      <div class="flex flex-col md:flex-row gap-6 md:gap-8">
-        <!-- Heading Section -->
-        <div class="w-full md:w-1/2 mb-6 md:mb-0">
-          <h1
-            class="text-2xl sm:text-3xl md:text-4xl font-bold text-black leading-tight"
-          >
-            Our Core Values: The Heart of Symbiosis Consulting Service
-          </h1>
-        </div>
-
-        <!-- Values Section -->
-        <div class="w-full md:w-1/2">
-          <ul class="space-y-3 sm:space-y-4">
-            <li class="flex flex-col sm:flex-row sm:items-start">
-              <span
-                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
-                >Best People-
-              </span>
-              <span class="text-sm sm:text-base">
-                We attract, nurture, and develop the best talent with a strong
-                'can-do' attitude.
-              </span>
-            </li>
-
-            <li class="flex flex-col sm:flex-row sm:items-start">
-              <span
-                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
-                >Client Value Creation-
-              </span>
-              <span class="text-sm sm:text-base">
-                We focus on execution excellence and building long-term, win-win
-                relationships to improve our clients' performance.
-              </span>
-            </li>
-
-            <li class="flex flex-col sm:flex-row sm:items-start">
-              <span
-                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
-                >One Global Network-
-              </span>
-              <span class="text-sm sm:text-base">
-                We harness the power of global collaboration to deliver
-                consistent, high-quality service anywhere in the world.
-              </span>
-            </li>
-
-            <li class="flex flex-col sm:flex-row sm:items-start">
-              <span
-                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
-                >Respect for the Individual-
-              </span>
-              <span class="text-sm sm:text-base">
-                We embrace diversity, foster inclusivity, and treat everyone
-                with fairness and dignity.
-              </span>
-            </li>
-
-            <li class="flex flex-col sm:flex-row sm:items-start">
-              <span
-                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
-                >Sincerity & Dedication-
-              </span>
-              <span class="text-sm sm:text-base">
-                We put genuine effort into everything we do, striving to deliver
-                the best for both our clients and our employees.
-              </span>
-            </li>
-
-            <li class="flex flex-col sm:flex-row sm:items-start">
-              <span
-                class="font-bold text-base sm:text-lg min-w-[170px] mb-1 sm:mb-0"
-                >Employee Satisfaction-
-              </span>
-              <span class="text-sm sm:text-base">
-                We don't just aim to satisfy, we aim to delight our team members
-                by aligning all our energies with their success and well-being.
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
 
-    <div class="flex flex-col">
-      <div class="flex-grow"></div>
-
-      <!-- Footer Section -->
-      <footer
-        class="bg-gradient-to-t from-blue-50 to-white p-4 sm:p-6 lg:p-8 text-center"
-      >
-        <div class="container mx-auto px-4 py-4 sm:py-6 lg:py-8">
-          <!-- Logo -->
-          <div class="flex justify-center mb-5">
-            <img
-              src="/assets/logo.png"
-              alt="Symbiosis Logo"
-              class="h-8 sm:h-10"
-            />
-          </div>
-
-          <!-- Mobile Footer Navigation -->
-          <div class="block sm:hidden mb-8">
-            <div class="grid grid-cols-2 gap-y-4 gap-x-2 text-center">
-              <a
-                href="/index.html"
-                class="text-[#1D1B20] font-medium hover:text-blue-600"
-                >Home</a
-              >
-              <a
-                href="/about.html"
-                class="text-[#1D1B20] font-medium hover:text-blue-600"
-                >About Us</a
-              >
-              <a
-                href="/services/managed.html"
-                class="text-[#1D1B20] font-medium hover:text-blue-600"
-                >Services</a
-              >
-              <a
-                href="/solutions/softwareDevelopmenr.html"
-                class="text-[#1D1B20] font-medium hover:text-blue-600"
-                >Solutions</a
-              >
-              <a
-                href="/products/optiSaasAi.html"
-                class="text-[#1D1B20] font-medium hover:text-blue-600"
-                >Products</a
-              >
-              <a
-                href="/contact.html"
-                class="text-[#1D1B20] font-medium hover:text-blue-600"
-                >Contact Us</a
-              >
-            </div>
-          </div>
-
-          <!-- Tablet/Desktop Footer Navigation -->
-          <div
-            class="hidden sm:flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-12"
-          >
-            <a
-              href="/index.html"
-              class="text-[#1D1B20] font-medium hover:text-blue-600"
-              >Home</a
-            >
-            <a
-              href="/about.html"
-              class="text-[#1D1B20] font-medium hover:text-blue-600"
-              >About Us</a
-            >
-
-            <!-- Services dropdown -->
-            <div class="group relative inline-block">
-              <button
-                class="text-[#1D1B20] flex items-center font-medium hover:text-[#003C84] focus:outline-none"
-              >
-                Services
-                <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
-              </button>
-              <div
-                class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52 text-left z-10"
-              >
-                <a
-                  href="/services/managed.html"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >Managed Services</a
-                >
-                <a
-                  href="/services/consulting.html"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >Staffing Services</a
-                >
-              </div>
-            </div>
-
-            <!-- Solutions dropdown -->
-            <div class="group relative inline-block">
-              <button
-                class="text-[#1D1B20] flex items-center font-medium hover:text-[#003C84] focus:outline-none"
-              >
-                Solutions
-                <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
-              </button>
-              <div
-                class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52 text-left z-10"
-              >
-                <a
-                  href="/solutions/softwareDevelopmenr.html"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >Software Development</a
-                >
-                <a
-                  href="/solutions/design.html"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >Design</a
-                >
-              </div>
-            </div>
-
-            <!-- Products dropdown -->
-            <div class="group relative inline-block">
-              <button
-                class="text-[#1D1B20] flex items-center font-medium hover:text-[#003C84] focus:outline-none"
-              >
-                Products
-                <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
-              </button>
-              <div
-                class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52 text-left z-10"
-              >
-                <a
-                  href="/products/optiSaasAi.html"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >OptiSaaSAI</a
-                >
-                <a
-                  href="/products/tms.html"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >TMS gowri</a
-                >
-              </div>
-            </div>
-
-            <a
-              href="/contact.html"
-              class="text-[#1D1B20] font-medium hover:text-blue-600"
-              >Contact Us</a
-            >
-          </div>
-
-          <!-- Divider -->
-          <div class="border-t border-gray-300 mb-4 sm:mb-6"></div>
-
-          <!-- Bottom section -->
-          <div class="flex flex-col sm:flex-row justify-between items-center">
-            <div class="flex items-center mb-4 sm:mb-0">
-              <a href="#" class="flex items-center">
-                <span class="text-sm sm:text-base text-[#1D1B20]">
-                  © 2025 Symbiosis Consulting. All rights reserved.
-                </span>
-              </a>
-            </div>
-
-            <!-- Legal Links -->
-            <div class="flex flex-wrap justify-center gap-3 sm:gap-6">
-              <a
-                href="/privacyPolicy.html"
-                class="text-sm sm:text-base text-gray-600 underline hover:text-blue-600"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="/termsAndConditions.html"
-                class="text-sm sm:text-base text-gray-600 underline hover:text-blue-600"
-              >
-                Terms of Use
-              </a>
-              <a
-                href="/cookiePolicy.html"
-                class="text-sm sm:text-base text-gray-600 underline hover:text-blue-600"
-              >
-                Cookie Preferences
-              </a>
-            </div>
-          </div>
+    <div class="flex pt-[90px] px-[180px]">
+        <div>
+            <img src="assets/ourCompany.png" class="w-[1600px] h-full">
         </div>
-      </footer>
+        <div class="">
+            <div class="pl-[60px]">
+                <div
+                    class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] text-3xl tracking-[0] leading-[39.6px]">
+                    Overview
+                </div>
+                <p
+                    class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] text-lg tracking-[0] leading-[26px]">
+                    Mindgraph Technologies is a next-generation technology company specializing in AI-powered solutions,
+                    data
+                    platforms, and digital transformation services. We partner with forward-thinking enterprises to
+                    modernize
+                    operations, drive growth, and deliver intelligent customer experiences across industries including
+                    energy,
+                    healthcare, BFSI, telecom, aviation, and manufacturing.
+                </p>
+
+            </div>
+            <div class="pl-[40px]">
+                <div
+                    class=" mt-[30px] [background:linear-gradient(132deg,rgba(234,249,253,0.5)_0%,rgba(222,248,255,0.5)_100%)] p-[20px] rounded-3xl">
+                    <div class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] text-3xl tracking-[0] leading-[39.6px]
+                    ">
+                        Vision
+                    </div>
+                    <p
+                        class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] text-lg tracking-[0] leading-[26px]">
+                        To be the trusted partner for enterprises worldwide, enabling intelligent transformation through
+                        AI,
+                        data, and digital innovation.
+                    </p>
+
+                </div>
+            </div>
+            <div class="pl-[40px]">
+                <div
+                    class="mt-[30px] [background:linear-gradient(132deg,rgba(234,249,253,0.5)_0%,rgba(222,248,255,0.5)_100%)] p-[20px] rounded-3xl">
+                    <div
+                        class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] text-3xl tracking-[0] leading-[39.6px]">
+                        Mission
+                    </div>
+                    <p
+                        class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] text-lg tracking-[0] leading-[26px]">
+                        At Mindgraph, our mission is to simplify complexity, empower industries, and drive sustainable
+                        growth by delivering AI-first platforms, cloud-native solutions, and strategic consulting—built
+                        for
+                        performance, security, and scale.
+                    </p>
+
+                </div>
+            </div>
+        </div>
     </div>
-  </body>
+
+    <!--What we do Section-->
+    <div class="flex items-center justify-center min-h-screen bg-white mt-[50px]">
+        <!-- Outer Circle Container -->
+        <div class="relative w-[800px] h-[650px] ">
+            <!-- Center Content -->
+           <div class="absolute inset-0 flex items-center justify-center z-20">
+                <div
+                    class="relative bg-white w-[500px] h-[180px] rounded-[140px] flex flex-col items-center justify-center text-center  px-4 border border-blue-500">
+                    <!-- Decorative SVG Icons -->
+                    <img src="assets/bluePlayButton.svg" class="absolute top-[40px] left-[100px] w-4 h-4" />
+                    <img src="assets/redPlayButton.svg"
+                        class="absolute top-[0px] left-1/2 transform -translate-x-1/2 w-4 h-4" />
+                    <img src="assets/Oval.svg" class="absolute top-[30px] right-[90px] w-3 h-3" />
+                    <img src="assets/redOval.svg" class="absolute top-[100px] right-[30px] w-3 h-3" />
+                    <img src="assets/redPlayButton.svg"
+                        class="absolute bottom-[25px] left-1/2 transform -translate-x-1/2 w-4 h-4" />
+                    <img src="assets/plus.svg" class="absolute bottom-[10px] left-[150px] w-4 h-4 opacity-40" />
+                    <img src="assets/plus.svg" class="absolute bottom-[10px] right-[120px] w-4 h-4 opacity-40" />
+
+                    <!-- Main Content -->
+                    <h2 class="text-3xl font-semibold text-[#687DA9]">What We do</h2>
+                    <p class="text-sm text-[#667085] max-w-[360px] mt-2">
+                        We offer a comprehensive suite of services and products to help businesses accelerate
+                        transformation:
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Lines -->
+            <!-- Top center -->
+            <div class="relative top-[90px] left-1/2 w-[100px] h-[20px] bg-gray-300 transform -translate-x-1/2 ">
+                <img src="assets/straightLine.svg" class="h-[470px] w-[100px]">
+            </div>
+            <!-- Bottom right -->
+            <div class="absolute top-[170px] left-[560px] w-[2px] h-[80px] bg-gray-300 transform rotate-[53deg]  ">
+                <img src="assets/straightLine.svg" class="h-[500px] w-[100px]">
+
+            </div>
+            <!-- Bottom right -->
+            <div class="absolute top-[420px] left-[560px] w-[2px] h-[80px] bg-gray-300 transform rotate-[130deg]  ">
+                <img src="assets/straightLine.svg" class="h-[500px] w-[100px]">
+
+            </div>
+
+            <!-- Service Items -->
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
+                <img src="assets/AI.svg" class="w-[40px] h-[40px]">
+                <span class="text-sm text-[#7E7E7E] text-center pt-1">AI & Data Intelligence Services</span>
+            </div>
+
+            <div class="absolute top-[15%] left-[85%] transform -translate-x-1/2 flex flex-col items-center z-10">
+                <img src="assets/Outline.svg" class="w-[40px] h-[40px]">
+                <span class="text-sm text-[#7E7E7E] pt-1 text-center">Application & Development Services</span>
+            </div>
+
+            <div class="absolute bottom-[15%] left-[85%] transform -translate-x-1/2 flex flex-col items-center z-10">
+                <img src="assets/sap.svg" class="w-[40px] h-[40px]">
+                <span class="text-sm text-[#7E7E7E] pt-1 text-center">SAP Enterprise Services</span>
+            </div>
+
+            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
+                <img src="assets/crm.svg" class="w-[40px] h-[40px]">
+                <span class="text-sm text-[#7E7E7E] pt-1 text-center">CRM & ERP Solutions</span>
+            </div>
+
+            <div class="absolute bottom-[15%] left-[15%] transform -translate-x-1/2 flex flex-col items-center z-10">
+                <img src="assets/cloudInfra.svg" class="w-[40px] h-[40px]">
+                <span class="text-sm text-[#7E7E7E] pt-1 text-center">Cloud Infrastructure Services</span>
+            </div>
+
+            <div class="absolute top-[15%] left-[15%] transform -translate-x-1/2 flex flex-col items-center z-10">
+                <img src="assets/Consult-Talk.svg" class="w-[40px] h-[40px]">
+                <span class="text-sm text-[#7E7E7E] pt-1 text-center">Consulting & Advisory Services</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Products Section-->
+    <div class="bg-white py-16 px-6 lg:px-20">
+        <div class="text-center mb-12">
+            <p class="text-[#1783F7] font-medium">Products</p>
+            <h2 class="text-2xl md:text-3xl font-semibold text-[#687DA9] mt-2">
+                Products That Power Transformation
+            </h2>
+        </div>
+
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
+            <!-- Left: Product List -->
+            <div class="w-full lg:w-1/2 space-y-4">
+                <div>
+                    <div class="border-b  py-2 flex items-center justify-between group hover:cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <div class="rotate-[-45deg]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                                    <path fill="#204596"
+                                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                                </svg>
+                            </div> <span class="text-[#7E7E7E]">MATHOPS</span>
+
+                        </div>
+                    </div>
+                    <img src="assets/line.svg">
+                </div>
+                <div>
+
+                    <div
+                        class="border-b border-gray-200 py-2 flex items-center justify-between group hover:cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <div class="rotate-[-45deg]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                                    <path fill="#204596"
+                                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                                </svg>
+                            </div> <span class="text-[#7E7E7E]">SmartSustain.AI</span>
+                        </div>
+                    </div>
+                    <img src="assets/line.svg">
+                </div>
+                <div>
+                    <div
+                        class="border-b border-gray-200 py-2 flex items-center justify-between group hover:cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <div class="rotate-[-45deg]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                                    <path fill="#204596"
+                                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                                </svg>
+                            </div> <span class="text-[#7E7E7E]">OpsBeat</span>
+                        </div>
+                    </div>
+                    <img src="assets/line.svg">
+                </div>
+                <div>
+                    <div
+                        class="border-b-2 border-blue-500 py-2 flex items-center justify-between group hover:cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <div class="rotate-[-45deg]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                                    <path fill="#204596"
+                                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                                </svg>
+                            </div> <span class="text-[#687DA9] font-semibold">CustomerDlens</span>
+                        </div>
+                        <span class="text-blue-500 font-medium text-xl">
+                            <img src="assets/blueArrow.svg">
+
+                        </span>
+                    </div>
+                     <img src="assets/Divider.svg">
+
+                </div>
+                <div>
+                    <div
+                        class="border-b border-gray-200 py-2 flex items-center justify-between group hover:cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <div class="rotate-[-45deg]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                                    <path fill="#204596"
+                                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                                </svg>
+                            </div> <span class="text-[#7E7E7E]">SaaSBeam AI</span>
+                        </div>
+                    </div>
+                    <img src="assets/line.svg">
+                </div>
+                <div>
+                    <div
+                        class="border-b border-gray-200 py-2 flex items-center justify-between group hover:cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <div class="rotate-[-45deg]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                                    <path fill="#204596"
+                                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                                </svg>
+                            </div> <span class="text-[#7E7E7E]">Responsible AI</span>
+                        </div>
+                    </div>
+                </div>
+                <img src="assets/line.svg">
+            </div>
+
+
+            <!-- Right: Image Section -->
+            <div class="w-full lg:w-1/2 relative">
+                <div class="bg-white rounded-md p-4 relative">
+                    <img src="assets/customerDlens.png" alt="Product preview" class="rounded-md " />
+                    <div
+                        class="absolute bottom-[70px] right-[130px] transform translate-y-1/2 translate-x-1/2 w-72 p-4 bg-white shadow-lg rounded-xl text-sm text-gray- flex flex-col justify-center items-center">
+                        <p class="text-[#667085]">AI-powered customer data fabric</p>
+                        <p class="text-[#667085]">for 360° operational insights</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Why Mindgrapg? -->
+    <section class="" id="Why Choose Us?">
+        <div class="px-4 sm:px-6 lg:px-20 py-8 sm:py-12 lg:py-16">
+            <!-- heading -->
+            <div class="flex flex-col text-3xl items-center justify-center mb-12 mt-8 text-[#1783F7]">
+                <h2>Why MindGraph</h2>
+                <h1 class="text-[#687DA9] text-xl md:text-4xl font-semibold pb-8">
+                    Shaping Purpose fit AI Innovation
+                </h1>
+                <p class="text-sm text-[#667085] font-normal mb-4 md:mb-7 md:pr-32 md:pl-32 text-center">
+                    We deliver more than services — we deliver outcomes. At Mindgraph, we fuse deep industry insight
+                    with
+                    intelligent technology to build future-ready enterprises. Our approach is bold, agile, and
+                    engineered for
+                    business impact—from rapid deployments to long-term transformation.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!--  Image Layout -->
+                <div class="pl-[100px]">
+                    <div class="flex ">
+                        <div class="pr-2 pb-2  h-[200px] w-[250px]">
+                            <img src="assets/businessPeople.jpg" alt="Digital Innovation" class=" object-cover ">
+                        </div>
+
+                        <div class=" pb-2 pt-[70px] pb-2 h-[200px] w-[250px]">
+                            <img src="assets/graph.jpg" alt="Business Growth" class=" object-cover ">
+                        </div>
+                    </div>
+                    <div class="flex ">
+                        <div class=" pr-2 h-[150px] w-[170px] pt-[140px]">
+                            <img src="assets/security.jpg" alt="Cyber Security" class=" object-cover ">
+                        </div>
+
+                        <div class="h-[200px] w-[330px] pt-[140px] ">
+                            <img src="assets/meeting.jpg" alt="Team Collaboration" class=" object-cover ">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content" class="flex flex-col gap-4 ">
+                    <div
+                        class="flex container p-4 rounded-3xl align-center gap-4 border bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[45px]">
+                        <img src="/assets/AINative.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
+                        <h3 class="items-center align-center font-semibold text-[#1F3F68]">
+                            AI-Native, Scalable Architecture </h3>
+                    </div>
+                    <div
+                        class="flex container p-4 rounded-3xl align-center gap-4 border bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[45px]">
+                        <img src="/assets/ownershipEducation.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
+                        <h3 class="items-center align-center font-semibold text-[#1F3F68]">
+                            End-to-End Ownership from Strategy to Execution </h3>
+                    </div>
+                    <div
+                        class="flex container p-4 rounded-3xl align-center gap-4 border bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[45px]">
+                        <img src="/assets/migrating.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
+                        <h3 class="items-center align-center font-semibold text-[#1F3F68]">
+                            Fast, Flexible, and Future-Ready Delivery </h3>
+                    </div>
+                    <div
+                        class="flex container p-4 rounded-3xl align-center gap-4 border bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[45px]">
+                        <img src="/assets/frictionlessIntegration.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
+                        <h3 class="items-center align-center font-semibold text-[#1F3F68]">
+                            Frictionless Integration Across Ecosystems </h3>
+                    </div>
+                    <div
+                        class="flex container p-4 rounded-3xl align-center gap-4 border bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[45px]">
+                        <img src="/assets/enterprise.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
+                        <h3 class="items-center align-center font-semibold text-[#1F3F68]">
+                            Enterprise-Grade Security & SLA-Driven Assurance
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- offerings -->
+    <section class="bg-white">
+        <div class="px-4 sm:px-6 lg:px-20 sm:py-12 lg:py-16 pb-0">
+            <!-- heading -->
+            <div class="flex flex-col items-center justify-center mb-12 mt-8 text-[#1783F7] ">
+                <h1 class="text-2xl">Offerings</h1>
+                <h1 class="text-[#687DA9] text-2xl md:text-4xl font-bold">
+                    Our Solutions by Function
+                </h1>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pl-16 pr-16">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-begin justify-begin">
+                        <div class="text-white z-10 p-8 ">
+                            <h2 class="text-2xl font-bold mb-2 pr-[180px]">Data Innovation</h2>
+                            <p class="text-lg font-normal">
+                                Unlock competitive advantage through advanced AI analytics and data modeling.
+                            </p>
+                        </div>
+                    </div>
+                    <img src="/assets/offering1.png" alt="Data Innovation"
+                        class="h-[372px] w-full object-cover rounded-3xl" />
+                </div>
+                <div class="relative bottom">
+                    <div class="absolute inset-0 flex items-begin justify-begin">
+                        <div class="text-white z-10 p-8">
+                            <h2 class="text-2xl font-bold mb-2 pr-[100px]">AI Products Gateway for ASEAN</h2>
+                            <p class="text-lg font-normal pr-[100px]">
+                                Localized AI products marketing, and regulatory support for ASEAN expansion.
+                            </p>
+                        </div>
+                    </div>
+                    <img src="/assets/offering2.png" alt="Data Innovation"
+                        class="h-[372px] w-full object-cover rounded-3xl" />
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-begin justify-begin">
+                        <div class="text-white z-10 p-8">
+                            <h2 class="text-2xl font-bold mb-2 pr-[100px]">Global Capability Centers (GCCs)</h2>
+                            <p class="text-lg font-normal pr-[100px]">
+                                Talent, governance, and operational AI for enterprise scalability.
+                            </p>
+                        </div>
+                    </div>
+                    <img src="/assets/offering3.png" alt="Data Innovation"
+                        class="h-[372px] w-full object-cover rounded-3xl" />
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Section-->
+    <section class="flex justify-center py-12 px-4 bg-white mt-[100px]">
+        <div
+            class="relative max-w-6xl w-full rounded-[40px_0px_0px_0px] [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] shadow-md p-6 md:p-10 flex flex-col md:flex-row items-center">
+
+            <!-- Floating quote symbol (top-right) -->
+            <div class="absolute top-[-35px]  text-6xl text-[#9beef1] select-none"><img src="assets/Shape.svg"></div>
+
+            <!-- Left: Testimonial -->
+            <div class="flex-1">
+                <p class="text-[#919CA2] mb-6 pr-[340px]">
+                    Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
+                    and engaging with your target audience on all the social media channels.
+                </p>
+                <div>
+                    <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
+                    <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+                </div>
+            </div>
+
+            <!-- Right: Logo Card with arrows -->
+
+            <div class=" w-[200px] h-[200px]  absolute top-[-70px] right-[30px]  shadow-[0px_0px_12.8px_#0000001a]">
+                <div class=" w-[200px] h-[200px] relative bg-white shadow-[0px_0px_4px_#0000000d]">
+
+                    <img src="assets/kpmg.png" alt="KPMG Logo"
+                        class="h-[30px] object-contain absolute top-[90px] left-[60px]" />
+
+                </div>
+            </div>
+            <!-- Arrows below image -->
+            <div class="flex gap-4 mt-auto absolute top-[145px] right-[90px]">
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowL.svg">
+                </button>
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowR.svg">
+
+                </button>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- Footer-->
+    <div class="bg-white pt-20">
+        <div class="px-[150px] flex items-center justify-between">
+            <img class="" src="assets/mindgraphLogo.png" />
+            <div>
+                <nav class="flex items-center space-x-6">
+                    <a href="#" class="text-[#7E7E7E]">Home</a>
+
+                    <a href="#" class="text-[#7E7E7E]">About Us</a>
+                    <a href="#" class="text-[#7E7E7E] flex items-center">Services <img src="assets/dropdown.svg"
+                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="#" class="text-[#7E7E7E] flex items-center">Products <img src="assets/dropdown.svg"
+                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="#" class="text-[#7E7E7E]">Blogs</a>
+                    <a href="#" class="text-[#7E7E7E]">Careers</a>
+                </nav>
+            </div>
+            <div class="flex">
+                <img src="assets/fb.svg">
+                <img src="assets/x.svg">
+                <img src="assets/youtube.svg">
+                <img src="assets/insta.svg">
+                <img src="assets/lnkedin.svg">
+
+
+            </div>
+
+        </div>
+        <div>
+            <img src="assets/line.svg" class="mt-[20px] px-[130px]">
+        </div>
+        <div>
+            <p
+                class=" mt-[20px] pb-[30px] [font-family:'Roboto',Helvetica] font-normal text-transparent text-sm text-center tracking-[0] leading-[normal]">
+                <span class="text-[#8a8a8f]">© Copyright 2025, </span>
+                <span class="font-semibold text-[#667085]">MindGraph</span>
+                <span class="text-[#8a8a8f]">. All Rights Reserved.</span>
+            </p>
+        </div>
+
+</body>
+
 </html>
