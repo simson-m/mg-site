@@ -1,0 +1,77 @@
+.overview{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 900px;
+  width: 100%;
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: left;
+  padding-left: 50px;
+  padding-right: 70px;
+}
+
+.logo-opti{
+  object-fit: contain;
+  height: 40px;
+  width: 245.11px;
+}
+
+.section-2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  margin-bottom: 30px;
+}
+
+.section-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px; /* space between columns */
+  padding: 40px;
+  justify-items: center;
+  align-items: start;
+}
+
+.section-4{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 640px;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.section-5 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px; /* space between columns */
+  padding: 40px;
+  justify-items: center;
+  align-items: start;
+}
+
+.section-between{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  margin-left: 50px;
+}
+
+.section-between-2{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px; /* space between columns */
+  padding: 40px;
+  justify-items: center;
+  align-items: start;
+}

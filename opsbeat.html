@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="css/opsBeat.css" />
+    <!-- <link rel="stylesheet" href="styleguide.css" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        /** @type {import('tailwindcss').Config} */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: "var(--black)",
+                        gray: "var(--gray)",
+                        "textbody-text": "var(--textbody-text)",
+                    },
+                    fontFamily: {
+                        "body-body-1-regular": "var(--body-body-1-regular-font-family)",
+                    },
+                },
+            },
+            plugins: [],
+        };
+    </script>
+</head>
+
+<body>
+
+
+    <header class="w-full py-6 px-12 flex justify-between items-center">
+        <a href="index.html">
+        <div class="logo flex items-center pl-[60px]">
+            <img src="assets/mindgraphLogo.png" alt="MindGraph Logo" class="h-12">
+        </div>
+      </a>
+        <nav class="flex items-center space-x-6">
+            <a href="about.html" class="text-[#202124]">About Us</a>
+            <a href="service.html" class="text-[#202124] flex items-center">Services <img src="assets/dropdownArrow.svg"
+                    alt="Dropdown" class="ml-1 w-4 h-4"></a>
+            <a href="product.html" class="text-[#202124] flex items-center">Products <img src="assets/dropdownArrow.svg"
+                    alt="Dropdown" class="ml-1 w-4 h-4"></a>
+            <a href="#" class="text-[#202124]">Contact Us</a>
+        </nav>
+        <button
+            class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+            Get in Touch
+            <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
+        </button>
+    </header>
+
+    <section class="overview">
+      <div class="description">
+          <div class="logo-opti">
+          <p style="font-weight: 600;font-size: 32.76px; background-image: linear-gradient(to bottom, #0C1733 , #244599 );background-clip: text; color:transparent">OpsBeat</p>
+          </div>
+          <p style="font-weight: 400;font-size: 40px; line-height: 1.2; padding-top: 20px; padding-bottom:20px;">AI-Powered IT Service Management Platform</p>
+          <p style="color: #585858;">Revolutionize your IT operations with smart automation, real-time visibility, and seamless integrations. OpsBeat brings speed, simplicity, and scale to modern service management.</p>
+          <button
+            class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]" 
+            style="width: 250px; height: 50px; margin-top: 35px;">
+            Talk to Our Experts
+            <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
+        </button>    
+      </div>
+      <div>
+          <img src="assets/opsbeat/header.png" alt="optiSaas">
+      </div>
+    </section>
+
+    <div  class="section-between">
+      <div>
+        <p style=" color: #2FC1FF; font-weight: 600; font-size: 16px; padding-bottom: 30px;">What is OpsBeat?</p>
+        <p style= "font-weight: 400; font-size: 43px; line-height: 1.2; padding-bottom: 20px;">Designed for Responsible <br> Growth </p>
+        <p style="font-size: 16px; font-weight: 400; line-height: 150%; width: 768px; height: 72px; color: #585858;">OpsBeat is more than an ITSM tool—it's a powerful platform built to streamline IT workflows, drive operational efficiency, and provide deep insight into service performance. With low-code customization, robust automation, and built-in AI, OpsBeat transforms how your teams manage IT services.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;">
+        <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Why Choose OpsBeat? </p>
+        <ul style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; list-style: disc; margin-left: 30px;" >
+          <li> AI-Powered ITSM with advanced automation and insights </li>
+          <li>Low-code tools for easy, flexible workflow customization</li>
+          <li>Enterprise-grade platform extensibility</li>
+          <li>Better performance visibility with advanced dashboards</li>
+          <li>Designed for scale, speed, and simplicity</li>
+          <li>A smarter alternative to traditional platforms like Freshdesk</li>
+        </ul>
+      </div>
+    </div>
+
+    <section  class="section-2">
+      <p style=" color: #2FC1FF; font-weight: 600; font-size: 16px; padding-bottom: 30px;">key Features</p>
+      <p style= "font-weight: 400; font-size: 43px; text-align: center; line-height: 1.2; padding-bottom: 20px;">Where Efficiency Meets <br> Intelligence</p>
+    </section>
+
+    <section class="section-3">
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: start; padding-left: 40px;">
+        <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Low Code/No Code Application</p>
+        <p style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">Design, customize, and deploy workflows without writing a single line of code.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;padding-left: 40px;">
+        <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Robust Workflow Engine </p>
+        <p style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">Automate tasks and standardize processes for improved speed and accuracy.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;padding-left: 40px;">
+        <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Customizable Dashboards</p>
+        <p style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">Get a 360° real-time view of tickets, performance metrics, and operational KPIs.</p>
+      </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;padding-left: 40px;">
+        <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Multichannel Support</p>
+        <p style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">Deliver consistent service through Email, Chat, SMS, and more—anytime, anywhere.</p>
+      </div>
+    </section>
+
+     <section  class="section-2">
+      <p style= "font-weight: 400; font-size: 43px; text-align: center; line-height: 1.2; padding-bottom: 20px;">Smart Capabilities That Set <br> OpsBeat Apart</p>
+    </section>
+
+    <section class="section-3">
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: start; padding-left: 40px;">
+        <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Aggregations APIs</p>
+        <p style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">Go beyond basic metrics. OpsBeat’s advanced APIs enable real-time aggregation of tickets, analytics, and system data—offering richer operational insights than competitors like Freshdesk.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;padding-left: 40px;">
+        <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Platform Extensibility </p>
+        <p style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">Unlike traditional ITSM platforms, OpsBeat empowers you to build full-scale custom applications—tailored to your exact IT requirements.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;padding-left: 40px;">
+        <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Built-In AI Features</p>
+        <p style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">Leverage intelligent automation, predictive analytics, and sentiment analysis to optimize performance, anticipate issues, and enhance service delivery.</p>
+      </div>
+    </section>
+
+   
+
+    <!-- Review Section-->
+    <section class="flex justify-center py-12 px-[100px] bg-white pt-[150px]">
+        <div
+            class="relative  w-full rounded-[40px_0px_0px_0px] [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] shadow-md p-6 md:p-10 flex flex-col md:flex-row items-center">
+
+            <!-- Floating quote symbol (top-right) -->
+            <div class="absolute top-[-35px]  text-6xl text-[#9beef1] select-none"><img src="assets/Shape.svg"></div>
+
+            <!-- Left: Testimonial -->
+            <div class="flex-1">
+                <p class="text-[#919CA2] mb-6 pr-[340px]">
+                    Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
+                    and engaging with your target audience on all the social media channels.
+                </p>
+                <div>
+                    <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
+                    <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+                </div>
+            </div>
+
+            <!-- Right: Logo Card with arrows -->
+
+            <div class=" w-[200px] h-[200px]  absolute top-[-70px] right-[30px]  shadow-[0px_0px_12.8px_#0000001a]">
+                <div class=" w-[200px] h-[200px] relative bg-white shadow-[0px_0px_4px_#0000000d]">
+
+                    <img src="assets/kpmg.png" alt="KPMG Logo"
+                        class="h-[30px] object-contain absolute top-[90px] left-[60px]" />
+
+                </div>
+            </div>
+            <!-- Arrows below image -->
+            <div class="flex gap-4 mt-auto absolute top-[145px] right-[90px]">
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowL.svg">
+                </button>
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowR.svg">
+
+                </button>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- Footer-->
+    <div class="bg-white pt-20">
+        <div class="px-[150px] flex items-center justify-between">
+            <img class="" src="assets/mindgraphLogo.png" />
+            <div>
+                <nav class="flex items-center space-x-6">
+                    <a href="index.html" class="text-[#7E7E7E]">Home</a>
+
+                    <a href="about.html" class="text-[#7E7E7E]">About Us</a>
+                    <a href="service.html" class="text-[#7E7E7E] flex items-center">Services <img src="assets/dropdown.svg"
+                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="product.html" class="text-[#7E7E7E] flex items-center">Products <img src="assets/dropdown.svg"
+                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="#" class="text-[#7E7E7E]">Blogs</a>
+                    <a href="#" class="text-[#7E7E7E]">Careers</a>
+                </nav>
+            </div>
+            <div class="flex">
+                <img src="assets/fb.svg">
+                <img src="assets/x.svg">
+                <img src="assets/youtube.svg">
+                <img src="assets/insta.svg">
+                <img src="assets/lnkedin.svg">
+
+
+            </div>
+
+        </div>
+        <div>
+            <img src="assets/line.svg" class="mt-[20px] px-[130px]">
+        </div>
+        <div>
+            <p
+                class=" mt-[20px] pb-[30px] [font-family:'Roboto',Helvetica] font-normal text-transparent text-sm text-center tracking-[0] leading-[normal]">
+                <span class="text-[#8a8a8f]">© Copyright 2025, </span>
+                <span class="font-semibold text-[#667085]">MindGraph</span>
+                <span class="text-[#8a8a8f]">. All Rights Reserved.</span>
+            </p>
+        </div>
+
+</body>
+
+</html>
