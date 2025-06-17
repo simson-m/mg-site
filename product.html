@@ -32,17 +32,17 @@
 
     <header class="w-full py-6 px-12 flex justify-between items-center">
         <a href="index.html">
-        <div class="logo flex items-center pl-[60px]">
-            <img src="assets/mindgraphLogo.png" alt="MindGraph Logo" class="h-12">
-        </div>
-      </a>
+            <div class="logo flex items-center pl-[60px]">
+                <img src="assets/mindgraphLogo.png" alt="MindGraph Logo" class="h-12">
+            </div>
+        </a>
         <nav class="flex items-center space-x-6">
             <a href="about.html" class="text-[#202124]">About Us</a>
             <a href="service.html" class="text-[#202124] flex items-center">Services <img src="assets/dropdownArrow.svg"
                     alt="Dropdown" class="ml-1 w-4 h-4"></a>
             <a href="product.html" class="text-[#202124] flex items-center">Products <img src="assets/dropdownArrow.svg"
                     alt="Dropdown" class="ml-1 w-4 h-4"></a>
-            <a href="#" class="text-[#202124]">Contact Us</a>
+            <a href="/contactUs.html" class="text-[#202124]">Contact Us</a>
         </nav>
         <button
             class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
@@ -76,16 +76,15 @@
     </div>
 
     <!-- CustomerDLens Product Section-->
-    <section class="bg-white py-20">
-        <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
-
-            <!-- Left: Blue Sidebar Panel with Floating Image -->
-            <div class=" w-full lg:w-1/2 flex justify-center">
+    <section class="bg-white py-20 overflow-x-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
+            <!-- Left: Image with Box -->
+            <div class="w-full lg:w-1/2 flex justify-center relative">
                 <!-- Blue Panel -->
-                <div class="absolute w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg !hidden"></div>
-
-                <!-- Image (Dashboard) -->
-                <img src="assets/customerDlenAI.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
+                <div class="absolute w-full max-w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg z-0 top-[30px]"></div>
+                <!-- Image -->
+                <img src="assets/customerDlenAI.png" alt="CyberAI Dashboard"
+                    class="w-full max-w-[600px] relative z-10 top-[-20px]" />
             </div>
 
             <!-- Right: Content -->
@@ -96,42 +95,45 @@
                     Unlock a 360° customer view with our AI-powered data platform. From ingestion to advanced analytics,
                     CustomerDLens.ai turns complex data into business intelligence.
                 </p>
-
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-1 text-[#666666] text-base">
-                    <li class="flex items-center gap-2 ">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                    <li class="flex items-center gap-2">
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         No-code data ingestion from diverse sources (APIs, Databricks, files, etc.)
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Real-time pipeline monitoring with cleansing & validation
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         360° customer view via unified Customer Data Fabric
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Dynamic segmentation using Slice & Dice Algorithm
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         AI-powered recommendations through GEN-AI
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Anomaly detection and historical tracking via Data Quality Dashboard
                     </li>
                 </ul>
+                <a href="customerDlens.html">
+                    <button
+                        class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        Read More
+                    </button></a>
             </div>
         </div>
     </section>
 
     <!-- SaaS Beam Section-->
-    <section class="bg-[#F7FBFF] py-20">
+    <section class="bg-[#F7FBFF] py-20 overflow-x-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-16">
-
             <!-- Left Text Content -->
             <div class="w-full lg:w-1/2">
                 <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">SaaS Beam</h3>
@@ -140,66 +142,69 @@
                     Gain complete control over your SaaS ecosystem with SaaS Beam—designed to reduce costs, prevent
                     shadow IT, and align SaaS investments with business goals.
                 </p>
-
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-2 text-[#666666] text-base">
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Unified dashboard for SaaS and cloud spend visibility
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         AI-driven SaaS Advisor for usage optimization
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Multicloud monitoring with budget threshold alerts
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Centralized SaaS marketplace with reviews and insights
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Automated contract lifecycle and renewal tracking
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Portfolio management across departments and teams
                     </li>
                 </ul>
+                <a href="optiSaas.html">
+                    <button
+                        class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        Read More
+                    </button></a>
             </div>
 
-            <!-- Right Image Card with Sidebar -->
-            <div class="w-full lg:w-1/2 flex justify-center ">
-                <!-- Light blue background box -->
-                <div class="absolute  w-[600px] h-[460px] bg-white !hidden"></div>
-
-                <!-- Dashboard Image -->
-                <img src="assets/saasbeam-image.png" alt="SaaS Beam Dashboard" class="w-[600px]   relative top-[-120px]" />
+            <!-- Right Image Card with Box -->
+            <div class="w-full lg:w-1/2 flex justify-center relative">
+                <!-- Background box -->
+                <div class="absolute w-full max-w-[600px] h-[440px] bg-white rounded-lg z-0 top-[40px]"></div>
+                <!-- Image -->
+                <img src="assets/saasbeam-image.png" alt="SaaS Beam Dashboard"
+                    class="w-full max-w-[600px] relative z-10 top-[-80px]" />
             </div>
-
         </div>
     </section>
 
+
     <!-- SmartSustain AI Section-->
-    <section class="bg-white py-20">
-        <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
-
-            <!-- Left: Blue Sidebar Panel with Floating Image -->
-            <div class=" w-full lg:w-1/2 flex justify-center">
+    <!-- CustomerDLens Product Section-->
+    <section class="bg-white py-20 overflow-x-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
+            <!-- Left: Image with Box -->
+            <div class="w-full lg:w-1/2 flex justify-center relative">
                 <!-- Blue Panel -->
-                <div class="absolute w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg !hidden"></div>
-
-                <!-- Image (Dashboard) -->
-                <img src="assets/smartsustainImage.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
+                <div class="absolute w-full max-w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg z-0 top-[30px]"></div>
+                <!-- Image -->
+                <img src="assets/smartsustainImage.png" alt="CyberAI Dashboard"
+                    class="w-full max-w-[600px] relative z-10 top-[-100px]" />
             </div>
 
             <!-- Right: Content -->
             <div class="w-full lg:w-1/2">
                 <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">SmartSustain.AI</h3>
-                <h4 class="text-xl  text-[#1783F7] mb-4">Data-Driven Sustainability for Future-Ready
-                    Organizations</h4>
+                <h4 class="text-xl text-[#1783F7] mb-4">Data-Driven Sustainability for Future-Ready Organizations</h4>
                 <p class="text-[#666666] mb-8">
                     Streamline ESG reporting with a fully customizable platform that supports compliance with global
                     standards like GRI and ISSB.
@@ -207,34 +212,41 @@
 
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-1 text-[#666666] text-base">
-                    <li class="flex items-center gap-2 ">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                    <li class="flex items-center gap-2">
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         ESG modules: Environmental, Social, Governance, and Compliance
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Scope 1, 2, and 3 emissions tracking with supplier inputs
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Bulk data upload for efficient reporting
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         ESG Maturity Assessment and Peer Benchmarking
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         ISSB & GRI gap assessments for standard compliance
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-[#1783f7] text-xl"><img src="assets/arrow.svg"></span>
+                        <img src="assets/arrow.svg" class="w-4 h-4 text-[#1783f7]" />
                         Role-based access for decentralized data collection and review
                     </li>
                 </ul>
+                <a href="smartSustain.html">
+                    <button
+                        class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        Read More
+                    </button></a>
+
             </div>
         </div>
     </section>
+
 
     <!-- Patient360 AI Section-->
     <section class="bg-[#F7FBFF] py-20">
@@ -277,15 +289,21 @@
                         HIPAA-compliant data encryption and role-based access
                     </li>
                 </ul>
+                <a href="customerDlens.html">
+                    <button
+                        class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        Read More
+                    </button></a>
             </div>
 
             <!-- Right Image Card with Sidebar -->
-            <div class="w-full lg:w-1/2 flex justify-center ">
-                <!-- Light blue background box -->
-                <div class="absolute  w-[600px] h-[460px] bg-white !hidden"></div>
-
+            <div class="w-full lg:w-1/2 flex justify-center relative">
+                <!-- Background box -->
+                <div class="absolute w-full max-w-[600px] h-[420px] bg-white rounded-lg z-0 top-[40px]"></div>
+                <!-- Image -->
                 <!-- Dashboard Image -->
-                <img src="assets/patient360Image.png" alt="SaaS Beam Dashboard" class="w-[560px]  relative top-[-120px]" />
+                <img src="assets/patient360Image.png" alt="SaaS Beam Dashboard"
+                    class="w-[560px]  relative top-[-100px]" />
             </div>
 
         </div>
@@ -296,12 +314,12 @@
         <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
 
             <!-- Left: Blue Sidebar Panel with Floating Image -->
-            <div class=" w-full lg:w-1/2 flex justify-center">
-                <!-- Blue Panel -->
-                <div class="absolute w-[600px] h-[380px] bg-[#f3f7ff] rounded-lg !hidden"></div>
+            <div class="w-full lg:w-1/2 flex justify-center relative">
+                <!-- Box behind the image -->
+                <div class="absolute w-full max-w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg z-0 top-[30px]"></div>
 
                 <!-- Image (Dashboard) -->
-                <img src="assets/autoDocxImage.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
+                <img src="assets/autoDocxImage.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-100px]" />
             </div>
 
             <!-- Right: Content -->
@@ -338,11 +356,16 @@
                     </li>
 
                 </ul>
+                <a href="autodox.html">
+                    <button
+                        class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        Read More
+                    </button></a>
             </div>
         </div>
     </section>
 
-    <!-- MamthOps Section-->
+    <!-- MathOps Section-->
     <section class="bg-[#F7FBFF] py-20">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-16">
 
@@ -380,13 +403,18 @@
                     </li>
 
                 </ul>
+                <a href="mathops.html">
+                    <button
+                        class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        Read More
+                    </button></a>
             </div>
 
             <!-- Right Image Card with Sidebar -->
-            <div class="w-full lg:w-1/2 flex justify-center ">
-                <!-- Light blue background box -->
-                <div class="absolute  w-[600px] h-[400px] bg-white none !hidden"></div>
-
+            <div class="w-full lg:w-1/2 flex justify-center relative">
+                <!-- Background box -->
+                <div class="absolute w-full max-w-[600px] h-[360px] bg-white rounded-lg z-0 top-[40px]"></div>
+                <!-- Image -->
                 <!-- Dashboard Image -->
                 <img src="assets/mathopsImage.png" alt="SaaS Beam Dashboard" class="w-[560px]  relative top-[-120px]" />
             </div>
@@ -399,10 +427,9 @@
         <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
 
             <!-- Left: Blue Sidebar Panel with Floating Image -->
-            <div class=" w-full lg:w-1/2 flex justify-center">
-                <!-- Blue Panel -->
-                <div class="absolute w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg !hidden"></div>
-
+            <div class="w-full lg:w-1/2 flex justify-center relative">
+                <!-- Box behind the image -->
+                <div class="absolute w-full max-w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg z-0 top-[30px]"></div>
                 <!-- Image (Dashboard) -->
                 <img src="assets/opsBeatImage.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
             </div>
@@ -445,6 +472,11 @@
                     </li>
 
                 </ul>
+                <a href="opsbeat.html">
+                    <button
+                        class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        Read More
+                    </button></a>
             </div>
         </div>
     </section>
@@ -503,10 +535,10 @@
                     <a href="index.html" class="text-[#7E7E7E]">Home</a>
 
                     <a href="about.html" class="text-[#7E7E7E]">About Us</a>
-                    <a href="service.html" class="text-[#7E7E7E] flex items-center">Services <img src="assets/dropdown.svg"
-                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
-                    <a href="product.html" class="text-[#7E7E7E] flex items-center">Products <img src="assets/dropdown.svg"
-                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="service.html" class="text-[#7E7E7E] flex items-center">Services <img
+                            src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="product.html" class="text-[#7E7E7E] flex items-center">Products <img
+                            src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4"></a>
                     <a href="#" class="text-[#7E7E7E]">Blogs</a>
                     <a href="#" class="text-[#7E7E7E]">Careers</a>
                 </nav>

@@ -27,65 +27,162 @@
     </script>
 
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const map = L.map("map").setView([44.8, -93.5], 4);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(map);
-        const locations = [
-          {
-            name: "Coimbatore",
-            coords: [11.0168, 76.9558],
-            address: "Coimbatore, Tamil Nadu, India",
-          },
-          {
-            name: "Chennai",
-            coords: [13.0827, 80.2707],
-            address: "Chennai, Tamil Nadu, India",
-          },
-          {
-            name: "Bangalore",
-            coords: [12.9716, 77.5946],
-            address: "Bangalore, Karnataka, India",
-          },
-          {
-            name: "Hyderabad",
-            coords: [17.385, 78.4867],
-            address: "Hyderabad, Telangana, India",
-          },
-        ];
+        document.addEventListener("DOMContentLoaded", function () {
+            // Default view: Bangalore
+            const map = L.map("map").setView([12.9716, 77.5946], 10);
 
-        locations.forEach((location) => {
-          const marker = L.marker(location.coords).addTo(map);
-          marker.bindPopup(`
-            <b>${location.name}</b><br>
-            ${location.address || location.name + " Office"}
-          `);
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution:
+                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(map);
+
+            const locations = [
+                { name: "Coimbatore", coords: [11.0168, 76.9558], address: "Coimbatore, Tamil Nadu, India" },
+                { name: "Chennai", coords: [13.0827, 80.2707], address: "Chennai, Tamil Nadu, India" },
+                { name: "Bangalore", coords: [12.9716, 77.5946], address: "Bangalore, Karnataka, India" },
+                { name: "Hyderabad", coords: [17.385, 78.4867], address: "Hyderabad, Telangana, India" },
+                { name: "Bhubaneswar", coords: [20.2961, 85.8245], address: "Bhubaneswar, Odisha, India" },
+                { name: "Kuala Lumpur", coords: [3.139, 101.6869], address: "Kuala Lumpur, Malaysia" },
+                { name: "Cincinnati", coords: [39.1031, -84.512], address: "Cincinnati, Ohio, USA" },
+                { name: "Singapore", coords: [1.3521, 103.8198], address: "Singapore" },
+            ];
+
+            locations.forEach((location) => {
+                const marker = L.marker(location.coords).addTo(map);
+                marker.bindPopup(`<b>${location.name}</b><br>${location.address}`);
+            });
+
+            // Hover logic
+            document.querySelectorAll("[data-location]").forEach((el) => {
+                el.addEventListener("mouseenter", () => {
+                    const name = el.getAttribute("data-location");
+                    const loc = locations.find((l) => l.name === name);
+                    if (loc) {
+                        map.setView(loc.coords, 10);
+                    }
+                });
+            });
+
+            window.addEventListener("resize", function () {
+                map.invalidateSize();
+            });
         });
+    </script>
+    <script>
+        emailjs.init("qiHx1-IR1OVRtl3Bt");
 
-        if (locations.length > 1) {
-          const bounds = locations.map((loc) => loc.coords);
-          map.fitBounds(bounds, { padding: [50, 50] });
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const contactForm = document.getElementById("contactForm");
+            const statusDiv = document.getElementById("statusMessage");
 
-        window.addEventListener("resize", function () {
-          map.invalidateSize();
+            function showStatusMessage(status, message) {
+                if (status === "success") {
+                    statusDiv.className =
+                        "mb-4 p-4 bg-green-100 text-green-800 rounded-md";
+                } else if (status === "error") {
+                    statusDiv.className =
+                        "mb-4 p-4 bg-red-100 text-red-800 rounded-md";
+                }
+
+                statusDiv.textContent = message;
+                statusDiv.classList.remove("hidden");
+
+                statusDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+                setTimeout(function () {
+                    statusDiv.classList.add("hidden");
+                }, 5000);
+            }
+
+            contactForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const message = document.getElementById("message").value;
+                const mobile = document.getElementById("mobile").value;
+
+                if (!name || !email || !message || !mobile) {
+                    showStatusMessage(
+                        "error",
+                        "Please fill in all required fields and accept the terms."
+                    );
+                    return;
+                }
+
+                // Show loading state
+                const submitBtn = document.getElementById("submitBtn");
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = "Sending...";
+                submitBtn.disabled = true;
+
+                // Prepare EmailJS template parameters
+                const templateParams = {
+                    from_name: name,
+                    reply_to: email,
+                    from_email: email,
+                    mobile_number: mobile,
+                    message: message,
+                };
+
+                // Send email using EmailJS
+                emailjs
+                    .send("service_wrnd508", "template_zwfzmhh", templateParams) // Replace with your actual IDs
+                    .then(
+                        function (response) {
+                            // Success
+                            console.log("SUCCESS!", response.status, response.text);
+                            showStatusMessage(
+                                "success",
+                                "Your message has been sent successfully! We will get back to you soon."
+                            );
+                            contactForm.reset();
+                        },
+                        function (error) {
+                            // Error
+                            console.log("FAILED...", error);
+                            showStatusMessage(
+                                "error",
+                                "Failed to send your message. Please try again later."
+                            );
+                        }
+                    )
+                    .finally(function () {
+                        // Reset button state
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    });
+            });
+
+            // Handle status messages from redirects (kept for backward compatibility)
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get("status");
+            const message = urlParams.get("message");
+
+            if (status && message) {
+                showStatusMessage(status, message);
+
+                // Clear the URL parameters to avoid showing the message on page refresh
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(
+                        {},
+                        document.title,
+                        window.location.pathname
+                    );
+                }
+            }
         });
-      });
     </script>
 </head>
 
@@ -93,18 +190,18 @@
 
 
     <header class="w-full py-6 px-12 flex justify-between items-center">
-      <a href="index.html">
-        <div class="logo flex items-center pl-[60px]" >
-            <img src="assets/mindgraphLogo.png" alt="MindGraph Logo" class="h-12">
-        </div>
-      </a>
+        <a href="index.html">
+            <div class="logo flex items-center pl-[60px]">
+                <img src="assets/mindgraphLogo.png" alt="MindGraph Logo" class="h-12">
+            </div>
+        </a>
         <nav class="flex items-center space-x-6">
             <a href="about.html" class="text-[#202124]">About Us</a>
             <a href="service.html" class="text-[#202124] flex items-center">Services <img src="assets/dropdownArrow.svg"
                     alt="Dropdown" class="ml-1 w-4 h-4"></a>
             <a href="product.html" class="text-[#202124] flex items-center">Products <img src="assets/dropdownArrow.svg"
                     alt="Dropdown" class="ml-1 w-4 h-4"></a>
-            <a href="#" class="text-[#202124]">Contact Us</a>
+            <a href="/contactUs.html" class="text-[#202124]">Contact Us</a>
         </nav>
         <button
             class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
@@ -123,92 +220,115 @@
             </div>
         </div>
     </div>
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white py-16">
-    <div class="container mx-auto flex flex-col lg:flex-row gap-10 px-6 lg:px-20">
-        <!-- Left Column: Text Content -->
-        <div class="lg:w-1/2">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">Get in Touch</h2>
-            <p class="text-gray-600 mb-6">
-                At Mindgraph, we’re dedicated to providing innovative solutions to meet your unique
-                challenges. Whether you have questions, need support, or want to explore how our services
-                can benefit you, we’re here to help.
-                <a href="mailto:info@mind-graph.com" class="text-blue-600 hover:underline">info@mind-graph.com</a>
-            </p>
-            <div class="flex flex-col md:flex-row gap-6">
-                <!-- Contact Support -->
-                <div class="flex-1">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Contact Support</h3>
-                    <p class="text-gray-600">
-                        At Mindgraph, your satisfaction is our top priority. Our dedicated support team
-                        is ready to assist you promptly with any technical issues, billing inquiries, or
-                        service needs.
-                    </p>
-                </div>
-                <!-- Feedback & Suggestions -->
-                <div class="flex-1">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Feedback & Suggestions</h3>
-                    <p class="text-gray-600">
-                        We value your feedback and suggestions to help us improve. Share your ideas for
-                        enhancing our services or new features you’d like to see to create better experiences
-                        for all our clients.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Column: Form -->
-        <div class="lg:w-1/2">
-            <form class="bg-white p-8 rounded-lg shadow-lg">
-                <div class="mb-4">
-                    <input type="text" placeholder="Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-                <div class="mb-4">
-                    <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-                <div class="mb-4">
-                    <input type="tel" placeholder="IN +91 9876543210" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-                <div class="mb-4">
-                    <textarea placeholder="How can we help you?" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-gradient-to-r from-gray-600 to-blue-600 text-white font-semibold py-3 rounded-lg hover:from-gray-700 hover:to-blue-700 transition">
-                    Submit
-                </button>
-                <p class="text-gray-600 text-sm mt-4 text-center">
-                    By Clicking on Submit, you agree to our
-                    <a href="#" class="text-blue-600 hover:underline">Terms and condition</a> &
-                    <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
+    <div
+        class="min-h-screen flex items-center justify-center  [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] py-16">
+        <div class="container mx-auto flex flex-col lg:flex-row gap-10 px-6 lg:px-[200px]">
+            <!-- Left Column: Text Content -->
+            <div class="lg:w-1/2">
+                <h2 class="text-4xl font-bold text-[#687DA9] mb-4">Get in Touch</h2>
+                <p class="text-[#667085] mb-6">
+                    At Mindgraph, we’re dedicated to providing innovative solutions to meet your unique
+                    challenges. Whether you have questions, need support, or want to explore how our services
+                    can benefit you, we’re here to help.
+                    <br>
+                    <br>
+                    <a href="mailto:info@mind-graph.com" class="text-[#687DA9] hover:underline">info@mind-graph.com</a>
                 </p>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="w-full flex justify-center px-4 sm:px-6 md:px-8 lg:px-16 py-12">
-    <div class="w-full max-w-6xl">
-        <div class="flex flex-col lg:flex-row">
-            <!-- Left Part: Map Section -->
-            <div class="lg:w-3/5 p-4 sm:p-6 md:p-8">
-                <div id="map"
-                    class="h-52 sm:h-80 md:h-[320px] lg:h-[400px] xl:h-[480px] w-full rounded-lg border border-gray-200">
+                <div class="flex flex-col md:flex-row gap-6 mt-[60px]">
+                    <!-- Contact Support -->
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
+                        <p class="text-[#667085]">
+                            At Mindgraph, your satisfaction is our top priority. Our dedicated support team
+                            is ready to assist you promptly with any technical issues, billing inquiries, or
+                            service needs.
+                        </p>
+                    </div>
+                    <!-- Feedback & Suggestions -->
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
+                        <p class="text-[#667085]">
+                            We value your feedback and suggestions to help us improve. Share your ideas for
+                            enhancing our services or new features you’d like to see to create better experiences
+                            for all our clients.
+                        </p>
+                    </div>
                 </div>
             </div>
-            <!-- Right Part: Locations List -->
-            <div class="lg:w-2/5 p-4 sm:p-6 md:p-8 flex flex-col items-center">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">Our Locations</h3>
-                <ul class="space-y-2 text-gray-600 text-left">
-                    <li>Bangalore, India</li>
-                    <li>Hyderabad, India</li>
-                    <li>Kuala Lumpur, Malaysia</li>
-                    <li>Cincinnati, Ohio, USA</li>
-                    <li>Bhubaneswar, India</li>
-                    <li>Coimbatore, India</li>
-                    <li>Singapore</li>
-                </ul>
+
+            <!-- Right Column: Form -->
+            <div class="lg:w-1/2">
+                <div id="statusMessage" class="hidden"></div>
+
+                <form id="contactForm" class="bg-white p-8 rounded-lg shadow-lg ">
+                    <div class="mb-4">
+                        <input type="text" placeholder="Name" id="name" name="name"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                    <!-- Email Input with Icon -->
+                    <div class="mb-4 relative">
+                        <img src="assets/mail.svg"
+                            class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <input type="email" placeholder="Your email" id="email" name="email"
+                            class="w-full pl-10 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <!-- Mobile Input with Country Code Dropdown -->
+                    <div class="mb-4 relative">
+                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
+                            <select class="bg-transparent text-[#101828] text-sm outline-none pr-1">
+                                <option value="IN" class="text-[#101828]">IN</option>
+                            </select>
+                        </div>
+                        <input type="tel" placeholder="+91 9876543210" id="mobile" name="mobile"
+                            class="w-full pl-20 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div class="mb-4">
+                        <textarea placeholder="How can we help you?" rows="4" id="message" name="message"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <button type="submit" id="submitBtn"
+                        class=" w-full text-center text-white font-semibold py-3 px-8 
+                        rounded-full flex justify-center items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        Submit
+                    </button>
+                    <p class="text-gray-600 text-lg mt-4 text-center">
+                        By contacting us, you agree to our
+                        <a href="#" class="text-[#202124] hover:underline font-bold">Terms and condition</a> and
+                        <a href="#" class="text-[#202124] hover:underline font-bold">Privacy Policy</a>
+                    </p>
+                </form>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="w-full flex justify-center px-4 sm:px-6 md:px-8 lg:px-16 py-12">
+        <div class="w-full max-w-6xl">
+            <div class="flex flex-col lg:flex-row">
+                <!-- Left Part: Map Section -->
+                <div class="lg:w-3/5 p-4 sm:p-6 md:p-8">
+                    <div id="map"
+                        class=" md:h-[320px] lg:h-[320px] xl:h-[350px] w-full rounded-2xl ">
+                    </div>
+                </div>
+                <!-- Right Part: Locations List -->
+                <div class="lg:w-2/5 p-4 sm:p-6 md:p-8 flex flex-col items-center">
+                    <h3 class="text-lg font-semibold text-[#1783F7] mb-4">Our Locations</h3>
+                    <ul class="space-y-4 text-[#5F6368] pl-[60px] ">
+                        <li class="hover:text-[#202124]" data-location="Bangalore">Bangalore, India</li>
+                        <li class="hover:text-[#202124]" data-location="Hyderabad">Hyderabad, India</li>
+                        <li class="hover:text-[#202124]" data-location="Kuala Lumpur">Kuala Lumpur, Malaysia</li>
+                        <li class="hover:text-[#202124]" data-location="Cincinnati">Cincinnati, Ohio, USA</li>
+                        <li class="hover:text-[#202124]" data-location="Bhubaneswar">Bhubaneswar, India</li>
+                        <li class="hover:text-[#202124]" data-location="Coimbatore">Coimbatore, India</li>
+                        <li class="hover:text-[#202124]" data-location="Singapore">Singapore</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Review Section-->
     <section class="flex justify-center py-12 px-4 bg-white mt-[100px]">
@@ -264,10 +384,10 @@
                     <a href="index.html" class="text-[#7E7E7E]">Home</a>
 
                     <a href="about.html" class="text-[#7E7E7E]">About Us</a>
-                    <a href="service.html" class="text-[#7E7E7E] flex items-center">Services <img src="assets/dropdown.svg"
-                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
-                    <a href="product.html" class="text-[#7E7E7E] flex items-center">Products <img src="assets/dropdown.svg"
-                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="service.html" class="text-[#7E7E7E] flex items-center">Services <img
+                            src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4"></a>
+                    <a href="product.html" class="text-[#7E7E7E] flex items-center">Products <img
+                            src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4"></a>
                     <a href="#" class="text-[#7E7E7E]">Blogs</a>
                     <a href="#" class="text-[#7E7E7E]">Careers</a>
                 </nav>
