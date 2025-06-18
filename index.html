@@ -110,7 +110,7 @@
     <div class="flex flex-col justify-center">
       <div class="text-[#667085] text-base font-normal mb-7 !leading-relaxed">
         Mindgraph is a Enterprise AI Services company helping enterprises across the globe build and manage AI solutions
-        and products. Our solutions unify Data, Cloud, Security ,ERP, CRM, and Industry specific Applications to drive
+        and products. Our solutions unify Data, Cloud, Security ,ERP, CRM, and Industry specific applications to drive
         growth, efficiency, and customer impact. From fraud detection in BFSI to Remote Patient Monitoring in Healthcare
         and personalization in Retail—we deliver secure, scalable, and industry value based transformation.
       </div>
@@ -344,7 +344,7 @@
               <h3 class="text-lg font-semibold opacity-50 group-hover:opacity-100">AI & Machine Learning</h3>
 
               <!-- Description that slides down -->
-              <div class="max-h-0 overflow-hidden transition-all duration-500 ease-out group-hover:max-h-40 ">
+              <div class="desc-01 max-h-40 overflow-hidden transition-all duration-500 ease-out group-hover:max-h-40">
                 <p class="text-gray-300 text-sm leading-relaxed mt-4 pt-4 border-gray-600">
                   Custom AI solutions with deep learning, NLP, computer vision, and predictive analytics for faster
                   decisions and better automation.
@@ -431,28 +431,43 @@
       },
     ];
 
-    let defaultImage = '/assets/aibanner.png';
+    const defaultImage = '/assets/aibanner.png';
+    const desc01 = document.querySelector('.desc-01');
+    const item01 = document.querySelector('.item-01');
 
     items.forEach(({ selector, image }) => {
       const element = document.querySelector(selector);
 
       element.addEventListener('mouseenter', () => {
         fadeImageChange1(image);
+
+        // If hovering on a different item, collapse .item-01
+        if (selector !== '.item-01') {
+          desc01.classList.remove('max-h-40');
+          desc01.classList.add('max-h-0');
+        }
       });
 
       element.addEventListener('mouseleave', () => {
         fadeImageChange1(defaultImage);
+
+        // If no other item is hovered, expand .item-01
+        setTimeout(() => {
+          if (![...document.querySelectorAll('.group')].some(item => item.matches(':hover'))) {
+            desc01.classList.remove('max-h-0');
+            desc01.classList.add('max-h-40');
+          }
+        }, 50);
       });
     });
 
     function fadeImageChange1(newSrc) {
-      // featureImage.classList.add('opacity-0');
       setTimeout(() => {
         featureImage.src = newSrc;
-        // featureImage.classList.remove('opacity-0');
-      }, 30); // Wait for fade-out before changing src
+      }, 30);
     }
   </script>
+
 
 
   <!-- services -->
@@ -463,7 +478,7 @@
       <!-- heading -->
       <div class="flex flex-col items-center justify-center mb-12 mt-8  ">
         <h2 class="text-[#1783F7] text-2xl mb-2">Services</h2>
-        <h1 class="text-[#687DA9] text-2xl md:text-4xl font-bold">Transforming Ideas into Intelligent Realities</h1>
+        <h1 class="text-[#687DA9] text-2xl md:text-4xl font-bold">Turning Vision into Smart Innovation</h1>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-8 hover:bg-white transition">
@@ -965,17 +980,25 @@
 
   </section>
 
-  <!-- Review Section-->
-  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] px-[130px]">
+  <!-- Review Section -->
+  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px]">
     <div
-      class="relative  rounded-[40px_0px_0px_0px] [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] shadow-md p-6 md:p-10 flex flex-col md:flex-row items-center">
+      class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
 
-      <!-- Floating quote symbol (top-right) -->
-      <div class="absolute top-[-35px]  text-6xl text-[#9beef1] select-none"><img src="assets/Shape.svg"></div>
+      <!-- Floating quote symbol -->
+      <div class="absolute -top-8 left-4 text-6xl text-[#9beef1] select-none">
+        <img src="assets/Shape.svg" alt="Quote Symbol">
+      </div>
 
-      <!-- Left: Testimonial -->
+      <!-- Logo top-right -->
+      <div
+        class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
+        <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
+      </div>
+
+      <!-- Testimonial Text -->
       <div class="flex-1">
-        <p class="text-[#919CA2] mb-6 pr-[340px]">
+        <p class="text-[#919CA2] mb-6 mt-[40px] md:mt-0 pr-0  md:pr-[100px]  lg:pr-[400px] ">
           Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
           and engaging with your target audience on all the social media channels.
         </p>
@@ -985,29 +1008,18 @@
         </div>
       </div>
 
-      <!-- Right: Logo Card with arrows -->
-
-      <div class=" w-[200px] h-[200px]  absolute top-[-70px] right-[30px]  shadow-[0px_0px_12.8px_#0000001a]">
-        <div class=" w-[200px] h-[200px] relative bg-white shadow-[0px_0px_4px_#0000000d]">
-
-          <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain absolute top-[90px] left-[60px]" />
-
-        </div>
-      </div>
-      <!-- Arrows below image -->
-      <div class="flex gap-4 mt-auto absolute top-[145px] right-[90px]">
+      <!-- Arrows at bottom center -->
+      <div class="flex justify-center gap-4 mt-8">
         <button class="hover:text-[#1783F7] transition">
-          <img src="assets/arrowL.svg">
+          <img src="assets/arrowL.svg" alt="Previous">
         </button>
         <button class="hover:text-[#1783F7] transition">
-          <img src="assets/arrowR.svg">
-
+          <img src="assets/arrowR.svg" alt="Next">
         </button>
       </div>
-    </div>
-
     </div>
   </section>
+
 
   <!-- Footer -->
   <footer class="bg-white pt-20 px-4 md:px-[150px]">

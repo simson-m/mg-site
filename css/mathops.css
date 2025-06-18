@@ -6,6 +6,43 @@
   width: 100%;
 }
 
+
+@media screen and (max-width: 426px) {
+  .overview {
+    flex-direction: column;
+  }
+
+  .section-between {
+    margin-left: 20px !important;
+  }
+
+  .description {
+    padding-left: 20px !important;
+    padding-right: 10px !important;
+    width: 100% !important;
+  }
+
+  .section-3 {
+    padding: 0px !important;
+    gap: 20px !important;
+  }
+
+  .section-4 {
+    flex-direction: column !important;
+  }
+
+  .section-5 {
+    padding: 0 !important;
+  }
+
+  .bannerImage {
+    display: none;
+  }
+  .section-between-2 {
+   padding: 0 !important;
+  }
+}
+
 .description{
   display: flex;
   flex-direction: column;
@@ -69,7 +106,7 @@
 }
 
 .section-between-2{
-  display: grid;
+  /* display: grid; */
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 40px; /* space between columns */
   padding: 40px;

@@ -1,4 +1,4 @@
-.overview{
+.overview {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -6,7 +6,56 @@
   width: 100%;
 }
 
-.description{
+
+
+@media screen and (max-width: 426px) {
+  .overview {
+    flex-direction: column;
+    background-image: url('../assets/opsbeat/header.png');
+   position: relative;
+    
+  }
+    .overview::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* adjust darkness */
+    
+  }
+  .section-between{
+    margin-left: 20px !important;
+  }
+
+  .description {
+    padding-left: 20px !important;
+    padding-right: 10px !important;
+    width: 100% !important;
+    color: white !important;
+    z-index: 1;
+  }
+
+  .section-3 {
+    padding: 0px !important;
+    gap:20px !important;
+  }
+
+  .section-4 {
+    flex-direction: column !important;
+  }
+
+  .section-5 {
+    padding: 0 !important;
+  }
+
+  .bannerImage {
+    display: none;
+  }
+}
+
+
+.description {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -16,13 +65,13 @@
   padding-right: 70px;
 }
 
-.logo-opti{
+.logo-opti {
   object-fit: contain;
   height: 40px;
   width: 245.11px;
 }
 
-.section-2{
+.section-2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,13 +83,14 @@
 .section-3 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px; /* space between columns */
+  gap: 40px;
+  /* space between columns */
   padding: 40px;
   justify-items: center;
   align-items: start;
 }
 
-.section-4{
+.section-4 {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -52,25 +102,26 @@
 .section-5 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px; /* space between columns */
+  gap: 40px;
+  /* space between columns */
   padding: 40px;
   justify-items: center;
   align-items: start;
 }
 
-.section-between{
-  display: flex;
-  flex-direction: row;
+.section-between {
+
   justify-content: start;
   margin-top: 80px;
   margin-bottom: 30px;
   margin-left: 50px;
 }
 
-.section-between-2{
+.section-between-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 40px; /* space between columns */
+  gap: 40px;
+  /* space between columns */
   padding: 40px;
   justify-items: center;
   align-items: start;
