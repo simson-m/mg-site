@@ -104,7 +104,7 @@
 
     <!-- Hero Banner Section-->
     <div class=" flex md:flex-row  flex-col " style="width: 100%;">
-        <div class="flex flex-col justify-center pl-[20px] md:pl-[50px]  pr-[3px] md:pr-[180px] md:w-[50%] 
+        <div class="flex flex-col justify-center pl-[20px] lg:pl-[50px]  pr-[3px] md:pr-[180px] md:w-[50%] 
          mt-[70px] md:mt-0 ">
             <div>
                 <img src="assets/customerDlensLogo.svg" class="h-[35px] max-w-lg md:max-w-full md:items-start">
@@ -139,7 +139,7 @@
                 marketing and smarter decision-making.</p>
         </div>
         <div class="grid md:grid-cols-2 px-[20px] mt-[80px]">
-            <div class="md:pr-[80px]">
+            <div class="lg:pr-[80px]">
                 <h2 class="text-[#0D0504] text-3xl font-bold">
                     Why Choose CustomerDLens?
                 </h2>
@@ -151,7 +151,7 @@
                     <li>Built for Marketers, Analysts & CX Teams – No deep technical skills required</li>
                 </ul>
             </div>
-            <div class="md:pr-[80px]">
+            <div class="lg:pr-[80px]">
                 <h2 class="text-[#0D0504] text-3xl font-bold mt-[50px] md:mt-0">
                     Ideal For
                 </h2>
@@ -170,14 +170,14 @@
 
     <!-- Key Features  Section-->
     <div class="mt-[50px]  md:mt-[100px] mx-[10px]  md:mx-[40px]">
-        <div class="flex flex-col justify-center items-center md:px-[400px]">
-            <h2 class="text-[#2FC1FF]">key Features</h2>
+        <div class="flex flex-col justify-center items-center lg:px-[400px]">
+            <h2 class="text-[#2FC1FF] text-xl">Key Features</h2>
             <p class="text-[#0D0504] text-center text-5xl mt-4">Powerful Features That Turn Customer Data into
                 Actionable Intelligence.</p>
 
         </div>
-        <div class="grid md:grid-cols-3 px-[20px]  md:px-[50px] mt-[80px]">
-            <div class="md:pr-[80px]">
+        <div class="grid md:grid-cols-3 px-[20px]  lg:px-[50px] mt-[80px]">
+            <div class="lg:pr-[80px]">
                 <h2 class="text-[#0D0504] text-3xl font-bold">Unified Customer View</h2>
                 <ul class="text-[#585858] mt-4 pl-[20px]" style="list-style: disc;">
                     <li>Consolidate customer data from CRM, ERP, email tools, and social media</li>
@@ -186,7 +186,7 @@
                 </ul>
             </div>
 
-            <div class="md:pr-[80px] mt-[40px] md:mt-0">
+            <div class="lg:pr-[80px] mt-[40px] md:mt-0">
                 <h2 class="text-[#0D0504] text-3xl font-bold">Data Integration</h2>
                 <ul class="text-[#585858] mt-4 pl-[20px]" style="list-style: disc;">
                     <li>100+ pre-built connectors for every data system</li>
@@ -195,7 +195,7 @@
                 </ul>
             </div>
 
-            <div class="md:pr-[80px] mt-[40px] md:mt-0">
+            <div class="lg:pr-[80px] mt-[40px] md:mt-0">
                 <h2 class="text-[#0D0504] text-3xl font-bold">Data Cleansing</h2>
                 <ul class="text-[#585858] mt-4 pl-[20px]" style="list-style: disc;">
                     <li>Remove duplicates, inconsistencies, and improve data quality</li>
@@ -204,7 +204,7 @@
                 </ul>
             </div>
 
-            <div class="md:pr-[80px] mt-[40px] md:mt-[80px]">
+            <div class="lg:pr-[80px] mt-[40px] md:mt-[80px]">
                 <h2 class="text-[#0D0504] text-3xl font-bold">Segmentation & Targeting</h2>
                 <ul class="text-[#585858] mt-4 pl-[20px]" style="list-style: disc;">
                     <li>Segment customers based on demographics, behavior, purchase history, etc.</li>
@@ -213,7 +213,7 @@
                 </ul>
             </div>
 
-            <div class="md:pr-[80px] mt-[40px] md:mt-[80px]">
+            <div class="lg:pr-[80px] mt-[40px] md:mt-[80px]">
                 <h2 class="text-[#0D0504] text-3xl font-bold">Personalized Marketing</h2>
                 <ul class="text-[#585858] mt-4 pl-[20px]" style="list-style: disc;">
                     <li>AI-driven recommendations for content, product offers, and communication</li>
@@ -222,7 +222,7 @@
                 </ul>
             </div>
 
-            <div class="md:pr-[80px] mt-[40px] md:mt-[80px]">
+            <div class="lg:pr-[80px] mt-[40px] md:mt-[80px]">
                 <h2 class="text-[#0D0504] text-3xl font-bold">Real Time Data Processing</h2>
                 <ul class="text-[#585858] mt-4 pl-[20px]" style="list-style: disc;">
                     <li>Instant analysis of user behavior and system events</li>
@@ -240,7 +240,7 @@
     </div>
 
   <!-- Review Section -->
-  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px]">
+  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
     <div
       class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
 
@@ -278,25 +278,30 @@
     </div>
   </section>
 
-
   <!-- Footer -->
-  <footer class="bg-white pt-20 px-4 md:px-[150px]">
-    <div class="flex flex-col md:flex-row items-center md:justify-between space-y-10 md:space-y-0">
+  <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+    <!-- Main footer content -->
+    <div
+      class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
       <!-- Logo -->
-      <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+      <div class="flex justify-center lg:justify-start">
+        <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+      </div>
 
       <!-- Navigation Links -->
-      <nav class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 text-center">
-        <a href="index.html" class="text-[#7E7E7E]">Home</a>
-        <a href="about.html" class="text-[#7E7E7E]">About Us</a>
-        <a href="service.html" class="text-[#7E7E7E] flex items-center justify-center">
+      <nav
+        class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+        <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+        <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+        <a href="service.html" class="hover:text-[#1783F7] flex items-center">
           Services <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
         </a>
-        <a href="product.html" class="text-[#7E7E7E] flex items-center justify-center">
+        <a href="product.html" class="hover:text-[#1783F7] flex items-center">
           Products <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
         </a>
-        <a href="#" class="text-[#7E7E7E]">Blogs</a>
-        <a href="#" class="text-[#7E7E7E]">Careers</a>
+        <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+        <a href="#" class="hover:text-[#1783F7]">Careers</a>
       </nav>
 
       <!-- Social Icons -->
@@ -310,12 +315,10 @@
     </div>
 
     <!-- Divider Line -->
-    <div class="mt-6">
-      <img src="assets/line.svg" class="w-full" alt="Divider" />
-    </div>
+    <div class="mt-8 border-t border-gray-300 w-full"></div>
 
     <!-- Copyright -->
-    <div class="mt-6 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+    <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
       © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
     </div>
   </footer>

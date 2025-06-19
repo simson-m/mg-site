@@ -2,123 +2,128 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mind Graph</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="/global.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Graph</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/global.css" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      fetch("/navbar.html")
-        .then((res) => res.text())
-        .then((data) => {
-          document.getElementById("navbar").innerHTML = data;
-          lucide.createIcons(); // Initialize icons after insertion
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch("/navbar.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("navbar").innerHTML = data;
+                    lucide.createIcons(); // Initialize icons after insertion
 
-          // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
-          const mobileMenuButton = document.getElementById("mobile-menu-button");
-          const closeMenuButton = document.getElementById("close-menu-button");
-          const mobileMenu = document.getElementById("mobile-menu");
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+                    const mobileMenuButton = document.getElementById("mobile-menu-button");
+                    const closeMenuButton = document.getElementById("close-menu-button");
+                    const mobileMenu = document.getElementById("mobile-menu");
 
-          if (!mobileMenuButton || !mobileMenu) {
-            console.error("Mobile menu button or menu is missing.");
-            return;
-          }
+                    if (!mobileMenuButton || !mobileMenu) {
+                        console.error("Mobile menu button or menu is missing.");
+                        return;
+                    }
 
-          mobileMenuButton.addEventListener("click", function () {
-            console.log("Mobile menu button clicked");
-            mobileMenu.classList.toggle("hidden");
-            mobileMenu.classList.toggle("flex");
-            document.body.classList.toggle("overflow-hidden");
-          });
+                    mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
+                        mobileMenu.classList.toggle("hidden");
+                        mobileMenu.classList.toggle("flex");
+                        document.body.classList.toggle("overflow-hidden");
+                    });
 
-          closeMenuButton.addEventListener("click", function () {
-            mobileMenu.classList.add("hidden");
-            mobileMenu.classList.remove("flex");
-            document.body.classList.remove("overflow-hidden");
-          });
+                    closeMenuButton.addEventListener("click", function () {
+                        mobileMenu.classList.add("hidden");
+                        mobileMenu.classList.remove("flex");
+                        document.body.classList.remove("overflow-hidden");
+                    });
 
-          const mobileDropdownToggles = document.querySelectorAll(
-            ".mobile-dropdown-toggle"
-          );
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
 
-          mobileDropdownToggles.forEach((toggle) => {
-            toggle.addEventListener("click", function () {
-              const content = this.nextElementSibling;
-              const icon = this.querySelector('[data-lucide="chevron-down"]');
+                    mobileDropdownToggles.forEach((toggle) => {
+                        toggle.addEventListener("click", function () {
+                            const content = this.nextElementSibling;
+                            const icon = this.querySelector('[data-lucide="chevron-down"]');
 
-              content.classList.toggle("hidden");
-              icon.style.transform = content.classList.contains("hidden")
-                ? "rotate(0deg)"
-                : "rotate(180deg)";
-            });
-          });
+                            content.classList.toggle("hidden");
+                            icon.style.transform = content.classList.contains("hidden")
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)";
+                        });
+                    });
+                });
         });
-    });
-  </script>
+    </script>
 
 
-  <style>
-    .testimonial-slide {
-      transition: opacity 0.5s ease-in-out;
-    }
+    <style>
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
 
-    .testimonial-slide:not(.active) {
-      display: none;
-      opacity: 0;
-    }
+        .testimonial-slide:not(.active) {
+            display: none;
+            opacity: 0;
+        }
 
-    .testimonial-slide.active {
-      display: flex;
-      opacity: 1;
-    }
+        .testimonial-slide.active {
+            display: flex;
+            opacity: 1;
+        }
 
-    /* Make images square on mobile */
-    @media (max-width: 768px) {
-      .square-on-mobile {
-        position: relative;
-        width: 100%;
-        padding-bottom: 100%;
-        /* Creates a square */
-        overflow: hidden;
-      }
+        /* Make images square on mobile */
+        @media (max-width: 768px) {
+            .square-on-mobile {
+                position: relative;
+                width: 100%;
+                padding-bottom: 100%;
+                /* Creates a square */
+                overflow: hidden;
+            }
 
-      .square-on-mobile img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-  </style>
+            .square-on-mobile img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <div id="navbar"></div>
+    <div id="navbar"></div>
 
 
-    <!-- Hero Banner-->
-    <div>
-        <div class=" h-[230px] flex justify-center items-center bg-cover"
-            style="background-image: url('assets/background.png');">
-            <div class="text-white font-semibold text-5xl text-center">
-                Products
+    <!-- Hero Banner -->
+    <div class="w-full">
+        <div class="relative h-[180px] md:h-[280px] w-full">
+            <img src="assets/background.png" alt="Hero Background"
+                class="absolute inset-0 w-full h-full object-cover" />
+
+            <div class="absolute inset-0 bg-black bg-opacity-10"></div>
+
+            <div class="relative z-10 flex justify-center items-center h-full">
+                <h1 class="text-white text-3xl md:text-5xl font-semibold text-center">Products</h1>
             </div>
         </div>
     </div>
 
-
     <!-- Empowering Section-->
-    <div class="my-[100px] ">
-        <p class="text-[#687da9] text-5xl text-center font-medium">
+    <div class="my-[30px]  md:my-[100px] ">
+        <p class="text-[#687da9] text-4xl md:text-5xl text-center font-medium">
             Empowering Innovation with AI-Driven Solutions
         </p>
-        <p class="text-[#666666] font-normal  text-base text-center tracking-[0.08px] leading-5 mt-[20px] mx-[200px]">
+        <p
+            class="text-[#666666] font-normal  text-base text-center tracking-[0.08px] leading-5 mt-[20px] mx-[20px] md:-[100px]  lg:mx-[200px]">
             At Mindgraph, we build intelligent platforms that empower organizations to make smarter decisions, automate
             operations, and unlock data-driven insights. Explore our product suite built to transform diverse
             domains—from
@@ -130,9 +135,11 @@
     <section class="bg-white py-20 overflow-x-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
             <!-- Left: Image with Box -->
-            <div class="w-full lg:w-1/2 flex justify-center relative">
+            <div class="w-full lg:w-1/2 flex justify-center relative  hidden lg:block">
                 <!-- Blue Panel -->
-                <div class="absolute w-full max-w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg z-0 top-[30px]"></div>
+                <div
+                    class="absolute w-full max-w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg z-0 top-[30px] hidden md:block">
+                </div>
                 <!-- Image -->
                 <img src="assets/customerDlenAI.png" alt="CyberAI Dashboard"
                     class="w-full max-w-[600px] relative z-10 top-[-20px]" />
@@ -140,12 +147,21 @@
 
             <!-- Right: Content -->
             <div class="w-full lg:w-1/2">
-                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">CustomerDLens.ai</h3>
-                <h4 class="text-xl text-[#1783F7] mb-4">Transforming Data into Decisions</h4>
-                <p class="text-[#666666] mb-8">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2 text-center md:text-left">CustomerDLens.ai</h3>
+                <h4 class="text-xl text-[#1783F7] mb-4 text-center md:text-left">Transforming Data into Decisions</h4>
+                <p class="text-[#666666] mb-8 text-center md:text-left">
                     Unlock a 360° customer view with our AI-powered data platform. From ingestion to advanced analytics,
                     CustomerDLens.ai turns complex data into business intelligence.
                 </p>
+                <div class="w-full lg:w-1/2 flex justify-center relative  block lg:hidden">
+                    <!-- Blue Panel -->
+                    <div
+                        class="absolute w-full max-w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg z-0 top-[30px] hidden lg:block">
+                    </div>
+                    <!-- Image -->
+                    <img src="assets/customerDlenAI.png" alt="CyberAI Dashboard"
+                        class="w-full max-w-[600px] relative z-10 top-[-20px]" />
+                </div>
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-1 text-[#666666] text-base">
                     <li class="flex items-center gap-2">
@@ -182,17 +198,27 @@
         </div>
     </section>
 
-    <!-- SaaS Beam Section-->
+    <!--Opti Sass Section-->
     <section class="bg-[#F7FBFF] py-20 overflow-x-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-16">
             <!-- Left Text Content -->
             <div class="w-full lg:w-1/2">
-                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">OptiSaas.AI</h3>
-                <h4 class="text-xl text-[#1783F7] mb-4">The Future of SaaS & Cloud Management</h4>
-                <p class="text-[#666666] mb-8">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2 text-center md:text-left">OptiSaas.AI</h3>
+                <h4 class="text-xl text-[#1783F7] mb-4 text-center md:text-left">The Future of SaaS & Cloud Management
+                </h4>
+                <p class="text-[#666666] mb-8 text-center md:text-left">
                     Gain complete control over your SaaS ecosystem with OptiSaas.AI designed to reduce costs, prevent
                     shadow IT, and align SaaS investments with business goals.
                 </p>
+                <div class="w-full lg:w-1/2 flex justify-center relative block lg:hidden">
+                    <!-- Background box -->
+                    <div
+                        class="absolute w-full max-w-[600px] h-[340px] bg-white rounded-lg z-0 top-[40px] hidden lg:block">
+                    </div>
+                    <!-- Image -->
+                    <img src="assets/optiSaas.png" alt="SaaS Beam Dashboard"
+                        class="w-full max-w-[500px] relative z-10 top-[-20px]" />
+                </div>
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-2 text-[#666666] text-base">
                     <li class="flex items-center gap-2">
@@ -228,9 +254,10 @@
             </div>
 
             <!-- Right Image Card with Box -->
-            <div class="w-full lg:w-1/2 flex justify-center relative">
+            <div class="w-full lg:w-1/2 flex justify-center relative hidden lg:block">
                 <!-- Background box -->
-                <div class="absolute w-full max-w-[600px] h-[340px] bg-white rounded-lg z-0 top-[40px]"></div>
+                <div class="absolute w-full max-w-[600px] h-[340px] bg-white rounded-lg z-0 top-[40px] hidden md:block">
+                </div>
                 <!-- Image -->
                 <img src="assets/optiSaas.png" alt="SaaS Beam Dashboard"
                     class="w-full max-w-[500px] relative z-10 top-[-20px]" />
@@ -244,9 +271,11 @@
     <section class="bg-white py-20 overflow-x-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
             <!-- Left: Image with Box -->
-            <div class="w-full lg:w-1/2 flex justify-center relative">
+            <div class="w-full lg:w-1/2 flex justify-center relative hidden lg:block">
                 <!-- Blue Panel -->
-                <div class="absolute w-full max-w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg z-0 top-[30px]"></div>
+                <div
+                    class="absolute w-full max-w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg z-0 top-[30px] hidden lg:block">
+                </div>
                 <!-- Image -->
                 <img src="assets/smartsustainImage.png" alt="CyberAI Dashboard"
                     class="w-full max-w-[600px] relative z-10 top-[-100px]" />
@@ -254,13 +283,22 @@
 
             <!-- Right: Content -->
             <div class="w-full lg:w-1/2">
-                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">SmartSustain.AI</h3>
-                <h4 class="text-xl text-[#1783F7] mb-4">Data-Driven Sustainability for Future-Ready Organizations</h4>
-                <p class="text-[#666666] mb-8">
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2 text-center md:text-left">SmartSustain.AI</h3>
+                <h4 class="text-xl text-[#1783F7] mb-4 text-center md:text-left">Data-Driven Sustainability for
+                    Future-Ready Organizations</h4>
+                <p class="text-[#666666] mb-8 text-center md:text-left">
                     Streamline ESG reporting with a fully customizable platform that supports compliance with global
                     standards like GRI and ISSB.
                 </p>
-
+                <div class="w-full lg:w-1/2 flex justify-center relative block lg:hidden">
+                    <!-- Blue Panel -->
+                    <div
+                        class="absolute w-full max-w-[600px] h-[400px] bg-[#f3f7ff] rounded-lg z-0 top-[30px] hidden lg:block">
+                    </div>
+                    <!-- Image -->
+                    <img src="assets/smartsustainImage.png" alt="CyberAI Dashboard"
+                        class="w-full max-w-[600px] relative z-10 top-[-50px]" />
+                </div>
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-1 text-[#666666] text-base">
                     <li class="flex items-center gap-2">
@@ -305,14 +343,24 @@
 
             <!-- Left Text Content -->
             <div class="w-full lg:w-1/2">
-                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">Patient360.ai</h3>
-                <h4 class="text-xl  text-[#1783F7] mb-4">Revolutionizing Healthcare with a Comprehensive Data
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2 text-center md:text-left">Patient360.ai</h3>
+                <h4 class="text-xl  text-[#1783F7] mb-4 text-center md:text-left">Revolutionizing Healthcare with a
+                    Comprehensive Data
                     Platform</h4>
-                <p class="text-[#666666] mb-8">
+                <p class="text-[#666666] mb-8 text-center md:text-left">
                     A healthcare-specific CDP offering seamless doctor-patient engagement, appointment scheduling, and
                     real-time data-driven decisions.
                 </p>
-
+                <div class="w-full lg:w-1/2 flex justify-center relative block lg:hidden">
+                    <!-- Background box -->
+                    <div
+                        class="absolute w-full max-w-[600px] h-[420px] bg-white rounded-lg z-0 top-[40px] hidden lg:block">
+                    </div>
+                    <!-- Image -->
+                    <!-- Dashboard Image -->
+                    <img src="assets/patient360Image.png" alt="SaaS Beam Dashboard"
+                        class="w-[560px]  relative top-[-60px]" />
+                </div>
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-2 text-[#666666] text-base">
                     <li class="flex items-center gap-2">
@@ -348,9 +396,10 @@
             </div>
 
             <!-- Right Image Card with Sidebar -->
-            <div class="w-full lg:w-1/2 flex justify-center relative">
+            <div class="w-full lg:w-1/2 flex justify-center relative hidden lg:block">
                 <!-- Background box -->
-                <div class="absolute w-full max-w-[600px] h-[420px] bg-white rounded-lg z-0 top-[40px]"></div>
+                <div class="absolute w-full max-w-[600px] h-[420px] bg-white rounded-lg z-0 top-[40px] hidden md:block">
+                </div>
                 <!-- Image -->
                 <!-- Dashboard Image -->
                 <img src="assets/patient360Image.png" alt="SaaS Beam Dashboard"
@@ -365,9 +414,11 @@
         <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
 
             <!-- Left: Blue Sidebar Panel with Floating Image -->
-            <div class="w-full lg:w-1/2 flex justify-center relative">
+            <div class="w-full lg:w-1/2 flex justify-center relative hidden lg:block">
                 <!-- Box behind the image -->
-                <div class="absolute w-full max-w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg z-0 top-[30px]"></div>
+                <div
+                    class="absolute w-full max-w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg z-0 top-[30px] hidden md:block">
+                </div>
 
                 <!-- Image (Dashboard) -->
                 <img src="assets/autoDocxImage.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-100px]" />
@@ -375,14 +426,24 @@
 
             <!-- Right: Content -->
             <div class="w-full lg:w-1/2">
-                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">AutoDocX.AI</h3>
-                <h4 class="text-xl text-[#1783F7] mb-4">Unlock Your Document’s Full Potential with AI
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2 text-center md:text-left">AutoDocX.AI</h3>
+                <h4 class="text-xl text-[#1783F7] mb-4 text-center md:text-left">Unlock Your Document’s Full Potential
+                    with AI
                     Organizations</h4>
-                <p class="text-[#666666] mb-8">
+                <p class="text-[#666666] mb-8 text-center md:text-left">
                     Reimagine document handling with AutoDocX.AI—an AI-powered platform for organizing, searching, and
                     securing documents.
                 </p>
+                <div class="w-full lg:w-1/2 flex justify-center relative block lg:hidden">
+                    <!-- Box behind the image -->
+                    <div
+                        class="absolute w-full max-w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg z-0 top-[40px] hidden lg:block">
+                    </div>
 
+                    <!-- Image (Dashboard) -->
+                    <img src="assets/autoDocxImage.png" alt="CyberAI Dashboard"
+                        class="w-[600px] relative top-[-49px]" />
+                </div>
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-1 text-[#666666] text-base">
                     <li class="flex items-center gap-2 ">
@@ -429,7 +490,16 @@
                     Move from reactive to proactive IT management with real-time monitoring, predictive insights, and
                     unified dashboards.
                 </p>
-
+                <div class="w-full lg:w-1/2 flex justify-center relative block lg:hidden">
+                    <!-- Background box -->
+                    <div
+                        class="absolute w-full max-w-[600px] h-[360px] bg-white rounded-lg z-0 top-[40px] hidden lg:block">
+                    </div>
+                    <!-- Image -->
+                    <!-- Dashboard Image -->
+                    <img src="assets/mathopsImage.png" alt="SaaS Beam Dashboard"
+                        class="w-[560px]  relative top-[-49px] lg:top-[-180px]" />
+                </div>
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-2 text-[#666666] text-base">
                     <li class="flex items-center gap-2">
@@ -462,9 +532,10 @@
             </div>
 
             <!-- Right Image Card with Sidebar -->
-            <div class="w-full lg:w-1/2 flex justify-center relative">
+            <div class="w-full lg:w-1/2 flex justify-center relative hidden lg:block">
                 <!-- Background box -->
-                <div class="absolute w-full max-w-[600px] h-[360px] bg-white rounded-lg z-0 top-[40px]"></div>
+                <div class="absolute w-full max-w-[600px] h-[360px] bg-white rounded-lg z-0 top-[40px] hidden md:block">
+                </div>
                 <!-- Image -->
                 <!-- Dashboard Image -->
                 <img src="assets/mathopsImage.png" alt="SaaS Beam Dashboard" class="w-[560px]  relative top-[-120px]" />
@@ -478,22 +549,32 @@
         <div class="max-w-7xl mx-auto px-6    lg:px-12 flex flex-col lg:flex-row gap-16 items-start">
 
             <!-- Left: Blue Sidebar Panel with Floating Image -->
-            <div class="w-full lg:w-1/2 flex justify-center relative">
+            <div class="w-full lg:w-1/2 flex justify-center relative hidden lg:block">
                 <!-- Box behind the image -->
-                <div class="absolute w-full max-w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg z-0 top-[30px]"></div>
+                <div
+                    class="absolute w-full max-w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg z-0 top-[30px] hidden md:block">
+                </div>
                 <!-- Image (Dashboard) -->
                 <img src="assets/opsBeatImage.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-50px]" />
             </div>
 
             <!-- Right: Content -->
             <div class="w-full lg:w-1/2">
-                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2">OpsBeat</h3>
-                <h4 class="text-xl  text-[#1783F7] mb-4">Revolutionizing IT Operations Management
+                <h3 class="text-3xl font-semibold text-[#687DA9] mb-2 text-center md:text-left">OpsBeat</h3>
+                <h4 class="text-xl  text-[#1783F7] mb-4 text-center md:text-left">Revolutionizing IT Operations Management
                 </h4>
-                <p class="text-[#666666] mb-8">
+                <p class="text-[#666666] mb-8 text-center md:text-left">
                     A powerful AI-driven IT service management tool designed to streamline workflows and enhance system
                     performance.
                 </p>
+                <div class="w-full lg:w-1/2 flex justify-center relative block lg:hidden">
+                    <!-- Box behind the image -->
+                    <div
+                        class="absolute w-full max-w-[600px] h-[420px] bg-[#f3f7ff] rounded-lg z-0 top-[30px] hidden lg:block">
+                    </div>
+                    <!-- Image (Dashboard) -->
+                    <img src="assets/opsBeatImage.png" alt="CyberAI Dashboard" class="w-[600px] relative top-[-29px]  md:top-[-50px]" />
+                </div>
 
                 <h5 class="text-lg font-semibold text-[#687DA9] mb-4">Key Capabilities</h5>
                 <ul class="space-y-1 text-[#666666] text-base">
@@ -531,64 +612,71 @@
             </div>
         </div>
     </section>
-  <!-- Review Section -->
-  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px]">
-    <div
-      class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
+    <!-- Review Section -->
+    <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
+        <div
+            class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
 
-      <!-- Floating quote symbol -->
-      <div class="absolute -top-8 left-4 text-6xl text-[#9beef1] select-none">
-        <img src="assets/Shape.svg" alt="Quote Symbol">
-      </div>
+            <!-- Floating quote symbol -->
+            <div class="absolute -top-8 left-4 text-6xl text-[#9beef1] select-none">
+                <img src="assets/Shape.svg" alt="Quote Symbol">
+            </div>
 
-      <!-- Logo top-right -->
-      <div class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
-        <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
-      </div>
+            <!-- Logo top-right -->
+            <div
+                class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
+                <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
+            </div>
 
-      <!-- Testimonial Text -->
-      <div class="flex-1">
-        <p class="text-[#919CA2] mb-6 mt-[40px] md:mt-0 pr-0  md:pr-[100px]  lg:pr-[400px] ">
-          Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
-          and engaging with your target audience on all the social media channels.
-        </p>
-        <div>
-          <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
-          <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+            <!-- Testimonial Text -->
+            <div class="flex-1">
+                <p class="text-[#919CA2] mb-6 mt-[40px] md:mt-0 pr-0  md:pr-[100px]  lg:pr-[400px] ">
+                    Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
+                    and engaging with your target audience on all the social media channels.
+                </p>
+                <div>
+                    <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
+                    <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+                </div>
+            </div>
+
+            <!-- Arrows at bottom center -->
+            <div class="flex justify-center gap-4 mt-8">
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowL.svg" alt="Previous">
+                </button>
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowR.svg" alt="Next">
+                </button>
+            </div>
         </div>
-      </div>
-
-      <!-- Arrows at bottom center -->
-      <div class="flex justify-center gap-4 mt-8">
-        <button class="hover:text-[#1783F7] transition">
-          <img src="assets/arrowL.svg" alt="Previous">
-        </button>
-        <button class="hover:text-[#1783F7] transition">
-          <img src="assets/arrowR.svg" alt="Next">
-        </button>
-      </div>
-    </div>
-  </section>
+    </section>
 
 
   <!-- Footer -->
-  <footer class="bg-white pt-20 px-4 md:px-[150px]">
-    <div class="flex flex-col md:flex-row items-center md:justify-between space-y-10 md:space-y-0">
+  <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+    <!-- Main footer content -->
+    <div
+      class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
       <!-- Logo -->
-      <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+      <div class="flex justify-center lg:justify-start">
+        <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+      </div>
 
       <!-- Navigation Links -->
-      <nav class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 text-center">
-        <a href="index.html" class="text-[#7E7E7E]">Home</a>
-        <a href="about.html" class="text-[#7E7E7E]">About Us</a>
-        <a href="service.html" class="text-[#7E7E7E] flex items-center justify-center">
+      <nav
+        class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+        <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+        <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+        <a href="service.html" class="hover:text-[#1783F7] flex items-center">
           Services <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
         </a>
-        <a href="product.html" class="text-[#7E7E7E] flex items-center justify-center">
+        <a href="product.html" class="hover:text-[#1783F7] flex items-center">
           Products <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
         </a>
-        <a href="#" class="text-[#7E7E7E]">Blogs</a>
-        <a href="#" class="text-[#7E7E7E]">Careers</a>
+        <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+        <a href="#" class="hover:text-[#1783F7]">Careers</a>
       </nav>
 
       <!-- Social Icons -->
@@ -602,16 +690,14 @@
     </div>
 
     <!-- Divider Line -->
-    <div class="mt-6">
-      <img src="assets/line.svg" class="w-full" alt="Divider" />
-    </div>
+    <div class="mt-8 border-t border-gray-300 w-full"></div>
 
     <!-- Copyright -->
-    <div class="mt-6 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+    <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
       © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
     </div>
   </footer>
-  
+
 </body>
 
 </html>

@@ -288,7 +288,7 @@
 
         </div>
         <!-- Review Section-->
-        <section class="flex justify-center py-12 px-4 bg-white pt-[150px] px-[130px]">
+        <section class="flex justify-center py-12 px-4 bg-white pt-[150px] px-[130px] hidden">
             <div
                 class="relative  rounded-[40px_0px_0px_0px] [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] shadow-md p-6 md:p-10 flex flex-col md:flex-row items-center">
 
@@ -333,45 +333,50 @@
     </div>
     </section>
 
-    <!-- Footer-->
-    <div class="bg-white pt-20">
-        <div class="px-[150px] flex items-center justify-between">
-            <img class="" src="assets/mindgraphLogo.png" />
-            <div>
-                <nav class="flex items-center space-x-6">
-                    <a href="#" class="text-[#7E7E7E]">Home</a>
+    <!-- Footer -->
+    <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+        <!-- Main footer content -->
+        <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
 
-                    <a href="#" class="text-[#7E7E7E]">About Us</a>
-                    <a href="#" class="text-[#7E7E7E] flex items-center">Services <img src="assets/dropdown.svg"
-                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
-                    <a href="#" class="text-[#7E7E7E] flex items-center">Products <img src="assets/dropdown.svg"
-                            alt="Dropdown" class="ml-1 w-4 h-4"></a>
-                    <a href="#" class="text-[#7E7E7E]">Blogs</a>
-                    <a href="#" class="text-[#7E7E7E]">Careers</a>
-                </nav>
-            </div>
-            <div class="flex">
-                <img src="assets/fb.svg">
-                <img src="assets/x.svg">
-                <img src="assets/youtube.svg">
-                <img src="assets/insta.svg">
-                <img src="assets/lnkedin.svg">
-
-
+            <!-- Logo -->
+            <div class="flex justify-center lg:justify-start">
+                <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
             </div>
 
+            <!-- Navigation Links -->
+            <nav
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+                <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+                <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+                <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+                    Services <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
+                </a>
+                <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+                    Products <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
+                </a>
+                <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+                <a href="#" class="hover:text-[#1783F7]">Careers</a>
+            </nav>
+
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <img src="assets/fb.svg" alt="Facebook" />
+                <img src="assets/x.svg" alt="Twitter" />
+                <img src="assets/youtube.svg" alt="YouTube" />
+                <img src="assets/insta.svg" alt="Instagram" />
+                <img src="assets/lnkedin.svg" alt="LinkedIn" />
+            </div>
         </div>
-        <div>
-            <img src="assets/line.svg" class="mt-[20px] px-[130px]">
+
+        <!-- Divider Line -->
+        <div class="mt-8 border-t border-gray-300 w-full"></div>
+
+        <!-- Copyright -->
+        <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+            © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
         </div>
-        <div>
-            <p
-                class=" mt-[20px] pb-[30px] [font-family:'Roboto',Helvetica] font-normal text-transparent text-sm text-center tracking-[0] leading-[normal]">
-                <span class="text-[#8a8a8f]">© Copyright 2025, </span>
-                <span class="font-semibold text-[#667085]">MindGraph</span>
-                <span class="text-[#8a8a8f]">. All Rights Reserved.</span>
-            </p>
-        </div>
+    </footer>
 </body>
 
 </html>

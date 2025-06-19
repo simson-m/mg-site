@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Graph</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/global.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch("/navbar.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("navbar").innerHTML = data;
+                    lucide.createIcons(); // Initialize icons after insertion
+
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+                    const mobileMenuButton = document.getElementById("mobile-menu-button");
+                    const closeMenuButton = document.getElementById("close-menu-button");
+                    const mobileMenu = document.getElementById("mobile-menu");
+
+                    if (!mobileMenuButton || !mobileMenu) {
+                        console.error("Mobile menu button or menu is missing.");
+                        return;
+                    }
+
+                    mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
+                        mobileMenu.classList.toggle("hidden");
+                        mobileMenu.classList.toggle("flex");
+                        document.body.classList.toggle("overflow-hidden");
+                    });
+
+                    closeMenuButton.addEventListener("click", function () {
+                        mobileMenu.classList.add("hidden");
+                        mobileMenu.classList.remove("flex");
+                        document.body.classList.remove("overflow-hidden");
+                    });
+
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
+
+                    mobileDropdownToggles.forEach((toggle) => {
+                        toggle.addEventListener("click", function () {
+                            const content = this.nextElementSibling;
+                            const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+                            content.classList.toggle("hidden");
+                            icon.style.transform = content.classList.contains("hidden")
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)";
+                        });
+                    });
+                });
+        });
+    </script>
+
+
+    <style>
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .testimonial-slide:not(.active) {
+            display: none;
+            opacity: 0;
+        }
+
+        .testimonial-slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Make images square on mobile */
+        @media (max-width: 768px) {
+            .square-on-mobile {
+                position: relative;
+                width: 100%;
+                padding-bottom: 100%;
+                /* Creates a square */
+                overflow: hidden;
+            }
+
+            .square-on-mobile img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="navbar"></div>
+
+    <div class="w-full">
+        <div class="relative h-[180px] md:h-[280px] w-full">
+            <img src="assets/industryBanner.jpg" alt="Hero Background"
+                class="absolute inset-0 w-full h-full object-cover" />
+
+            <div class="absolute inset-0 bg-black bg-opacity-10"></div>
+
+            <div class="relative z-10 flex justify-center items-center h-full">
+                <h1 class="text-white text-3xl md:text-5xl font-semibold text-center">Industries</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Energy & Utilities Section-->
+    <section class="bg-white py-8 sm:py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Heading + Image -->
+            <div class="mb-10">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                    <img src="assets/energyUtilites.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
+                        <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9]">Energy & Utilities</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Columns (manual borders) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Overview -->
+                <div>
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
+                    <p class="text-lg">
+                        We help energy providers and utility companies transition into intelligent, sustainable
+                        enterprises.
+                        Our AI-powered platforms and IoT integrations offer real-time insights into energy flow, asset
+                        performance, and ESG metrics.
+                    </p>
+                </div>
+
+                <!-- Key Solutions (with vertical border in desktop only) -->
+                <div class="md:border-l md:border-r md:border-gray-300 px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Smart grid optimization and energy distribution modeling</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Predictive maintenance for transmission and distribution infrastructure</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>IoT-based smart meter data aggregation and real-time analytics</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Carbon emissions tracking and ESG reporting dashboards</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Outage management and disaster recovery automation</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Impact (no borders on mobile) -->
+                <div class="md:pl-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Reduced energy loss and improved load balancing</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Faster fault detection and resolution</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Enhanced regulatory compliance and sustainability reporting</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Proactive asset lifecycle management</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- HealthCare Section-->
+    <section class="bg-white py-8 sm:py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Heading + Image -->
+            <div class="mb-10">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                    <img src="assets/healthcareIndustry.jpg" alt="Energy Utilities"
+                        class="w-full h-full object-cover" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
+                        <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9]">Healthcare</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Columns (manual borders) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Overview -->
+                <div>
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
+                    <p class="text-lg">
+                        Mindgraph enables healthcare providers to modernize operations and improve patient outcomes
+                        through AI, secure data platforms, and predictive diagnostics. We support clinical
+                        decision-making and operational efficiency.
+                    </p>
+                </div>
+
+                <!-- Key Solutions -->
+                <div class="md:border-l md:border-r md:border-gray-300 px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Predictive analytics for early diagnosis and patient risk scoring</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>AI-driven triage, treatment planning, and workflow automation</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Secure patient data integration across HIS, EHR, and wearable devices</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Medical image analysis using computer vision models</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>HIPAA-compliant infrastructure and access controls</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Impact -->
+                <div class="md:pl-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Reduced diagnosis time and improved treatment accuracy</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Streamlined patient journeys and reduced administrative overhead</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Improved care personalization and preventive healthcare delivery</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Stronger data security and regulatory alignment</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Airports Section-->
+    <section class="bg-white py-8 sm:py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Heading + Image -->
+            <div class="mb-10">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                    <img src="assets/airportIndustry.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
+                        <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9]">Airports</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Columns (manual borders) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Overview -->
+                <div>
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
+                    <p class="text-lg">
+                        From landside to airside, we help airports digitize their infrastructure, optimize resource
+                        allocation, and enhance the passenger experience. Our intelligent solutions support operational
+                        visibility and real-time responsiveness.
+                    </p>
+                </div>
+
+                <!-- Key Solutions (with vertical border in desktop only) -->
+                <div class="md:border-l md:border-r md:border-gray-300 px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Passenger flow analysis and queue prediction</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Predictive maintenance for runway and terminal equipment</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>AI-powered baggage handling and lost item tracking</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Smart terminal energy management and surveillance systems</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Integrated dashboards for turnaround and staff scheduling</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Impact (no borders on mobile) -->
+                <div class="md:pl-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Reduced passenger wait times and operational delays</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Real-time situational awareness across airport systems</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Optimized use of resources and reduced operating costs</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Enhanced passenger safety, comfort, and satisfaction</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Banking Section-->
+    <section class="bg-white py-8 sm:py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Heading + Image -->
+            <div class="mb-10">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                    <img src="assets/bankingIndustry.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
+                        <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9] lg:pr-[700px]">Banking, Financial
+                            Services &
+                            Insurance (BFSI)</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Columns (manual borders) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Overview -->
+                <div>
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
+                    <p class="text-lg">
+                        Mindgraph empowers financial institutions with AI-first digital solutions to reduce risk, detect
+                        fraud, enhance customer journeys, and meet regulatory demands.
+                    </p>
+                </div>
+
+                <!-- Key Solutions -->
+                <div class="md:border-l md:border-r md:border-gray-300 px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Real-time fraud detection and transaction scoring using ML</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Credit risk modeling and financial forecasting</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Personalized banking experiences and customer 360 profiling</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>RegTech compliance automation and audit trails</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Chatbots and virtual agents for service efficiency</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Impact -->
+                <div class="md:pl-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Lower financial risk and reduced fraud-related losses</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Improved underwriting accuracy and faster approvals</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Increased customer retention and engagement</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Streamlined compliance reporting and risk governance</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Telecom Section-->
+    <section class="bg-white py-8 sm:py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Heading + Image -->
+            <div class="mb-10">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                    <img src="assets/telecomIndustry.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
+                        <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9]">Telecom</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Columns (manual borders) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Overview -->
+                <div>
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
+                    <p class="text-lg">
+                        We support telecom operators in improving service quality, customer retention, and network
+                        intelligence with scalable AI and real-time data analytics.
+                    </p>
+                </div>
+
+                <!-- Key Solutions (with vertical border in desktop only) -->
+                <div class="md:border-l md:border-r md:border-gray-300 px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Network performance monitoring and anomaly detection</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Churn prediction and subscriber behavior analytics</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Automated ticketing and self-healing workflows</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>5G resource orchestration and smart planning</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Customer sentiment and SLA tracking with NLP</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Impact (no borders on mobile) -->
+                <div class="md:pl-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Enhanced service availability and customer satisfaction</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Data-driven customer retention strategies</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Optimized network investment and resource utilization</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Reduced manual intervention in support operations</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Manufacturing Section-->
+    <section class="bg-white py-8 sm:py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Heading + Image -->
+            <div class="mb-10">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                    <img src="assets/maufacturingIndustry.jpg" alt="Energy Utilities"
+                        class="w-full h-full object-cover" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
+                        <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9]">Manufacturing</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Columns (manual borders) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Overview -->
+                <div>
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
+                    <p class="text-lg">
+                        We help manufacturers digitize plant operations, optimize supply chains, and improve product
+                        quality using AI and IoT-enabled solutions.
+                    </p>
+                </div>
+
+                <!-- Key Solutions (with vertical border in desktop only) -->
+                <div class="md:border-l md:border-r md:border-gray-300 px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Predictive maintenance for production machinery</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Quality inspection using computer vision</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>AI-based production scheduling and capacity planning</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Connected factory insights via IoT data integration</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Supply chain risk analysis and automation</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Impact (no borders on mobile) -->
+                <div class="md:pl-6">
+                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666]">
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Reduced unplanned downtime and maintenance costs</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Improved defect detection and product consistency</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Optimized throughput and on-time delivery</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span><img src="assets/arrow.svg" /></span>
+                            <span>Real-time visibility into production and logistics</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+  <!-- Footer -->
+  <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+    <!-- Main footer content -->
+    <div
+      class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
+      <!-- Logo -->
+      <div class="flex justify-center lg:justify-start">
+        <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+      </div>
+
+      <!-- Navigation Links -->
+      <nav
+        class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+        <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+        <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+        <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+          Services <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
+        </a>
+        <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+          Products <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
+        </a>
+        <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+        <a href="#" class="hover:text-[#1783F7]">Careers</a>
+      </nav>
+
+      <!-- Social Icons -->
+      <div class="flex justify-center space-x-4">
+        <img src="assets/fb.svg" alt="Facebook" />
+        <img src="assets/x.svg" alt="Twitter" />
+        <img src="assets/youtube.svg" alt="YouTube" />
+        <img src="assets/insta.svg" alt="Instagram" />
+        <img src="assets/lnkedin.svg" alt="LinkedIn" />
+      </div>
+    </div>
+
+    <!-- Divider Line -->
+    <div class="mt-8 border-t border-gray-300 w-full"></div>
+
+    <!-- Copyright -->
+    <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+      © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+
+</html>

@@ -55,6 +55,13 @@
 }
 
 
+@media screen and (max-width: 769px) {
+  .overview {
+    height: 600px;
+    
+  }
+}
+
 .description {
   display: flex;
   flex-direction: column;

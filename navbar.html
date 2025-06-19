@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <header id="main-navbar"
-  class="flex items-center justify-between p-4 md:p-6 md:px-20 fixed top-0 left-0 right-0 z-50 bg-white ">
+  class="flex items-center justify-between p-4 md:p-6 lg:px-20 fixed top-0 left-0 right-0 z-50 bg-white ">
   <!-- Logo -->
   <div class="flex items-center space-x-2 cursor-pointer" onclick="window.location.href='/index.html'">
     <a href="/index.html" class="text-[#202124]">
@@ -9,7 +9,7 @@
   </div>
 
   <!-- Desktop Navigation -->
-  <nav class="hidden md:flex space-x-6 items-center">
+  <nav class="hidden lg:flex space-x-6 items-center">
     <a href="/about.html" class="text-[#202124] font-medium hover:text-[#003C84]">About Us</a>
 
     <!-- Services dropdown -->
@@ -25,21 +25,27 @@
           <i data-lucide="chevron-down" class="ml-1 w-4 h-4"></i>
         </button> </a>
       <div class="absolute hidden group-hover:block bg-white border rounded shadow-lg w-52">
+        <a href="/autodox.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">AutoDocX.AI</a>
         <a href="/customerDlens.html"
           class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">CustomerDLens.AI</a>
+        <a href="/mathops.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">MATHOPS</a>
+        <a href="/opsbeat.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">OpsBeat</a>
         <a href="/optiSaas.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">OptiSaaSAI</a>
+        <a href="/customerDlens.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">Patient360.ai</a>
         <a href="/smartSustain.html"
           class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">SmartSustain.AI</a>
-        <a href="/customerDlens.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">Patient360.ai</a>
-        <a href="/autodox.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">AutoDocX.AI</a>
-        <a href="/mathops.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">MathOps</a>
-        <a href="/opsbeat.html" class="block px-4 py-2 text-sm text-[#202124] hover:bg-gray-100">OpsBeat</a>
       </div>
     </div>
-    <a href="#" class="text-[#1D1B20] font-medium py-2">Contact Us</a>
+
+    <!-- Industries dropdown -->
+    <div class="relative inline-block">
+      <a href="industries.html" class="text-[#202124] flex items-center">Industries </a>
+    </div>
+
+    <a href="contactUs.html" class="text-[#1D1B20] font-medium py-2">Contact Us</a>
 
   </nav>
-  <div class="hidden md:block">
+  <div class="hidden lg:block">
 
     <button
       class=" text-white font-semibold py-3 px-8   rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
@@ -50,7 +56,7 @@
 
   <!-- Inside <header> element, after desktop nav -->
   <!-- Mobile Menu Toggle Button -->
-  <div class="md:hidden">
+  <div class="lg:hidden">
     <button id="mobile-menu-button" class="focus:outline-none">
       <i data-lucide="menu" class="w-6 h-6 text-[#202124]"></i>
     </button>
@@ -74,16 +80,18 @@
           <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
         </button>
         <div class="hidden flex-col pl-4 py-2 space-y-2">
-          <a href="/customerDlens.html" class="block text-md text-[#202124] m-1 ">CustomerDLens.AI</a>
-          <a href="/optiSaas.html" class="block text-md text-[#202124]  m-1">OptiSaaSAI</a>
-          <a href="/smartSustain.html" class="block text-md text-[#202124] m-1">SmartSustain.AI</a>
-          <a href="/customerDlens.html" class="block text-md text-[#202124] m-1">Patient360.ai</a>
           <a href="/autodox.html" class="block text-md text-[#202124] m-1">AutoDocX.AI</a>
-          <a href="/mathops.html" class="block text-md text-[#202124] m-1">MathOps</a>
+          <a href="/customerDlens.html" class="block text-md text-[#202124] m-1 ">CustomerDLens.AI</a>
+          <a href="/mathops.html" class="block text-md text-[#202124] m-1">MATHOPS</a>
           <a href="/opsbeat.html" class="block text-md text-[#202124] m-1">OpsBeat</a>
+          <a href="/optiSaas.html" class="block text-md text-[#202124]  m-1">OptiSaaSAI</a>
+          <a href="/customerDlens.html" class="block text-md text-[#202124] m-1">Patient360.ai</a>
+          <a href="/smartSustain.html" class="block text-md text-[#202124] m-1">SmartSustain.AI</a>
         </div>
       </div>
 
+      <!-- Industries dropdown -->
+      <a href="/industries.html" class="text-[#202124] font-medium py-2 border-b border-gray-100">Industries </a>
 
       <div class="pt-4">
         <a href="/contactUs.html">

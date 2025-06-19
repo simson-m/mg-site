@@ -54,6 +54,12 @@
    padding: 0 !important;
   }
 }
+@media screen and (max-width: 769px){
+  .section-between-2 {
+   padding: 0 !important;
+  }
+}
+
 
 
 .description {

@@ -8,6 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="/global.css" />
+  <!-- SwiperJS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <script>
@@ -101,9 +104,10 @@
 <body class="bg-white text-[#1D1B20] overflow-x-hidden  max-w-full">
   <div id="navbar"></div>
 
-  <section class="grid grid-cols-1 gap-16 md:grid-cols-2 px-6 md:px-14 py-12 max-w-full mx-4 py-20 items-center">
+  <section
+    class="md:grid grid-cols-1 lg:gap-16 md:grid-cols-2 px-2 lg:px-14 py-3 lg:py-12 max-w-full mx-4 md:py-20 items-center">
     <div class="mb-8 md:mb-0">
-      <h1 class="text-2xl md:text-[40px] font-bold text-[#1783F7] !leading-relaxed mb-4 md:mb-7">
+      <h1 class="text-2xl md:text-2xl lg:text-[40px] font-bold text-[#1783F7] !leading-relaxed mb-4 md:mb-7">
         Driving Industry Transformation with Secure and Scalable Enterprise AI-Powered Solutions
       </h1>
     </div>
@@ -119,8 +123,8 @@
 
   <section class="relative bg-gradient-to-r from-[#000000] to-[#020288]">
     <img src="/assets/homebanner.png" alt="Logo" class="h-[80vh] w-[100%] object-cover opacity-70" />
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center ">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 leading-tight ">
         AI-Powered. Cyber-Secure. Enterprise-Ready.
       </h2>
       <p class="text-lg md:text-2xl font-normal mb-4 md:mb-7">
@@ -134,7 +138,8 @@
   <section class="mt-12">
     <div id="industry-focus" class="flex flex-col items-center justify-center">
       <h2 class="text-2xl md:text-4xl text-[#1783F7]  mb-4 leading-tight">Industry Focus</h2>
-      <h1 class="text-2xl md:text-4xl text-[#055CC0]  mb-4 leading-tight">Transforming Industries with
+      <h1 class="text-2xl md:text-4xl text-[#055CC0]  mb-4 leading-tight px-[40px] md:px-0 text-center">Transforming
+        Industries with
         Intelligent & Scalable Solutions</h1>
       <p class="text-sm text-[#667085] font-normal mb-4 md:mb-7 md:pr-32 md:pl-32 text-center">
         Mindgraph empowers sector-specific transformation with AI-driven, data-centric, and cloud-enabled solutions. Our
@@ -145,121 +150,135 @@
     <!-- sliders -->
     <section id="slider" class="relative">
       <div class="relative">
-        <div class="testimonial-slide active flex overflow-x-hidden snap-x ml-[100px]">
-          <!-- Slides -->
-          <div class="snap-center flex-shrink-0 w-[404.93px] h-[436.1px] relative mx-2">
-            <div
-              class="h-full w-full relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white before:to-[#173D7A] before:pointer-events-none">
+        <div class="testimonial-slide active flex overflow-x-hidden snap-x md:ml-[20px] lg:ml-[100px]">
+
+          <!-- Slide 1: Energy & Utilities -->
+          <div
+            class="snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[400px] md:h-[436.1px] relative mx-2 p-4 md:p-0">
+            <div class="h-full w-full relative rounded-2xl overflow-hidden">
               <img src="/assets/home/energy.png" alt="Energy & Utilities"
-                class="h-full w-full object-cover opacity-50 rounded-lg" />
-              <div class="absolute bottom-0 left-0 right-0 pl-12 pr-12 pb-12 text-white z-10">
-                <h2 class="text-2xl font-bold mb-2">Energy & Utilities</h2>
-                <p class="text-lg font-normal">
+                class="h-full w-full object-cover opacity-80" />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A]"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                <h2 class="text-xl md:text-2xl font-bold mb-2">Energy & Utilities</h2>
+                <p class="text-sm md:text-lg font-normal leading-snug">
                   Enable smart grid operations, optimize consumption, and achieve sustainability goals with AI-powered
                   energy intelligence and ESG tracking.
                 </p>
               </div>
             </div>
           </div>
-          <!-- Repeat for other slides with same structure -->
-          <div class="snap-center flex-shrink-0 w-[404.93px] h-[436.1px] relative mx-2">
-            <div
-              class="h-full w-full relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white before:to-[#173D7A] before:pointer-events-none">
-              <img src="/assets/home/telecom.png" alt="Telecom"
-                class="h-full w-full object-cover opacity-50 rounded-lg" />
-              <div class="absolute bottom-0 left-0 right-0 pl-12 pr-12 pb-12 text-white z-10">
-                <h2 class="text-2xl font-bold mb-2">Telecom</h2>
-                <p class="text-lg font-normal">
-                  Transform airlines, rail networks, roadways, and shippers with intelligent logistics, real-time
-                  monitoring, and secure communication networks.
+
+          <!-- Slide 2: Telecom -->
+          <div
+            class="snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[400px] md:h-[436.1px] relative mx-2 p-4 md:p-0">
+            <div class="h-full w-full relative rounded-2xl overflow-hidden">
+              <img src="/assets/home/telecom.png" alt="Telecom" class="h-full w-full object-cover opacity-80" />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A]"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                <h2 class="text-xl md:text-2xl font-bold mb-2">Telecom</h2>
+                <p class="text-sm md:text-lg font-normal leading-snug">
+                  Transform telecom networks with intelligent infrastructure, real-time monitoring, and secure
+                  communications.
                 </p>
               </div>
             </div>
           </div>
-          <div class="snap-center flex-shrink-0 w-[404.93px] h-[436.1px] relative mx-2">
-            <div
-              class="h-full w-full relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white before:to-[#173D7A] before:pointer-events-none">
-              <img src="/assets/home/aviation.png" alt="Aviation"
-                class="h-full w-full object-cover opacity-50 rounded-lg" />
-              <div class="absolute bottom-0 left-0 right-0 pl-12 pr-12 pb-12 text-white z-10">
-                <h2 class="text-2xl font-bold mb-2">Aviation</h2>
-                <p class="text-lg font-normal">
-                  Support global aviation leaders like Boeing, Airbus, Dnata, and Amadeus with secure, AI-enhanced
-                  systems
-                  — from predictive maintenance to airport operations and passenger analytics.
+
+          <!-- Slide 3: Aviation -->
+          <div
+            class="snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[400px] md:h-[436.1px] relative mx-2 p-4 md:p-0">
+            <div class="h-full w-full relative rounded-2xl overflow-hidden">
+              <img src="/assets/home/aviation.png" alt="Aviation" class="h-full w-full object-cover opacity-80" />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A]"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                <h2 class="text-xl md:text-2xl font-bold mb-2">Aviation</h2>
+                <p class="text-sm md:text-lg font-normal leading-snug">
+                  Support global aviation leaders with secure, AI-enhanced systems — from predictive maintenance to
+                  airport operations.
                 </p>
               </div>
             </div>
           </div>
-          <div class="snap-center flex-shrink-0 w-[404.93px] h-[436.1px] relative mx-2">
-            <div
-              class="h-full w-full relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white before:to-[#173D7A] before:pointer-events-none">
+
+          <!-- Slide 4: Transportation -->
+          <div
+            class="snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[400px] md:h-[436.1px] relative mx-2 p-4 md:p-0">
+            <div class="h-full w-full relative rounded-2xl overflow-hidden">
               <img src="/assets/home/transportation.png" alt="Transportation"
-                class="h-full w-full object-cover opacity-50 rounded-lg" />
-              <div class="absolute bottom-0 left-0 right-0 pl-12 pr-12 pb-12 text-white z-10">
-                <h2 class="text-2xl font-bold mb-2">Transportation</h2>
-                <p class="text-lg font-normal">
-                  Transform airlines, rail networks, roadways, and shippers with intelligent logistics, real-time
-                  monitoring, and secure communication networks.
+                class="h-full w-full object-cover opacity-80" />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A]"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                <h2 class="text-xl md:text-2xl font-bold mb-2">Transportation</h2>
+                <p class="text-sm md:text-lg font-normal leading-snug">
+                  Transform logistics with AI-powered routing, predictive maintenance, and real-time asset tracking.
                 </p>
               </div>
             </div>
           </div>
-          <div class="snap-center flex-shrink-0 w-[404.93px] h-[436.1px] relative mx-2">
-            <div
-              class="h-full w-full relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white before:to-[#173D7A] before:pointer-events-none">
-              <img src="/assets/healthcare.png" alt="Telecom"
-                class="h-full w-full object-cover opacity-50 rounded-lg" />
-              <div class="absolute bottom-0 left-0 right-0 pl-12 pr-12 pb-12 text-white z-10">
-                <h2 class="text-2xl font-bold mb-2">Healthcare</h2>
-                <p class="text-lg font-normal">
-                  Enhance patient care, streamline operations, and ensure regulatory compliance with AI and data-driven
+
+          <!-- Slide 5: Healthcare -->
+          <div
+            class="snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[400px] md:h-[436.1px] relative mx-2 p-4 md:p-0">
+            <div class="h-full w-full relative rounded-2xl overflow-hidden">
+              <img src="/assets/healthcare.png" alt="Healthcare" class="h-full w-full object-cover opacity-80" />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A]"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                <h2 class="text-xl md:text-2xl font-bold mb-2">Healthcare</h2>
+                <p class="text-sm md:text-lg font-normal leading-snug">
+                  Enhance patient care, streamline operations, and ensure compliance with AI-powered health tech
+                  solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6: Manufacturing -->
+          <div
+            class="snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[400px] md:h-[436.1px] relative mx-2 p-4 md:p-0">
+            <div class="h-full w-full relative rounded-2xl overflow-hidden">
+              <img src="/assets/manufacturing.jpg" alt="Manufacturing" class="h-full w-full object-cover opacity-80" />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A]"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                <h2 class="text-xl md:text-2xl font-bold mb-2">Manufacturing</h2>
+                <p class="text-sm md:text-lg font-normal leading-snug">
+                  Digitize production with smart sensors, predictive analytics, and AI-based supply chain optimization.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 7: BFSI -->
+          <div
+            class="snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[400px] md:h-[436.1px] relative mx-2 p-4 md:p-0">
+            <div class="h-full w-full relative rounded-2xl overflow-hidden">
+              <img src="/assets/banking.jpg" alt="BFSI" class="h-full w-full object-cover opacity-80" />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A]"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                <h2 class="text-xl md:text-2xl font-bold mb-2">Banking, Financial Services & Insurance (BFSI)</h2>
+                <p class="text-sm md:text-lg font-normal leading-snug">
+                  Drive fraud detection, credit risk modeling, and personalized banking experiences with AI-first
                   platforms.
                 </p>
               </div>
             </div>
           </div>
-          <div class="snap-center flex-shrink-0 w-[404.93px] h-[436.1px] relative mx-2">
-            <div
-              class="h-full w-full relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white before:to-[#173D7A] before:pointer-events-none">
-              <img src="/assets/manufacturing.jpg" alt="Telecom"
-                class="h-full w-full object-cover opacity-50 rounded-lg" />
-              <div class="absolute bottom-0 left-0 right-0 pl-12 pr-12 pb-12 text-white z-10">
-                <h2 class="text-2xl font-bold mb-2">Manufacturing</h2>
-                <p class="text-lg font-normal">
-                  Digitize the shop floor with real-time production insights, predictive maintenance, and smart supply
-                  chain management.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="snap-center flex-shrink-0 w-[404.93px] h-[436.1px] relative mx-2">
-            <div
-              class="h-full w-full relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white before:to-[#173D7A] before:pointer-events-none">
-              <img src="/assets/banking.jpg" alt="Telecom" class="h-full w-full object-cover opacity-50 rounded-lg" />
-              <div class="absolute bottom-0 left-0 right-0 pl-12 pr-12 pb-12 text-white z-10">
-                <h2 class="text-2xl font-bold mb-2">Banking, Financial Services & Insurance (BFSI)</h2>
-                <p class="text-lg font-normal">
-                  Drive fraud detection, credit risk modeling, and personalized banking with AI-first platforms.
-                </p>
-              </div>
-            </div>
-          </div>
+
         </div>
 
-        <div class="flex items-center justify-between pl-32 pr-32 mt-8">
-          <div class="flex-1 text-base text-[#667085] pr-[250px]">
+        <div class="md:flex  items-center justify-between  md:pl-16 lg:pl-32  md:pr-16 lg:pr-32 mt-1 md:mt-8">
+          <div class="flex-1 text-base text-[#667085] md:pr-[30px] lg:pr-[250px] px-[20px] md:px-0">
             Each sector benefits from our integrated stack of AI, cybersecurity, cloud, ERP/CRM,
             and domain-focused platforms like MathOps, Smart Sustain,
             OpsBeat, and CustomerDlens.
           </div>
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center  justify-center  space-x-4 pt-[30px] md:pt-0">
 
             <button
-              class=" text-white py-2 px-6 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+              class="hidden md:flex text-white py-2 px-6 rounded-full items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
               View All <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
-
             </button>
+
             <div class="flex items-center space-x-2">
               <button
                 class="bg-white rounded-full w-8 h-8 flex items-center justify-center  hover:bg-gray-100 transition-all"
@@ -284,18 +303,32 @@
           const prevBtn = document.getElementById('prevBtn');
           const nextBtn = document.getElementById('nextBtn');
           let currentIndex = 0;
-          const slideWidth = 424.93 + 16; // width + margin
+
+          // Helper: calculate actual slide width including margin
+          function getSlideWidth() {
+            const slide = slides[0];
+            const style = window.getComputedStyle(slide);
+            const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+            return slide.offsetWidth + margin;
+          }
+
+          // Helper: how many slides fit in viewport
+          function getVisibleSlidesCount() {
+            return window.innerWidth < 768 ? 1 : 3;
+          }
 
           function updateButtons() {
+            const visibleCount = getVisibleSlidesCount();
             prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex >= slides.length - 3; // Show 3 slides at a time
+            nextBtn.disabled = currentIndex >= slides.length - visibleCount;
           }
 
           function goToSlide(index) {
-            if (index < 0 || index > slides.length - 3) return; // Prevent scrolling past last 3 slides
+            const visibleCount = getVisibleSlidesCount();
+            if (index < 0 || index > slides.length - visibleCount) return;
             currentIndex = index;
             slider.scrollTo({
-              left: index * slideWidth,
+              left: index * getSlideWidth(),
               behavior: 'smooth'
             });
             updateButtons();
@@ -304,39 +337,46 @@
           prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
           nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
 
-          // Initialize buttons
+          // Handle window resize
+          window.addEventListener('resize', () => {
+            goToSlide(currentIndex); // re-align scroll
+            updateButtons();
+          });
+
+          // Initialize
           updateButtons();
         });
       </script>
+
     </section>
 
   </section>
 
-  <!--  offer section -->
+  <!-- What we offer section -->
   <!-- image with with text content inside it -->
-  <section class="relative mt-8 pt-20">
+  <section class="relative mt-8  pt-4 md:pt-20 hidden lg:block">
     <div class="relative">
       <div class="absolute inset-0 bg-black bg-opacity-50 "></div>
       <img id="featureImage" src="/assets/aibanner.png" alt="Ai Banner"
-        class="h-[80vh] w-[100%] object-cover transition-opacity duration-700 opacity-100" />
+        class="h-[90vh]  md:h-[80vh] w-[100%] object-cover transition-opacity duration-700 opacity-100" />
     </div>
-    <div class="absolute inset-0 flex flex-col pl-32 pt-20 mt-[100px]">
+    <div class="absolute inset-0 flex flex-col md:pl-[20px] lg:pl-32 pt-20 md:mt-[100px] text-center md:text-start">
       <h2 class="text-4xl md:text-[36px] leading-tight font-normal brightness-125 text-[#1783F7] mb-4">
         What we offer
       </h2>
-      <h1 class="text-2xl md:text-5xl text-white font-roboto brightness-90 mb-4 md:mb-7">
+      <h1 class="font-semibold md:font-base text-3xl md:text-5xl text-white font-roboto brightness-90 mb-4 md:mb-7">
         Our Capabilities
       </h1>
     </div>
 
     <!-- Cards container -->
-    <div class="absolute inset-x-0 bottom-0 pl-32 pr-32 pb-8 z-20">
+    <div class="absolute inset-x-0 bottom-0 pl-2  lg:pl-32 pr-32 pb-8 z-20">
       <div class="max-w-6xl mx-auto">
         <!-- Container for all items -->
         <div class="flex space-x-4 items-end">
 
           <!-- Item 01 - AI & Machine Learning -->
-          <div class="group relative item-01 ">
+          <div class="group relative item-01 md:pl-[20px ">
             <div
               class="text-white p-6 cursor-pointer min-w-[200px] transition-all duration-300 transform group-hover:-translate-y-10 ">
               <div class="text-sm font-bold mb-2 opacity-50 group-hover:opacity-100">01</div>
@@ -409,6 +449,119 @@
       </div>
     </div>
   </section>
+
+  <!-- What we offer Mobile view-->
+  <section class="relative mt-8 pt-4 md:pt-20 block lg:hidden">
+    <div class="swiper mySwiper h-[90vh] md:h-[80vh]">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 -->
+        <div class="swiper-slide relative">
+          <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+          <img src="/assets/aibanner.png" class="object-cover w-full h-full" />
+          <div class="absolute inset-0 z-20 flex flex-col md:pl-[20px] pt-20 md:mt-[100px] text-center md:text-start">
+            <h2 class="text-4xl md:text-[36px] text-[#1783F7] mb-4">What we offer</h2>
+            <h1 class="text-3xl md:text-5xl text-white font-roboto mb-4 md:mb-7">Our Capabilities</h1>
+          </div>
+          <div class="absolute inset-x-0 bottom-0 pl-2  pr-2 pb-8 z-30">
+            <div class="text-white p-6">
+              <div class="text-sm font-bold mb-2">01</div>
+              <hr>
+              <h3 class="text-lg font-semibold">AI & Machine Learning</h3>
+              <p class="text-gray-300 text-sm mt-4">
+                Custom AI solutions with deep learning, NLP, computer vision, and predictive analytics.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide relative">
+          <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+          <img src="/assets/offer-cyberSecurity.jpg" class="object-cover w-full h-full" />
+          <div
+            class="absolute inset-0 z-20 flex flex-col lg:pl-32 md:pl-[20px] pt-20 md:mt-[100px] text-center md:text-start">
+            <h2 class="text-4xl md:text-[36px] text-[#1783F7] mb-4">What we offer</h2>
+            <h1 class="text-3xl md:text-5xl text-white font-roboto mb-4 md:mb-7">Our Capabilities</h1>
+          </div>
+          <div class="absolute inset-x-0 bottom-0 pl-2 lg:pl-32 pr-2 pb-8 z-30">
+            <div class="text-white p-6">
+              <div class="text-sm font-bold mb-2">02</div>
+              <hr>
+              <h3 class="text-lg font-semibold">Cybersecurity</h3>
+              <p class="text-gray-300 text-sm mt-4">
+                Comprehensive security solutions with threat detection, vulnerability assessment, and more.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide relative">
+          <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+          <img src="/assets/offer-cloud.jpg" class="object-cover w-full h-full" />
+          <div
+            class="absolute inset-0 z-20 flex flex-col lg:pl-32  md:pl-[20px] pt-20 md:mt-[100px] text-center md:text-start">
+            <h2 class="text-4xl md:text-[36px] text-[#1783F7] mb-4">What we offer</h2>
+            <h1 class="text-3xl md:text-5xl text-white font-roboto mb-4 md:mb-7">Our Capabilities</h1>
+          </div>
+          <div class="absolute inset-x-0 bottom-0 pl-2 lg:pl-32 pr-2 pb-8 z-30">
+            <div class="text-white p-6">
+              <div class="text-sm font-bold mb-2">03</div>
+              <hr>
+              <h3 class="text-lg font-semibold">Cloud & Infra Services</h3>
+              <p class="text-gray-300 text-sm mt-4">
+                Scalable cloud infrastructure solutions with migration services, DevOps automation, and 24/7 monitoring
+                for optimal performance.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide relative">
+          <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+          <img src="/assets/offer-erp.jpg" class="object-cover w-full h-full" />
+          <div
+            class="absolute inset-0 z-20 flex flex-col lg:pl-32 pt-20  md:pl-[20px] md:mt-[100px] text-center md:text-start">
+            <h2 class="text-4xl md:text-[36px] text-[#1783F7] mb-4">What we offer</h2>
+            <h1 class="text-3xl md:text-5xl text-white font-roboto mb-4 md:mb-7">Our Capabilities</h1>
+          </div>
+          <div class="absolute inset-x-0 bottom-0 pl-2 lg:pl-32 pr-2 pb-8 z-30">
+            <div class="text-white p-6">
+              <div class="text-sm font-bold mb-2">04</div>
+              <hr>
+              <h3 class="text-lg font-semibold">ERP, CRM & AI Ecosystem</h3>
+              <p class="text-gray-300 text-sm mt-4">
+                Integrated business management systems with AI-powered analytics, customer relationship management, and
+                workflow automation.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <!-- <div class="swiper-button-next"></div> -->
+        <!-- <div class="swiper-button-prev"></div> -->
+      </div>
+    </div>
+  </section>
+  <script>
+    const swiper = new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: {
+        delay: 4000,           // 4 seconds per slide
+        disableOnInteraction: false // Keeps autoplay active after manual interaction
+      },
+      grabCursor: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      effect: "slide", // or use "fade"
+    });
+  </script>
+
+
+
   <script>
     const featureImage = document.getElementById('featureImage');
 
@@ -468,21 +621,18 @@
     }
   </script>
 
-
-
   <!-- services -->
-
-  <section class="bg-gradient-to-br from-E8F5FF to-FBFFFA via-E8F1EF to-D3ECFF hidden lg:block"
+  <section class="bg-gradient-to-br from-E8F5FF to-FBFFFA via-E8F1EF to-D3ECFF  block"
     style="background: linear-gradient(to bottom right, #E8F5FF, #FBFFFA, #E8F1EF, #D3ECFF);">
     <div class="px-4 sm:px-6 lg:px-20 py-8 sm:py-12 lg:py-16">
       <!-- heading -->
       <div class="flex flex-col items-center justify-center mb-12 mt-8  ">
-        <h2 class="text-[#1783F7] text-2xl mb-2">Services</h2>
-        <h1 class="text-[#687DA9] text-2xl md:text-4xl font-bold">Turning Vision into Smart Innovation</h1>
+        <h2 class="text-[#1783F7]  text-3xl md:text-2xl mb-2">Services</h2>
+        <h1 class="text-[#687DA9] text-2xl md:text-4xl font-bold text-center">Turning Vision into Smart Innovation</h1>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-8 hover:bg-white transition">
-          <div class="flex flex-col justify-center gap-8 ">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition">
+          <div class="flex flex-col justify-center  gap-4 md:gap-8 ">
 
             <div id="head" class="items-center gap-4">
               <h2 class="text-[#687DA9] text-xl font-bold">
@@ -503,8 +653,8 @@
           <img src="/assets/home/ai.svg" alt="AI & Data Intelligence Services" class="w-8 h-8">
         </div>
 
-        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-8 hover:bg-white transition">
-          <div class="flex flex-col justify-center gap-8 ">
+        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition">
+          <div class="flex flex-col justify-center gap-4 md:gap-8 ">
 
             <div id="head" class="items-center gap-4">
               <h2 class="text-[#687DA9] text-xl font-bold">
@@ -525,8 +675,8 @@
           </div>
           <img src="/assets/home/app.svg" alt="Application & Development Services" class="w-8 h-8">
         </div>
-        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-8 hover:bg-white transition">
-          <div class="flex flex-col justify-center gap-8 ">
+        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition">
+          <div class="flex flex-col justify-center gap-4 md:gap-8 ">
 
             <div id="head" class="justify-begin gap-4">
               <h2 class="text-[#687DA9] text-xl font-bold">
@@ -546,8 +696,8 @@
           </div>
           <img src="/assets/home/sap.svg" alt="AI & Data Intelligence Services" class="w-8 h-8">
         </div>
-        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-8 hover:bg-white transition">
-          <div class="flex flex-col justify-center gap-8 ">
+        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition">
+          <div class="flex flex-col justify-center gap-4 md:gap-8 ">
 
             <div id="head" class="items-center gap-4">
               <h2 class="text-[#687DA9] text-xl font-bold">
@@ -567,8 +717,8 @@
           </div>
           <img src="/assets/home/crm.svg" alt="AI & Data Intelligence Services" class="w-8 h-8">
         </div>
-        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-8 hover:bg-white transition">
-          <div class="flex flex-col justify-center gap-8 ">
+        <div class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition">
+          <div class="flex flex-col justify-centergap-4 md:gap-8 ">
 
             <div id="head" class="items-center gap-4">
               <h2 class="text-[#687DA9] text-xl font-bold">
@@ -588,8 +738,8 @@
           </div>
           <img src="/assets/home/cloud.svg" alt="AI & Data Intelligence Services" class="w-8 h-8">
         </div>
-        <div class="flex justify-between shadow-lg p-2 shadow-gray-300 gap-8 hover:bg-white transition">
-          <div class="flex flex-col justify-center gap-8 ">
+        <div class="flex justify-between shadow-lg p-2 shadow-gray-300 gap-0 md:gap-8 hover:bg-white transition">
+          <div class="flex flex-col justify-center gap-4 md:gap-8 ">
 
             <div id="head" class="items-center gap-4">
               <h2 class="text-[#687DA9] text-xl font-bold">
@@ -628,8 +778,8 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col justify-start text-[#7E7E7E] ">
-          <a href="mathops.html">
-            <div id="MathOps" class="hover:text-[#687DA9] hover:font-semibold group p-4">
+          <a href="customerDlens.html">
+            <div id="CustomerDlens" class="hover:text-[#687DA9] hover:font-semibold p-4 group">
               <div class="flex items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
                   <div class="rotate-[-45deg]">
@@ -638,7 +788,7 @@
                         d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
                     </svg>
                   </div>
-                  <h3 class="text-xl">MATHOPS</h3>
+                  <h3 class="text-xl">CustomerDlens</h3>
                 </div>
                 <div class="self-end rotate-[90deg] hidden group-hover:block">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -650,8 +800,8 @@
               <hr class="mt-6">
             </div>
           </a>
-          <a href="smartSustain.html">
-            <div id="SmartSustain" class="hover:text-[#687DA9] hover:font-semibold group p-4">
+          <a href="mathops.html">
+            <div id="MathOps" class="hover:text-[#687DA9] hover:font-semibold group p-4">
               <div class="flex items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
                   <div class="rotate-[-45deg]">
@@ -660,7 +810,7 @@
                         d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
                     </svg>
                   </div>
-                  <h3 class="text-xl">SmartSustain.AI</h3>
+                  <h3 class="text-xl">MATHOPS</h3>
                 </div>
                 <div class="self-end rotate-[90deg] hidden group-hover:block">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -694,28 +844,7 @@
               <hr class="mt-6">
             </div>
           </a>
-          <a href="customerDlens.html">
-            <div id="CustomerDlens" class="hover:text-[#687DA9] hover:font-semibold p-4 group">
-              <div class="flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                  <div class="rotate-[-45deg]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
-                      <path fill="#204596"
-                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
-                    </svg>
-                  </div>
-                  <h3 class="text-xl">CustomerDlens</h3>
-                </div>
-                <div class="self-end rotate-[90deg] hidden group-hover:block">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#1783F7" stroke-linecap="round" stroke-linejoin="round"
-                      d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
-                  </svg>
-                </div>
-              </div>
-              <hr class="mt-6">
-            </div>
-          </a>
+
           <a href="optiSaas.html">
             <div id="SaaSBeam AI" class="hover:text-[#687DA9] hover:font-semibold group p-4">
               <div class="flex items-center justify-between gap-4">
@@ -760,19 +889,42 @@
               <hr class="mt-6">
             </div>
           </a>
+          <a href="smartSustain.html">
+            <div id="SmartSustain" class="hover:text-[#687DA9] hover:font-semibold group p-4">
+              <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                  <div class="rotate-[-45deg]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                      <path fill="#204596"
+                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                    </svg>
+                  </div>
+                  <h3 class="text-xl">SmartSustain.AI</h3>
+                </div>
+                <div class="self-end rotate-[90deg] hidden group-hover:block">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" stroke="#1783F7" stroke-linecap="round" stroke-linejoin="round"
+                      d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                  </svg>
+                </div>
+              </div>
+              <hr class="mt-6">
+            </div>
+          </a>
+
+
 
 
         </div>
-        <div class="relative">
+        <div class="relative hidden md:block">
           <img src="assets/dottedBg.png" class="relative">
           <div>
-            <img id="image" src="assets/mathOps.png"
+            <img id="image" src="assets/customerDlens.png"
               class="absolute top-[60px] left-[40px] w-[600px] transition-opacity duration-700 opacity-100">
           </div>
           <div
-            class="absolute bottom-[105px] right-[250px] transform translate-y-1/2 translate-x-1/2 w-[440px] p-6 bg-white shadow-lg rounded-3xl text-xl text-[#667085] flex flex-col justify-center items-start px-[55px]">
-            <p class="text-[#667085]" id="text1">MathOps is a next-gen analytics and monitoring platform built to
-              optimize IT .</p>
+            class="absolute    md:bottom-[120px] lg:bottom-[100px]  md:right-[50px] lg:right-[250px] transform translate-y-1/2 translate-x-1/2 w-[440px] p-6 bg-white shadow-lg rounded-3xl text-xl text-[#667085] flex flex-col justify-center items-start px-[55px]">
+            <p class="text-[#667085]" id="text1">AI-powered customer data fabric for 360° operational insights.</p>
             <!-- <p class="text-[#667085]" id="text2">and monitoring platform built to optimize IT .</p> -->
           </div>
         </div>
@@ -817,9 +969,9 @@
       },
     ];
 
-    const defaultImage1 = '/assets/mathOps.png';
+    const defaultImage1 = '/assets/customerDlens.png';
     const detext1 = document.getElementById('text1');
-    const defaultText1 = 'MathOps is a next-gen analytics and monitoring platform built to optimize IT .'
+    const defaultText1 = 'AI-powered customer data fabric for 360° operational insights.'
 
     items1.forEach(({ selector, image, text1 }) => {
       const element = document.querySelector(selector);
@@ -856,18 +1008,19 @@
   <section class="bg-white">
     <div class="px-4 sm:px-6 lg:px-20 sm:py-12 lg:py-16 pb-0">
       <!-- heading -->
-      <div class="flex flex-col items-center justify-center mb-12 mt-8 text-[#1783F7] font-bold text-xl md:text-2xl">
+      <div
+        class="flex flex-col items-center justify-center text-center mb-12 mt-8 text-[#1783F7] font-bold text-xl md:text-2xl">
         <h1>Offerings</h1>
-        <h1 class="text-[#687DA9] text-2xl md:text-4xl font-bold">
+        <h1 class="text-[#687DA9] text-4xl md:text-4xl font-bold">
           Our Solutions by Function
         </h1>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pl-16 pr-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:pl-16 md:pr-16">
         <div class="relative">
           <div class="absolute inset-0 flex items-begin justify-begin">
-            <div class="text-white z-10 p-8">
-              <h2 class="text-3xl font-bold mb-2">Data Innovation</h2>
-              <p class="text-xl font-normal">
+            <div class="text-white z-10 p-8 pr-[50px] md:pr-0">
+              <h2 class="text-xl lg:text-3xl font-bold mb-2">Data Innovation</h2>
+              <p class=" text-base lg:text-xl font-normal">
                 Unlock competitive advantage through advanced AI analytics and data modeling.
               </p>
             </div>
@@ -876,9 +1029,9 @@
         </div>
         <div class="relative bottom">
           <div class="absolute inset-0 flex items-begin justify-begin">
-            <div class="text-white z-10 p-8">
-              <h2 class="text-3xl font-bold mb-2">AI Products Gateway for ASEAN</h2>
-              <p class="text-xl font-normal">
+            <div class="text-white z-10 p-8 pr-[50px] md:pr-0">
+              <h2 class="text-xl lg:text-3xl font-bold mb-2">AI Products Gateway for ASEAN</h2>
+              <p class="text-base lg:text-xl font-normal">
                 Localized AI products marketing, and regulatory support for ASEAN expansion.
               </p>
             </div>
@@ -887,9 +1040,9 @@
         </div>
         <div class="relative">
           <div class="absolute inset-0 flex items-begin justify-begin">
-            <div class="text-white z-10 p-8">
-              <h2 class="text-3xl font-bold mb-2">Global Capability Centers (GCCs)</h2>
-              <p class="text-xl font-normal">
+            <div class="text-white z-10 p-8 pr-[50px] md:pr-0">
+              <h2 class="text-xl lg:text-3xl font-bold mb-2">Global Capability Centers (GCCs)</h2>
+              <p class="text-base lg:text-xl font-normal">
                 Talent, governance, and operational AI for enterprise scalability.
               </p>
             </div>
@@ -900,88 +1053,87 @@
       </div>
     </div>
   </section>
+
   <!-- Why Choose Us? -->
-  <section class="" id="WhyChooseUs">
+  <section id="WhyChooseUs">
     <div class="px-4 sm:px-6 lg:px-20 py-8 sm:py-12 lg:py-16">
-      <!-- heading -->
-      <div class="flex flex-col text-3xl items-center justify-center mb-12 mt-8 text-[#1783F7]">
-        <h2>Why Choose Us?</h2>
-        <h1 class="text-[#687DA9] text-xl md:text-4xl font-bold pb-8">
-          Shaping Purpose fit AI Innovation
+
+      <!-- Heading -->
+      <div class="flex flex-col items-center text-center mb-12 mt-8 text-[#1783F7]">
+        <h2 class="text-2xl sm:text-3xl">Why Choose Us?</h2>
+        <h1 class="text-[#687DA9] text-xl md:text-4xl font-bold pb-6">
+          Shaping Purpose Fit AI Innovation
         </h1>
-        <p class="text-sm text-[#667085] font-normal mb-4 md:mb-7 md:pr-32 md:pl-32 text-center">
+        <p class="text-sm text-[#667085] max-w-5xl font-normal mb-4 md:mb-7">
           We deliver more than services — we deliver outcomes. At Mindgraph, we fuse deep industry insight with
           intelligent technology to build future-ready enterprises. Our approach is bold, agile, and engineered for
           business impact—from rapid deployments to long-term transformation.
         </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!--  Image Layout -->
-        <div class="flex justify-end pr-[100px]">
-          <div class="pl-[100px]">
-            <div class="flex  items-end">
-              <div class="pr-2 pb-2  h-[180px] w-[180px]">
-                <img src="assets/businessPeople.jpg" alt="Digital Innovation" class=" object-cover ">
+
+      <!-- Content Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2  gap-4 ">
+
+        <!-- Left Image Grid -->
+        <div class="flex justify-end hidden md:flex">
+          <div class="items-end">
+            <div class="grid grid-cols-2 gap-4 max-w-[500px] mx-auto md:mx-0">
+              <img src="assets/businessPeople.jpg" alt="Business People" class="aspect-[10/12] object-cover ">
+              <div class="relative">
+                <img src="assets/graph.jpg" alt="Graph" class="w-full h-[200px] bottom-0 object-cover absolute ">
+
               </div>
 
-              <div class=" pb-2 pt-[55px] pb-2 h-[180px] w-[180px]">
-                <img src="assets/graph.jpg" alt="Business Growth" class=" object-cover ">
-              </div>
             </div>
-            <div class="flex ">
-              <div class=" pr-2 h-[150px] w-[140px] pt-[80px]">
-                <img src="assets/security.jpg" alt="Cyber Security" class=" object-cover ">
-              </div>
+            <div class="grid grid-cols-3 gap-4 max-w-[500px] mx-auto md:mx-0 md:mt-[10px]">
+              <div class="relative">
+                <img src="assets/security.jpg" alt="Cyber Security" class=" object-cover absolute h-[230px] ">
 
-              <div class="h-[200px] w-[270px] pt-[80px] ">
-                <img src="assets/meeting.jpg" alt="Team Collaboration" class=" object-cover ">
+              </div>
+              <div class="col-span-2">
+                <img src="assets/meeting.jpg" alt="Meeting" class="aspect-square ">
+
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Right Feature List -->
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center p-4 rounded-2xl bg-[#EAF9FD] shadow-sm gap-4 lg:p-[30px]">
+            <img src="/assets/AINative.svg" alt="AI Platform" class="w-6 h-6">
+            <h3 class="text-[#1F3F68] text-sm md:text-base font-medium">AI-Driven Platforms Built for Performance</h3>
+          </div>
 
+          <div class="flex items-center p-4 rounded-2xl bg-[#EAF9FD] shadow-sm gap-4 lg:p-[30px]">
+            <img src="/assets/ownershipEducation.svg" alt="Ownership" class="w-6 h-6">
+            <h3 class="text-[#1F3F68] text-sm md:text-base font-medium">Complete Ownership — From Vision to Value</h3>
+          </div>
 
-
-        <div id="content" class="flex flex-col gap-4 pr-[50px]">
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF]  items-center p-[30px]">
-            <img src="/assets/AINative.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center text-[#1F3F68] pl-[10px]">
-              AI-Driven Platforms Built for Performance </h3>
-          </div>
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[30px]">
-            <img src="/assets/ownershipEducation.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68] pl-[10px]">
-              Complete Ownership — From Vision to Value </h3>
-          </div>
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[30px]">
-            <img src="/assets/migrating.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68] pl-[10px]">
-              Accelerated Implementation, Measurable Results </h3>
-          </div>
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[30px]">
-            <img src="/assets/frictionlessIntegration.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68] pl-[10px]">
-              Seamless Integration with Your Ecosystem</h3>
-          </div>
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[30px]">
-            <img src="/assets/enterprise.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68]  pl-[10px]">
-              Enterprise-Grade Support. Always On. Always Aligned.
+          <div class="flex items-center p-4 rounded-2xl bg-[#EAF9FD] shadow-sm gap-4 lg:p-[30px]">
+            <img src="/assets/migrating.svg" alt="Implementation" class="w-6 h-6">
+            <h3 class="text-[#1F3F68] text-sm md:text-base font-medium">Accelerated Implementation, Measurable Results
             </h3>
+          </div>
+
+          <div class="flex items-center p-4 rounded-2xl bg-[#EAF9FD] shadow-sm gap-4 lg:p-[30px]">
+            <img src="/assets/frictionlessIntegration.svg" alt="Integration" class="w-6 h-6">
+            <h3 class="text-[#1F3F68] text-sm md:text-base font-medium">Seamless Integration with Your Ecosystem</h3>
+          </div>
+
+          <div class="flex items-center p-4 rounded-2xl bg-[#EAF9FD] shadow-sm gap-4 lg:p-[30px]">
+            <img src="/assets/enterprise.svg" alt="Support" class="w-6 h-6">
+            <h3 class="text-[#1F3F68] text-sm md:text-base font-medium">Enterprise-Grade Support. Always On. Always
+              Aligned.</h3>
           </div>
         </div>
       </div>
-
+    </div>
   </section>
 
+
   <!-- Review Section -->
-  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px]">
+  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
     <div
       class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
 
@@ -1022,23 +1174,29 @@
 
 
   <!-- Footer -->
-  <footer class="bg-white pt-20 px-4 md:px-[150px]">
-    <div class="flex flex-col md:flex-row items-center md:justify-between space-y-10 md:space-y-0">
+  <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+    <!-- Main footer content -->
+    <div
+      class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
       <!-- Logo -->
-      <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+      <div class="flex justify-center lg:justify-start">
+        <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+      </div>
 
       <!-- Navigation Links -->
-      <nav class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 text-center">
-        <a href="index.html" class="text-[#7E7E7E]">Home</a>
-        <a href="about.html" class="text-[#7E7E7E]">About Us</a>
-        <a href="service.html" class="text-[#7E7E7E] flex items-center justify-center">
+      <nav
+        class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+        <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+        <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+        <a href="service.html" class="hover:text-[#1783F7] flex items-center">
           Services <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
         </a>
-        <a href="product.html" class="text-[#7E7E7E] flex items-center justify-center">
+        <a href="product.html" class="hover:text-[#1783F7] flex items-center">
           Products <img src="assets/dropdown.svg" alt="Dropdown" class="ml-1 w-4 h-4" />
         </a>
-        <a href="#" class="text-[#7E7E7E]">Blogs</a>
-        <a href="#" class="text-[#7E7E7E]">Careers</a>
+        <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+        <a href="#" class="hover:text-[#1783F7]">Careers</a>
       </nav>
 
       <!-- Social Icons -->
@@ -1052,15 +1210,15 @@
     </div>
 
     <!-- Divider Line -->
-    <div class="mt-6">
-      <img src="assets/line.svg" class="w-full" alt="Divider" />
-    </div>
+    <div class="mt-8 border-t border-gray-300 w-full"></div>
 
     <!-- Copyright -->
-    <div class="mt-6 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+    <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
       © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
     </div>
   </footer>
+
+
 
 
 </body>
