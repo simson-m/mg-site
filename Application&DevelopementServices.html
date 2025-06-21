@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Graph</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/global.css" />
+    <!-- SwiperJS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch("/navbar.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("navbar").innerHTML = data;
+                    lucide.createIcons(); // Initialize icons after insertion
+
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+                    const mobileMenuButton = document.getElementById("mobile-menu-button");
+                    const closeMenuButton = document.getElementById("close-menu-button");
+                    const mobileMenu = document.getElementById("mobile-menu");
+
+                    if (!mobileMenuButton || !mobileMenu) {
+                        console.error("Mobile menu button or menu is missing.");
+                        return;
+                    }
+
+                    mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
+                        mobileMenu.classList.toggle("hidden");
+                        mobileMenu.classList.toggle("flex");
+                        document.body.classList.toggle("overflow-hidden");
+                    });
+
+                    closeMenuButton.addEventListener("click", function () {
+                        mobileMenu.classList.add("hidden");
+                        mobileMenu.classList.remove("flex");
+                        document.body.classList.remove("overflow-hidden");
+                    });
+
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
+
+                    mobileDropdownToggles.forEach((toggle) => {
+                        toggle.addEventListener("click", function () {
+                            const content = this.nextElementSibling;
+                            const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+                            content.classList.toggle("hidden");
+                            icon.style.transform = content.classList.contains("hidden")
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)";
+                        });
+                    });
+                });
+        });
+    </script>
+
+
+    <style>
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .testimonial-slide:not(.active) {
+            display: none;
+            opacity: 0;
+        }
+
+        .testimonial-slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Make images square on mobile */
+        @media (max-width: 768px) {
+            .square-on-mobile {
+                position: relative;
+                width: 100%;
+                padding-bottom: 100%;
+                /* Creates a square */
+                overflow: hidden;
+            }
+
+            .square-on-mobile img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-[#1D1B20] overflow-x-hidden  max-w-full">
+    <div id="navbar"></div>
+
+    <!-- Hero Section -->
+    <section class="relative h-[60vh]  bg-cover bg-center"
+        style="background-image: url('/assets/apiServiceBanner.png')">
+        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        <div class="relative z-10 flex   items-center md:items-end h-full px-4 pb-[20px] px-[80px]">
+            <h1 class="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                Application & Development <br />
+                Services
+            </h1>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="relative bg-white pb-12 px-4 sm:px-8 lg:px-16">
+        <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
+
+            <!-- Text Content -->
+            <div class="md:w-1/2 mt-8 md:mt-0">
+                <h2 class="text-blue-600 text-xl font-semibold mb-4">Overview</h2>
+                <p class="text-[#667085] text-base leading-relaxed">
+                    At Mindgraph, we specialize in building next-generation digital applications that fuel business
+                    transformation and customer engagement. Whether you're launching a new product, modernizing a legacy
+                    system, or enhancing user experiences, our end-to-end development services cover the full
+                    application lifecycle. From intuitive UX/UI design to backend architecture, agile delivery, and
+                    post-deployment support, we help organizations turn ideas into impactful digital solutions.
+                </p>
+            </div>
+
+            <!-- Floating Image -->
+            <div class="md:w-1/2 -mt-20 z-20">
+                <img src="/assets/apiServiceOverview.png" alt="AI Illustration" class="w-full max-w-md mx-auto " />
+            </div>
+        </div>
+    </section>
+
+    <!--What we offer section -->
+    <section class="w-full">
+        <div class="flex flex-col md:flex-row">
+
+            <!-- Left: White Content -->
+            <div class="md:w-1/3 w-full px-6 py-12 lg:pl-[120px]">
+                <h3 class="text-[#1783F7] text-lg font-semibold mb-3">What We Offer</h3>
+                <p class="text-lg md:text-3xl text-[#687DA9]  font-medium leading-relaxed ">
+                    Our comprehensive application development services are tailored to deliver robust, scalable, and
+                    future-ready solutions
+                </p>
+            </div>
+
+            <!-- Right: Full-bleed Blue Panel -->
+            <div class="md:w-2/3 w-full px-6 py-12 md:rounded-tl-3xl md:rounded-bl-3xl md:pl-16 lg:pr-[220px] lg:ml-[100px]
+                bg-[linear-gradient(to_bottom_right,_#E8F5FF,_#FBFFFA,_#E8F1EF,_#D3ECFF)]">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 max-w-6xl mx-auto">
+
+                    <!-- Feature 1 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/apiServiceIcon1.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold  text-xl  text-[#687DA9] ">Custom Web, Mobile, and Enterprise App
+                                Development</h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Full-stack development of responsive, cross-platform applications that meet your
+                                business goals and technical requirements. </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/apiServiceIcon2.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold text-xl text-[#687DA9] ">User Interface and Experience (UI/UX)
+                                Design
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Human-centered design strategies focused on usability, accessibility, and aesthetic
+                                appeal to elevate customer satisfaction and brand consistency. </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/apiServiceIcon3.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold text-xl text-[#687DA9] ">Platform Modernization
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Migration of legacy systems to cloud-native, microservices-based architectures to
+                                enhance performance, maintainability, and agility.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/apiServiceIcon4.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold text-xl text-[#687DA9]">API Development and Third-Party Integration
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Development of secure APIs and seamless integration with enterprise systems, payment
+                                gateways, CRMs, and external data services. </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/apiServiceIcon5.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold text-xl text-[#687DA9]">Agile Product Lifecycle and DevSecOps
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Iterative development frameworks and secure CI/CD pipelines that ensure faster time to
+                                market, continuous improvement, and embedded security. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Key Capabilites Section-->
+    <section class="py-16 px-4 sm:px-8 lg:px-20">
+        <!-- Title and Intro -->
+        <div class="max-w-7xl mx-auto ">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Key Capabilities</h2>
+            <p class="text-[#667085] text-base sm:text-lg md:pr-[400px]">
+                Our technical expertise and domain experience enable us to build solutions that are both innovative and
+                enterprise-grade
+        </div>
+
+        <div class="relative max-w-7xl mx-auto bg-[#F8FBFE]   p-6 sm:p-10 flex flex-col lg:flex-row items-start gap-10">
+
+            <!-- Left: Feature List -->
+            <div class="w-full lg:w-2/3 space-y-8 lg:pr-[50px]">
+                <!-- Item 1 -->
+                <div class="flex items-start">
+                    <img src="assets/arrow.svg" class="mt-1">
+                    <div class="ml-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                            Cross-Platform Mobile App Development
+                        </h3>
+                        <p class="text-sm text-[#667085] mt-1">
+                            Unified codebase applications built using React Native, Flutter, or Kotlin Multiplatform for
+                            efficient development and consistent user experiences
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex items-start">
+                    <img src="assets/arrow.svg" class="mt-1">
+                    <div class="ml-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                            Enterprise Portals & Dashboards
+                        </h3>
+                        <p class="text-sm text-[#667085] mt-1">
+                            Scalable web platforms tailored for internal and external stakeholders—whether for customer
+                            self-service, employee productivity, or partner collaboration
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex items-start">
+                    <img src="assets/arrow.svg" class="mt-1">
+                    <div class="ml-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                            Low-Code/No-Code Prototyping & MVP Validation
+                        </h3>
+
+                        <p class="text-sm text-[#667085] mt-1">
+                            Rapid development using platforms like OutSystems, Mendix, or PowerApps to build, test, and
+                            iterate MVPs with minimal development overhead
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="flex items-start">
+                    <img src="assets/arrow.svg" class="mt-1">
+                    <div class="ml-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                            In-App Analytics & Engagement Tools
+                        </h3>
+                        <p class="text-sm text-[#667085] mt-1">
+                            Integration of real-time analytics, A/B testing, user behavior tracking, and personalization
+                            engines to optimize product performance
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- Right: Floating Image -->
+            <div class="w-full lg:w-1/3 flex justify-center lg:justify-end lg:-mt-20 z-10">
+                <div class="max-w-sm lg:max-w-md  overflow-hidden bg-white">
+                    <img src="/assets/capabilityAPIService.png" alt="AI Hand"
+                        class="md:w-full md:h-auto object-cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why choose us section-->
+    <section class="py-16 px-4 sm:px-8 lg:px-20 text-center">
+        <!-- Title -->
+        <div class="mb-12">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Why Choose Us</h2>
+            <p class="text-gray-600 text-base sm:text-lg">
+                Mindgraph is the trusted development partner for companies looking to innovate fast, scale smart, and
+                stay secure
+            </p>
+        </div>
+
+        <!-- Process Row -->
+        <div class="relative max-w-7xl mx-auto">
+            <!-- Horizontal line behind circles -->
+            <div class="hidden lg:block absolute top-[225px] left-0 right-0 h-0.5 bg-[#C8C7CC] z-0 opacity-40"></div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-4 relative z-10">
+
+                <!-- Step Template (Repeat for 1 to 5) -->
+                <div class="flex flex-col items-center text-center">
+                    <!-- Image -->
+                    <img src="/assets/api1.png" alt="AI Cloud" class=" mb-4 object-contain" />
+
+                    <!-- Number Circle (z-index above line) -->
+                    <div class="relative z-10 bg-white mb-4">
+                        <span
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            1
+                        </span>
+                    </div>
+
+
+                    <!-- Heading and Description -->
+                    <div class="px-[50px] text-center">
+                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                            Agile Delivery with Rapid MVP-to-Product Evolution
+                        </h3>
+                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Accelerate your go-to-market journey with agile sprints, lean methodologies, and quick
+                            iterations from prototype to production.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center text-center">
+                    <img src="/assets/api2.png" alt="AI Delivery" class=" mb-4 object-contain" />
+                    <div class="relative z-10 bg-white mb-4">
+                        <span
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            2
+                        </span>
+                    </div>
+                    <div class="px-[50px] text-center">
+
+                        <h3 class="font-semibold text-[#687DA9]  mb-1 text-xl">
+                            User-Centric Design with Business Impact
+                        </h3>
+                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Every application we build prioritizes user needs, resulting in higher adoption rates,
+                            improved usability scores, and tangible ROI.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center text-center">
+                    <img src="/assets/api3.png" alt="Modular" class=" mb-4 object-contain" />
+                    <div class="relative z-10 bg-white mb-4">
+                        <span
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            3
+                        </span>
+                    </div>
+                    <div class="px-[50px] text-center">
+
+                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                            Performance, Scalability & Security by Design
+                        </h3>
+                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Our applications are built to handle scale, ensure data security, and maintain peak
+                            performance even under high load.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col items-center text-center">
+                    <img src="/assets/api4.png" alt="Security" class=" mb-4 object-contain" />
+                    <div class="relative z-10 bg-white mb-4">
+                        <span
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            4
+                        </span>
+                    </div>
+                    <div class="px-[50px] text-center">
+
+                        <h3 class="font-semibold text-[#687DA9]  mb-1 text-xl">
+                            Integrated Ecosystem Ready
+                        </h3>
+                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Seamless alignment with modern cloud infrastructures (AWS, Azure, GCP), AI capabilities, and
+                            enterprise systems like Salesforce, SAP, and Microsoft Dynamics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="border-t mt-16 mb-6 max-w-7xl mx-auto bg-[#C8C7CC]"></div>
+
+        <div class="mt-12">
+            <p class="text-[#687DA9]  text-3xl mb-2 md:px-[250px]">
+                Let Mindgraph be your partner in creating intelligent, scalable, and delightful digital experiences </p>
+            <p class="text-[#1783F7] font-semibold text-2xl">
+                Build faster. Launch smarter. Grow stronger
+            </p>
+        </div>
+        <div class="border-t mt-12 mb-6 max-w-7xl mx-auto"></div>
+
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+        <!-- Main footer content -->
+        <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
+            <!-- Logo -->
+            <div class="flex justify-center lg:justify-start">
+                <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+            </div>
+
+            <!-- Navigation Links -->
+            <nav
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+                <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+                <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+                <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+                    Services
+                </a>
+                <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+                    Products
+                </a>
+                <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+                <a href="#" class="hover:text-[#1783F7]">Careers</a>
+            </nav>
+
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <img src="assets/fb.svg" alt="Facebook" />
+                <img src="assets/x.svg" alt="Twitter" />
+                <img src="assets/youtube.svg" alt="YouTube" />
+                <img src="assets/insta.svg" alt="Instagram" />
+                <img src="assets/lnkedin.svg" alt="LinkedIn" />
+            </div>
+        </div>
+
+        <!-- Divider Line -->
+        <div class="mt-8 border-t border-gray-300 w-full"></div>
+
+        <!-- Copyright -->
+        <div class="mt-4 pb-8 text-center text-base text-[#8a8a8f] font-normal">
+            © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>
