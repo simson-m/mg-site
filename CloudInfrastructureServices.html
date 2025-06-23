@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Graph</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/global.css" />
+    <!-- SwiperJS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch("/navbar.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("navbar").innerHTML = data;
+                    lucide.createIcons(); // Initialize icons after insertion
+
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+                    const mobileMenuButton = document.getElementById("mobile-menu-button");
+                    const closeMenuButton = document.getElementById("close-menu-button");
+                    const mobileMenu = document.getElementById("mobile-menu");
+
+                    if (!mobileMenuButton || !mobileMenu) {
+                        console.error("Mobile menu button or menu is missing.");
+                        return;
+                    }
+
+                    mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
+                        mobileMenu.classList.toggle("hidden");
+                        mobileMenu.classList.toggle("flex");
+                        document.body.classList.toggle("overflow-hidden");
+                    });
+
+                    closeMenuButton.addEventListener("click", function () {
+                        mobileMenu.classList.add("hidden");
+                        mobileMenu.classList.remove("flex");
+                        document.body.classList.remove("overflow-hidden");
+                    });
+
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
+
+                    mobileDropdownToggles.forEach((toggle) => {
+                        toggle.addEventListener("click", function () {
+                            const content = this.nextElementSibling;
+                            const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+                            content.classList.toggle("hidden");
+                            icon.style.transform = content.classList.contains("hidden")
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)";
+                        });
+                    });
+                });
+        });
+    </script>
+
+
+    <style>
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .testimonial-slide:not(.active) {
+            display: none;
+            opacity: 0;
+        }
+
+        .testimonial-slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Make images square on mobile */
+        @media (max-width: 768px) {
+            .square-on-mobile {
+                position: relative;
+                width: 100%;
+                padding-bottom: 100%;
+                /* Creates a square */
+                overflow: hidden;
+            }
+
+            .square-on-mobile img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-[#1D1B20] overflow-x-hidden  max-w-full">
+    <div id="navbar"></div>
+
+    <!-- Hero Section -->
+    <section class="relative h-[60vh]  bg-cover bg-center" style="background-image: url('/assets/cloudBanner.jpg')">
+        <div class="absolute inset-0 bg-black bg-opacity-10"></div>
+        <div class="relative z-10 flex   items-center md:items-end h-full px-4 pb-[20px] px-[80px]">
+            <h1 class="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                Cloud Infrastructure <br />
+                Services
+            </h1>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="relative bg-white pb-12 px-4 sm:px-8 lg:px-16 mt-[30px] lg:mt-0 ">
+        <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
+
+            <!-- Text Content -->
+            <div class="md:w-1/2 mt-8 md:mt-0 ">
+                <h2 class="text-blue-600 text-xl font-semibold mb-4">Overview</h2>
+                <p class="text-[#667085] text-base leading-relaxed">
+                    At Mindgraph, we help organizations build, scale, and secure cloud environments that drive agility,
+                    resilience, and cost efficiency. Our Cloud Infrastructure Services are designed to modernize
+                    traditional IT operations and support business transformation. Whether you're operating in AWS,
+                    Azure, Google Cloud Platform (GCP), or a hybrid environment, we provide end-to-end cloud lifecycle
+                    support—from strategy and migration to automation, governance, and continuous performance tuning.
+                </p>
+            </div>
+
+            <!-- Floating Image -->
+            <div class="md:w-1/2 -mt-20 z-20">
+                <img src="/assets/cloudOverview.png" alt="AI Illustration" class="w-full max-w-md mx-auto " />
+            </div>
+        </div>
+    </section>
+
+    <!--What we offer section -->
+    <section class="w-full">
+        <div class="flex flex-col md:flex-row">
+
+            <!-- Left: White Content -->
+            <div class="md:w-1/3 w-full px-6 py-12 lg:pl-[120px]">
+                <h3 class="text-[#1783F7] text-lg font-semibold mb-3">What We Offer</h3>
+                <p class="text-lg md:text-3xl text-[#687DA9] font-medium leading-relaxed ">
+                    Our offerings cover every phase of cloud adoption, enabling you to accelerate transformation while
+                    maintaining control and compliance
+                </p>
+            </div>
+
+            <!-- Right: Full-bleed Blue Panel -->
+            <div class="md:w-2/3 w-full px-6 py-12 md:rounded-tl-3xl md:rounded-bl-3xl md:pl-16 lg:pr-[220px] lg:ml-[100px]
+                bg-[linear-gradient(to_bottom_right,_#E8F5FF,_#FBFFFA,_#E8F1EF,_#D3ECFF)]">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 max-w-6xl mx-auto">
+
+                    <!-- Feature 1 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/cloudIcon1.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold  text-xl  text-[#687DA9]">
+                                Cloud Readiness Assessment & Architecture Design
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Evaluate your current infrastructure, define a cloud adoption roadmap, and design
+                                scalable, secure architectures tailored to business needs.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/cloudIcon2.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold text-xl text-[#687DA9]">
+                                Cloud Migration & Hybrid Cloud Enablement
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Execute smooth and secure migrations of workloads, applications, and databases with
+                                minimal downtime. Enable hybrid models for flexibility and continuity.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/cloudIcon3.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold text-xl text-[#687DA9]">Infrastructure as Code (IaC) & DevOps
+                                Automation
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Automate infrastructure provisioning and management using tools like Terraform, Ansible,
+                                and CloudFormation—aligned with CI/CD practices.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/cloudIcon4.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold text-xl text-[#687DA9]">Cloud Monitoring, Security & Governance
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Implement real-time monitoring, automated threat detection, and cloud-native security
+                                controls for visibility, compliance, and risk mitigation. </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class=" items-start gap-3">
+                        <img src="/assets/cloudIcon5.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <div>
+                            <h4 class="font-semibold text-xl text-[#687DA9]">Cost Control & Performance Optimization
+                            </h4>
+                            <p class="text-base text-[#667085] mt-4">
+                                Optimize cloud resources, eliminate waste, and right-size infrastructure to align with
+                                usage patterns and budget goals. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Key Capabilites Section-->
+    <section class="py-16 px-4 sm:px-8 lg:px-20">
+        <!-- Title and Intro -->
+        <div class="max-w-7xl mx-auto mb-1 ">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Key Capabilities</h2>
+            <p class="text-[#667085] text-base sm:text-lg lg:pr-[700px]">
+                We bring deep cloud engineering expertise and automation-first practices to every engagement</p>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto bg-[#F8FBFE]   p-6 sm:p-10 flex flex-col lg:flex-row items-start gap-10">
+
+            <!-- Left: Feature List -->
+            <div class="w-full lg:w-2/3 space-y-8 lg:pr-[50px]">
+                <!-- Item 1 -->
+                <div class="flex items-start">
+                    <img src="assets/arrow.svg" class="mt-1">
+                    <div class="ml-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                            Multi-Cloud Expertise (AWS, Azure, GCP)
+                        </h3>
+                        <p class="text-sm text-[#667085] mt-1">
+                            Proven delivery across all major public cloud providers with hybrid and multi-cloud strategy
+                            support.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex items-start">
+                    <img src="assets/arrow.svg" class="mt-1">
+                    <div class="ml-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                            Automated Pipelines & Backup Strategies </h3>
+                        <p class="text-sm text-[#667085] mt-1">
+                            Set up fully automated deployment pipelines, disaster recovery setups, and backup systems to
+                            ensure business continuity.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex items-start">
+                    <img src="assets/arrow.svg" class="mt-1">
+                    <div class="ml-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                            Security, Compliance & Access Control</h3>
+
+                        <p class="text-sm text-[#667085] mt-1">
+                            Design robust role-based access controls (RBAC), encryption protocols, identity management,
+                            and regulatory compliance frameworks (e.g., HIPAA, GDPR, SOC 2).
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="flex items-start">
+                    <img src="assets/arrow.svg" class="mt-1">
+                    <div class="ml-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                            Real-Time Monitoring & Auto-Scaling
+                        </h3>
+                        <p class="text-sm text-[#667085] mt-1">
+                            Enable intelligent scaling and real-time resource usage insights to maintain application
+                            performance and avoid over-provisioning.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Floating Image -->
+            <div class="w-full lg:w-1/3 flex justify-center lg:justify-end lg:-mt-20 z-10">
+                <div class="max-w-sm lg:max-w-md  overflow-hidden bg-white">
+                    <img src="/assets/capabilitiesCloud.png" alt="AI Hand" class="md:w-full md:h-auto object-cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why choose us section-->
+    <section class="py-16 px-4 sm:px-8 lg:px-20 text-center">
+        <!-- Title -->
+        <div class="mb-12">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Why Choose Us</h2>
+            <p class="text-gray-600 text-base sm:text-lg">
+                Mindgraph delivers cloud success with the right mix of expertise, automation, and proactive support
+            </p>
+        </div>
+
+        <!-- Process Row -->
+        <div class="relative max-w-7xl mx-auto">
+            <!-- Horizontal line behind circles -->
+            <div class="hidden lg:block absolute top-[225px] left-0 right-0 h-0.5 bg-[#C8C7CC] z-0 opacity-40"></div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-4 relative z-10">
+
+                <!-- Step Template (Repeat for 1 to 5) -->
+                <div class="flex flex-col items-center text-center">
+                    <!-- Image -->
+                    <img src="/assets/cloud1.png" alt="AI Cloud" class=" mb-4 object-contain" />
+
+                    <!-- Number Circle (z-index above line) -->
+                    <div class="relative z-10 bg-white mb-4">
+                        <span
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            1
+                        </span>
+                    </div>
+
+
+                    <!-- Heading and Description -->
+                    <div class="px-[60px] text-center">
+                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                            Cloud-Agnostic Expertise with Certified Engineers </h3>
+                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Our architects and engineers hold certifications across AWS, Azure, and GCP—ensuring
+                            best-fit, vendor-neutral solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center text-center">
+                    <img src="/assets/cloud2.png" alt="AI Delivery" class=" mb-4 object-contain" />
+                    <div class="relative z-10 bg-white mb-4">
+                        <span
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            2
+                        </span>
+                    </div>
+                    <div class="px-[60px] text-center">
+
+                        <h3 class="font-semibold text-[#687DA9]  mb-1 text-xl">
+                            Accelerated Migration with Zero Data Loss </h3>
+                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Streamlined, secure migrations backed by proven frameworks and rigorous testing to ensure no
+                            business disruption.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center text-center">
+                    <img src="/assets/crm3.png" alt="Modular" class=" mb-4 object-contain" />
+                    <div class="relative z-10 bg-white mb-4">
+                        <span
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            3
+                        </span>
+                    </div>
+                    <div class="px-[60px] text-center">
+
+                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                            Automation-Driven, DevOps-First Approach
+                        </h3>
+                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Embrace infrastructure agility and speed with CI/CD pipelines, IaC, and container
+                            orchestration (Docker, Kubernetes).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col items-center text-center">
+                    <img src="/assets/crm4.png" alt="Security" class=" mb-4 object-contain" />
+                    <div class="relative z-10 bg-white mb-4">
+                        <span
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            4
+                        </span>
+                    </div>
+                    <div class="px-[50px] text-center">
+
+                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                            24/7 Monitoring & Continuous Optimization
+                        </h3>
+                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Proactive support models with always-on monitoring, incident response, and continuous tuning
+                            for performance and cost efficiency
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="border-t mt-16 mb-6 max-w-7xl mx-auto bg-[#C8C7CC]"></div>
+
+        <div class="mt-12">
+            <p class="text-[#1783F7] font-semibold text-2xl">
+                Build a cloud infrastructure that scales with your vision.
+            </p>
+            <p class="text-[#687DA9] text-3xl mb-2 lg:px-[250px]">
+                Partner with Mindgraph to transform your IT operations—securely, efficiently, and intelligently. </p>
+
+        </div>
+        <div class="border-t mt-12 mb-6 max-w-7xl mx-auto"></div>
+
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+        <!-- Main footer content -->
+        <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
+            <!-- Logo -->
+            <div class="flex justify-center lg:justify-start">
+                <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+            </div>
+
+            <!-- Navigation Links -->
+            <nav
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+                <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+                <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+                <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+                    Services
+                </a>
+                <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+                    Products
+                </a>
+                <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+                <a href="#" class="hover:text-[#1783F7]">Careers</a>
+            </nav>
+
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <img src="assets/fb.svg" alt="Facebook" />
+                <img src="assets/x.svg" alt="Twitter" />
+                <img src="assets/youtube.svg" alt="YouTube" />
+                <img src="assets/insta.svg" alt="Instagram" />
+                <img src="assets/lnkedin.svg" alt="LinkedIn" />
+            </div>
+        </div>
+
+        <!-- Divider Line -->
+        <div class="mt-8 border-t border-gray-300 w-full"></div>
+
+        <!-- Copyright -->
+        <div class="mt-4 pb-8 text-center text-base text-[#8a8a8f] font-normal">
+            © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>
