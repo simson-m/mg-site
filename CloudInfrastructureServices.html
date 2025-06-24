@@ -107,7 +107,7 @@
     <!-- Hero Section -->
     <section class="relative h-[60vh]  bg-cover bg-center" style="background-image: url('/assets/cloudBanner.jpg')">
         <div class="absolute inset-0 bg-black bg-opacity-10"></div>
-        <div class="relative z-10 flex   items-center md:items-end h-full px-4 pb-[20px] px-[80px]">
+        <div class="relative z-10 flex  items-end h-full px-4 pb-[20px] md:px-[80px]">
             <h1 class="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
                 Cloud Infrastructure <br />
                 Services
@@ -120,7 +120,7 @@
         <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
 
             <!-- Text Content -->
-            <div class="md:w-1/2 mt-8 md:mt-0 ">
+            <div class="md:w-1/2 mt-8 md:mt-0 order-2 md:order-1">
                 <h2 class="text-blue-600 text-xl font-semibold mb-4">Overview</h2>
                 <p class="text-[#667085] text-base leading-relaxed">
                     At Mindgraph, we help organizations build, scale, and secure cloud environments that drive agility,
@@ -132,7 +132,7 @@
             </div>
 
             <!-- Floating Image -->
-            <div class="md:w-1/2 -mt-20 z-20">
+            <div class="md:w-1/2 md:-mt-20 z-20 order-1 md:order-2">
                 <img src="/assets/cloudOverview.png" alt="AI Illustration" class="w-full max-w-md mx-auto " />
             </div>
         </div>
@@ -232,11 +232,18 @@
         <!-- Title and Intro -->
         <div class="max-w-7xl mx-auto mb-1 ">
             <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Key Capabilities</h2>
-            <p class="text-[#667085] text-base sm:text-lg lg:pr-[700px]">
+            <p class="text-[#667085] text-base sm:text-lg xl:pr-[700px]">
                 We bring deep cloud engineering expertise and automation-first practices to every engagement</p>
         </div>
 
-        <div class="relative max-w-7xl mx-auto bg-[#F8FBFE]   p-6 sm:p-10 flex flex-col lg:flex-row items-start gap-10">
+        <div class="w-full lg:w-1/3 flex justify-center lg:justify-end lg:-mt-20 z-10 md:hidden">
+            <div class="max-w-sm lg:max-w-md  overflow-hidden bg-white px-[20px] pt-[10px]">
+                <img src="/assets/capabilitiesCloud.png" alt="AI Hand"
+                    class="md:w-full md:h-auto object-cover aspect-square" />
+            </div>
+        </div>
+        <div
+            class="relative max-w-7xl mx-auto bg-[#F8FBFE]   p-6 sm:p-10 flex flex-col lg:flex-row items-start gap-10 mt-[40px]">
 
             <!-- Left: Feature List -->
             <div class="w-full lg:w-2/3 space-y-8 lg:pr-[50px]">
@@ -296,7 +303,7 @@
             </div>
 
             <!-- Right: Floating Image -->
-            <div class="w-full lg:w-1/3 flex justify-center lg:justify-end lg:-mt-20 z-10">
+            <div class="w-full lg:w-1/3 flex justify-center lg:justify-end lg:-mt-20 z-10 hidden md:flex">
                 <div class="max-w-sm lg:max-w-md  overflow-hidden bg-white">
                     <img src="/assets/capabilitiesCloud.png" alt="AI Hand" class="md:w-full md:h-auto object-cover" />
                 </div>
@@ -304,7 +311,8 @@
         </div>
     </section>
 
-    <!-- Why choose us section-->
+
+    <!-- Why choose us Section-->
     <section class="py-16 px-4 sm:px-8 lg:px-20 text-center">
         <!-- Title -->
         <div class="mb-12">
@@ -314,96 +322,87 @@
             </p>
         </div>
 
-        <!-- Process Row -->
-        <div class="relative max-w-7xl mx-auto">
-            <!-- Horizontal line behind circles -->
-            <div class="hidden lg:block absolute top-[225px] left-0 right-0 h-0.5 bg-[#C8C7CC] z-0 opacity-40"></div>
+        <!-- Scrollable Cards -->
+        <div class="relative overflow-x-auto scroll-smooth" style="scroll-snap-type: x mandatory;">
+            <div class="relative inline-flex lg:grid lg:grid-cols-4 gap-12 lg:gap-4 px-4 py-4 z-10 min-w-full">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-4 relative z-10">
+                <!-- Horizontal line -->
+                <div
+                    class="absolute top-[236px] left-0 right-0 h-0.5 bg-[#C8C7CC] opacity-40 z-0 mx-[55px] lg:mx-[30px] pointer-events-none">
+                </div>
 
-                <!-- Step Template (Repeat for 1 to 5) -->
-                <div class="flex flex-col items-center text-center">
-                    <!-- Image -->
-                    <img src="/assets/cloud1.png" alt="AI Cloud" class=" mb-4 object-contain" />
-
-                    <!-- Number Circle (z-index above line) -->
+                <!-- Card 1 -->
+                <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
+                    style="scroll-snap-align: start;">
+                    <img src="/assets/cloud1.png" alt="AI Cloud" class="mb-4 object-contain" />
                     <div class="relative z-10 bg-white mb-4">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
-                            1
-                        </span>
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">1</span>
                     </div>
-
-
-                    <!-- Heading and Description -->
-                    <div class="px-[60px] text-center">
+                    <div class="px-4">
                         <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
-                            Cloud-Agnostic Expertise with Certified Engineers </h3>
-                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                            Cloud-Agnostic Expertise with Certified Engineers
+                        </h3>
+                        <p class="text-sm text-[#667085]">
                             Our architects and engineers hold certifications across AWS, Azure, and GCP—ensuring
                             best-fit, vendor-neutral solutions.
                         </p>
                     </div>
                 </div>
 
-                <!-- Step 2 -->
-                <div class="flex flex-col items-center text-center">
-                    <img src="/assets/cloud2.png" alt="AI Delivery" class=" mb-4 object-contain" />
+                <!-- Card 2 -->
+                <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
+                    style="scroll-snap-align: start;">
+                    <img src="/assets/cloud2.png" alt="AI Delivery" class="mb-4 object-contain" />
                     <div class="relative z-10 bg-white mb-4">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
-                            2
-                        </span>
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">2</span>
                     </div>
-                    <div class="px-[60px] text-center">
-
-                        <h3 class="font-semibold text-[#687DA9]  mb-1 text-xl">
-                            Accelerated Migration with Zero Data Loss </h3>
-                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                    <div class="px-4">
+                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                            Accelerated Migration with Zero Data Loss
+                        </h3>
+                        <p class="text-sm text-[#667085]">
                             Streamlined, secure migrations backed by proven frameworks and rigorous testing to ensure no
                             business disruption.
                         </p>
                     </div>
                 </div>
 
-                <!-- Step 3 -->
-                <div class="flex flex-col items-center text-center">
-                    <img src="/assets/crm3.png" alt="Modular" class=" mb-4 object-contain" />
+                <!-- Card 3 -->
+                <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
+                    style="scroll-snap-align: start;">
+                    <img src="/assets/crm3.png" alt="Modular" class="mb-4 object-contain" />
                     <div class="relative z-10 bg-white mb-4">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
-                            3
-                        </span>
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">3</span>
                     </div>
-                    <div class="px-[60px] text-center">
-
+                    <div class="px-4">
                         <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
                             Automation-Driven, DevOps-First Approach
                         </h3>
-                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                        <p class="text-sm text-[#667085]">
                             Embrace infrastructure agility and speed with CI/CD pipelines, IaC, and container
                             orchestration (Docker, Kubernetes).
                         </p>
                     </div>
                 </div>
 
-                <!-- Step 4 -->
-                <div class="flex flex-col items-center text-center">
-                    <img src="/assets/crm4.png" alt="Security" class=" mb-4 object-contain" />
+                <!-- Card 4 -->
+                <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
+                    style="scroll-snap-align: start;">
+                    <img src="/assets/crm4.png" alt="Security" class="mb-4 object-contain" />
                     <div class="relative z-10 bg-white mb-4">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
-                            4
-                        </span>
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">4</span>
                     </div>
-                    <div class="px-[50px] text-center">
-
+                    <div class="px-4">
                         <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
                             24/7 Monitoring & Continuous Optimization
                         </h3>
-                        <p class="text-sm text-[#667085] max-w-xs mx-auto">
+                        <p class="text-sm text-[#667085]">
                             Proactive support models with always-on monitoring, incident response, and continuous tuning
-                            for performance and cost efficiency
+                            for performance and cost efficiency.
                         </p>
                     </div>
                 </div>
@@ -412,21 +411,16 @@
 
         <!-- CTA -->
         <div class="border-t mt-16 mb-6 max-w-7xl mx-auto bg-[#C8C7CC]"></div>
-
         <div class="mt-12">
             <p class="text-[#1783F7] font-semibold text-2xl">
                 Build a cloud infrastructure that scales with your vision.
             </p>
-            <p class="text-[#687DA9] text-3xl mb-2 lg:px-[250px]">
-                Partner with Mindgraph to transform your IT operations—securely, efficiently, and intelligently. </p>
-
+            <p class="text-[#687DA9] text-2xl md:text-3xl mb-2 lg:px-[250px]">
+                Partner with Mindgraph to transform your IT operations—securely, efficiently, and intelligently.
+            </p>
         </div>
         <div class="border-t mt-12 mb-6 max-w-7xl mx-auto"></div>
-
     </section>
-
-
-
 
 
     <!-- Footer -->
