@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Graph</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/global.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch("/navbar.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("navbar").innerHTML = data;
+                    lucide.createIcons(); // Initialize icons after insertion
+
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+                    const mobileMenuButton = document.getElementById("mobile-menu-button");
+                    const closeMenuButton = document.getElementById("close-menu-button");
+                    const mobileMenu = document.getElementById("mobile-menu");
+
+                    if (!mobileMenuButton || !mobileMenu) {
+                        console.error("Mobile menu button or menu is missing.");
+                        return;
+                    }
+
+                    mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
+                        mobileMenu.classList.toggle("hidden");
+                        mobileMenu.classList.toggle("flex");
+                        document.body.classList.toggle("overflow-hidden");
+                    });
+
+                    closeMenuButton.addEventListener("click", function () {
+                        mobileMenu.classList.add("hidden");
+                        mobileMenu.classList.remove("flex");
+                        document.body.classList.remove("overflow-hidden");
+                    });
+
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
+
+                    mobileDropdownToggles.forEach((toggle) => {
+                        toggle.addEventListener("click", function () {
+                            const content = this.nextElementSibling;
+                            const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+                            content.classList.toggle("hidden");
+                            icon.style.transform = content.classList.contains("hidden")
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)";
+                        });
+                    });
+                });
+        });
+    </script>
+
+
+    <style>
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .testimonial-slide:not(.active) {
+            display: none;
+            opacity: 0;
+        }
+
+        .testimonial-slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Make images square on mobile */
+        @media (max-width: 768px) {
+            .square-on-mobile {
+                position: relative;
+                width: 100%;
+                padding-bottom: 100%;
+                /* Creates a square */
+                overflow: hidden;
+            }
+
+            .square-on-mobile img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <!-- Top Section -->
+    <section class="relative bg-white pt-16  px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <!-- Left Text -->
+            <div class="md:pb-[50px]">
+                <h1 class="text-5xl font-bold text-[#1783F7] mb-4 lg:mr-[200px]">ERP, CRM & AI Ecosystem</h1>
+                <h2 class="text-xl font-semibold text-[#1783F7] mb-2">Overview</h2>
+                <p class="text-[#667085] leading-relaxed">
+                    In today’s fast-paced digital economy, organizations require more than just standalone systems —
+                    they need a connected ecosystem that seamlessly unifies operations, customer engagement, and data
+                    intelligence. Mindgraph specializes in building integrated enterprise platforms by aligning ERP and
+                    CRM systems with intelligent automation and AI-driven insights.
+                    From implementation to continuous optimization, we help businesses unlock the full potential of
+                    their enterprise technology stack — enabling data-driven decisions, streamlined operations, and
+                    personalized customer experiences across all touchpoints.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Floating Image -->
+        <div class="absolute top-10 right-0 w-[48%] -mb-16 z-10">
+            <img src="assets/erpOverview.png" alt="AI chip" class="rounded-lg shadow-lg w-full h-auto object-cover" />
+        </div>
+    </section>
+
+    <!-- What We Offer Section -->
+    <section class="bg-[#EFFBFF] py-20 px-6">
+        <div class="max-w-7xl mx-auto relative z-20">
+            <h3 class="text-2xl font-semibold text-[#1783F7] mb-2">What We Offer</h3>
+            <p class="text-[#667085] mb-10">We provide a wide range of AI-driven services and solutions tailored to meet
+                the unique challenges of modern enterprises</p>
+
+            <div class=" px-4 sm:px-8 lg:px-16">
+                <div class="max-w-7xl mx-auto space-y-0 divide-y divide-[#C8C7CC] border-t border-[#C8C7CC]">
+                    <!-- Card 1 -->
+                    <div class="flex flex-col md:flex-row items-center  gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">01</span>
+                        <img src="assets/erpOffer1.png" alt="NLP" class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">Salesforce, Zoho, and Microsoft
+                                    Dynamics CRM Integration</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Custom configuration and end-to-end integration of leading CRM platforms to support
+                                marketing automation, lead nurturing, sales management, and customer support.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">02</span>
+                        <img src="assets/erpOffer2.png" alt="Computer Vision"
+                            class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">SAP, Oracle, and Microsoft Dynamics
+                                    ERP Implementation & Upgrades</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Full-cycle ERP services, including system design, data migration, custom module
+                                development, and upgrades to the latest cloud or hybrid versions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">03</span>
+                        <img src="assets/erpOffer3.png" alt="Analytics" class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">AI-Enabled Dashboards & Process
+                                    Automation</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Smart analytics dashboards, predictive insights, and AI-powered workflows to automate
+                                approvals, forecasting, and exception handling.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">04</span>
+                        <img src="assets/erpOffer4.png" alt="Recommendation"
+                            class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">Workflow Design, Data Synchronization
+                                    & Reporting Intelligence</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Cross-platform workflow engineering, real-time data sync between ERP-CRM systems, and
+                                generation of unified reports with actionable insights. </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">05</span>
+                        <img src="assets/erpOffer5.png" alt="Custom Models" class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">User Training, Change Management &
+                                    SLA-Based Support</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Comprehensive enablement programs to onboard teams, manage change adoption, and ensure
+                                ongoing performance with dedicated support and service-level agreements. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="lg:px-[200px] px-6 py-16">
+        <div class="max-w-7xl mx-auto">
+            <!-- Heading -->
+            <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
+
+            <!-- Grid layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden  pr-[20px]">
+                    <img src="assets/erpKey1.png" alt="AI Accelerators" class="w-48 h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-[#687DA9]">Deep Expertise in ERP–CRM–AI Integration</h3>
+                        <p class="text-sm text-[#667085] mt-2">
+                            Proven ability to connect enterprise platforms with minimal disruption, ensuring seamless
+                            data flow and operational harmony.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
+                    <img src="assets/erpKey2.png" alt="MLOps" class="w-48 h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-[#687DA9]">Industry-Specific Prebuilt Workflows</h3>
+                        <p class="text-sm text-[#667085] mt-2">
+                            Accelerators tailored for industries such as BFSI, healthcare, manufacturing, and retail to
+                            reduce implementation time and enhance value realization.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
+                    <img src="assets/erpKey3.png" alt="Ethical AI" class="w-48 h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-[#687DA9]">Customer 360 & Operational Visibility
+                            Solutions</h3>
+                        <p class="text-sm text-[#667085] mt-2">
+                            Unified views of customer journeys, financial performance, and supply chain operations for
+                            better planning and responsiveness.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
+                    <img src="assets/erpKey4.png" alt="Cloud AI" class="w-48 h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-[#687DA9]">End-to-End Ownership from Setup to Optimization</h3>
+                        <p class="text-sm text-[#667085] mt-2">
+                            We take full responsibility from planning and deployment to continuous improvement, ensuring your enterprise ecosystem evolves with your business needs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Line -->
+            <div class="border-t border-[#C8C7CC] mt-16"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+        <!-- Main footer content -->
+        <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
+            <!-- Logo -->
+            <div class="flex justify-center lg:justify-center">
+                <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+            </div>
+
+            <!-- Navigation Links -->
+            <nav
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+                <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+                <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+                <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+                    Services
+                </a>
+                <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+                    Products
+                </a>
+                <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+                <a href="#" class="hover:text-[#1783F7]">Careers</a>
+            </nav>
+
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <img src="assets/fb.svg" alt="Facebook" />
+                <img src="assets/x.svg" alt="Twitter" />
+                <img src="assets/youtube.svg" alt="YouTube" />
+                <img src="assets/insta.svg" alt="Instagram" />
+                <img src="assets/lnkedin.svg" alt="LinkedIn" />
+            </div>
+        </div>
+
+        <!-- Divider Line -->
+        <div class="mt-8 border-t border-gray-300 w-full"></div>
+
+        <!-- Copyright -->
+        <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+            © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>

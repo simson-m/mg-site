@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Graph</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/global.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch("/navbar.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("navbar").innerHTML = data;
+                    lucide.createIcons(); // Initialize icons after insertion
+
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+                    const mobileMenuButton = document.getElementById("mobile-menu-button");
+                    const closeMenuButton = document.getElementById("close-menu-button");
+                    const mobileMenu = document.getElementById("mobile-menu");
+
+                    if (!mobileMenuButton || !mobileMenu) {
+                        console.error("Mobile menu button or menu is missing.");
+                        return;
+                    }
+
+                    mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
+                        mobileMenu.classList.toggle("hidden");
+                        mobileMenu.classList.toggle("flex");
+                        document.body.classList.toggle("overflow-hidden");
+                    });
+
+                    closeMenuButton.addEventListener("click", function () {
+                        mobileMenu.classList.add("hidden");
+                        mobileMenu.classList.remove("flex");
+                        document.body.classList.remove("overflow-hidden");
+                    });
+
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
+
+                    mobileDropdownToggles.forEach((toggle) => {
+                        toggle.addEventListener("click", function () {
+                            const content = this.nextElementSibling;
+                            const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+                            content.classList.toggle("hidden");
+                            icon.style.transform = content.classList.contains("hidden")
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)";
+                        });
+                    });
+                });
+        });
+    </script>
+
+
+    <style>
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .testimonial-slide:not(.active) {
+            display: none;
+            opacity: 0;
+        }
+
+        .testimonial-slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Make images square on mobile */
+        @media (max-width: 768px) {
+            .square-on-mobile {
+                position: relative;
+                width: 100%;
+                padding-bottom: 100%;
+                /* Creates a square */
+                overflow: hidden;
+            }
+
+            .square-on-mobile img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <!-- Top Section -->
+    <section class="relative bg-white pt-16 pb-32 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <!-- Left Text -->
+            <div>
+                <h1 class="text-5xl font-bold text-[#1783F7] mb-4 lg:mr-[200px]">Cybersecurity</h1>
+                <h2 class="text-xl font-semibold text-[#1783F7] mb-2">Overview</h2>
+                <p class="text-[#667085] leading-relaxed">
+                    In today’s hyper-connected world, cybersecurity is more than just a technical requirement — it’s a
+                    strategic imperative. At Mindgraph, we deliver comprehensive cybersecurity services that help
+                    organizations stay ahead of evolving threats across both Information Technology (IT) and Operational
+                    Technology (OT) landscapes. Our approach combines real-time threat intelligence, automated defense
+                    mechanisms, and compliance readiness to ensure resilient and secure digital environments.
+                    Whether you're protecting cloud-native applications, securing industrial control systems, or
+                    navigating complex regulatory landscapes, we provide end-to-end solutions tailored to your risk
+                    profile.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Floating Image -->
+        <div class="absolute top-10 right-0 w-[48%] -mb-16 z-10">
+            <img src="assets/cyberOverview.png " alt="AI chip" class="rounded-lg shadow-lg w-full h-auto object-cover" />
+        </div>
+    </section>
+
+    <!-- What We Offer Section -->
+    <section class="bg-[#EFFBFF] py-20 px-6">
+        <div class="max-w-7xl mx-auto relative z-20">
+            <h3 class="text-2xl font-semibold text-[#1783F7] mb-2">What We Offer</h3>
+            <p class="text-[#667085] mb-10">We provide a wide range of AI-driven services and solutions tailored to meet
+                the unique challenges of modern enterprises</p>
+
+            <div class=" px-4 sm:px-8 lg:px-16">
+                <div class="max-w-7xl mx-auto space-y-0 divide-y divide-[#C8C7CC] border-t border-[#C8C7CC]">
+                    <!-- Card 1 -->
+                    <div class="flex flex-col md:flex-row items-center  gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">01</span>
+                        <img src="assets/cyberOffer1.png" alt="NLP" class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">Security Operations Center (SOC) as a
+                                    Service</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Round-the-clock monitoring, incident detection, and response through a centralized SOC
+                                powered by advanced analytics and automation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">02</span>
+                        <img src="assets/cyberOffer2.png" alt="Computer Vision"
+                            class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">Threat Intelligence, SIEM, and
+                                    Real-Time Monitoring</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Integration of Security Information and Event Management (SIEM) with contextual threat
+                                intelligence for dynamic, real-time threat visibility and response.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">03</span>
+                        <img src="assets/cyberOffer3.png" alt="Analytics" class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">Vulnerability Assessment & Penetration
+                                    Testing (VAPT)</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Regular scanning, assessment, and ethical hacking to uncover and mitigate potential
+                                vulnerabilities in networks, applications, and systems.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">04</span>
+                        <img src="assets/cyberOffer4.png" alt="Recommendation"
+                            class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">Cloud and Infrastructure Security</h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Secure cloud workloads, hybrid environments, and on-premises infrastructure using
+                                hardened configurations, encryption, and continuous compliance. </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                        <span class="text-[#1783F7] text-xl font-bold w-10">05</span>
+                        <img src="assets/cyberOffer5.png" alt="Custom Models"
+                            class="w-36 h-20 object-cover rounded-md" />
+                        <div class="flex flex-col md:flex-row md:justify-between w-full">
+                            <div class="md:w-1/3 mb-2 md:mb-0">
+                                <h4 class="text-2xl font-semibold text-[#687DA9]">Regulatory Compliance and Governance
+                                </h4>
+                            </div>
+                            <p class="text-[#667085] md:w-2/3 text-sm">
+                                Implementation and support for frameworks such as ISO 27001, NIST CSF, HIPAA, and GDPR,
+                                ensuring your business stays audit-ready and regulation-compliant.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="lg:px-[200px] px-6 py-16">
+        <div class="max-w-7xl mx-auto">
+            <!-- Heading -->
+            <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
+
+            <!-- Grid layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden  pr-[20px]">
+                    <img src="assets/cyberKey1.png" alt="AI Accelerators" class="w-48 h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-[#687DA9]">Zero Trust Architecture Enablement</h3>
+                        <p class="text-sm text-[#667085] mt-2">
+                            Design and implementation of Zero Trust models to ensure strict access control and trust
+                            verification across users, devices, and networks.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
+                    <img src="assets/cyberKey2.png" alt="MLOps" class="w-48 h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-[#687DA9]">AI-Powered Threat Detection and Automated
+                            Response</h3>
+                        <p class="text-sm text-[#667085] mt-2">
+                            Leverage machine learning and behavioral analytics for early threat identification and
+                            rapid, automated incident containment.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
+                    <img src="assets/cyberKey3.png" alt="Ethical AI" class="w-48 h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-[#687DA9]">Operational Technology (OT) Security</h3>
+                        <p class="text-sm text-[#667085] mt-2">
+                            Specialized protection for critical infrastructure and industrial environments, minimizing
+                            risk to SCADA, PLCs, and other control systems.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
+                    <img src="assets/cyberKey4.png" alt="Cloud AI" class="w-48 h-48 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-[#687DA9]">Proactive Incident Handling and Forensics</h3>
+                        <p class="text-sm text-[#667085] mt-2">
+                            End-to-end incident response capabilities including root cause analysis, threat containment,
+                            and digital forensics to support recovery and legal proceedings.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Line -->
+            <div class="border-t border-[#C8C7CC] mt-16"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+        <!-- Main footer content -->
+        <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
+            <!-- Logo -->
+            <div class="flex justify-center lg:justify-center">
+                <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+            </div>
+
+            <!-- Navigation Links -->
+            <nav
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+                <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+                <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+                <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+                    Services
+                </a>
+                <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+                    Products
+                </a>
+                <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+                <a href="#" class="hover:text-[#1783F7]">Careers</a>
+            </nav>
+
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <img src="assets/fb.svg" alt="Facebook" />
+                <img src="assets/x.svg" alt="Twitter" />
+                <img src="assets/youtube.svg" alt="YouTube" />
+                <img src="assets/insta.svg" alt="Instagram" />
+                <img src="assets/lnkedin.svg" alt="LinkedIn" />
+            </div>
+        </div>
+
+        <!-- Divider Line -->
+        <div class="mt-8 border-t border-gray-300 w-full"></div>
+
+        <!-- Copyright -->
+        <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+            © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>
