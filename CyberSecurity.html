@@ -103,13 +103,17 @@
     <div id="navbar"></div>
 
     <!-- Top Section -->
-    <section class="relative bg-white pt-16 pb-32 px-6">
+    <section class="relative bg-white pt-16  pb-8 md:pb-32 md:px-6">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <!-- Left Text -->
             <div>
                 <h1 class="text-5xl font-bold text-[#1783F7] mb-4 lg:mr-[200px]">Cybersecurity</h1>
-                <h2 class="text-xl font-semibold text-[#1783F7] mb-2">Overview</h2>
-                <p class="text-[#667085] leading-relaxed">
+                <div class="md:hidden">
+                    <img src="assets/cyberOverview.png " alt="AI chip" class=" w-full h-auto object-cover" />
+
+                </div>
+                <h2 class="text-xl font-semibold text-[#1783F7] mb-2 mt-6 md:mt-0 px-4 md:px-0">Overview</h2>
+                <p class="text-[#667085] leading-relaxed px-4 md:px-0">
                     In today’s hyper-connected world, cybersecurity is more than just a technical requirement — it’s a
                     strategic imperative. At Mindgraph, we deliver comprehensive cybersecurity services that help
                     organizations stay ahead of evolving threats across both Information Technology (IT) and Operational
@@ -123,24 +127,26 @@
         </div>
 
         <!-- Right Floating Image -->
-        <div class="absolute top-10 right-0 w-[48%] -mb-16 z-10">
-            <img src="assets/cyberOverview.png " alt="AI chip" class="rounded-lg shadow-lg w-full h-auto object-cover" />
+        <div class="absolute top-10 right-0 w-[48%] -mb-16 z-10 hidden md:block">
+            <img src="assets/cyberOverview.png " alt="AI chip"
+                class="rounded-lg shadow-lg w-full md:h-[90vh] lg:h-auto object-cover" />
         </div>
     </section>
 
     <!-- What We Offer Section -->
-    <section class="bg-[#EFFBFF] py-20 px-6">
+    <section class="bg-[#EFFBFF]  py-8 md:py-20 md:px-6">
         <div class="max-w-7xl mx-auto relative z-20">
-            <h3 class="text-2xl font-semibold text-[#1783F7] mb-2">What We Offer</h3>
-            <p class="text-[#667085] mb-10">We provide a wide range of AI-driven services and solutions tailored to meet
+            <h3 class="text-2xl font-semibold text-[#1783F7] mb-2 px-4 md:px-0">What We Offer</h3>
+            <p class="text-[#667085] mb-10 px-4 md:px-0">We provide a wide range of AI-driven services and solutions
+                tailored to meet
                 the unique challenges of modern enterprises</p>
 
-            <div class=" px-4 sm:px-8 lg:px-16">
+            <div class=" px-4 md:px-6 lg:px-16">
                 <div class="max-w-7xl mx-auto space-y-0 divide-y divide-[#C8C7CC] border-t border-[#C8C7CC]">
                     <!-- Card 1 -->
-                    <div class="flex flex-col md:flex-row items-center  gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center  gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">01</span>
-                        <img src="assets/cyberOffer1.png" alt="NLP" class="w-36 h-20 object-cover rounded-md" />
+                        <img src="assets/cyberOffer1.png" alt="NLP" class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Security Operations Center (SOC) as a
@@ -154,10 +160,10 @@
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">02</span>
                         <img src="assets/cyberOffer2.png" alt="Computer Vision"
-                            class="w-36 h-20 object-cover rounded-md" />
+                            class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Threat Intelligence, SIEM, and
@@ -171,9 +177,10 @@
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">03</span>
-                        <img src="assets/cyberOffer3.png" alt="Analytics" class="w-36 h-20 object-cover rounded-md" />
+                        <img src="assets/cyberOffer3.png" alt="Analytics"
+                            class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Vulnerability Assessment & Penetration
@@ -187,10 +194,10 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">04</span>
                         <img src="assets/cyberOffer4.png" alt="Recommendation"
-                            class="w-36 h-20 object-cover rounded-md" />
+                            class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Cloud and Infrastructure Security</h4>
@@ -202,10 +209,10 @@
                     </div>
 
                     <!-- Card 5 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">05</span>
                         <img src="assets/cyberOffer5.png" alt="Custom Models"
-                            class="w-36 h-20 object-cover rounded-md" />
+                            class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Regulatory Compliance and Governance
@@ -222,16 +229,17 @@
         </div>
     </section>
 
-    <section class="lg:px-[200px] px-6 py-16">
+    <section class="lg:px-[80px] xl:px-[200px] px-6 py-16">
         <div class="max-w-7xl mx-auto">
             <!-- Heading -->
-            <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
-
+            <div class="flex justify-center md:justify-start">
+                <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
+            </div>
             <!-- Grid layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Card 1 -->
-                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden  pr-[20px]">
-                    <img src="assets/cyberKey1.png" alt="AI Accelerators" class="w-48 h-48 object-cover" />
+                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-[20px]">
+                    <img src="assets/cyberKey1.png" alt="AI Accelerators" class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Zero Trust Architecture Enablement</h3>
                         <p class="text-sm text-[#667085] mt-2">
@@ -242,8 +250,8 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
-                    <img src="assets/cyberKey2.png" alt="MLOps" class="w-48 h-48 object-cover" />
+                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-[20px]">
+                    <img src="assets/cyberKey2.png" alt="MLOps" class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">AI-Powered Threat Detection and Automated
                             Response</h3>
@@ -255,8 +263,8 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
-                    <img src="assets/cyberKey3.png" alt="Ethical AI" class="w-48 h-48 object-cover" />
+                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-[20px]">
+                    <img src="assets/cyberKey3.png" alt="Ethical AI" class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Operational Technology (OT) Security</h3>
                         <p class="text-sm text-[#667085] mt-2">
@@ -267,8 +275,8 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-[20px]">
-                    <img src="assets/cyberKey4.png" alt="Cloud AI" class="w-48 h-48 object-cover" />
+                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-[20px]">
+                    <img src="assets/cyberKey4.png" alt="Cloud AI" class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Proactive Incident Handling and Forensics</h3>
                         <p class="text-sm text-[#667085] mt-2">

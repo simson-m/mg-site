@@ -95,12 +95,17 @@
     <div id="navbar"></div>
 
     <!-- Top Section -->
-    <section class="relative bg-white pt-16 pb-32 px-6">
-        <div class="max-w-7xl mx-auto flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 items-center">
+    <section class="relative bg-white pt-16  pb-12 md:pb-32 ">
+        <div class="max-w-7xl mx-auto flex flex-col-reverse md:grid md:grid-cols-2 gap-10 items-center">
             <div class="z-10">
-                <h1 class="text-4xl sm:text-5xl font-bold text-[#1783F7] mb-4">AI & Machine Learning</h1>
-                <h2 class="text-lg sm:text-xl font-semibold text-[#1783F7] mb-2">Overview</h2>
-                <p class="text-[#667085] leading-relaxed text-sm sm:text-base">
+                <h1 class="md:text-4xl text-5xl font-bold text-[#1783F7] mb-4 px-4">AI & Machine Learning</h1>
+                <div class="md:hidden">
+                    <img src="assets/aiOverview.png" alt="AI chip"
+                        class=" w-full h-auto object-cover max-h-[400px] lg:max-h-none" />
+                </div>
+                <h2 class="md:text-lg text-2xl font-semibold text-[#1783F7] mb-2 px-4 mt-6 md:mt-0">Overview</h2>
+
+                <p class="text-[#667085] leading-relaxed text-sm sm:text-base px-4">
                     At Mindsight, we specialize in delivering bespoke Artificial Intelligence (AI) and Machine Learning
                     (ML)
                     solutions that drive intelligent automation, improve operational efficiency, and unlock
@@ -115,7 +120,7 @@
                 </p>
             </div>
 
-            <div class="relative lg:absolute top-10 right-0 w-full lg:w-[48%] z-0">
+            <div class="relative lg:absolute top-10 right-0  w-full lg:w-[48%] z-0 hidden md:block">
                 <img src="assets/aiOverview.png" alt="AI chip"
                     class="rounded-lg shadow-lg w-full h-auto object-cover max-h-[400px] lg:max-h-none" />
             </div>
@@ -123,21 +128,23 @@
     </section>
 
     <!-- What We Offer Section -->
-    <section class="bg-[#EFFBFF] py-20 px-6">
+    <section class="bg-[#EFFBFF] py-6 md:py-20 md:px-6">
         <div class="max-w-7xl mx-auto">
-            <h3 class="text-2xl font-semibold text-[#1783F7] mb-2">What We Offer</h3>
-            <p class="text-[#667085] mb-10">We provide a wide range of AI-driven services and solutions tailored to meet
-                the unique challenges of modern enterprises</p>
-
-            <div class="px-4 sm:px-8 lg:px-16">
+            <div class="px-6">
+                <h3 class="text-2xl font-semibold text-[#1783F7] mb-2">What We Offer</h3>
+                <p class="text-[#667085] mb-10">We provide a wide range of AI-driven services and solutions tailored to
+                    meet
+                    the unique challenges of modern enterprises</p>
+            </div>
+            <div class="px-4 md:px-4 lg:px-16">
                 <div class="space-y-0 divide-y divide-[#C8C7CC] border-t border-[#C8C7CC]">
 
                     <!-- Card 1 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">01</span>
-                        <img src="assets/aiOffer1.png" alt="NLP" class="w-36 h-20 object-cover rounded-md" />
+                        <img src="assets/aiOffer1.png" alt="NLP" class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
-                            <div class="md:w-1/3 mb-2 md:mb-0">
+                            <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Natural Language Processing (NLP)</h4>
                             </div>
                             <p class="text-[#667085] md:w-2/3 text-sm">
@@ -148,12 +155,12 @@
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">02</span>
                         <img src="assets/aiOffer2.png" alt="Computer Vision"
-                            class="w-36 h-20 object-cover rounded-md" />
+                            class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
-                            <div class="md:w-1/3 mb-2 md:mb-0">
+                            <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Computer Vision Applications</h4>
                             </div>
                             <p class="text-[#667085] md:w-2/3 text-sm">
@@ -164,11 +171,12 @@
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">03</span>
-                        <img src="assets/aiOffer3.png" alt="Analytics" class="w-36 h-20 object-cover rounded-md" />
+                        <img src="assets/aiOffer3.png" alt="Analytics"
+                            class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
-                            <div class="md:w-1/3 mb-2 md:mb-0">
+                            <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Predictive Analytics</h4>
                             </div>
                             <p class="text-[#667085] md:w-2/3 text-sm">
@@ -179,11 +187,12 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">04</span>
-                        <img src="assets/aiOffer4.png" alt="Recommendation" class="w-36 h-20 object-cover rounded-md" />
+                        <img src="assets/aiOffer4.png" alt="Recommendation"
+                            class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
-                            <div class="md:w-1/3 mb-2 md:mb-0">
+                            <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Recommendation & Personalization
                                     Engines</h4>
                             </div>
@@ -195,11 +204,12 @@
                     </div>
 
                     <!-- Card 5 -->
-                    <div class="flex flex-col md:flex-row items-center gap-6 py-6">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
                         <span class="text-[#1783F7] text-xl font-bold w-10">05</span>
-                        <img src="assets/aiOffer5.png" alt="Custom Models" class="w-36 h-20 object-cover rounded-md" />
+                        <img src="assets/aiOffer5.png" alt="Custom Models"
+                            class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
-                            <div class="md:w-1/3 mb-2 md:mb-0">
+                            <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
                                 <h4 class="text-2xl font-semibold text-[#687DA9]">Custom AI Model Development</h4>
                             </div>
                             <p class="text-[#667085] md:w-2/3 text-sm">
@@ -216,16 +226,17 @@
     </section>
 
     <!-- Key Strengths Section -->
-    <section class="lg:px-[200px] px-6 py-16">
+    <section class="lg:px-[200px] px-4 md:px-6 py-16">
         <div class="max-w-7xl mx-auto">
             <!-- Heading -->
-            <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
-
+            <div class="flex justify-center md:justify-start">
+                <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
+            </div>
             <!-- Grid layout -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <!-- Card 1 -->
-                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-5">
-                    <img src="assets/aiKey1.png" alt="AI Accelerators" class="w-48 h-48 object-cover" />
+                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
+                    <img src="assets/aiKey1.png" alt="AI Accelerators" class="w-full md:w-48 h-[10rem] md:h-full lg:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">AI Accelerators for Rapid Deployment</h3>
                         <p class="text-sm text-[#667085] mt-2">
@@ -236,8 +247,8 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-5">
-                    <img src="assets/aiKey2.png" alt="MLOps" class="w-48 h-48 object-cover" />
+                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
+                    <img src="assets/aiKey2.png" alt="MLOps" class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Model Lifecycle Management with MLOps</h3>
                         <p class="text-sm text-[#667085] mt-2">
@@ -248,8 +259,8 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-5">
-                    <img src="assets/aiKey3.png" alt="Ethical AI" class="w-48 h-48 object-cover" />
+                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
+                    <img src="assets/aiKey3.png" alt="Ethical AI" class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Ethical and Responsible AI</h3>
                         <p class="text-sm text-[#667085] mt-2">
@@ -260,8 +271,8 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div class="flex border border-[#DFE7EB] rounded-md shadow-sm overflow-hidden pr-5">
-                    <img src="assets/aiKey4.png" alt="Cloud AI" class="w-48 h-48 object-cover" />
+                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
+                    <img src="assets/aiKey4.png" alt="Cloud AI" class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Cloud-Native AI Architectures</h3>
                         <p class="text-sm text-[#667085] mt-2">
