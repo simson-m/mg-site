@@ -13,7 +13,7 @@
   }
 
   .section-between {
-    margin-left: 20px !important;
+    padding-left: 20px !important;
   }
 
   .description {
@@ -101,12 +101,13 @@
   justify-content: center;
   align-items: start;
   margin-top: 80px;
-  margin-bottom: 30px;
-  margin-left: 80px;
+  /* margin-bottom: 30px; */
+  padding-left: 80px;
+  padding-top: 40px;
 }
 
 .section-between-2{
-  /* display: grid; */
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 40px; /* space between columns */
   padding: 40px;

@@ -51,7 +51,6 @@
 
             const locations = [
                 { name: "Coimbatore", coords: [11.0168, 76.9558], address: "Coimbatore, Tamil Nadu, India" },
-                { name: "Chennai", coords: [13.0827, 80.2707], address: "Chennai, Tamil Nadu, India" },
                 { name: "Bangalore", coords: [12.9716, 77.5946], address: "Bangalore, Karnataka, India" },
                 { name: "Hyderabad", coords: [17.385, 78.4867], address: "Hyderabad, Telangana, India" },
                 { name: "Bhubaneswar", coords: [20.2961, 85.8245], address: "Bhubaneswar, Odisha, India" },
@@ -191,7 +190,23 @@
                 .then((data) => {
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
+                    const currentPath = window.location.pathname;
 
+                    // Highlight desktop links
+                    document.querySelectorAll("#navbar nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
+
+                    // Highlight mobile links
+                    document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -240,7 +255,7 @@
     <div id="navbar"></div>
 
     <!-- Hero Banner-->
-   <div class="w-full">
+    <div class="w-full">
         <div class="relative h-[180px] md:h-[280px] w-full">
             <img src="assets/contactUs/contactus-banner.png" alt="Hero Background"
                 class="absolute inset-0 w-full h-full object-cover" />
@@ -334,25 +349,25 @@
                 </form>
             </div>
             <div class="flex flex-col md:flex-row gap-6 md:mt-[60px] black md:hidden">
-                    <!-- Contact Support -->
-                    <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
-                        <p class="text-[#667085]">
-                            At Mindgraph, your satisfaction is our top priority. Our dedicated support team
-                            is ready to assist you promptly with any technical issues, billing inquiries, or
-                            service needs.
-                        </p>
-                    </div>
-                    <!-- Feedback & Suggestions -->
-                    <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
-                        <p class="text-[#667085]">
-                            We value your feedback and suggestions to help us improve. Share your ideas for
-                            enhancing our services or new features you’d like to see to create better experiences
-                            for all our clients.
-                        </p>
-                    </div>
+                <!-- Contact Support -->
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
+                    <p class="text-[#667085]">
+                        At Mindgraph, your satisfaction is our top priority. Our dedicated support team
+                        is ready to assist you promptly with any technical issues, billing inquiries, or
+                        service needs.
+                    </p>
                 </div>
+                <!-- Feedback & Suggestions -->
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
+                    <p class="text-[#667085]">
+                        We value your feedback and suggestions to help us improve. Share your ideas for
+                        enhancing our services or new features you’d like to see to create better experiences
+                        for all our clients.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -382,90 +397,91 @@
         </div>
     </div>
 
-     <!-- Review Section -->
-  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
-    <div
-      class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
+    <!-- Review Section -->
+    <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
+        <div
+            class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
 
-      <!-- Floating quote symbol -->
-      <div class="absolute -top-8 left-4 text-6xl text-[#9beef1] select-none">
-        <img src="assets/Shape.svg" alt="Quote Symbol">
-      </div>
+            <!-- Floating quote symbol -->
+            <div class="absolute -top-8 left-4 text-6xl text-[#9beef1] select-none">
+                <img src="assets/Shape.svg" alt="Quote Symbol">
+            </div>
 
-      <!-- Logo top-right -->
-      <div class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
-        <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
-      </div>
+            <!-- Logo top-right -->
+            <div
+                class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
+                <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
+            </div>
 
-      <!-- Testimonial Text -->
-      <div class="flex-1">
-        <p class="text-[#919CA2] mb-6 mt-[40px] md:mt-0 pr-0  md:pr-[100px]  lg:pr-[400px] ">
-          Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
-          and engaging with your target audience on all the social media channels.
-        </p>
-        <div>
-          <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
-          <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+            <!-- Testimonial Text -->
+            <div class="flex-1">
+                <p class="text-[#919CA2] mb-6 mt-[40px] md:mt-0 pr-0  md:pr-[100px]  lg:pr-[400px] ">
+                    Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
+                    and engaging with your target audience on all the social media channels.
+                </p>
+                <div>
+                    <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
+                    <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+                </div>
+            </div>
+
+            <!-- Arrows at bottom center -->
+            <div class="flex justify-center gap-4 mt-8">
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowL.svg" alt="Previous">
+                </button>
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowR.svg" alt="Next">
+                </button>
+            </div>
         </div>
-      </div>
-
-      <!-- Arrows at bottom center -->
-      <div class="flex justify-center gap-4 mt-8">
-        <button class="hover:text-[#1783F7] transition">
-          <img src="assets/arrowL.svg" alt="Previous">
-        </button>
-        <button class="hover:text-[#1783F7] transition">
-          <img src="assets/arrowR.svg" alt="Next">
-        </button>
-      </div>
-    </div>
-  </section>
+    </section>
 
 
-  <!-- Footer -->
-  <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
-    <!-- Main footer content -->
-    <div
-      class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+    <!-- Footer -->
+    <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+        <!-- Main footer content -->
+        <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
 
-      <!-- Logo -->
-      <div class="flex justify-center lg:justify-start">
-        <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
-      </div>
+            <!-- Logo -->
+            <div class="flex justify-center lg:justify-start">
+                <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+            </div>
 
-      <!-- Navigation Links -->
-      <nav
-        class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
-        <a href="index.html" class="hover:text-[#1783F7]">Home</a>
-        <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
-        <a href="service.html" class="hover:text-[#1783F7] flex items-center">
-          Services 
-        </a>
-        <a href="product.html" class="hover:text-[#1783F7] flex items-center">
-          Products 
-        </a>
-        <a href="#" class="hover:text-[#1783F7]">Blogs</a>
-        <a href="#" class="hover:text-[#1783F7]">Careers</a>
-      </nav>
+            <!-- Navigation Links -->
+            <nav
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+                <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+                <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+                <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+                    Services
+                </a>
+                <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+                    Products
+                </a>
+                <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+                <a href="#" class="hover:text-[#1783F7]">Careers</a>
+            </nav>
 
-      <!-- Social Icons -->
-      <div class="flex justify-center space-x-4">
-        <img src="assets/fb.svg" alt="Facebook" />
-        <img src="assets/x.svg" alt="Twitter" />
-        <img src="assets/youtube.svg" alt="YouTube" />
-        <img src="assets/insta.svg" alt="Instagram" />
-        <img src="assets/lnkedin.svg" alt="LinkedIn" />
-      </div>
-    </div>
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <img src="assets/fb.svg" alt="Facebook" />
+                <img src="assets/x.svg" alt="Twitter" />
+                <img src="assets/youtube.svg" alt="YouTube" />
+                <img src="assets/insta.svg" alt="Instagram" />
+                <img src="assets/lnkedin.svg" alt="LinkedIn" />
+            </div>
+        </div>
 
-    <!-- Divider Line -->
-    <div class="mt-8 border-t border-gray-300 w-full"></div>
+        <!-- Divider Line -->
+        <div class="mt-8 border-t border-gray-300 w-full"></div>
 
-    <!-- Copyright -->
-    <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
-      © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
-    </div>
-  </footer>
+        <!-- Copyright -->
+        <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+            © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
+        </div>
+    </footer>
 </body>
 
 </html>

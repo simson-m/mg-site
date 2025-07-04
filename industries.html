@@ -17,7 +17,23 @@
                 .then((data) => {
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
+                    const currentPath = window.location.pathname;
 
+                    // Highlight desktop links
+                    document.querySelectorAll("#navbar nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
+
+                    // Highlight mobile links
+                    document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -146,7 +162,8 @@
                 </div>
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
-                <div class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0 pt-[20px] md:pt-0">
+                <div
+                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0 pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666]">
                         <li class="flex items-start gap-2">
@@ -209,8 +226,7 @@
                 <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
                     <img src="assets/healthcareIndustry.jpg" alt="Energy Utilities"
                         class="w-full h-full object-cover" />
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r  via-white/70 to-transparent flex items-center pl-6">
+                    <div class="absolute inset-0 bg-gradient-to-r  via-white/70 to-transparent flex items-center pl-6">
                         <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9]">Healthcare</h2>
                     </div>
                 </div>
@@ -230,7 +246,8 @@
                 </div>
 
                 <!-- Key Solutions -->
-                <div class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div
+                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666]">
                         <li class="flex items-start gap-2">
@@ -314,7 +331,8 @@
                 </div>
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
-                <div class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div
+                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666]">
                         <li class="flex items-start gap-2">
@@ -377,8 +395,7 @@
             <div class="mb-10">
                 <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
                     <img src="assets/bankingIndustry.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r  via-white/70 to-transparent flex items-center pl-6">
+                    <div class="absolute inset-0 bg-gradient-to-r  via-white/70 to-transparent flex items-center pl-6">
                         <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9] lg:pr-[700px]">Banking, Financial
                             Services &
                             Insurance (BFSI)</h2>
@@ -399,7 +416,8 @@
                 </div>
 
                 <!-- Key Solutions -->
-                <div class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div
+                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666]">
                         <li class="flex items-start gap-2">
@@ -481,7 +499,8 @@
                 </div>
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
-                <div class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div
+                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666]">
                         <li class="flex items-start gap-2">
@@ -566,7 +585,8 @@
                 </div>
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
-                <div class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div
+                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666]">
                         <li class="flex items-start gap-2">
@@ -638,10 +658,10 @@
                 <a href="index.html" class="hover:text-[#1783F7]">Home</a>
                 <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
                 <a href="service.html" class="hover:text-[#1783F7] flex items-center">
-                    Services 
+                    Services
                 </a>
                 <a href="product.html" class="hover:text-[#1783F7] flex items-center">
-                    Products 
+                    Products
                 </a>
                 <a href="#" class="hover:text-[#1783F7]">Blogs</a>
                 <a href="#" class="hover:text-[#1783F7]">Careers</a>

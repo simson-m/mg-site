@@ -18,6 +18,23 @@
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
 
+                    const currentPath = window.location.pathname;
+
+                    // Highlight desktop links
+                    document.querySelectorAll("#navbar nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
+
+                    // Highlight mobile links
+                    document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -111,41 +128,42 @@
             </div>
 
             <div class="">
-                <p class="text-[#0D0504] text-[35px] md:text-5xl mt-4 font-semibold">AI-Powered ESG Platform for a
+                <p class="text-[#1783F7] text-[35px] md:text-5xl mt-4 font-semibold">AI-Powered ESG Platform for a
                     Greener Tomorrow</p>
-                <p class="text-[#585858] md:text-lg mt-4">Track, assess, and improve your sustainability performance
+                <p class="text-[#667085] md:text-lg mt-4">Track, assess, and improve your sustainability performance
                     with
                     real-time ESG dashboards, intelligent assessments, and global reporting standards—all in one
                     powerful platform.</p>
             </div>
 
             <button
-                class="mt-6  w-[240px] text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                class="mt-6  w-[240px] text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
                 Talk to Our Experts
                 <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2  h-3">
             </button>
         </div>
         <div class="mt-[50px] md:mt-0">
-            <img src="assets/smartAIDash.png" class="md:h-[900px]  object-cover">
+            <img src="assets/smartAIDashboard.png" class="md:h-[900px]  object-cover object-left">
         </div>
     </div>
 
     <!-- What is smart sustain Section-->
     <div class="mt-[100px] md:mx-[40px]">
-        <div class="flex flex-col justify-center items-center lg:px-[370px] px-[20px]">
-            <h2 class="text-[#2FC1FF] font-bold">What is SmartSustain.AI?</h2>
-            <p class="text-[#0D0504] text-center text-5xl mt-4">Designed for Responsible Growth</p>
-            <p class="text-[#585858] text-center mt-4">SmartSustain.AI is an advanced ESG management platform designed
+        <div class="flex flex-col justify-center items-center xl:px-[370px] lg:px-[150px] px-[20px]">
+            <h2 class="text-[#1783F7] font-bold text-2xl">What is SmartSustain.AI?</h2>
+            <p class="text-[#687DA9] text-center text-5xl mt-4">Designed for Responsible Growth</p>
+            <p class="text-[#667085] text-center mt-4">SmartSustain.AI is an advanced ESG management platform designed
                 to help organizations measure, report, and improve their environmental and social impact. With
                 category-specific dashboards and intelligent tools, businesses can align with global standards, assess
                 readiness, and set actionable sustainability goals.</p>
         </div>
         <div class="grid md:grid-cols-2 px-[20px] md:px-[30px] mt-[80px]">
             <div class="lg:pr-[80px]">
-                <h2 class="text-[#0D0504] text-3xl font-bold">
+                <h2 class="text-[#687DA9] text-3xl font-bold">
                     Why Choose SmartSustain.AI?
                 </h2>
-                <ul style="list-style: disc;" class="text-[#585858] mt-4 pl-[20px]">
+                <ul style="list-style: disc;" class="text-[#666666] mt-4 pl-[20px]">
                     <li>Unified ESG Dashboards – All your data in one place, clearly visualized</li>
                     <li>Global Standards Compliance – GRI, ISSB, and more</li>
                     <li>Customizable & Scalable – Fits diverse industries and regulatory needs</li>
@@ -156,10 +174,10 @@
             </div>
 
             <div class="lg:pr-[80px] mt-[50px] md:mt-0">
-                <h2 class="text-[#0D0504] text-3xl font-bold">
+                <h2 class="text-[#687DA9] text-3xl font-bold">
                     Ideal For
                 </h2>
-                <ul style="list-style: disc;" class="text-[#585858] mt-4 pl-[20px]">
+                <ul style="list-style: disc;" class="text-[#666666] mt-4 pl-[20px]">
                     <li>Sustainability & ESG Managers</li>
                     <li>Compliance Teams</li>
                     <li>CSR and Impact Reporting Teams</li>
@@ -177,59 +195,59 @@
     </div>
 
     <!-- Key Features  Section-->
-    <div class="mt-[100px] mx-[10px] md:mx-[40px]">
+    <div class="mt-[100px] mx-[10px] md:mx-[0px] bg-[#F6FAFF] pt-[30px] pb-[50px]">
         <div class="flex flex-col justify-center items-center lg:px-[400px]">
-            <h2 class="text-[#2FC1FF] text-2xl">Key Features</h2>
-            <p class="text-[#0D0504] text-center  text-5xl mt-4">
+            <h2 class="text-[#1783F7] text-2xl">Key Features</h2>
+            <p class="text-[#687DA9] text-center  text-5xl mt-4">
                 Smarter ESG Decisions, Backed by Real-Time Data and AI
             </p>
         </div>
 
         <div class="grid md:grid-cols-3 px-[20px]  md:px-[50px] mt-[80px]">
             <div class="lg:pr-[80px]">
-                <h2 class="text-[#0D0504] text-3xl font-bold">Scope 1, 2, and 3 Emissions Dashboards</h2>
-                <p class="text-[#585858] mt-6 md:mt-4">Visualize and manage your direct and indirect emissions data in
+                <h2 class="text-[#687DA9] text-3xl font-bold">Scope 1, 2, and 3 Emissions Dashboards</h2>
+                <p class="text-[#667085] mt-6 md:mt-4">Visualize and manage your direct and indirect emissions data in
                     real time
                 </p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-0">
-                <h2 class="text-[#0D0504] text-3xl font-bold">Waste & Water Management</h2>
-                <p class="text-[#585858] mt-6 md:mt-4">Track resource usage, monitor disposal trends, and implement
+                <h2 class="text-[#687DA9] text-3xl font-bold">Waste & Water Management</h2>
+                <p class="text-[#667085] mt-6 md:mt-4">Track resource usage, monitor disposal trends, and implement
                     conservation
                     strategies</p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-0">
-                <h2 class="text-[#0D0504] text-3xl font-bold pr-[100px]">Maturity Assessment</h2>
-                <p class="text-[#585858] mt-6 md:mt-4">Evaluate your organization’s ESG readiness across key
+                <h2 class="text-[#687DA9] text-3xl font-bold pr-[100px]">Maturity Assessment</h2>
+                <p class="text-[#667085] mt-6 md:mt-4">Evaluate your organization’s ESG readiness across key
                     sustainability
                     dimensions</p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-[80px]">
-                <h2 class="text-[#0D0504] text-3xl font-bold">Peer Benchmarking</h2>
-                <p class="text-[#585858] mt-6 md:mt-4">Compare ESG performance with industry peers to identify gaps and
+                <h2 class="text-[#687DA9] text-3xl font-bold">Peer Benchmarking</h2>
+                <p class="text-[#667085] mt-6 md:mt-4">Compare ESG performance with industry peers to identify gaps and
                     opportunities</p>
             </div>
 
-            <div class="lg:pr-[80px] mt-[40px] md:mt-[80px] md:ml-[30px] ml-0 lg:ml-0" >
-                <h2 class="text-[#0D0504] text-3xl font-bold">Target Setting</h2>
-                <p class="text-[#585858] mt-6 md:mt-4">Define clear sustainability objectives and track progress against
+            <div class="lg:pr-[80px] mt-[40px] md:mt-[80px] md:ml-[30px] ml-0 lg:ml-0">
+                <h2 class="text-[#687DA9] text-3xl font-bold">Target Setting</h2>
+                <p class="text-[#667085] mt-6 md:mt-4">Define clear sustainability objectives and track progress against
                     them
                 </p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-[80px]">
-                <h2 class="text-[#0D0504] text-3xl font-bold">GRI Framework</h2>
-                <p class="text-[#585858] mt-6 md:mt-4">Align reporting with the Global Reporting Initiative standards
+                <h2 class="text-[#687DA9] text-3xl font-bold">GRI Framework</h2>
+                <p class="text-[#667085] mt-6 md:mt-4">Align reporting with the Global Reporting Initiative standards
                     for
                     transparency</p>
             </div>
             <div></div>
             <div class="lg:pr-[80px] mt-[80px] ">
-                <h2 class="text-[#0D0504] text-3xl font-bold">ISSB Gap Assessment</h2>
-                <p class="text-[#585858] mt-6 md:mt-4">Identify reporting gaps and align with ISSB sustainability
+                <h2 class="text-[#687DA9] text-3xl font-bold">ISSB Gap Assessment</h2>
+                <p class="text-[#667085] mt-6 md:mt-4">Identify reporting gaps and align with ISSB sustainability
                     disclosure
                     standards</p>
             </div>
@@ -241,89 +259,90 @@
         <img src="assets/issbGap.png">
     </div>
 
-  <!-- Review Section -->
-  <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
-    <div
-      class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
+    <!-- Review Section -->
+    <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
+        <div
+            class="relative rounded-tl-[40px] bg-gradient-to-br from-[#E8F5FF] via-[#FBFFFA] via-30% to-[#D3ECFF] shadow-md p-6 md:p-10 flex flex-col ">
 
-      <!-- Floating quote symbol -->
-      <div class="absolute -top-8 left-4 text-6xl text-[#9beef1] select-none">
-        <img src="assets/Shape.svg" alt="Quote Symbol">
-      </div>
+            <!-- Floating quote symbol -->
+            <div class="absolute -top-8 left-4 text-6xl text-[#9beef1] select-none">
+                <img src="assets/Shape.svg" alt="Quote Symbol">
+            </div>
 
-      <!-- Logo top-right -->
-      <div class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
-        <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
-      </div>
+            <!-- Logo top-right -->
+            <div
+                class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
+                <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
+            </div>
 
-      <!-- Testimonial Text -->
-      <div class="flex-1">
-        <p class="text-[#919CA2] mb-6 mt-[40px] md:mt-0 pr-0  md:pr-[100px]  lg:pr-[400px] ">
-          Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
-          and engaging with your target audience on all the social media channels.
-        </p>
-        <div>
-          <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
-          <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+            <!-- Testimonial Text -->
+            <div class="flex-1">
+                <p class="text-[#919CA2] mb-6 mt-[40px] md:mt-0 pr-0  md:pr-[100px]  lg:pr-[400px] ">
+                    Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
+                    and engaging with your target audience on all the social media channels.
+                </p>
+                <div>
+                    <p class="font-semibold text-[#1A2129]">Jean Woodruff</p>
+                    <p class="text-sm text-[#919CA2]">Lorem Ipsum.co</p>
+                </div>
+            </div>
+
+            <!-- Arrows at bottom center -->
+            <div class="flex justify-center gap-4 mt-8">
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowL.svg" alt="Previous">
+                </button>
+                <button class="hover:text-[#1783F7] transition">
+                    <img src="assets/arrowR.svg" alt="Next">
+                </button>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Arrows at bottom center -->
-      <div class="flex justify-center gap-4 mt-8">
-        <button class="hover:text-[#1783F7] transition">
-          <img src="assets/arrowL.svg" alt="Previous">
-        </button>
-        <button class="hover:text-[#1783F7] transition">
-          <img src="assets/arrowR.svg" alt="Next">
-        </button>
-      </div>
-    </div>
-  </section>
+    <!-- Footer -->
+    <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+        <!-- Main footer content -->
+        <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
 
-  <!-- Footer -->
-  <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
-    <!-- Main footer content -->
-    <div
-      class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+            <!-- Logo -->
+            <div class="flex justify-center lg:justify-start">
+                <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+            </div>
 
-      <!-- Logo -->
-      <div class="flex justify-center lg:justify-start">
-        <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
-      </div>
+            <!-- Navigation Links -->
+            <nav
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+                <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+                <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+                <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+                    Services
+                </a>
+                <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+                    Products
+                </a>
+                <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+                <a href="#" class="hover:text-[#1783F7]">Careers</a>
+            </nav>
 
-      <!-- Navigation Links -->
-      <nav
-        class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
-        <a href="index.html" class="hover:text-[#1783F7]">Home</a>
-        <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
-        <a href="service.html" class="hover:text-[#1783F7] flex items-center">
-          Services 
-        </a>
-        <a href="product.html" class="hover:text-[#1783F7] flex items-center">
-          Products 
-        </a>
-        <a href="#" class="hover:text-[#1783F7]">Blogs</a>
-        <a href="#" class="hover:text-[#1783F7]">Careers</a>
-      </nav>
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <img src="assets/fb.svg" alt="Facebook" />
+                <img src="assets/x.svg" alt="Twitter" />
+                <img src="assets/youtube.svg" alt="YouTube" />
+                <img src="assets/insta.svg" alt="Instagram" />
+                <img src="assets/lnkedin.svg" alt="LinkedIn" />
+            </div>
+        </div>
 
-      <!-- Social Icons -->
-      <div class="flex justify-center space-x-4">
-        <img src="assets/fb.svg" alt="Facebook" />
-        <img src="assets/x.svg" alt="Twitter" />
-        <img src="assets/youtube.svg" alt="YouTube" />
-        <img src="assets/insta.svg" alt="Instagram" />
-        <img src="assets/lnkedin.svg" alt="LinkedIn" />
-      </div>
-    </div>
+        <!-- Divider Line -->
+        <div class="mt-8 border-t border-gray-300 w-full"></div>
 
-    <!-- Divider Line -->
-    <div class="mt-8 border-t border-gray-300 w-full"></div>
-
-    <!-- Copyright -->
-    <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
-      © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
-    </div>
-  </footer>
+        <!-- Copyright -->
+        <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+            © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
+        </div>
+    </footer>
 
 
 </body>

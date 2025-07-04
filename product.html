@@ -17,6 +17,23 @@
                 .then((data) => {
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
+                    const currentPath = window.location.pathname;
+
+                    // Highlight desktop links
+                    document.querySelectorAll("#navbar nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
+
+                    // Highlight mobile links
+                    document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
 
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -191,8 +208,8 @@
                 </ul>
                 <div class="flex md:block justify-center">
                     <a href="customerDlens.html">
-                        <button
-                            class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
                             Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
                         </button></a>
                 </div>
@@ -251,8 +268,8 @@
                 <div class="flex md:block justify-center">
 
                     <a href="optiSaas.html">
-                        <button
-                            class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
                             Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
                         </button></a>
                 </div>
@@ -334,8 +351,8 @@
                 <div class="flex md:block justify-center">
 
                     <a href="smartSustain.html">
-                        <button
-                            class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
                             Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
                         </button></a>
                 </div>
@@ -399,8 +416,8 @@
                 <div class="flex md:block justify-center">
 
                     <a href="customerDlens.html">
-                        <button
-                            class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
                             Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
                         </button></a>
                 </div>
@@ -482,8 +499,8 @@
                 <div class="flex md:block justify-center">
 
                     <a href="autodox.html">
-                        <button
-                            class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
                             Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
                         </button></a>
                 </div>
@@ -541,8 +558,8 @@
                 <div class="flex md:block justify-center">
 
                     <a href="mathops.html">
-                        <button
-                            class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
                             Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
                         </button></a>
                 </div>
@@ -625,8 +642,8 @@
                 </ul>
                 <div class="flex md:block justify-center">
                     <a href="opsbeat.html">
-                        <button
-                            class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
                             Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
                         </button></a>
                 </div>

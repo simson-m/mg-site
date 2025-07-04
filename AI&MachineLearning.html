@@ -17,7 +17,23 @@
                 .then((data) => {
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons();
+                    const currentPath = window.location.pathname;
 
+                    // Highlight desktop links
+                    document.querySelectorAll("#navbar nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
+
+                    // Highlight mobile links
+                    document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
                     const mobileMenu = document.getElementById("mobile-menu");
@@ -122,7 +138,7 @@
 
             <div class="relative lg:absolute top-10 right-0  w-full lg:w-[48%] z-0 hidden md:block">
                 <img src="assets/aiOverview.png" alt="AI chip"
-                    class="rounded-lg shadow-lg w-full h-auto object-cover max-h-[400px] lg:max-h-none" />
+                    class="rounded-lg shadow-lg w-full h-auto object-cover max-h-[400px] lg:max-h-none xl:h-[31rem] " />
             </div>
         </div>
     </section>
@@ -236,7 +252,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <!-- Card 1 -->
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
-                    <img src="assets/aiKey1.png" alt="AI Accelerators" class="w-full md:w-48 h-[10rem] md:h-full lg:h-48 object-cover" />
+                    <img src="assets/aiKey1.png" alt="AI Accelerators"
+                        class="w-full md:w-48 h-[10rem] md:h-full lg:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">AI Accelerators for Rapid Deployment</h3>
                         <p class="text-sm text-[#667085] mt-2">
@@ -248,7 +265,8 @@
 
                 <!-- Card 2 -->
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
-                    <img src="assets/aiKey2.png" alt="MLOps" class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
+                    <img src="assets/aiKey2.png" alt="MLOps"
+                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Model Lifecycle Management with MLOps</h3>
                         <p class="text-sm text-[#667085] mt-2">
@@ -260,7 +278,8 @@
 
                 <!-- Card 3 -->
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
-                    <img src="assets/aiKey3.png" alt="Ethical AI" class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
+                    <img src="assets/aiKey3.png" alt="Ethical AI"
+                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Ethical and Responsible AI</h3>
                         <p class="text-sm text-[#667085] mt-2">
@@ -272,7 +291,8 @@
 
                 <!-- Card 4 -->
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
-                    <img src="assets/aiKey4.png" alt="Cloud AI" class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
+                    <img src="assets/aiKey4.png" alt="Cloud AI"
+                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
                     <div class="p-4">
                         <h3 class="text-2xl font-semibold text-[#687DA9]">Cloud-Native AI Architectures</h3>
                         <p class="text-sm text-[#667085] mt-2">

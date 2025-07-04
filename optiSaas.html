@@ -20,6 +20,24 @@
           document.getElementById("navbar").innerHTML = data;
           lucide.createIcons(); // Initialize icons after insertion
 
+          const currentPath = window.location.pathname;
+
+          // Highlight desktop links
+          document.querySelectorAll("#navbar nav a").forEach((link) => {
+            const linkPath = new URL(link.href).pathname;
+            if (currentPath === linkPath) {
+              link.classList.add("font-bold");
+            }
+          });
+
+          // Highlight mobile links
+          document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+            const linkPath = new URL(link.href).pathname;
+            if (currentPath === linkPath) {
+              link.classList.add("font-bold");
+            }
+          });
+
           // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
           const mobileMenuButton = document.getElementById("mobile-menu-button");
           const closeMenuButton = document.getElementById("close-menu-button");
@@ -111,12 +129,12 @@
         <img src="assets/optiLogo.png" alt="logo" class="">
       </div>
       <p style="font-size: 40px; line-height: 1.2; padding-top: 20px; padding-bottom:20px;"
-        class="font-semibold md:font-medium pr-0 md:pr-[90px]">AI-Powered
+        class="font-semibold md:font-medium pr-0 md:pr-[90px] text-[#1783F7]">AI-Powered
         SaaS Tool for Effortless Business Management</p>
-      <p>With advanced analytics, AI, and machine learning, our services <br>transform operations and cost management,
+      <p class="text-[#667085]">With advanced analytics, AI, and machine learning, our services <br>transform operations and cost management,
         unlocking unparalleled <br> efficiency and insights.</p>
       <button
-        class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]"
+        class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)] hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]"
         style="width: 250px; height: 50px; margin-top: 35px;">
         Talk to Our Experts
         <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
@@ -127,28 +145,28 @@
     </div>
   </section>
 
-  <section class="section-2 mt-[430px] md:mt-[30px] lg:mt-0">
+  <section class="section-2 mt-[430px] md:mt-[30px] lg:mt-0 bg-[#F6FAFF]">
     <p style="height: 24px; width: 72px; color: #2FC1FF; font-weight: 600; font-size: 16px; padding-bottom: 30px;">
       Features</p>
     <p style="font-weight: 400; font-size: 43px; text-align: center; line-height: 1.2; padding-bottom: 20px;"
-      class="px-[15px]">A Platform
+      class="px-[15px] text-[#687DA9]">A Platform
       Your Entire Business <br> will Love</p>
-    <p style="font-size: 16px; font-weight: 400; line-height: 150%;  color: #585858; align-items: center; text-align: center;"
+    <p style="font-size: 16px; font-weight: 400; line-height: 150%;  color: #667085; align-items: center; text-align: center;"
       class="md:w-[768px] md:h-[72px]">
       Discover a game-changing platform designed to be the backbone of your business operations. <br> With unmatched
       functionality, ease of use, and efficiency, it’s the solution your entire organization <br> will love.</p>
   </section>
 
-  <section class="section-3">
+  <section class="section-3  bg-[#F6FAFF]" >
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;
        " class=" pl-[20px] md:pl-[40px]">
 
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Quality Features</p>
+      <p style="font-weight: 600;font-size: 32px; ;  padding-bottom: 20px;" class="text-[#687DA9]">Quality Features</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Experience top-tier SaaS with AI automation, robust security, seamless integration, and real-time analytics.</p>
       <ul
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; list-style: disc; margin-left: 30px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #666666; list-style: disc; margin-left: 30px;">
         <li>Dashboard and Report</li>
         <li>Portfolio</li>
         <li>Recommender</li>
@@ -157,12 +175,12 @@
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class=" pl-[20px] md:pl-[40px]">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">SaaS Management </p>
+      <p style="font-weight: 600;font-size: 32px; ;  padding-bottom: 20px;" class="text-[#687DA9]">SaaS Management </p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         An all-in-one customer service platform that helps you balance everything your customers need to be happy.</p>
       <ul
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; list-style: disc; margin-left: 30px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #666666; list-style: disc; margin-left: 30px;">
         <li>User Subscription </li>
         <li>Market Place</li>
         <li>All-in-One-Application</li>
@@ -172,12 +190,12 @@
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class=" pl-[20px] md:pl-[40px]">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Steps to Automate</p>
+      <p style="font-weight: 600;font-size: 32px; ;  padding-bottom: 20px;" class="text-[#687DA9]">Steps to Automate</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Whether you have a team of 2 or 200, our shared team inboxes keep everyone on the same page and in the loop.</p>
       <ul
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; list-style: disc; margin-left: 30px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #666666; list-style: disc; margin-left: 30px;">
         <li>Workflow Management</li>
         <li>Monitor Onboarding</li>
         <li>Manage Licenses</li>
@@ -191,23 +209,23 @@
     <div class="description">
       <p style="height: 24px; width: 72px; color: #2FC1FF; font-weight: 600; font-size: 16px; padding-bottom: 30px;">
         Integrations</p>
-      <p style="font-weight: 400;  line-height: 1.2; padding-bottom: 15px;" class="text-[36px]  md:text-[43px]">Get more
+      <p style="font-weight: 400;  line-height: 1.2; padding-bottom: 15px;" class="text-[36px]  md:text-[43px] text-[#687DA9]">Get more
         value from <br>
         OptiSaaSAI</p>
-      <p style="font-size: 16px; font-weight: 400; line-height: 150%;  color: #585858; align-items: center;"
+      <p style="font-size: 16px; font-weight: 400; line-height: 150%;  color: #666666; align-items: center;"
         class="lg:w-[768px] lg:h-[72px]">
         Connect your tools, connect your teams. With 200+ apps in our directory, <br> your favorite tools are just a
         click away.</p>
       <div style="display: flex; justify-content: left;" class="flex-col md:flex-row">
         <div class=" pr-[5px] md:pr-[30px] mt-[30px]">
           <img style="height: 100px; width:100px; padding-bottom: 8px;" src="assets/data-analytics.svg" alt="logo">
-          <p style="font-weight: 700;font-size: 24px; color: #1D1B20; padding-bottom: 8px;">Comprehensive Insights</p>
-          <p style="font-weight: 400;font-size: 16px; color:#585858 ;">Data, Info, Intel & Actions</p>
+          <p style="font-weight: 700;font-size: 24px; color: #7E7E7E; padding-bottom: 8px;">Comprehensive Insights</p>
+          <p style="font-weight: 400;font-size: 16px; color:#666666 ;">Data, Info, Intel & Actions</p>
         </div>
         <div class=" pr-[5px] md:pr-[30px] mt-[30px]">
           <img style="height: 100px; width:100px;padding-bottom: 8px;" src="assets/strategy.svg" alt="logo">
-          <p style="font-weight: 700;font-size: 24px; color: #1D1B20;padding-bottom: 8px;">SaaS Insights</p>
-          <p style="font-weight: 400;font-size: 16px; color:#585858 ;">Plan Your Next Move</p>
+          <p style="font-weight: 700;font-size: 24px; color: #7E7E7E;padding-bottom: 8px;">SaaS Insights</p>
+          <p style="font-weight: 400;font-size: 16px; color:#666666 ;">Plan Your Next Move</p>
         </div>
       </div>
     </div>
@@ -220,14 +238,14 @@
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start; "
       class=" pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
       <img style="padding-bottom: 10px;" src="assets/sec-5-l1.png" alt="img">
-      <p style="font-weight: 700;font-size: 24px; color: #1D1B20;  padding-bottom: 20px;" class="mt-[30px] md:mt-0">
+      <p style="font-weight: 700;font-size: 24px; color: #687DA9;  padding-bottom: 20px;" class="mt-[30px] md:mt-0">
         Generative AI</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         At OptiSaaSAI, we introduce Ask Amigo, an AI-powered assistant designed to enhance user experience with
         intelligent, intuitive support.</p>
       <ul
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; list-style: disc; margin-left: 30px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #666666; list-style: disc; margin-left: 30px;">
         <li>Natural Language Understanding</li>
         <li>Personalized Recommendations</li>
         <li>24/7 Instant Assistance</li>
@@ -239,14 +257,14 @@
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class=" pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
       <img style="padding-bottom: 10px;" src="assets/sec-5-l2.png" alt="img">
-      <p style="font-weight: 700;font-size: 24px; color: #1D1B20;  padding-bottom: 20px;" class="mt-[30px] md:mt-0">Pre
+      <p style="font-weight: 700;font-size: 24px; color: #687DA9;  padding-bottom: 20px;" class="mt-[30px] md:mt-0">Pre
         Integrated Adaptors</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         At OptiSaaSAI, we focus on value and flexibility, offering free integrations with top SaaS platforms and a
         dynamic connectors framework to provide a robust, adaptable solution for your business.</p>
       <ul
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; list-style: disc; margin-left: 30px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #666666; list-style: disc; margin-left: 30px;">
         <li>Cost Efficiency</li>
         <li>Enhanced Functionality</li>
         <li>Agile Development Approach</li>
@@ -268,7 +286,8 @@
       </div>
 
       <!-- Logo top-right -->
-      <div class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
+      <div
+        class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
         <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
       </div>
 
@@ -297,7 +316,7 @@
   </section>
 
 
-    <!-- Footer -->
+  <!-- Footer -->
   <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
     <!-- Main footer content -->
     <div
@@ -314,10 +333,10 @@
         <a href="index.html" class="hover:text-[#1783F7]">Home</a>
         <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
         <a href="service.html" class="hover:text-[#1783F7] flex items-center">
-          Services 
+          Services
         </a>
         <a href="product.html" class="hover:text-[#1783F7] flex items-center">
-          Products 
+          Products
         </a>
         <a href="#" class="hover:text-[#1783F7]">Blogs</a>
         <a href="#" class="hover:text-[#1783F7]">Careers</a>

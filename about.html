@@ -17,6 +17,24 @@
         .then((data) => {
           document.getElementById("navbar").innerHTML = data;
           lucide.createIcons(); // Initialize icons after insertion
+          const currentPath = window.location.pathname;
+
+          // Highlight desktop links
+          document.querySelectorAll("#navbar nav a").forEach((link) => {
+            const linkPath = new URL(link.href).pathname;
+            if (currentPath === linkPath) {
+              link.classList.add("font-bold");
+            }
+          });
+
+          // Highlight mobile links
+          document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+            const linkPath = new URL(link.href).pathname;
+            if (currentPath === linkPath) {
+              link.classList.add("font-bold");
+            }
+          });
+
 
           // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
           const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -174,7 +192,7 @@
   </div>
 
   <!--What we do Section-->
-  <div class="flex items-center justify-center min-h-screen bg-white mt-[50px]
+  <div class="flex items-center justify-center min-h-screen 2xl:min-h-[60vh] mt-[50px]
   px-[20px] ">
     <!-- Outer Circle Container -->
     <div class="relative w-[800px] h-[650px] ">
@@ -415,20 +433,18 @@
             </div>
           </a>
 
-
-
-
         </div>
-        <div class="relative hidden md:block">
-          <img src="assets/dottedBg.png" class="relative">
-          <div>
-            <img id="image" src="assets/customerDlens.png"
-              class="absolute top-[60px] left-[40px] w-[600px] transition-opacity duration-700 opacity-100">
-          </div>
-          <div
-            class="absolute    md:bottom-[120px] lg:bottom-[100px]  md:right-[50px] lg:right-[250px] transform translate-y-1/2 translate-x-1/2 w-[440px] p-6 bg-white shadow-lg rounded-3xl text-xl text-[#667085] flex flex-col justify-center items-start px-[55px]">
-            <p class="text-[#667085]" id="text1">AI-powered customer data fabric for 360° operational insights.</p>
-            <!-- <p class="text-[#667085]" id="text2">and monitoring platform built to optimize IT .</p> -->
+       <div class="relative hidden md:flex items-center justify-center">
+          <div class="relative w-full max-w-[700px] bg-[url('/assets/dottedBg.png')] bg-cover bg-center p-8">
+            <img id="image" src="/assets/customerDlens.png"
+              class="w-full h-auto transition-opacity duration-700 opacity-100 relative z-10" />
+            <div
+              class="absolute -bottom-4 left-[23rem] transform -translate-x-1/2 w-[90%] max-w-[440px] p-6 bg-white shadow-lg rounded-3xl text-xl text-[#667085] flex flex-col justify-center items-start px-[40px] z-20">
+              <p class="text-[#667085]" id="text1">
+                AI-powered customer data fabric for 360° operational insights.
+              </p>
+            </div>
+
           </div>
         </div>
 
@@ -550,7 +566,7 @@
           </div>
         </div>
 
-        <div id="content" class="flex flex-col gap-4 ">
+        <div id="content" class="flex flex-col gap-4 xl:pr-[100px] ">
           <div
             class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[25px]  md:p-[30px]">
             <img src="/assets/AINative.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">

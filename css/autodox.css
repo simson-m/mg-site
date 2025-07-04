@@ -1,7 +1,9 @@
 .overview {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  padding-left: 80px;
+
   height: 900px;
   width: 100%;
 }
@@ -12,17 +14,21 @@
     flex-direction: column;
     background-image: url('../assets/autodox/autodox-header.png');
     position: relative;
-    
+
   }
-    .overview::before {
+
+  .overview::before {
     content: "";
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* adjust darkness */
-    
+    background-color: rgba(0, 0, 0, 0.4);
+    /* adjust darkness */
+
   }
+
   .section-between {
     margin-left: 20px !important;
   }
@@ -50,13 +56,15 @@
   .bannerImage {
     display: none;
   }
+
   .section-between-2 {
-   padding: 0 !important;
+    padding: 0 !important;
   }
 }
-@media screen and (max-width: 769px){
+
+@media screen and (max-width: 769px) {
   .section-between-2 {
-   padding: 0 !important;
+    padding: 0 !important;
   }
 }
 
@@ -83,8 +91,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
-  margin-bottom: 50px;
+  /* margin-top: 80px; */
+  padding-top: 50px;
+  /* margin-bottom: 50px; */
 }
 
 .section-3 {

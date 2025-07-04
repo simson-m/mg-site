@@ -21,6 +21,23 @@
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
 
+                    const currentPath = window.location.pathname;
+
+                    // Highlight desktop links
+                    document.querySelectorAll("#navbar nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
+
+                    // Highlight mobile links
+                    document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                        }
+                    });
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -326,7 +343,8 @@
             <div class="relative inline-flex lg:grid lg:grid-cols-4 gap-12 lg:gap-4 px-4 py-4 z-10 min-w-full">
 
                 <!-- Horizontal line -->
-                <div class="absolute top-[236px] left-0 right-0 h-0.5 bg-[#C8C7CC] z-0 opacity-40 pointer-events-none mx-[55px] lg:mx-[35px]">
+                <div
+                    class="absolute top-[236px] left-0 right-0 h-0.5 bg-[#C8C7CC] z-0 opacity-40 pointer-events-none mx-[55px] lg:mx-[35px]">
                 </div>
 
                 <!-- Step 1 -->

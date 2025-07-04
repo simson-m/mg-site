@@ -18,6 +18,23 @@
           document.getElementById("navbar").innerHTML = data;
           lucide.createIcons(); // Initialize icons after insertion
 
+          const currentPath = window.location.pathname;
+
+          // Highlight desktop links
+          document.querySelectorAll("#navbar nav a").forEach((link) => {
+            const linkPath = new URL(link.href).pathname;
+            if (currentPath === linkPath) {
+              link.classList.add("font-bold");
+            }
+          });
+
+          // Highlight mobile links
+          document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+            const linkPath = new URL(link.href).pathname;
+            if (currentPath === linkPath) {
+              link.classList.add("font-bold");
+            }
+          });
           // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
           const mobileMenuButton = document.getElementById("mobile-menu-button");
           const closeMenuButton = document.getElementById("close-menu-button");
@@ -107,13 +124,14 @@
       <div class="logo-opti">
         <img src="assets/mathops/mathops-logo.png" alt="logo">
       </div>
-      <p style="font-size: 40px; line-height: 1.2; padding-top: 20px; padding-bottom:20px;" class="font-bold">AI-Powered
+      <p style="font-size: 40px; line-height: 1.2; padding-top: 20px; padding-bottom:20px;" class="font-bold text-[#1783F7]">AI-Powered
         IT Operations Made Smarter</p>
       <p style="color: #585858;">MathOps is a next-gen analytics and monitoring platform built to optimize IT operations
         with real-time visibility, intelligent automation, and predictive insights. Whether you're managing a small team
         or a large infrastructure, MathOps equips you with the tools to stay ahead of incidents, reduce downtime, and
         improve performance.</p>
       <button class=" text-white font-semibold py-1 md:py-3 px-4 md:px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+      hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]
         w-[200px] md:w-[250px] h-[50px] " style=" margin-top: 35px;">
         Talk to Our Experts
         <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
@@ -125,9 +143,9 @@
   </section>
 
   <section class="section-2 mt-[150px] md:mt-0">
-    <p style=" color: #2FC1FF; font-weight: 600; font-size: 16px; padding-bottom: 30px;">What is Mathops?</p>
+    <p style=" color: #1783F7; font-weight: 600; font-size: 16px; padding-bottom: 30px;">What is Mathops?</p>
     <p style="font-weight: 400; font-size: 43px; text-align: center; line-height: 1.2; padding-bottom: 20px;"
-      class="px-[50px] md:px-0">Transform
+      class="px-[50px] md:px-0 text-[#687DA9]">Transform
       Your IT Ecosystem <br> with AI-Driven Intelligence</p>
     <p style="font-size: 16px; font-weight: 400; line-height: 150%; color: #585858; align-items: center; text-align: center;"
       class="md:w-[768px] md:h-[72px] px-[10px] md:px-0">
@@ -137,8 +155,8 @@
   </section>
 
   <section class="section-2">
-    <p style=" color: #2FC1FF; font-weight: 600; font-size: 16px; padding-bottom: 30px;">Who Uses Mathops?</p>
-    <div style="font-weight: 400;font-size: 48px;line-height: 120%;text-align: center;" class="px-[20px] md:px-0">
+    <p style=" color: #1783F7; font-weight: 600; font-size: 16px; padding-bottom: 30px;">Who Uses Mathops?</p>
+    <div style="font-weight: 400;font-size: 48px;line-height: 120%;text-align: center;" class="px-[20px] md:px-0 text-[#687DA9]">
       A Tool Built for Every Role in the IT Chain
     </div>
   </section>
@@ -146,31 +164,31 @@
   <section class="section-3">
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">IT Managers</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">IT Managers</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Track KPIs, system health, and resource utilization to ensure consistent performance and cost control.</p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">IT Admin </p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">IT Admin </p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Get a bird’s-eye view of infrastructure with real-time alerts and root cause visibility for rapid resolution.
       </p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Response Team</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Response Team</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Respond to critical events with real-time notifications and automated ticketing through multiple channels.</p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Data Analysts</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Data Analysts</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Gain meaningful trends and insights for smarter capacity planning and long-term performance tuning.</p>
     </div>
   </section>
@@ -179,113 +197,113 @@
     <img src="assets/mathops/mathops-image.png" alt="image">
   </div>
 
-  <section class="section-between mt-[100px] md:mt-0">
+  <section class="section-between mt-[100px] md:mt-0 bg-[#F6FAFF]">
     <p style=" color: #2FC1FF; font-weight: 600; font-size: 16px; padding-bottom: 30px;">Key Features</p>
-    <p style="font-weight: 400; font-size: 43px; line-height: 1.2; padding-bottom: 20px;" class="pr-[20px] md:pr-0">
+    <p style="font-weight: 400; font-size: 43px; line-height: 1.2; padding-bottom: 20px;" class="pr-[20px] md:pr-0 text-[#687DA9]">
       Smart Tools for Proactive,
       Predictive, and Reliable <br> IT Operations. </p>
-    <p style="font-size: 16px; font-weight: 400; line-height: 150%;  color: #585858;"
+    <p style="font-size: 16px; font-weight: 400; line-height: 150%;  color:#667085;"
       class="md:w-[768px] md:h-[72px] pr-[10px] md:pr-0">MathOps
       combines AI-driven monitoring, predictive analytics, and intelligent automation to help IT teams detect issues
       early, optimize performance, and ensure system reliability—before problems arise.</p>
   </section>
 
-  <section class="section-between-2 md:grid">
+  <section class="section-between-2 md:grid bg-[#F6FAFF]">
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start; "
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Real-Time Monitoring</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Real-Time Monitoring</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Keep track of application and infrastructure performance through dynamic dashboards that display live metrics,
         thresholds, and alerts enabling instant diagnosis.</p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Predictive Analytics </p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Predictive Analytics </p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Use machine learning models to anticipate system failures, abnormal spikes, and performance degradation giving
         your team time to act before downtime happens.</p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Dashboards</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Dashboards</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Tailor dashboard views by team, function, or data type. Highlight what's most important for your stakeholders,
         with drag-and-drop widgets and filters.</p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Incident Management</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Incident Management</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Automate alerting and ticket creation through built-in integrations with email, SMS, WhatsApp, and common ITSM
         tools ensuring no issue goes unnoticed.</p>
     </div>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">360-Degree Entity View</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">360-Degree Entity View</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Gain complete visibility into all components from server health and network performance to app responsiveness in
         a unified, central interface.</p>
     </div>
   </section>
 
   <section class="section-2">
-    <p style=" color: #2FC1FF; font-weight: 600; font-size: 16px; padding-bottom: 30px;">Why Choose Mathops?</p>
-    <p style="font-weight: 400; font-size: 43px; text-align: center; line-height: 1.2; padding-bottom: 20px;">Smarter
+    <p style=" color: #1783F7; font-weight: 600; font-size: 16px; padding-bottom: 30px;">Why Choose Mathops?</p>
+    <p style="font-weight: 400; font-size: 43px; text-align: center; line-height: 1.2; padding-bottom: 20px;color:#687DA9">Smarter
       Operations. Stronger <br> Systems.</p>
   </section>
 
   <section class=" section-between-2">
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start; "
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">IT Management</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">IT Management</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Shift from reactive firefighting to intelligent foresight with predictive alerting and continuous optimization.
       </p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Seamless Integrations </p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Seamless Integrations </p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Plug into your existing ecosystem with support for ITSM, cloud tools, messaging platforms, and third-party APIs.
       </p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">AI-Powered Intelligence</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">AI-Powered Intelligence</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Use AI and machine learning to uncover hidden patterns and make informed decisions faster.</p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start;"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Adaptability</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Adaptability</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Whether you're in finance, healthcare, e-commerce, or logistics, MathOps flexes to fit your unique operational
         needs.</p>
     </div>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Unified Collaboration</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Unified Collaboration</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Enable better cross-team coordination with shared dashboards, unified alerts, and collaborative workflows.</p>
     </div>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: start"
       class="pl-[20px] md:pl-[40px] pr-[10px] md:pr-0">
-      <p style="font-weight: 600;font-size: 32px; color: #0D0504;  padding-bottom: 20px;">Full-Stack Visibility</p>
+      <p style="font-weight: 600;font-size: 32px; color: #687DA9;  padding-bottom: 20px;">Full-Stack Visibility</p>
       <p
-        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #585858; padding-bottom: 20px;">
+        style="font-weight: 400;font-size: 16px;line-height: 25.89px;letter-spacing: 0%; color: #667085; padding-bottom: 20px;">
         Ensure uptime, detect issues early, and manage all IT assets in one place — from apps to infrastructure.</p>
     </div>
   </section>
@@ -305,7 +323,8 @@
       </div>
 
       <!-- Logo top-right -->
-      <div class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
+      <div
+        class="absolute top-[-40px] right-4 md:w-[190px] md:h-[190px] w-[90px] h-[90px] bg-white shadow-md flex items-center justify-center">
         <img src="assets/kpmg.png" alt="KPMG Logo" class="h-[30px] object-contain" />
       </div>
 
@@ -350,10 +369,10 @@
         <a href="index.html" class="hover:text-[#1783F7]">Home</a>
         <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
         <a href="service.html" class="hover:text-[#1783F7] flex items-center">
-          Services 
+          Services
         </a>
         <a href="product.html" class="hover:text-[#1783F7] flex items-center">
-          Products 
+          Products
         </a>
         <a href="#" class="hover:text-[#1783F7]">Blogs</a>
         <a href="#" class="hover:text-[#1783F7]">Careers</a>

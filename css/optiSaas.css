@@ -1,7 +1,9 @@
 .overview {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
+    padding-left: 80px;
+
   height: 900px;
   width: 100%;
 }
@@ -57,7 +59,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 80px;
-  margin-bottom: 50px;
+  padding-top: 50px;
 }
 
 .section-3 {
