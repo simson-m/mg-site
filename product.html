@@ -19,11 +19,14 @@
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
 
+
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
                         const linkPath = new URL(link.href).pathname;
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
+                            link.classList.remove("text-[#7E7E7E]");
+                            link.classList.add("text-[#687DA9]");
                         }
                     });
 
@@ -32,6 +35,8 @@
                         const linkPath = new URL(link.href).pathname;
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
+                            link.classList.remove("text-[#7E7E7E]");
+                            link.classList.add("text-[#687DA9]");
                         }
                     });
 

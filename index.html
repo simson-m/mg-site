@@ -27,6 +27,8 @@
             const linkPath = new URL(link.href).pathname;
             if (currentPath === linkPath) {
               link.classList.add("font-bold");
+              link.classList.remove("text-[#7E7E7E]");
+              link.classList.add("text-[#687DA9]");
             }
           });
 
@@ -35,6 +37,8 @@
             const linkPath = new URL(link.href).pathname;
             if (currentPath === linkPath) {
               link.classList.add("font-bold");
+              link.classList.remove("text-[#7E7E7E]");
+              link.classList.add("text-[#687DA9]");
             }
           });
           // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
@@ -120,7 +124,24 @@
 <body class="bg-white text-[#1D1B20] overflow-x-hidden  max-w-full">
   <div id="navbar"></div>
 
-  <section
+   
+  <section>
+     <div class=" flex md:flex-row  flex-col " style="width: 100%;">
+        <div class="flex flex-col justify-center pl-[20px] lg:pl-[150px] 3xl:pl-[300px] pr-[3px] 3xl:pr-[150px] md:w-[60%] 
+         mt-[20px] md:mt-0 ">
+            <div class="">
+                <p class="text-[#1783F7] text-[35px] md:text-6xl 3xl:text-8xl mt-4 font-semibold">AI-Powered. <br>Cyber-Secure.<br> Enterprise-Ready.</p>
+                <p class="text-[#7E7E7E]   md:text-lg 3xl:text-3xl mt-4">Driving Intelligent Innovation Across Critical Industries</p>
+            </div>
+        </div>
+        <div >
+            <img src="assets/indexNewBanner.png" class=" md:h-[400px]  lg:h-[700px] xl:h-full w-full mt-[50px] md:mt-0 object-cover object-right">
+        </div>
+
+    </div>
+  </section>
+
+  <!-- <section
     class="md:grid grid-cols-1 lg:gap-16 md:grid-cols-2 px-2 lg:px-14 py-3 lg:py-12 max-w-full mx-4 md:py-20 items-center">
     <div class="mb-8 md:mb-0">
       <h1 class="text-2xl md:text-2xl lg:text-[40px] font-bold text-[#1783F7] !leading-relaxed mb-4 md:mb-7">
@@ -135,9 +156,9 @@
         and personalization in Retail—we deliver secure, scalable, and industry value based transformation.
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <section class="relative bg-gradient-to-r from-[#000000] to-[#020288]">
+  <!-- <section class="relative bg-gradient-to-r from-[#000000] to-[#020288]">
     <img src="/assets/homebanner.png" alt="Logo" class="h-[80vh] w-[100%] object-cover opacity-70" />
     <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center ">
       <h2 class="text-4xl md:text-5xl font-bold mb-4 leading-tight ">
@@ -147,7 +168,9 @@
         Driving Intelligent Innovation Across Critical Industries
       </p>
     </div>
-  </section>
+  </section> -->
+
+
 
   <!-- Industry Focus -->
   <section class="mt-12">
@@ -379,6 +402,148 @@
 
     </section>
 
+  </section>
+
+      <!-- services -->
+  <section class="bg-gradient-to-br from-E8F5FF to-FBFFFA via-E8F1EF to-D3ECFF block lg:mt-[50px]"
+    style="background: linear-gradient(to bottom right, #E8F5FF, #FBFFFA, #E8F1EF, #D3ECFF);" >
+    <div class="px-4 sm:px-6 lg:px-20 py-8 sm:py-12 lg:py-16">
+      <!-- heading -->
+      <div class="flex flex-col items-center justify-center mb-12 mt-8">
+        <h2 class="text-[#1783F7] text-3xl md:text-2xl mb-2">Services</h2>
+        <h1 class="text-[#687DA9] text-2xl md:text-4xl font-bold text-center">Turning Vision into Smart Innovation</h1>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+        <a href="AI_DI_Services.html" class="h-full block">
+          <div
+            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <div id="head" class="items-center gap-4">
+                <h2 class="text-[#687DA9] text-xl font-bold">AI & Data Intelligence Services</h2>
+              </div>
+              <div>
+                <p>
+                  Unlock the power of data and AI to automate decisions, predict outcomes, and drive business growth. We
+                  handle everything from strategy and pipelines to real-time analytics and model deployment
+                </p>
+              </div>
+              <div>
+                <img src="/assets/home/navarrow.svg" alt="AI & Data Intelligence Services" class="w-6 h-6">
+              </div>
+            </div>
+            <img src="/assets/home/ai.svg" alt="AI & Data Intelligence Services" class="w-8 h-8">
+          </div>
+        </a>
+
+        <a href="Application&DevelopementServices.html" class="h-full block">
+          <div
+            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <div id="head" class="items-center gap-4">
+                <h2 class="text-[#687DA9] text-xl font-bold">Application & Development Services</h2>
+              </div>
+              <div>
+                <p>
+                  Design, build, and support powerful business applications with a focus on performance, scalability,
+                  and
+                  user experience. From custom development to lifecycle management, we ensure your apps evolve with your
+                  business
+                </p>
+              </div>
+              <div>
+                <img src="/assets/home/navarrow.svg" alt="Application & Development Services" class="w-6 h-6">
+              </div>
+            </div>
+            <img src="/assets/home/app.svg" alt="Application & Development Services" class="w-8 h-8">
+          </div>
+        </a>
+
+        <a href="SapEnterpriseServices.html" class="h-full block">
+          <div
+            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <div id="head" class="justify-begin gap-4">
+                <h2 class="text-[#687DA9] text-xl font-bold">SAP Enterprise Services</h2>
+              </div>
+              <div>
+                <p>
+                  Keep your SAP systems running smoothly with expert support across application performance, cloud
+                  hosting, upgrades, and business continuity planning.
+                </p>
+              </div>
+              <div>
+                <img src="/assets/home/navarrow.svg" alt="SAP Enterprise Services" class="w-6 h-6">
+              </div>
+            </div>
+            <img src="/assets/home/sap.svg" alt="SAP Enterprise Services" class="w-8 h-8">
+          </div>
+        </a>
+
+        <a href="CRM&ERP_Services.html" class="h-full block">
+          <div
+            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <div id="head" class="items-center gap-4">
+                <h2 class="text-[#687DA9] text-xl font-bold">CRM & ERP Solutions</h2>
+              </div>
+              <div>
+                <p>
+                  Connect customer engagement and business operations with smart, scalable CRM and ERP platforms
+                  tailored
+                  to your needs.
+                </p>
+              </div>
+              <div>
+                <img src="/assets/home/navarrow.svg" alt="CRM & ERP Solutions" class="w-6 h-6">
+              </div>
+            </div>
+            <img src="/assets/home/crm.svg" alt="CRM & ERP Solutions" class="w-8 h-8">
+          </div>
+        </a>
+
+        <a href="CloudInfrastructureServices.html" class="h-full block">
+          <div
+            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <div id="head" class="items-center gap-4">
+                <h2 class="text-[#687DA9] text-xl font-bold">Cloud Infrastructure Services</h2>
+              </div>
+              <div>
+                <p>
+                  Deploy, scale, and manage your cloud environment (AWS, Azure, GCP) with ease—ensuring performance,
+                  security, and cost-efficiency every step of the way.
+                </p>
+              </div>
+              <div>
+                <img src="/assets/home/navarrow.svg" alt="Cloud Infrastructure Services" class="w-6 h-6">
+              </div>
+            </div>
+            <img src="/assets/home/cloud.svg" alt="Cloud Infrastructure Services" class="w-8 h-8">
+          </div>
+        </a>
+
+        <a href="Consulting&AdvisoryServices.html" class="h-full block">
+          <div
+            class="flex justify-between shadow-lg p-2 shadow-gray-300 gap-0 md:gap-8 hover:bg-white transition h-full">
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <div id="head" class="items-center gap-4">
+                <h2 class="text-[#687DA9] text-xl font-bold">Consulting & Advisory Services</h2>
+              </div>
+              <div>
+                <p>
+                  Drive innovation and digital maturity with strategic guidance across business and technology
+                  domains—focused on sectors like energy, defence, BFSI, healthcare, and logistics.
+                </p>
+              </div>
+              <div>
+                <img src="/assets/home/navarrow.svg" alt="Consulting & Advisory Services" class="w-6 h-6">
+              </div>
+            </div>
+            <img src="/assets/home/consulting.svg" alt="Consulting & Advisory Services" class="w-8 h-8">
+          </div>
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- What we offer section -->
@@ -670,147 +835,7 @@
     }
   </script>
 
-  <!-- services -->
-  <section class="bg-gradient-to-br from-E8F5FF to-FBFFFA via-E8F1EF to-D3ECFF block"
-    style="background: linear-gradient(to bottom right, #E8F5FF, #FBFFFA, #E8F1EF, #D3ECFF);">
-    <div class="px-4 sm:px-6 lg:px-20 py-8 sm:py-12 lg:py-16">
-      <!-- heading -->
-      <div class="flex flex-col items-center justify-center mb-12 mt-8">
-        <h2 class="text-[#1783F7] text-3xl md:text-2xl mb-2">Services</h2>
-        <h1 class="text-[#687DA9] text-2xl md:text-4xl font-bold text-center">Turning Vision into Smart Innovation</h1>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
-        <a href="AI_DI_Services.html" class="h-full block">
-          <div
-            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
-            <div class="flex flex-col justify-center gap-4 md:gap-8">
-              <div id="head" class="items-center gap-4">
-                <h2 class="text-[#687DA9] text-xl font-bold">AI & Data Intelligence Services</h2>
-              </div>
-              <div>
-                <p>
-                  Unlock the power of data and AI to automate decisions, predict outcomes, and drive business growth. We
-                  handle everything from strategy and pipelines to real-time analytics and model deployment
-                </p>
-              </div>
-              <div>
-                <img src="/assets/home/navarrow.svg" alt="AI & Data Intelligence Services" class="w-6 h-6">
-              </div>
-            </div>
-            <img src="/assets/home/ai.svg" alt="AI & Data Intelligence Services" class="w-8 h-8">
-          </div>
-        </a>
 
-        <a href="Application&DevelopementServices.html" class="h-full block">
-          <div
-            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
-            <div class="flex flex-col justify-center gap-4 md:gap-8">
-              <div id="head" class="items-center gap-4">
-                <h2 class="text-[#687DA9] text-xl font-bold">Application & Development Services</h2>
-              </div>
-              <div>
-                <p>
-                  Design, build, and support powerful business applications with a focus on performance, scalability,
-                  and
-                  user experience. From custom development to lifecycle management, we ensure your apps evolve with your
-                  business
-                </p>
-              </div>
-              <div>
-                <img src="/assets/home/navarrow.svg" alt="Application & Development Services" class="w-6 h-6">
-              </div>
-            </div>
-            <img src="/assets/home/app.svg" alt="Application & Development Services" class="w-8 h-8">
-          </div>
-        </a>
-
-        <a href="SapEnterpriseServices.html" class="h-full block">
-          <div
-            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
-            <div class="flex flex-col justify-center gap-4 md:gap-8">
-              <div id="head" class="justify-begin gap-4">
-                <h2 class="text-[#687DA9] text-xl font-bold">SAP Enterprise Services</h2>
-              </div>
-              <div>
-                <p>
-                  Keep your SAP systems running smoothly with expert support across application performance, cloud
-                  hosting, upgrades, and business continuity planning.
-                </p>
-              </div>
-              <div>
-                <img src="/assets/home/navarrow.svg" alt="SAP Enterprise Services" class="w-6 h-6">
-              </div>
-            </div>
-            <img src="/assets/home/sap.svg" alt="SAP Enterprise Services" class="w-8 h-8">
-          </div>
-        </a>
-
-        <a href="CRM&ERP_Services.html" class="h-full block">
-          <div
-            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
-            <div class="flex flex-col justify-center gap-4 md:gap-8">
-              <div id="head" class="items-center gap-4">
-                <h2 class="text-[#687DA9] text-xl font-bold">CRM & ERP Solutions</h2>
-              </div>
-              <div>
-                <p>
-                  Connect customer engagement and business operations with smart, scalable CRM and ERP platforms
-                  tailored
-                  to your needs.
-                </p>
-              </div>
-              <div>
-                <img src="/assets/home/navarrow.svg" alt="CRM & ERP Solutions" class="w-6 h-6">
-              </div>
-            </div>
-            <img src="/assets/home/crm.svg" alt="CRM & ERP Solutions" class="w-8 h-8">
-          </div>
-        </a>
-
-        <a href="CloudInfrastructureServices.html" class="h-full block">
-          <div
-            class="flex justify-between shadow-lg p-2 shadow-gray-200 gap-0 md:gap-8 hover:bg-white transition h-full">
-            <div class="flex flex-col justify-center gap-4 md:gap-8">
-              <div id="head" class="items-center gap-4">
-                <h2 class="text-[#687DA9] text-xl font-bold">Cloud Infrastructure Services</h2>
-              </div>
-              <div>
-                <p>
-                  Deploy, scale, and manage your cloud environment (AWS, Azure, GCP) with ease—ensuring performance,
-                  security, and cost-efficiency every step of the way.
-                </p>
-              </div>
-              <div>
-                <img src="/assets/home/navarrow.svg" alt="Cloud Infrastructure Services" class="w-6 h-6">
-              </div>
-            </div>
-            <img src="/assets/home/cloud.svg" alt="Cloud Infrastructure Services" class="w-8 h-8">
-          </div>
-        </a>
-
-        <a href="Consulting&AdvisoryServices.html" class="h-full block">
-          <div
-            class="flex justify-between shadow-lg p-2 shadow-gray-300 gap-0 md:gap-8 hover:bg-white transition h-full">
-            <div class="flex flex-col justify-center gap-4 md:gap-8">
-              <div id="head" class="items-center gap-4">
-                <h2 class="text-[#687DA9] text-xl font-bold">Consulting & Advisory Services</h2>
-              </div>
-              <div>
-                <p>
-                  Drive innovation and digital maturity with strategic guidance across business and technology
-                  domains—focused on sectors like energy, defence, BFSI, healthcare, and logistics.
-                </p>
-              </div>
-              <div>
-                <img src="/assets/home/navarrow.svg" alt="Consulting & Advisory Services" class="w-6 h-6">
-              </div>
-            </div>
-            <img src="/assets/home/consulting.svg" alt="Consulting & Advisory Services" class="w-8 h-8">
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
 
   <!-- products -->
   <section class="bg-white">

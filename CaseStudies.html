@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Graph</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/global.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch("/navbar.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("navbar").innerHTML = data;
+                    lucide.createIcons(); // Initialize icons after insertion
+                    const currentPath = window.location.pathname;
+
+                    // Highlight desktop links
+                    document.querySelectorAll("#navbar nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                            link.classList.remove("text-[#7E7E7E]");
+                            link.classList.add("text-[#687DA9]");
+                        }
+                    });
+
+                    // Highlight mobile links
+                    document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                            link.classList.remove("text-[#7E7E7E]");
+                            link.classList.add("text-[#687DA9]");
+                        }
+                    });
+
+
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+                    const mobileMenuButton = document.getElementById("mobile-menu-button");
+                    const closeMenuButton = document.getElementById("close-menu-button");
+                    const mobileMenu = document.getElementById("mobile-menu");
+
+                    if (!mobileMenuButton || !mobileMenu) {
+                        console.error("Mobile menu button or menu is missing.");
+                        return;
+                    }
+
+                    mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
+                        mobileMenu.classList.toggle("hidden");
+                        mobileMenu.classList.toggle("flex");
+                        document.body.classList.toggle("overflow-hidden");
+                    });
+
+                    closeMenuButton.addEventListener("click", function () {
+                        mobileMenu.classList.add("hidden");
+                        mobileMenu.classList.remove("flex");
+                        document.body.classList.remove("overflow-hidden");
+                    });
+
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
+
+                    mobileDropdownToggles.forEach((toggle) => {
+                        toggle.addEventListener("click", function () {
+                            const content = this.nextElementSibling;
+                            const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+                            content.classList.toggle("hidden");
+                            icon.style.transform = content.classList.contains("hidden")
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)";
+                        });
+                    });
+                });
+        });
+    </script>
+
+
+    <style>
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .testimonial-slide:not(.active) {
+            display: none;
+            opacity: 0;
+        }
+
+        .testimonial-slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Make images square on mobile */
+        @media (max-width: 768px) {
+            .square-on-mobile {
+                position: relative;
+                width: 100%;
+                padding-bottom: 100%;
+                /* Creates a square */
+                overflow: hidden;
+            }
+
+            .square-on-mobile img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+
+    <!-- Hero Section -->
+    <section class="relative h-[300px] bg-cover bg-center"
+        style="background-image: url('assets/case_study_banner.jpg')">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <h1 class="text-white text-4xl font-semibold">Case studies</h1>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="py-12 px-6 md:px-20 bg-white">
+        <h2 class="text-[#1783F7] text-lg  mb-4">Overview</h2>
+        <p class="text-[#667085] max-w-6xl text-base">
+            At Mindgraph, we specialize in building next-generation digital experiences that fuel business
+            transformation and customer engagement. Whether you're launching a new product, redesigning an app, or
+            accelerating analytics, we bring comprehensive solutions that span strategy, experience design, and applied
+            AI. From enterprise tools to customer experiences, agile delivery, and post-deployment support — we help
+            organizations turn bold ideas into beautiful digital solutions.
+        </p>
+    </section>
+
+    <section class="bg-white py-16  relative overflow-hidden">
+        <div class="flex flex-col items-center lg:flex-row  pl-16">
+
+            <!-- Left Text Section -->
+            <div class="max-w-xl z-10 lg:pr-[100px]">
+                <h3 class="text-[#1783F7] text-xl font-medium mb-2">Featured Project</h3>
+                <h2 class="text-4xl font-semibold text-[#687DA9] mb-4">KPMG ESG Tool</h2>
+                <p class="text-[#667085] mb-6 leading-relaxed">
+                    At Mindgraph, we specialize in building next-generation digital applications that fuel business
+                    transformation and customer engagement. Whether you're launching a new product, modernizing a legacy
+                    system, or enhancing user experiences, our end-to-end development services cover the full
+                    application lifecycle. From intuitive UX/UI design to backend architecture, agile delivery, and
+                    post-deployment support, we help organizations turn ideas into impactful digital solutions.
+                </p>
+                <a href="KPMG_ESG_TOOL.html">
+                    <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
+                        View Full Project <img src="assets/getInArrow.svg" class="pl-2"></img>
+                    </button></a>
+            </div>
+
+            <!-- Right Image Section -->
+            <div class="relative max-w-4xl w-full h-[700px]" style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
+                  border-top-left-radius: 78px;">
+                <div class="relative left-[-65px] top-[70px]">
+                    <img src="assets/kpmg_laptop_final.png" class="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Featured Project 2 -->
+    <section class="py-12  bg-white">
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-20">
+            <!-- Text -->
+            <div class="lg:w-1/2 lg:pr-[150px]">
+                <h3 class="text-[#1783F7] text-base font-semibold mb-2">Featured Project</h3>
+                <h2 class="text-2xl font-bold text-[#687DA9] mb-4">DigiLeap</h2>
+                <p class="text-[#667085] mb-6">
+                    At Mindgraph, we collaborated with DigiLeap to build a future-ready digital learning platform for
+                    enterprises and educational institutions. The platform is designed to support interactive modules,
+                    real-time tracking, user analytics, and a seamless content management system. With scalable
+                    architecture and intuitive UX, DigiLeap has enhanced learning experiences for thousands of users.
+                </p>
+                <a href="#">
+                    <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
+                        View Full Project <img src="assets/getInArrow.svg" class="pl-2"></img>
+                    </button></a>
+            </div>
+            <!-- Image -->
+
+            <div class="relative max-w-4xl w-full h-[600px]" style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
+                  border-top-right-radius: 78px;">
+                <div class="relative left-[-65px] ">
+                    <img src="assets/digi_leap_study.png" class="">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Featured Project 3 -->
+    <section class="bg-white py-16  relative overflow-hidden">
+        <div class="flex flex-col items-center lg:flex-row  pl-16">
+
+            <!-- Left Text Section -->
+            <div class="max-w-xl z-10 lg:pr-[100px]">
+                <h3 class="text-[#1783F7] text-xl font-medium mb-2">Featured Project</h3>
+                <h2 class="text-4xl font-semibold text-[#687DA9] mb-4">Platform Fusion</h2>
+                <p class="text-[#667085] mb-6 leading-relaxed">
+                    At Mindgraph, we specialize in building next-generation digital applications that fuel business
+                    transformation and customer engagement. Whether you're launching a new product, modernizing a legacy
+                    system, or enhancing user experiences, our end-to-end development services cover the full
+                    application lifecycle. From intuitive UX/UI design to backend architecture, agile delivery, and
+                    post-deployment support, we help organizations turn ideas into impactful digital solutions.
+                </p>
+                <a href="#">
+                    <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
+       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
+                        View Full Project <img src="assets/getInArrow.svg" class="pl-2"></img>
+                    </button></a>
+            </div>
+
+            <!-- Right Image Section -->
+            <div class="relative max-w-4xl w-full h-[550px]" style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
+                  border-top-left-radius: 78px;">
+                <div class="relative left-[-65px] top-[30px]">
+                    <img src="assets/esg.png" class="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
+        <!-- Main footer content -->
+        <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
+
+            <!-- Logo -->
+            <div class="flex justify-center lg:justify-start">
+                <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
+            </div>
+
+            <!-- Navigation Links -->
+            <nav
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
+                <a href="index.html" class="hover:text-[#1783F7]">Home</a>
+                <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
+                <a href="service.html" class="hover:text-[#1783F7] flex items-center">
+                    Services
+                </a>
+                <a href="product.html" class="hover:text-[#1783F7] flex items-center">
+                    Products
+                </a>
+                <a href="#" class="hover:text-[#1783F7]">Blogs</a>
+                <a href="#" class="hover:text-[#1783F7]">Careers</a>
+            </nav>
+
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-4">
+                <img src="assets/fb.svg" alt="Facebook" />
+                <img src="assets/x.svg" alt="Twitter" />
+                <img src="assets/youtube.svg" alt="YouTube" />
+                <img src="assets/insta.svg" alt="Instagram" />
+                <img src="assets/lnkedin.svg" alt="LinkedIn" />
+            </div>
+        </div>
+
+        <!-- Divider Line -->
+        <div class="mt-8 border-t border-gray-300 w-full"></div>
+
+        <!-- Copyright -->
+        <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
+            © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
+        </div>
+    </footer>
+</body>
+
+</html>
