@@ -105,30 +105,41 @@ function renderContent() {
     const items = data.slice(start, end);
 
     let i = 0, bgClass;
-    items.forEach(item => {
-        if (i % 2 == 1) {
-            bgClass = "bg-[#F7FBFF]"
-        }
-        else {
-            bgClass = "bg-white"
-        }
-        contentEl.innerHTML += `
-      <div class="${bgClass}  p-6 flex flex-col md:flex-row gap-6 py-[60px] px-[100px]">
-        <img src="assets/${item.image}" class="w-full md:w-1/4 rounded" alt="${item.title}">
-        <div>
-          <p class="text-sm text-[#1783F7] mb-2">${item.date}</p>
-          <h2 class="text-2xl font-semibold text-[#055CC0] mb-2">${item.title}</h2>
-          <p class="text-[#667085] mb-4">${item.description1}</p>
-          <p class="text-[#667085] mb-4">${item.description2}</p>
-          <a href="BlogDetail.html" class="text-[#1783F7] underline inline-flex items-center gap-1">
+   items.forEach(item => {
+  if (i % 2 == 1) {
+    bgClass = "bg-[#F7FBFF]";
+  } else {
+    bgClass = "bg-white";
+  }
+
+  contentEl.innerHTML += `
+    <div class="${bgClass} p-6 sm:p-8 lg:px-[100px] lg:py-[60px] 
+                flex flex-col md:flex-row gap-6">
+      
+      <!-- Image -->
+      <img src="assets/${item.image}" 
+     class="w-full md:w-1/3 lg:w-1/4 aspect-[4/3] object-cover rounded" 
+     alt="${item.title}">
+      
+      <!-- Text Content -->
+      <div class="flex-1">
+        <p class="text-sm text-[#1783F7] mb-2">${item.date}</p>
+        <h2 class="text-xl sm:text-2xl font-semibold text-[#055CC0] mb-2">
+          ${item.title}
+        </h2>
+        <p class="text-[#667085] mb-4 text-sm sm:text-base">${item.description1}</p>
+        <p class="text-[#667085] mb-4 text-sm sm:text-base">${item.description2}</p>
+        <a href="BlogDetail.html" 
+           class="text-[#1783F7] underline inline-flex items-center gap-1 text-sm sm:text-base">
           Read More
-          <img src="/assets/home/navarrow.svg" alt="arrow" class="w-6  h-6">
-          </a>
-        </div>
+          <img src="/assets/home/navarrow.svg" alt="arrow" class="w-5 h-5 sm:w-6 sm:h-6">
+        </a>
       </div>
-    `;
-        i++;
-    });
+    </div>
+  `;
+  i++;
+});
+
 }
 
 function renderPagination() {

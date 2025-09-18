@@ -138,8 +138,7 @@
       <p class="text-white md:text-[#667085]">Revolutionize your IT operations with smart automation, real-time
         visibility, and
         seamless integrations. OpsBeat brings speed, simplicity, and scale to modern service management.</p>
-      <button
-        class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+      <button class=" text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
         hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]"
         style="width: 250px; height: 50px; margin-top: 35px;">
         Talk to Our Experts
@@ -154,7 +153,8 @@
   <div class="section-between lg:flex flex-row ">
     <div>
       <p style=" color: #1783F7; font-weight: 600; font-size: 16px; padding-bottom: 30px;">What is OpsBeat?</p>
-      <p style="font-weight: 400; font-size: 43px; line-height: 1.2; padding-bottom: 20px;" class="text-[#687DA9]">Designed for Responsible
+      <p style="font-weight: 400; font-size: 43px; line-height: 1.2; padding-bottom: 20px;" class="text-[#687DA9]">
+        Designed for Responsible
         <br> Growth
       </p>
       <p style="font-size: 16px; font-weight: 400; line-height: 150%; color: #666666;"
@@ -294,50 +294,16 @@
 
 
   <!-- Footer -->
-  <footer class="bg-white pt-16 px-4 md:px-10 lg:px-[150px] mt-[50px]">
-    <!-- Main footer content -->
-    <div
-      class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0 text-center lg:text-left">
-
-      <!-- Logo -->
-      <div class="flex justify-center lg:justify-start">
-        <img class="h-10" src="assets/mindgraphLogo.png" alt="MindGraph Logo" />
-      </div>
-
-      <!-- Navigation Links -->
-      <nav
-        class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 text-[#7E7E7E] text-base">
-        <a href="index.html" class="hover:text-[#1783F7]">Home</a>
-        <a href="about.html" class="hover:text-[#1783F7]">About Us</a>
-        <a href="service.html" class="hover:text-[#1783F7] flex items-center">
-          Services
-        </a>
-        <a href="product.html" class="hover:text-[#1783F7] flex items-center">
-          Products
-        </a>
-      <a href="Blogs.html" class="hover:text-[#1783F7]">Blogs </a>
- <a href="CaseStudies.html" class="text-[#7E7E7E] flex items-center">UseCase </a>
-        <a href="#" class="hover:text-[#1783F7]">Careers</a>
-      </nav>
-
-      <!-- Social Icons -->
-      <div class="flex justify-center space-x-4">
-        <img src="assets/fb.svg" alt="Facebook" />
-        <img src="assets/x.svg" alt="Twitter" />
-        <img src="assets/youtube.svg" alt="YouTube" />
-        <img src="assets/insta.svg" alt="Instagram" />
-        <img src="assets/lnkedin.svg" alt="LinkedIn" />
-      </div>
-    </div>
-
-    <!-- Divider Line -->
-    <div class="mt-8 border-t border-gray-300 w-full"></div>
-
-    <!-- Copyright -->
-    <div class="mt-4 pb-8 text-center text-sm text-[#8a8a8f] font-normal">
-      © Copyright 2025, <span class="font-semibold text-[#667085]">MindGraph</span>. All Rights Reserved.
-    </div>
-  </footer>
+  <div id="footer"></div>
+  <script>
+    // Load footer dynamically
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footer").innerHTML = data;
+      })
+      .catch(err => console.error("Error loading footer:", err));
+  </script>
 
 
 </body>
