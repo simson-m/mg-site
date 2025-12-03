@@ -8,7 +8,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="/global.css" />
-
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -18,6 +22,37 @@
           document.getElementById("navbar").innerHTML = data;
           lucide.createIcons(); // Initialize icons after insertion
           const currentPath = window.location.pathname;
+
+          const toggle = document.getElementById('dark-mode-toggle');
+          if (toggle) {
+              // Use change event on the checkbox
+              toggle.addEventListener('change', () => {
+                if (toggle.checked) {
+                  document.documentElement.classList.add('dark');
+                  localStorage.setItem('theme', 'dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                  localStorage.setItem('theme', 'light');
+                }
+                updateThemeImages();
+              });
+
+              // Set initial checkbox state based on localStorage
+              if (localStorage.getItem('theme') === 'dark') {
+                toggle.checked = true;
+                document.documentElement.classList.add('dark');
+              }
+            }
+            // updateArrowImages();
+            function updateThemeImages() {
+              const isDark = document.documentElement.classList.contains("dark");
+
+              document.querySelectorAll(".theme-image").forEach(img => {
+                const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                img.src = newSrc;
+              });
+            }
+
 
           // Highlight desktop links
           document.querySelectorAll("#navbar nav a").forEach((link) => {
@@ -82,7 +117,6 @@
     });
   </script>
 
-
   <style>
     .testimonial-slide {
       transition: opacity 0.5s ease-in-out;
@@ -117,6 +151,36 @@
         object-fit: cover;
       }
     }
+
+    .text-radiant span {
+      background: linear-gradient(96.69deg, #1783f7 3.19%, #ff6647 94.56%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .text-radiant {
+      background: linear-gradient(96.69deg, #1783f7 3.19%, #ff6647 94.56%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Light mode: disable gradient + use normal text color */
+    :not(.dark) .text-radiant {
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      -webkit-text-fill-color: unset !important;
+      background-clip: unset !important;
+      color: #687DA9 !important;
+      /* your light mode text color */
+    }
+
+    svg {
+      fill: currentColor;
+    }
   </style>
 </head>
 
@@ -137,18 +201,19 @@
     </div>
   </div>
 
-  <div class="flex flex-col lg:flex-row pt-[20px]  lg:pt-[90px] lg:px-[180px]">
+  <div
+    class="flex flex-col lg:flex-row pt-[20px]  lg:pt-[90px] lg:px-[180px] dark:pb-[30px] dark:bg-black transition-all duration-500 ease-in">
     <div class="order-2 lg:order-1  md:pl-[200px] lg:pl-0">
       <img src="assets/ourCompany.png" class="lg:max-w-7xl md:w-[400px] h-full p-[50px] lg:p-0">
     </div>
     <div class="order-1 lg:order-2">
       <div class=" pl-[20px] pr-[10px] md:pr-0 md:pl-[60px]">
         <div
-          class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] text-3xl tracking-[0] leading-[39.6px]">
+          class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] dark:text-white text-3xl tracking-[0] leading-[39.6px]">
           Overview
         </div>
         <p
-          class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] text-lg tracking-[0] leading-[26px]">
+          class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] dark:text-white text-lg tracking-[0] leading-[26px]">
           Mindgraph is a next-generation technology company specializing in AI-powered solutions,
           data
           platforms, and digital transformation services. We partner with forward-thinking enterprises to
@@ -162,12 +227,12 @@
       <div class="pl-[20px]  md:pl-[40px] pr-[10px] md:pr-0">
         <div
           class=" mt-[30px] [background:linear-gradient(132deg,rgba(234,249,253,0.5)_0%,rgba(222,248,255,0.5)_100%)] p-[20px] rounded-3xl">
-          <div class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] text-3xl tracking-[0] leading-[39.6px]
+          <div class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] dark:text-white text-3xl tracking-[0] leading-[39.6px]
                     ">
             Vision
           </div>
           <p
-            class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] text-base  md:text-lg tracking-[0] leading-[26px]">
+            class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] dark:text-white text-base  md:text-lg tracking-[0] leading-[26px]">
             To be the trusted partner for enterprises worldwide, enabling intelligent transformation through
             AI,
             data, and digital innovation.
@@ -179,11 +244,11 @@
         <div
           class="mt-[30px] [background:linear-gradient(132deg,rgba(234,249,253,0.5)_0%,rgba(222,248,255,0.5)_100%)] p-[20px] rounded-3xl">
           <div
-            class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] text-3xl tracking-[0] leading-[39.6px]">
+            class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] dark:text-white text-3xl tracking-[0] leading-[39.6px]">
             Mission
           </div>
           <p
-            class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] text-base  md:text-lg tracking-[0] leading-[26px]">
+            class="mt-[10px] [font-family:'Roboto',Helvetica] font-normal text-[#667085] dark:text-white text-base  md:text-lg tracking-[0] leading-[26px]">
             At Mindgraph, our mission is to simplify complexity, empower industries, and drive sustainable
             growth by delivering AI-first platforms, cloud-native solutions, and strategic consulting—built
             for
@@ -196,14 +261,14 @@
   </div>
 
   <!--What we do Section-->
-  <div class="flex items-center justify-center min-h-screen 2xl:min-h-[60vh] mt-[50px]
+  <div class="flex items-center justify-center transition-all duration-500 ease-in min-h-screen 2xl:min-h-[60vh] pt-[50px]  dark:pb-[50px] dark:bg-[#000000]
   px-[20px] ">
     <!-- Outer Circle Container -->
     <div class="relative w-[800px] h-[650px] ">
       <!-- Center Content -->
       <div class="absolute inset-0 flex items-center justify-center z-20">
         <div
-          class="relative bg-white w-[500px] h-[180px] rounded-[140px] flex flex-col items-center justify-center text-center  px-4">
+          class="relative bg-white dark:bg-[#181818]  w-[500px] h-[180px] rounded-[140px] flex flex-col items-center justify-center text-center  px-4">
           <!-- Decorative SVG Icons -->
           <img src="assets/bluePlayButton.svg"
             class="absolute  top-[60px] md:top-[40px] left-[10px] md:left-[100px] w-4 h-4" />
@@ -229,17 +294,28 @@
       <!-- Top center -->
       <div class="hidden md:block">
         <div class="relative top-[90px] left-1/2 w-[100px] h-[20px]  transform -translate-x-1/2 ">
-          <img src="assets/straightLine.svg" class="h-[470px] w-[100px]">
+          <img src="assets/straightLine.svg" class="h-[470px] w-[100px] block dark:hidden">
+          <svg width="100" height="470" viewBox="0 0 100 470" xmlns="http://www.w3.org/2000/svg"
+            class="hidden dark:block">
+            <line x1="50" y1="0" x2="50" y2="470" stroke="white" stroke-width="2" />
+          </svg>
+
         </div>
         <!-- App to Cloud -->
         <div class="absolute  top-[100px] md:top-[170px] md:left-[560px] w-[2px] h-[80px]  transform rotate-[53deg]  ">
-          <img src="assets/straightLine.svg" class="h-[500px] w-[100px]">
-
+          <img src="assets/straightLine.svg" class="h-[470px] w-[100px] block dark:hidden">
+          <svg width="100" height="470" viewBox="0 0 100 470" xmlns="http://www.w3.org/2000/svg"
+            class="hidden dark:block">
+            <line x1="50" y1="0" x2="50" y2="470" stroke="white" stroke-width="2" />
+          </svg>
         </div>
         <!-- Bottom right -->
         <div class="absolute top-[420px] left-[580px] w-[2px] h-[80px]  transform rotate-[130deg]  ">
-          <img src="assets/straightLine.svg" class="h-[500px] w-[100px]">
-
+          <img src="assets/straightLine.svg" class="h-[470px] w-[100px] block dark:hidden">
+          <svg width="100" height="470" viewBox="0 0 100 470" xmlns="http://www.w3.org/2000/svg"
+            class="hidden dark:block">
+            <line x1="50" y1="0" x2="50" y2="470" stroke="white" stroke-width="2" />
+          </svg>
         </div>
       </div>
       <div class="block md:hidden">
@@ -257,387 +333,587 @@
       <!-- Service Items -->
       <div class="absolute top-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
         <img src="assets/AI.svg" class="w-[40px] h-[40px]">
-        <span class="text-sm text-[#7E7E7E] text-center pt-1">AI & Data Intelligence Services</span>
+        <span class="text-sm text-[#7E7E7E] dark:text-white text-center pt-1">AI & Data Intelligence Services</span>
       </div>
 
       <div class="absolute top-[15%] left-[85%] transform -translate-x-1/2 flex flex-col items-center z-10
       ">
         <img src="assets/Outline.svg" class="w-[40px] h-[40px]">
-        <span class="text-sm text-[#7E7E7E] pt-1 text-center">Application & Development Services</span>
+        <span class="text-sm text-[#7E7E7E] dark:text-white pt-1 text-center">Application & Development Services</span>
       </div>
 
       <div class="absolute bottom-[15%] left-[85%] transform -translate-x-1/2 flex flex-col items-center z-10">
         <img src="assets/sap.svg" class="w-[40px] h-[40px]">
-        <span class="text-sm text-[#7E7E7E] pt-1 text-center">SAP Enterprise Services</span>
+        <span class="text-sm text-[#7E7E7E] dark:text-white pt-1 text-center">SAP Enterprise Services</span>
       </div>
 
       <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
         <img src="assets/crm.svg" class="w-[40px] h-[40px]">
-        <span class="text-sm text-[#7E7E7E] pt-1 text-center">CRM & ERP Solutions</span>
+        <span class="text-sm text-[#7E7E7E] dark:text-white pt-1 text-center">CRM & ERP Solutions</span>
       </div>
 
       <div class="absolute bottom-[15%] left-[15%] transform -translate-x-1/2 flex flex-col items-center z-10">
         <img src="assets/cloudInfra.svg" class="w-[40px] h-[40px]">
-        <span class="text-sm text-[#7E7E7E] pt-1 text-center pl-[60px] md:pl-0 pr-[50px] md:pr-0">Cloud Infrastructure
+        <span class="text-sm text-[#7E7E7E] dark:text-white pt-1 text-center pl-[60px] md:pl-0 pr-[50px] md:pr-0">Cloud
+          Infrastructure
           Services</span>
       </div>
 
       <div class="absolute top-[15%] left-[15%] transform -translate-x-1/2 flex flex-col items-center z-10">
         <img src="assets/Consult-Talk.svg" class="w-[40px] h-[40px]">
-        <span class="text-sm text-[#7E7E7E] pt-1 text-center pl-[60px] md:pl-0 pr-[50px] md:pr-0">Consulting & Advisory
+        <span
+          class="text-sm text-[#7E7E7E] dark:text-white pt-1 text-center pl-[60px] md:pl-0 pr-[50px] md:pr-0">Consulting
+          & Advisory
           Services</span>
       </div>
     </div>
   </div>
 
-  <!-- products -->
-  <section class="bg-white">
-    <div class="px-4 sm:px-6 lg:px-20 py-8 sm:py-12 lg:py-16">
+  <!-- Solutions section -->
+  <section id="solutions-section"
+    class="bg-white dark:bg-[#000000] pt-[100px] pb-[100px] transition-all duration-500 ease-in">
+    <div
+      class="px-10 md:px-[50px] lg:px-20 py-8 sm:py-12 lg:py-16 space-y-6 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+      data-delay="100">
       <!-- heading -->
-      <div class="flex flex-col items-center justify-center mb-12 mt-8 text-[#1783F7] font-bold text-xl md:text-2xl">
-        <h2>Products</h2>
-        <h1 class="text-[#687DA9] text-2xl text-center md:text-4xl font-bold">
-          Products That Power Transformation
-        </h1>
+      <div class="flex gap-2 items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="200">
+        <h2 class="text-4xl text-[#1783F7] dark:text-[#828282] mb-4 leading-tight">
+          Products
+        </h2>
+        <img src="/assets/updated/line.svg" class="pt-3" />
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="flex flex-col justify-start text-[#7E7E7E] ">
-          <a href="customerDlens.html">
-            <div id="CustomerDlens" class="hover:text-[#687DA9] hover:font-semibold p-4 group">
-              <div class="flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                  <div class="rotate-[-45deg]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
-                      <path fill="#204596"
-                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
-                    </svg>
-                  </div>
-                  <h3 class="text-xl">CustomerDlens</h3>
-                </div>
-                <div class="self-end rotate-[90deg] hidden group-hover:block">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#1783F7" stroke-linecap="round" stroke-linejoin="round"
-                      d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
-                  </svg>
-                </div>
-              </div>
-              <hr class="mt-6">
-            </div>
-          </a>
-          <a href="mathops.html">
-            <div id="MathOps" class="hover:text-[#687DA9] hover:font-semibold group p-4">
-              <div class="flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                  <div class="rotate-[-45deg]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
-                      <path fill="#204596"
-                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
-                    </svg>
-                  </div>
-                  <h3 class="text-xl">MATHOPS</h3>
-                </div>
-                <div class="self-end rotate-[90deg] hidden group-hover:block">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#1783F7" stroke-linecap="round" stroke-linejoin="round"
-                      d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
-                  </svg>
-                </div>
-              </div>
-              <hr class="mt-6">
-            </div>
-          </a>
-          <a href="opsbeat.html">
-            <div id="OpsBeat" class="hover:text-[#687DA9] hover:font-semibold group p-4">
-              <div class="flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                  <div class="rotate-[-45deg]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
-                      <path fill="#204596"
-                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
-                    </svg>
-                  </div>
-                  <h3 class="text-xl">OpsBeat</h3>
-                </div>
-                <div class="self-end rotate-[90deg] hidden group-hover:block">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#1783F7" stroke-linecap="round" stroke-linejoin="round"
-                      d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
-                  </svg>
-                </div>
-              </div>
-              <hr class="mt-6">
-            </div>
-          </a>
+      <h1
+        class="text-4xl text-black  dark:text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold text-radiant opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="300">
+        AI Frameworks That Power Transformation
+      </h1>
+    </div>
 
-          <a href="optiSaas.html">
-            <div id="SaaSBeam AI" class="hover:text-[#687DA9] hover:font-semibold group p-4">
-              <div class="flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                  <div class="rotate-[-45deg]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
-                      <path fill="#204596"
-                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
-                    </svg>
-                  </div>
-                  <h3 class="text-xl">OptiSaas.AI</h3>
-                </div>
-                <div class="self-end rotate-[90deg] hidden group-hover:block">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#1783F7" stroke-linecap="round" stroke-linejoin="round"
-                      d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-10 md:px-[50px] lg:px-[70px]">
+      <!-- Left side: List of solutions -->
+      <div class="flex flex-col justify-start text black dark:text-white space-y-2">
+        <!-- Solution Items -->
+        <a href="mathops.html">
+          <div id="MathOps"
+            class="solution-item hover:text-[#687DA9] dar:hover:text-white hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="400">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
+                    class="text-[#204596] dark:text-white">
+                    <path fill="currentColor"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
                   </svg>
                 </div>
-              </div>
-              <hr class="mt-6">
-            </div>
-          </a>
-          <a href="customerDlens.html">
-            <div id="Patient360" class="hover:text-[#687DA9] hover:font-semibold group p-4">
-              <div class="flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                  <div class="rotate-[-45deg]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
-                      <path fill="#204596"
-                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
-                    </svg>
-                  </div>
-                  <h3 class="text-xl">Patient360.AI</h3>
-                </div>
-                <div class="self-end rotate-[90deg] hidden group-hover:block">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#1783F7" stroke-linecap="round" stroke-linejoin="round"
-                      d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
-                  </svg>
-                </div>
-              </div>
-              <hr class="mt-6">
-            </div>
-          </a>
-          <a href="smartSustain.html">
-            <div id="SmartSustain" class="hover:text-[#687DA9] hover:font-semibold group p-4">
-              <div class="flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                  <div class="rotate-[-45deg]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
-                      <path fill="#204596"
-                        d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
-                    </svg>
-                  </div>
-                  <h3 class="text-xl">SmartSustain.AI</h3>
-                </div>
-                <div class="self-end rotate-[90deg] hidden group-hover:block">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#1783F7" stroke-linecap="round" stroke-linejoin="round"
-                      d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
-                  </svg>
-                </div>
-              </div>
-              <hr class="mt-6">
-            </div>
-          </a>
 
-        </div>
-       <div class="relative hidden md:flex items-center justify-center">
-          <div class="relative w-full max-w-[700px] bg-[url('/assets/dottedBg.png')] bg-cover bg-center p-8">
-            <img id="image" src="/assets/customerDlens.png"
-              class="w-full h-auto transition-opacity duration-700 opacity-100 relative z-10" />
-            <div
-              class="absolute -bottom-4 left-[23rem] transform -translate-x-1/2 w-[90%] max-w-[440px] p-6 bg-white shadow-lg rounded-3xl text-xl text-[#667085] flex flex-col justify-center items-start px-[40px] z-20">
-              <p class="text-[#667085]" id="text1">
-                AI-powered customer data fabric for 360° operational insights.
-              </p>
+                <h3 class="text-xl">MATHOPS</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  class="text-[#204596] dark:text-white">
+                  <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
             </div>
+            <hr class="mt-6">
+          </div>
+        </a>
 
+        <a href="smartSustain.html">
+          <div id="SmartSustain"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="500">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
+                    class="text-[#204596] dark:text-white">
+                    <path fill="currentColor"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">SmartSustain.AI</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  class="text-[#204596] dark:text-white">
+                  <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="opsbeat.html">
+          <div id="OpsBeat"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
+                    class="text-[#204596] dark:text-white">
+                    <path fill="currentColor"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">OpsBeat</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  class="text-[#204596] dark:text-white">
+                  <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="customerDlens.html">
+          <div id="CustomerDlens"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
+                    class="text-[#204596] dark:text-white">
+                    <path fill="currentColor"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">CustomerDlens</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  class="text-[#204596] dark:text-white">
+                  <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="optiSaas.html">
+          <div id="SaaSBeamAI"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
+                    class="text-[#204596] dark:text-white">
+                    <path fill="currentColor"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">OptiSaas.AI</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  class="text-[#204596] dark:text-white">
+                  <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="customerDlens.html">
+          <div id="Patient360"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
+                    class="text-[#204596] dark:text-white">
+                    <path fill="currentColor"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">Patient360.AI</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  class="text-[#204596] dark:text-white">
+                  <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="#">
+          <div id="ResponsibleAI"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
+                    class="text-[#204596] dark:text-white">
+                    <path fill="currentColor"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">Responsible AI</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  class="text-[#204596] dark:text-white">
+                  <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Right side: Image + text -->
+      <div class="relative hidden md:flex items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="400">
+        <div class="relative flex items-start pt-12">
+          <img id="solution-image" src="/assets/mathOps.png"
+            class="w-[550px] h-auto transition-opacity duration-700 z-10" />
+          <div class="absolute right-[-30px] top-[70px] w-[450px] md:h-[300px] lg:h-[380px] xl:h-[450px] 
+                bg-[url('/assets/dottedBg.png')] bg-contain bg-no-repeat bg-right">
           </div>
         </div>
 
+        <!-- TEXT CARD BELOW IMAGE -->
+        <div
+          class="absolute md:top-[380px] lg:top-[480px] left-[10px] w-[90%] max-w-[440px] p-6 text-xl text-black dark:text-white z-20"
+          id="solution-text">
+          MathOps is a next-gen analytics and monitoring platform built to optimize IT.
+        </div>
       </div>
     </div>
   </section>
 
   <script>
-    const featureImage1 = document.getElementById('image');
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute('data-delay') || 0;
+          setTimeout(() => {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+          }, delay);
+        }
+      });
+    }, { threshold: 0.2 });
 
-    const items1 = [
-      {
-        selector: '#MathOps',
-        image: '/assets/mathOps.png',
-        text1: 'MathOps is a next-gen analytics and monitoring platform built to optimize IT .'
-      },
-      {
-        selector: '#SmartSustain',
-        image: 'assets/prd-smartSustain.png',
-        text1: 'Simplify and scale ESG reporting. SmartSustain.AI enables accurate tracking of carbon emissions, water usage, governance, and social impact'
-      },
-      {
-        selector: '#OpsBeat',
-        image: 'assets/opsBeatPrd.png',
-        text1: 'Revolutionize your IT operations with smart automation, real-time visibility, and seamless integrations.'
-      },
-      {
-        selector: '#CustomerDlens',
-        image: 'assets/customerDlens.png',
-        text1: 'AI-powered customer data fabric for 360° operational insights'
-      },
-      {
-        selector: '#SaaSBeam\\ AI',
-        image: 'assets/optiSaas.png',
-        text1: 'Enterprise SaaS and Cloud Management Platform'
-      },
-      {
-        selector: '#Patient360',
-        image: '/assets/prd-patient.png',
-        text1: 'AI-powered customer data fabric for 360° operational insights'
-      },
+    // Observe all elements with data-delay
+    const animatedElements = document.querySelectorAll('#solutions-section [data-delay]');
+    animatedElements.forEach(el => observer.observe(el));
+
+    // --- Solution section image hover interaction ---
+    const solutionImage = document.getElementById('solution-image');
+    const solutionText = document.getElementById('solution-text');
+
+    const items = [
+      { selector: '#MathOps', image: '/assets/mathOps.png', text: 'MathOps is a next-gen analytics and monitoring platform built to optimize IT.' },
+      { selector: '#SmartSustain', image: 'assets/prd-smartSustain.png', text: 'Simplify and scale ESG reporting. SmartSustain.AI enables accurate tracking of carbon emissions, water usage, governance, and social impact.' },
+      { selector: '#OpsBeat', image: 'assets/opsBeatPrd.png', text: 'Revolutionize your IT operations with smart automation, real-time visibility, and seamless integrations.' },
+      { selector: '#CustomerDlens', image: 'assets/customerDlens.png', text: 'AI-powered customer data fabric for 360° operational insights.' },
+      { selector: '#SaaSBeamAI', image: 'assets/optiSaas.png', text: 'Enterprise SaaS and Cloud Management Platform.' },
+      { selector: '#Patient360', image: '/assets/prd-patient.png', text: 'AI-powered patient data fabric for 360° operational insights.' },
+      { selector: '#ResponsibleAI', image: '/assets/prd-patient.png', text: 'Responsible AI fabric for 360° operational insights.' },
     ];
 
-    const defaultImage1 = '/assets/customerDlens.png';
-    const detext1 = document.getElementById('text1');
-    const defaultText1 = 'AI-powered customer data fabric for 360° operational insights.'
+    const defaultImage = '/assets/mathOps.png';
+    const defaultText = 'MathOps is a next-gen analytics and monitoring platform built to optimize IT.';
 
-    items1.forEach(({ selector, image, text1 }) => {
+    items.forEach(({ selector, image, text }) => {
       const element = document.querySelector(selector);
-
       if (!element) return;
-
-      element.addEventListener('mouseenter', () => {
-        fadeImageChange(image, text1);
-        console.log(text1 + "  TEXT 2 " + text2);
-      });
-
-      element.addEventListener('mouseleave', () => {
-        fadeImageChange(defaultImage1, defaultText1);
-      });
+      element.addEventListener('mouseenter', () => fadeSolutionImageChange(image, text));
+      element.addEventListener('mouseleave', () => fadeSolutionImageChange(defaultImage, defaultText));
     });
 
-
-
-    function fadeImageChange(newSrc, text1) {
-      featureImage1.style.opacity = 0;
-
+    function fadeSolutionImageChange(newSrc, newText) {
+      solutionImage.style.opacity = 0;
       setTimeout(() => {
-        featureImage1.src = newSrc;
-        detext1.innerHTML = text1;
-        featureImage1.onload = () => {
-          featureImage1.style.opacity = 1;
-        };
-      }, 200);
+        solutionImage.src = newSrc;
+        solutionText.innerHTML = newText;
+        solutionImage.onload = () => solutionImage.style.opacity = 1;
+      }, 100);
     }
-
   </script>
 
-  <!-- Why Mindgraph? -->
-  <section class="" id="Why Choose Us?">
-    <div class="px-4 sm:px-6 lg:px-20 py-8 sm:py-12 lg:py-16">
-      <!-- heading -->
-      <div class="flex flex-col text-3xl items-center justify-center text-center mb-12 mt-8 text-[#1783F7]">
-        <h2>Why MindGraph</h2>
-        <h1 class="text-[#687DA9] text-3xl md:text-4xl font-semibold pb-8">
-          Shaping Purpose fit AI Innovation
-        </h1>
-        <p class="text-sm text-[#667085] font-normal mb-4 md:mb-7 md:pr-32 md:pl-32 text-center">
-          We deliver more than services — we deliver outcomes. At Mindgraph, we fuse deep industry insight
-          with
-          intelligent technology to build future-ready enterprises. Our approach is bold, agile, and
-          engineered for
-          business impact—from rapid deployments to long-term transformation.
-        </p>
-      </div>
-      <div class="grid grid-cols-1  gap-6">
-        <!--  Image Layout -->
-        <!-- Left Image Grid -->
-       
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
 
-        <div id="content" class="flex flex-col gap-4 xl:px-[100px] ">
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[25px]  md:p-[30px]">
-            <img src="/assets/AINative.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68]">
-              AI-Native, Scalable Architecture </h3>
-          </div>
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[20px]  md:p-[30px]">
-            <img src="/assets/ownershipEducation.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68]">
-              End-to-End Ownership from Strategy to Execution </h3>
-          </div>
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[20px]  md:p-[30px]">
-            <img src="/assets/migrating.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68]">
-              Fast, Flexible, and Future-Ready Delivery </h3>
-          </div>
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[20px]  md:p-[30px]">
-            <img src="/assets/frictionlessIntegration.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68]">
-              Frictionless Integration Across Ecosystems </h3>
-          </div>
-          <div
-            class="flex container p-4 rounded-3xl align-center gap-4  bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF] items-center p-[20px]  md:p-[30px]">
-            <img src="/assets/enterprise.svg" alt="Why Choose Us?" class="w-[24px] h-[24px]">
-            <h3 class="items-center align-center  text-[#1F3F68]">
-              Enterprise-Grade Security & SLA-Driven Assurance
-            </h3>
-          </div>
-        </div>
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+  </style>
+
+  <!-- Why Choose Us section -->
+  <section class="dark:bg-[#000000] pt-[100px] pb-[100px]  transition-all duration-500 ease-in" id="choose-us-section">
+    <div class="px-10 lg:px-20 py-8 sm:py-12 lg:py-16">
+
+      <!-- Heading -->
+      <div class="flex gap-2 md:items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="100">
+        <h2 class="text-3xl md:text-4xl text-[#1783F7] dark:text-[#828282] mb-4 leading-tight">
+          Why MindGraph
+        </h2>
+        <img src="/assets/updated/line.svg" class="pt-3 mr-4" />
       </div>
+      <h1
+        class="text-4xl text-[#687DA9] dark:text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold text-radiant opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="200">
+        Shaping Purpose fit AI Innovation
+      </h1>
+      <p class="text-md text-[#667085] dark:text-[#FFFFFF] font-normal mb-4 leading-[26px] opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="300">
+        We deliver more than services — we deliver outcomes. At Mindgraph, we fuse deep industry insight with
+        intelligent technology to build future-ready enterprises. Our approach is bold, agile, and engineered for
+        business impact—from rapid deployments to long-term transformation.
+      </p>
     </div>
 
+    <!-- Content Grid -->
+    <div
+      class="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 overflow-x-auto px-[20px] md:px-[80px] gap-6 flex flex-wrap justify-start mt-8">
+      <div class="choose-box 
+         bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF]          
+         dark:bg-gradient-to-b dark:from-[#1C1C1C] dark:to-[#000000] 
+         grid p-6 pb-4 border w-[250px] h-[240px] 
+         items-center-safe opacity-0 scale-75 
+         transition-all duration-700 ease-out" data-delay="400">
+
+        <!-- <img src="/assets/updated/choose1.svg " alt="AI Platform" class=""> -->
+        <img src="/assets/AINative.svg" alt="Support" class="mb-4 theme-image" data-light="/assets/AINative.svg"
+          data-dark="/assets/updated/choose1.svg" />
+
+        <h3 class="text-[#1F3F68] dark:text-white text-lg md:text-xl font-extrabold">AI-Driven Platforms Built for
+          Performance</h3>
+      </div>
+
+      <!-- Box 2 -->
+      <div class="choose-box 
+         bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF]          
+         dark:bg-gradient-to-b dark:from-[#1C1C1C] dark:to-[#000000] 
+         grid p-6 pb-4 border w-[250px] h-[240px] 
+         items-center-safe opacity-0 scale-75 
+         transition-all duration-700 ease-out" data-delay="500">
+        <img src="/assets/ownershipEducation.svg" data-light="/assets/ownershipEducation.svg"
+          data-dark="/assets/updated/choose2.svg" alt="Ownership" class="mb-4 theme-image">
+        <h3 class="text-[#1F3F68] dark:text-white text-lg md:text-xl font-extrabold ">Complete Ownership — From Vision
+          to Value
+        </h3>
+      </div>
+
+      <!-- Box 3 -->
+      <div class="choose-box 
+         bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF]          
+         dark:bg-gradient-to-b dark:from-[#1C1C1C] dark:to-[#000000] 
+         grid p-6 pb-4 border w-[250px] h-[240px] 
+         items-center-safe opacity-0 scale-75 
+         transition-all duration-700 ease-out" data-delay="600">
+        <img src="/assets/migrating.svg" data-light="/assets/migrating.svg" data-dark="/assets/updated/choose3.svg"
+          alt="Implementation" class="mb-4 theme-image">
+        <h3 class="text-[#1F3F68] dark:text-white text-lg md:text-xl font-extrabold ">Accelerated Implementation,
+          Measurable
+          Results</h3>
+      </div>
+
+      <!-- Box 4 -->
+      <div class="choose-box 
+         bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF]          
+         dark:bg-gradient-to-b dark:from-[#1C1C1C] dark:to-[#000000] 
+         grid p-6 pb-4 border w-[250px] h-[240px] 
+         items-center-safe opacity-0 scale-75 
+         transition-all duration-700 ease-out" data-delay="700">
+        <img src="/assets/frictionlessIntegration.svg" data-light="/assets/frictionlessIntegration.svg"
+          data-dark="/assets/updated/choose4.svg" alt="Integration" class="mb-4 theme-image">
+        <h3 class="text-[#1F3F68] dark:text-white text-lg md:text-xl font-extrabold ">Seamless Integration with Your
+          Ecosystem
+        </h3>
+      </div>
+
+      <!-- Box 5 -->
+      <div class="choose-box 
+         bg-gradient-to-r from-[#EAF9FD] to-[#DEF8FF]          
+         dark:bg-gradient-to-b dark:from-[#1C1C1C] dark:to-[#000000] 
+         grid p-6 pb-4 border w-[250px] h-[240px] 
+         items-center-safe opacity-0 scale-75 
+         transition-all duration-700 ease-out" data-delay="800">
+        <img src="/assets/enterprise.svg" data-light="/assets/enterprise.svg" data-dark="/assets/updated/choose5.svg"
+          alt="Support" class="mb-4 theme-image">
+        <h3 class="text-[#1F3F68] dark:text-white text-lg md:text-xl font-extrabold ">Enterprise-Grade Support. Always
+          On. Always
+          Aligned.</h3>
+      </div>
+    </div>
   </section>
 
-  <!-- offerings -->
-  <section class="bg-white">
-    <div class="px-4 sm:px-6 lg:px-20 sm:py-12 lg:py-16 pb-0">
-      <!-- heading -->
-      <div class="flex flex-col items-center justify-center text-center mb-12 mt-8 text-[#1783F7] ">
-        <h1 class="text-3xl md:text-2xl">Offerings</h1>
-        <h1 class="text-[#687DA9] text-3xl md:text-4xl font-bold">
-          Our Solutions by Function
-        </h1>
+  <!-- Intersection Observer Script -->
+  <script>
+    const observer3 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(() => {
+            // If the element is a choose-box, animate zoom in
+            if (entry.target.classList.contains('choose-box')) {
+              entry.target.classList.remove('opacity-0', 'scale-75');
+              entry.target.classList.add('opacity-100', 'scale-100');
+            } else {
+              // For headings and paragraphs, animate from bottom
+              entry.target.classList.remove('opacity-0', 'translate-y-10');
+              entry.target.classList.add('opacity-100', 'translate-y-0');
+            }
+          }, delay);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const animatedElements3 = document.querySelectorAll('#choose-us-section [data-delay]');
+    animatedElements3.forEach(el => observer3.observe(el));
+  </script>
+
+  <!-- Tailwind overrides for final state -->
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+
+    .scale-100 {
+      transform: scale(1);
+    }
+  </style>
+
+  <!-- Offerings Section -->
+  <section class="bg-white dark:bg-black pt-[100px] pb-[50px]  transition-all duration-500 ease-in"
+    id="offerings-section">
+    <div class="px-10 md:px-[50px] lg:px-[120px] sm:py-12 lg:py-16 pb-0">
+      <!-- Heading -->
+      <div class="flex gap-2 items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="100">
+        <h2 class="text-3xl md:text-4xl text-[#1783F7] dark:text-[#828282] mb-4 leading-tight">
+          Offerings
+        </h2>
+        <img src="/assets/updated/line.svg" class="pt-3" />
+
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:pl-16 md:pr-16">
-        <div class="relative">
-          <div class="absolute inset-0 flex items-begin justify-begin">
-            <div class="text-white z-10 p-8 ">
-              <h2 class="text-lg  md:text-2xl font-bold mb-2 pr-[180px]">Data Innovation</h2>
-              <p class="text-sm md:text-lg font-normal">
-                Unlock competitive advantage through advanced AI analytics and data modeling.
-              </p>
-            </div>
+
+      <h1
+        class="text-4xl text-[#687DA9] dark:text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold text-radiant opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="200">
+        Our Solutions by Function
+      </h1>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 px-10 md:px-[50px] lg:px-[120px] ">
+      <!-- Card 1 -->
+      <div class="relative bg-white opacity-0 translate-y-10 transition-all duration-700 ease-in hover:scale-105 "
+        data-delay="300">
+        <div class="absolute inset-0 flex items-start justify-start">
+          <div class="text-white dark:text-black z-10 p-2 md:p-8 md:pr-[50px] md:pr-0">
+            <h2 class="text-2xl lg:text-3xl font-extrabold mb-2">Data<br> Innovation</h2>
+            <p class="text-base lg:text-base font-normal md:pr-8">
+              Unlock competitive advantage through advanced AI analytics and data modeling.
+            </p>
           </div>
-          <img src="/assets/offering1.png" alt="Data Innovation"
-            class="md:h-[372px] w-full object-cover rounded-3xl asp" />
         </div>
-        <div class="relative bottom">
-          <div class="absolute inset-0 flex items-begin justify-begin">
-            <div class="text-white z-10 p-8">
-              <h2 class="text-lg  md:text-2xl font-bold mb-2  pr-[50px] lg:pr-[100px]">AI Products Gateway for ASEAN
-              </h2>
-              <p class="text-sm md:text-lg font-normal pr-[70px]  lg:pr-[100px]">
-                Localized AI products marketing, and regulatory support for ASEAN expansion.
-              </p>
-            </div>
+        <img src="/assets/updated/DataInnovation.png" alt="Data Innovation"
+          class="h-full w-full object-cover hidden dark:block" />
+        <img src="/assets/offering1.png" alt="Data Innovation"
+          class="md:h-[372px] w-full object-cover rounded-3xl asp dark:hidden" />
+      </div>
+
+      <!-- Card 2 -->
+      <div class="relative bg-white opacity-0 translate-y-10 transition-all duration-700 ease-in hover:scale-105 "
+        data-delay="450">
+        <div class="absolute inset-0 flex items-start justify-start">
+          <div class="text-white dark:text-black z-10 p-2 md:p-8 md:pr-[50px] md:pr-0">
+            <h2 class="text-2xl lg:text-3xl font-extrabold mb-2">AI Products Gateway for ASEAN</h2>
+            <p class="text-base lg:text-base font-normal md:pr-8">
+              Localized AI products marketing, and regulatory support for ASEAN expansion.
+            </p>
           </div>
-          <img src="/assets/offering2.png" alt="Data Innovation" class="md:h-[372px] w-full object-cover rounded-3xl" />
         </div>
-        <div class="relative">
-          <div class="absolute inset-0 flex items-begin justify-begin">
-            <div class="text-white z-10 p-8">
-              <h2 class="text-lg  md:text-2xl font-bold mb-2 pr-[50px] md:pr-[100px]">Global Capability Centers (GCCs)
-              </h2>
-              <p class=" text-sm md:text-lg font-normal pr-[70px]  md:pr-[100px]">
-                Talent, governance, and operational AI for enterprise scalability.
-              </p>
-            </div>
+        <img src="/assets/updated/Apac.png" alt="APAC" class="h-full w-full object-cover  hidden dark:block" />
+        <img src="/assets/offering2.png" alt="Data Innovation"
+          class="md:h-[372px] w-full object-cover rounded-3xl asp  dark:hidden" />
+      </div>
+
+      <!-- Card 3 -->
+      <div class="relative bg-white opacity-0 translate-y-10 transition-all duration-700 ease-in hover:scale-105"
+        data-delay="600">
+        <div class="absolute inset-0 flex items-start justify-start">
+          <div class="text-white dark:text-black z-10 p-2 md:p-8 md:pr-[50px] md:pr-0">
+            <h2 class="text-2xl lg:text-3xl font-extrabold mb-2">Global Capability Centers (GCCs)</h2>
+            <p class="text-base lg:text-base font-normal md:pr-8">
+              Talent, governance, and operational AI for enterprise scalability.
+            </p>
           </div>
-          <img src="/assets/offering3.png" alt="Data Innovation" class="md:h-[372px] w-full object-cover rounded-3xl" />
         </div>
+        <img src="/assets/updated/Gccs.png" alt="GCCs" class="h-full w-full object-cover  hidden dark:block" />
+        <img src="/assets/offering3.png" alt="Data Innovation"
+          class="md:h-[372px] w-full object-cover rounded-3xl dark:hidden" />
 
       </div>
     </div>
   </section>
+
+  <!-- Intersection Observer Script -->
+  <script>
+    const observer2 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(() => {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+          }, delay);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const animatedElements2 = document.querySelectorAll('#offerings-section [data-delay]');
+    animatedElements2.forEach(el => observer2.observe(el));
+  </script>
+
+  <!-- Tailwind overrides for final state -->
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+  </style>
 
   <!-- Review Section -->
   <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
@@ -679,17 +955,73 @@
     </div>
   </section>
 
-
-    <div id="footer"></div>
+  <div id="footer"></div>
   <script>
     // Load footer dynamically
     fetch("footer.html")
       .then(res => res.text())
       .then(data => {
-        document.getElementById("footer").innerHTML = data;
+        const footerContainer = document.getElementById("footer");
+        footerContainer.innerHTML = data;
+
+        // After footer is added, initialize footer animations
+        initFooterAnimations();
       })
       .catch(err => console.error("Error loading footer:", err));
+
+    function initFooterAnimations() {
+      const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+            setTimeout(() => {
+              entry.target.classList.remove('opacity-0', 'translate-y-10');
+              entry.target.classList.add('opacity-100', 'translate-y-0');
+            }, delay);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      const footerElements = document.querySelectorAll('#footer [data-delay]');
+      footerElements.forEach(el => footerObserver.observe(el));
+      // Zoom-in animation for social icons
+      const socialIcons = document.querySelectorAll('#footer img'); // target your social icons
+      socialIcons.forEach(icon => {
+        icon.classList.add('scale-0', 'transition-transform', 'duration-700', 'ease-out');
+      });
+
+      const iconObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('scale-0');
+            entry.target.classList.add('scale-100');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      socialIcons.forEach(icon => iconObserver.observe(icon));
+    }
+
   </script>
+
+  <!-- Tailwind overrides -->
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+
+    .scale-0 {
+      transform: scale(0);
+    }
+
+    .scale-100 {
+      transform: scale(1);
+    }
+  </style>
 </body>
 
 </html>

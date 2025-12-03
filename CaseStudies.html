@@ -167,10 +167,11 @@
             </div>
 
             <!-- Right Image Section -->
-            <div class="relative max-w-4xl w-fullh-[400px] sm:h-[600px] md:h-[600px] lg:h-[700px] mt-[30px] md:mt-0  rounded-tl-[30px] md:rounded-tl-[78px] " style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
+            <div class="relative max-w-4xl w-fullh-[400px] sm:h-[600px] md:h-[600px] lg:h-[700px] mt-[30px] md:mt-0  rounded-tl-[30px] md:rounded-tl-[78px] "
+                style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
                   ">
                 <div class="relative md:left-[-65px] md:top-[70px]">
-                    <img src="assets/kpmg_laptop_final.png" >
+                    <img src="assets/kpmg_laptop_final.png">
                 </div>
             </div>
 
@@ -211,7 +212,8 @@
             </div>
             <!-- Image -->
 
-            <div class="relativemax-w-4xl w-fullh-[400px] sm:h-[600px] md:h-[600px] lg:h-[700px] rounded-tr-[30px] md:rounded-tr-[78px]" style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
+            <div class="relativemax-w-4xl w-fullh-[400px] sm:h-[600px] md:h-[600px] lg:h-[700px] rounded-tr-[30px] md:rounded-tr-[78px]"
+                style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
                   ">
                 <div class="relative md:left-[-65px] ">
                     <img src="assets/digi_leap_study.png" class="">
@@ -244,7 +246,8 @@
             </div>
 
             <!-- Right Image Section -->
-            <div class="relative max-w-4xl w-fullh-[400px] sm:h-[600px] md:h-[600px] lg:h-[700px]  rounded-tl-[30px] md:rounded-tl-[78px] mt-[30px] md:mt-0" style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
+            <div class="relative max-w-4xl w-fullh-[400px] sm:h-[600px] md:h-[600px] lg:h-[700px]  rounded-tl-[30px] md:rounded-tl-[78px] mt-[30px] md:mt-0"
+                style="background: linear-gradient(120.98deg, rgba(232, 245, 255, 0.5) 6.85%, rgba(251, 255, 250, 0.5) 34.02%, rgba(232, 241, 239, 0.5) 57.24%, rgba(211, 236, 255, 0.5) 97.98%);
                   ">
                 <div class="relative md:left-[-65px] md:top-[30px]">
                     <img src="assets/esg.png" class="">
@@ -262,10 +265,67 @@
         fetch("footer.html")
             .then(res => res.text())
             .then(data => {
-                document.getElementById("footer").innerHTML = data;
+                const footerContainer = document.getElementById("footer");
+                footerContainer.innerHTML = data;
+
+                // After footer is added, initialize footer animations
+                initFooterAnimations();
             })
             .catch(err => console.error("Error loading footer:", err));
+
+        function initFooterAnimations() {
+            const footerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+                        setTimeout(() => {
+                            entry.target.classList.remove('opacity-0', 'translate-y-10');
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        }, delay);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            const footerElements = document.querySelectorAll('#footer [data-delay]');
+            footerElements.forEach(el => footerObserver.observe(el));
+            // Zoom-in animation for social icons
+            const socialIcons = document.querySelectorAll('#footer img'); // target your social icons
+            socialIcons.forEach(icon => {
+                icon.classList.add('scale-0', 'transition-transform', 'duration-700', 'ease-out');
+            });
+
+            const iconObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('scale-0');
+                        entry.target.classList.add('scale-100');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            socialIcons.forEach(icon => iconObserver.observe(icon));
+        }
+
     </script>
+
+    <!-- Tailwind overrides -->
+    <style>
+        .opacity-100 {
+            opacity: 1;
+        }
+
+        .translate-y-0 {
+            transform: translateY(0);
+        }
+
+        .scale-0 {
+            transform: scale(0);
+        }
+
+        .scale-100 {
+            transform: scale(1);
+        }
+    </style>
 </body>
 
 </html>

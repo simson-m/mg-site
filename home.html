@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mind Graph</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/global.css" />
+  <!-- SwiperJS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      fetch("/navbar.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("navbar").innerHTML = data;
+          lucide.createIcons(); // Initialize icons after insertion
+          const currentPath = window.location.pathname;
+
+          // Highlight desktop links
+          document.querySelectorAll("#navbar nav a").forEach((link) => {
+            const linkPath = new URL(link.href).pathname;
+            if (currentPath === linkPath) {
+              link.classList.add("font-bold");
+              link.classList.remove("text-[#7E7E7E]");
+              link.classList.add("text-white");
+            }
+          });
+
+          // Highlight mobile links
+          document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+            const linkPath = new URL(link.href).pathname;
+            if (currentPath === linkPath) {
+              link.classList.add("font-bold");
+              link.classList.remove("text-[#7E7E7E]");
+              link.classList.add("text-[#687DA9]");
+            }
+          });
+          // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+          const mobileMenuButton =
+            document.getElementById("mobile-menu-button");
+          const closeMenuButton =
+            document.getElementById("close-menu-button");
+          const mobileMenu = document.getElementById("mobile-menu");
+
+          if (!mobileMenuButton || !mobileMenu) {
+            console.error("Mobile menu button or menu is missing.");
+            return;
+          }
+
+          mobileMenuButton.addEventListener("click", function () {
+            console.log("Mobile menu button clicked");
+            mobileMenu.classList.toggle("hidden");
+            mobileMenu.classList.toggle("flex");
+            document.body.classList.toggle("overflow-hidden");
+          });
+
+          closeMenuButton.addEventListener("click", function () {
+            mobileMenu.classList.add("hidden");
+            mobileMenu.classList.remove("flex");
+            document.body.classList.remove("overflow-hidden");
+          });
+
+          const mobileDropdownToggles = document.querySelectorAll(
+            ".mobile-dropdown-toggle"
+          );
+
+          mobileDropdownToggles.forEach((toggle) => {
+            toggle.addEventListener("click", function () {
+              const content = this.nextElementSibling;
+              const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+              content.classList.toggle("hidden");
+              icon.style.transform = content.classList.contains("hidden")
+                ? "rotate(0deg)"
+                : "rotate(180deg)";
+            });
+          });
+        });
+    });
+  </script>
+
+  <style>
+    .testimonial-slide {
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .testimonial-slide:not(.active) {
+      display: none;
+      opacity: 0;
+    }
+
+    .testimonial-slide.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    /* Make images square on mobile */
+    @media (max-width: 768px) {
+      .square-on-mobile {
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%;
+        /* Creates a square */
+        overflow: hidden;
+      }
+
+      .square-on-mobile img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .searchResult p:hover {
+      background-color: #191919;
+      border: 0.2px solid #ffffff;
+      transition: all 0.3s;
+      transform: scale(1.1);
+    }
+
+    .text-radiant span {
+      background: linear-gradient(96.69deg, #1783f7 3.19%, #ff6647 94.56%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .text-radiant {
+      background: linear-gradient(96.69deg, #1783f7 3.19%, #ff6647 94.56%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .card-open {
+      flex: 2 !important;
+    }
+
+    .card-open .image-animate {
+      transform: translateX(0) translateY(0) scale(1.1) !important;
+    }
+
+    .card-open .overlay {
+      opacity: 1 !important;
+    }
+
+    .industry-title {
+      text-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);/
+    }
+
+    /* Make sure image covers */
+    .slide-img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* center Swiper's slides visually with some gap on large screens */
+    .swiper-slide {
+      transition: transform 400ms ease;
+    }
+
+    /* Slight scale for active centered slide */
+    .swiper-slide-active .card-content {
+      transform: scale(1);
+    }
+
+    .card-content {
+      transform: scale(0.96);
+      transition: transform 400ms ease;
+    }
+
+    .accordion-item {
+      border: 0.5px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .industry-slide {
+      transition: all;
+    }
+
+    .active-card {
+      box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.2);
+      transition: box-shadow 0.5s ease;
+    }
+
+    .card-fill {
+      position: relative;
+      width: 100%;
+      height: 45px;
+      background-color: #1a1a1a;
+      overflow: hidden;
+      z-index: 0;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      line-height: normal;
+    }
+
+    .card-fill::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background-color: #ffffff;
+      z-index: 0;
+      animation: card-progress 6s ease-out infinite;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    }
+
+    .card-fill span {
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .card-fill.active span {
+      color: #000;
+    }
+
+    @keyframes card-progress {
+      0% {
+        width: 0%;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body class="overflow-x-hidden max-w-full">
+  <div id="navbar"></div>
+
+  <!-- Hero Banner-->
+  <section class="bg-[#191919] text-white overflow-hidden">
+    <div class="flex flex-col md:flex-row mx-0 md:mx-[50px] lg:mx-[120px] pt-[50px] pb-[100px] md:items-center">
+      <!-- Heading + Subtext -->
+      <div class="md:w-[50%] pl-4 md:pl-0 space-y-4 hero-text">
+        <h2 class="text-5xl md:text-5xl lg:text-6xl text-radiant font-bold animated-heading ">
+          AI-Powered.
+          Cyber-Secure.Enterprise-Ready.
+        </h2>
+        <p class="text-4xl animated-subtext">
+          Driving Intelligent Innovation <br />Across Critical Industries
+        </p>
+      </div>
+
+      <!-- Form -->
+      <div class="md:w-[50%] mt-6 px-4 md:px-0">
+        <div>
+          <form>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <img src="assets/updated/star_icon.svg" />
+              </div>
+              <input type="text"
+                class="w-full h-12 italic pl-10 pr-4 placeholder-black placeholder-opacity-75 text-base border"
+                placeholder="Ask us anything about your requirement" />
+            </div>
+          </form>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mt-2 bg-[#191919] searchResult">
+          <p class="bg-[#D9D9D9] p-2 bg-opacity-[25%] text-sm flex items-center font-normal"> What are the AI Services
+            help to build my product? </p>
+          <p class="bg-[#D9D9D9] bg-opacity-[25%] p-2 text-sm flex items-center font-normal"> What exactly does your AI
+            product do </p>
+          <p class="bg-[#D9D9D9] bg-opacity-[25%] p-2 text-sm flex items-center font-normal"> Are there case studies or
+            success stories from Aviation industries? </p>
+          <p class="bg-[#D9D9D9] bg-opacity-[25%] p-2 text-sm flex items-center font-normal"> Does it integrate with my
+            existing systems (CRM, ERP, APIs, etc.)? </p>
+          <p class="bg-[#D9D9D9] bg-opacity-[25%] p-2 text-sm flex items-center font-normal"> Who owns the data and the
+            AI-generated outputs? </p>
+          <p class="bg-[#D9D9D9] bg-opacity-[25%] p-2 text-sm flex items-center font-normal"> How is sensitive data
+            protected? </p>
+          <p class="bg-[#D9D9D9] bg-opacity-[25%] p-2 text-sm flex items-center font-normal"> How long does it take to
+            implement? </p>
+          <p class="bg-[#D9D9D9] bg-opacity-[25%] p-2 text-sm flex items-center font-normal"> What type of customer
+            support is available (email, chat, 24/7)? </p>
+          <p class="bg-[#D9D9D9] bg-opacity-[25%] p-2 text-sm flex items-center font-normal"> Is there a service-level
+            agreement (SLA)? </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Floating in animation */
+    @keyframes floatIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animated-heading span,
+    .animated-subtext span {
+      display: inline-block;
+      opacity: 0;
+      animation: floatIn 0.8s forwards;
+    }
+
+    .animated-subtext span {
+      animation-delay: 0.5s;
+      /* delay for subtext */
+    }
+  </style>
+
+  <script>
+    // Function to split text into spans
+    function animateText(selector) {
+      const element = document.querySelector(selector);
+      const text = element.innerText;
+      element.innerHTML = '';
+      var len = text.split('.').length;
+      text.split('.').forEach((char, i) => {
+
+
+
+        if (i == len - 1) {
+          const span1 = document.createElement('span');
+          span1.innerText = char;
+          span1.style.animationDelay = `${i * 0.05}s`;
+          element.appendChild(span1);
+        }
+        else {
+          const span = document.createElement('span');
+          span.innerText = char + ".";
+          span.style.animationDelay = `${i * 0.05}s`; // stagger characters
+          element.appendChild(span);
+        }
+      });
+    }
+
+    // Animate heading and subtext
+    animateText('.animated-heading');
+    animateText('.animated-subtext');
+  </script>
+
+  <!-- Floating Cards Section -->
+  <section
+    class="px-0 md:px-[40px] lg:px-[120px] z-10 bg-[linear-gradient(to_bottom,_#191919_60%,_#000000_40%)] hidden md:block">
+
+    <!--Desktop View-->
+    <div id="accordion" class=" w-full h-[500px] gap-0 flex">
+
+      <!-- ITEM 1 -->
+      <div data-item="1"
+        class="accordion-item active flex-[2] relative transition-all duration-500 overflow-hidden group bg-[#000] ">
+
+        <div
+          class="image-bg absolute right-0 top-[-140px] h-full w-[80%] bg-no-repeat bg-right bg-contain transition-all duration-500"
+          style="background-image: url('assets/updated/AgenticAI.svg')">
+        </div>
+
+
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-between p-6">
+
+          <div class="flex flex-col gap-10">
+            <h3 class="text-3xl font-extrabold text-white">Agentic AI</h3>
+
+            <p class="text-white text-sm  desc mr-0 mr-[180px] lg:leading-[26px] opacity-90">
+              MindGraph harnesses the power of Agentic AI to drive intelligent automation, adaptive decision-making, and
+              continuous business innovation.
+            </p>
+          </div>
+
+
+          <ul class="feature-list mt-4 space-y-2 opacity-100 transition-opacity duration-300 text-white">
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" /> Data
+              Innovation</li>
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" /> Data
+              Engineering</li>
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" /> Data
+              Governance</li>
+          </ul>
+        </div>
+      </div>
+      <!-- ITEM 2 -->
+      <div data-item="2"
+        class="accordion-item group flex-1 relative transition-all duration-500 overflow-hidden bg-[#000] ">
+
+        <!-- Background Image (Right aligned + controlled width) -->
+        <div
+          class="image-bg absolute right-[-50px] bottom-[-120px] h-full w-[50%] bg-no-repeat bg-right bg-contain transition-all duration-500"
+          style="background-image: url('assets/updated/cyberAI.svg')">
+        </div>
+
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-between p-6">
+
+          <div class="flex flex-col gap-10">
+
+            <h3 class="text-3xl font-extrabold text-white">Cyber AI</h3>
+
+            <!-- Margin-right applies ONLY when parent has class .active -->
+            <p class="desc text-white text-sm lg:leading-[26px] transition-all duration-500 group-[.active]:mr-[180px]">
+              MindGraph harnesses the power of Agentic AI to drive intelligent automation, adaptive decision-making, and
+              continuous business innovation.
+            </p>
+          </div>
+
+          <ul class="feature-list mt-4 space-y-2 opacity-0 transition-opacity duration-300 text-white">
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" />Cybersecurity
+              for
+              AI</li>
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" />AI for
+              Cybersecurity
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- ITEM 3 -->
+      <div data-item="3"
+        class="accordion-item flex-1 relative transition-all duration-500 overflow-hidden group bg-[#000000] ">
+
+        <!-- Background Image (Right aligned + controlled width) -->
+        <div
+          class="image-bg absolute right-0 bottom-[-120px] h-full w-[50%] bg-no-repeat bg-right bg-contain transition-all duration-500"
+          style="background-image: url('assets/updated/EnterAI.svg')">
+        </div>
+
+
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-between p-6">
+
+          <div class="flex flex-col gap-10">
+
+            <h3 class="text-3xl font-extrabold text-white">Enterprise AI</h3>
+
+            <p class="text-white text-sm desc lg:leading-[26px]">
+              MindGraph harnesses the power of Agentic AI to drive intelligent automation, adaptive decision-making, and
+              continuous business innovation. </p>
+          </div>
+
+          <ul class="feature-list mt-4 space-y-2 opacity-0 transition-opacity duration-300 text-white">
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" /> Workflow
+              Automations</li>
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" />
+              Implementations and Integrations of Customer Experience, CRM, ERP and other Products</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="px-4 z-10 bg-[linear-gradient(to_bottom,_#191919_40%,_#000000_60%)] block md:hidden">
+    <!-- Mobile View-->
+    <div id="accordion" class="w-full h-auto md:h-[500px] flex flex-col md:flex-row gap-4 md:gap-0">
+
+      <!-- ITEM 1 -->
+      <div data-item="1" class="accordion-item active md:flex-[2] relative transition-all duration-500 overflow-hidden group bg-[#000] 
+             md:h-full h-[420px] rounded-md border border-[#333]">
+
+        <!-- Background Image -->
+        <div class="image-bg absolute right-0 top-0 
+               h-[335px]  w-full  
+               bg-no-repeat bg-right bg-contain  transition-all duration-500"
+          style="background-image: url('assets/updated/AgenticAI.svg')">
+        </div>
+
+        <!-- Content -->
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-between p-6 pr-[100px]">
+          <div class="flex flex-col gap-10">
+            <h3 class="text-3xl font-extrabold text-white">Agentic AI</h3>
+
+            <p class="desc text-white text-sm lg:leading-[26px] mr-0 md:mr-[180px]">
+              MindGraph harnesses the power of Agentic AI to drive intelligent automation, adaptive decision-making, and
+              continuous business innovation.
+            </p>
+          </div>
+
+          <ul class="feature-list mt-4 space-y-2 text-white opacity-100 md:opacity-0 transition-opacity duration-300">
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" /> Data
+              Innovation</li>
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" /> Data
+              Engineering</li>
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" /> Data
+              Governance</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- ITEM 2 -->
+      <div data-item="2" class="accordion-item md:flex-1 relative transition-all duration-500 overflow-hidden group bg-[#000] 
+             md:h-full h-[420px] rounded-md border border-[#333]">
+
+        <div class="image-bg absolute right-0 top-10 
+               h-[220px]  w-full 
+               bg-no-repeat bg-right bg-contain  transition-all duration-500"
+          style="background-image: url('assets/updated/cyberAI.svg')">
+        </div>
+
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-between p-6 pr-[100px]">
+          <div class="flex flex-col gap-10">
+            <h3 class="text-3xl font-extrabold text-white">Cyber AI</h3>
+
+            <p class="desc text-white text-sm lg:leading-[26px] mr-0 md:mr-[180px]">
+              MindGraph harnesses the power of Agentic AI to drive intelligent automation, adaptive decision-making, and
+              continuous business innovation.
+            </p>
+          </div>
+
+          <ul class="feature-list mt-4 space-y-2 text-white opacity-100 md:opacity-0 transition-opacity duration-300">
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" />Cybersecurity
+              for AI</li>
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" />AI for
+              Cybersecurity</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- ITEM 3 -->
+      <div data-item="3" class="accordion-item md:flex-1 relative transition-all duration-500 overflow-hidden group bg-[#000] 
+             md:h-full h-[420px] rounded-md border border-[#333]">
+
+        <div class="image-bg absolute right-0 top-[60px] 
+               h-[220px]  w-full 
+               bg-no-repeat bg-right bg-contain   transition-all duration-500"
+          style="background-image: url('assets/updated/EnterAI.svg')">
+        </div>
+
+        <div class="absolute inset-0 bg-black/40 flex flex-col justify-between p-6 pr-[120px]">
+          <div class="flex flex-col gap-10">
+            <h3 class="text-3xl font-extrabold text-white">Enterprise AI</h3>
+
+            <p class="desc text-white text-sm lg:leading-[26px] mr-0 md:mr-[180px]">
+              MindGraph harnesses the power of Agentic AI to drive intelligent automation, adaptive decision-making, and
+              continuous business innovation.
+            </p>
+          </div>
+
+          <ul class="feature-list mt-4 space-y-2 text-white opacity-100 md:opacity-0 transition-opacity duration-300">
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" /> Workflow
+              Automations</li>
+            <li class="flex items-center"><img src="assets/updated/listIcons.svg" class="w-4 h-4 mr-2" />
+              Implementations and Integrations of Customer Experience, CRM, ERP and other Products</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    function getResponsiveMargin() {
+      if (window.innerWidth >= 1024) return "220px"; // lg
+      if (window.innerWidth >= 768) return "150px";  // md
+      return "0px";
+    }
+
+    const items = document.querySelectorAll(".accordion-item");
+
+    items.forEach(item => {
+      item.addEventListener("mouseenter", () => {
+
+        items.forEach((i, index) => {
+          if (index == 0) {
+            i.querySelector(".image-bg").style.top = "-137px";
+            i.querySelector(".image-bg").style.width = "70%";
+          } else {
+            i.querySelector(".image-bg").style.width = "50%";
+          }
+
+          i.classList.remove("active");
+          i.style.flex = "1";
+          i.querySelector(".feature-list").style.opacity = "0";
+          i.querySelector(".desc").style.marginRight = "0";
+        });
+
+        item.classList.add("active");
+        item.style.flex = "2";
+        item.querySelector(".feature-list").style.opacity = "1";
+        item.querySelector(".desc").style.marginRight = getResponsiveMargin();
+        item.querySelector(".image-bg").style.width = "60%";
+      });
+    });
+
+
+    document.getElementById("accordion").addEventListener("mouseleave", () => {
+
+      items.forEach(i => {
+        i.classList.remove("active");
+        i.style.flex = "1";
+        i.querySelector(".feature-list").style.opacity = "0";
+        i.querySelector(".desc").style.marginRight = "0";
+        i.querySelector(".image-bg").style.width = "50%";
+      });
+
+      const first = items[0];
+      first.classList.add("active");
+      first.style.flex = "2";
+      first.querySelector(".feature-list").style.opacity = "1";
+      first.querySelector(".desc").style.marginRight = getResponsiveMargin();
+      first.querySelector(".image-bg").style.width = "60%";
+    });
+
+  </script>
+
+  <!--Services section-->
+  <section class="bg-[#000000]">
+    <div class="px-6 md:px-[50px] lg:px-[120px] py-8 sm:py-12 lg:py-16">
+      <!-- heading -->
+      <div class="flex flex-col justify-center mb-12 mt-8">
+        <div class="flex gap-2 items-center opacity-0 translate-y-10 transition-all duration-700 ease-out"
+          data-delay="100">
+          <h2 class="text-[#828282] text-3xl md:text-2xl mb-2">Services</h2>
+          <img src="/assets/updated/line.svg" />
+        </div>
+
+        <h1
+          class=" text-4xl md:text-4xl font-extrabold text-radiant opacity-0 translate-y-10 transition-all duration-700 ease-out"
+          data-delay="200">
+          Transforming Ideas into Intelligent Realities
+        </h1>
+      </div>
+
+      <!-- Services types -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+
+        <!-- Service Card 1 -->
+        <a href="AI_DI_Services.html" class="h-full block">
+          <div
+            class="service-card flex flex-col items-start p-2 gap-0 md:gap-8 h-full opacity-0 translate-y-10 rotate-[-5deg] transition-all duration-700 hover:scale-105 hover:rotate-0 hover:shadow-lg">
+            <img src="assets/updated/Ai&data.svg" class="h-[11rem]" />
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <h2 class="text-white text-xl font-semibold">AI & Data Intelligence Services</h2>
+              <p class="text-[#FFFFFF] leading-[25px] text-sm pr-[50px]">
+                Unlock the power of data and AI to automate decisions, predict outcomes, and drive business growth. We
+                handle everything from strategy and pipelines to real-time analytics and model deployment
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Service Card 2 -->
+        <a href="Application&DevelopementServices.html" class="h-full block">
+          <div
+            class="service-card flex flex-col items-start p-2 gap-0 md:gap-8 h-full opacity-0 translate-y-10 rotate-[-5deg] transition-all duration-700 hover:scale-105 hover:rotate-0 hover:shadow-lg">
+            <img src="assets/updated/Appl&dev.svg" class="h-[11rem]" />
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <h2 class="text-white text-xl font-semibold">Application & Development Services</h2>
+              <p class="text-[#FFFFFF] leading-[25px] text-sm pr-[50px]">
+                Design, build, and support powerful business applications with a focus on performance, scalability, and
+                user experience. From custom development to lifecycle management, we ensure your apps evolve with your
+                business
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Service Card 3 -->
+        <a href="SapEnterpriseServices.html" class="h-full block">
+          <div
+            class="service-card flex flex-col items-start p-2 gap-0 md:gap-8 h-full opacity-0 translate-y-10 rotate-[-5deg] transition-all duration-700 hover:scale-105 hover:rotate-0 hover:shadow-lg">
+            <img src="assets/updated/SAP-enterprise.svg" class="h-[11rem]" />
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <h2 class="text-white text-xl font-semibold">SAP Enterprise Services</h2>
+              <p class="text-[#FFFFFF] leading-[25px] text-sm pr-[50px]">
+                Keep your SAP systems running smoothly with expert support across application performance, cloud
+                hosting, upgrades, and business continuity planning.
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Service Card 4 -->
+        <a href="CRM&ERP_Services.html" class="h-full block">
+          <div
+            class="service-card flex flex-col items-start p-2 gap-0 md:gap-8 h-full opacity-0 translate-y-10 rotate-[-5deg] transition-all duration-700 hover:scale-105 hover:rotate-0 hover:shadow-lg">
+            <img src="assets/updated/CRM.svg" class="h-[11rem]" />
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <h2 class="text-white text-xl font-semibold">CRM & ERP Solutions</h2>
+              <p class="text-[#FFFFFF] leading-[25px] text-sm pr-[50px]">
+                Connect customer engagement and business operations with smart, scalable CRM and ERP platforms tailored
+                to your needs.
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Service Card 5 -->
+        <a href="CloudInfrastructureServices.html" class="h-full block">
+          <div
+            class="service-card flex flex-col items-start p-2 gap-0 md:gap-8 h-full opacity-0 translate-y-10 rotate-[-5deg] transition-all duration-700 hover:scale-105 hover:rotate-0 hover:shadow-lg">
+            <img src="assets/updated/Cloud-infra.svg" class="h-[11rem]" />
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <h2 class="text-white text-xl font-semibold">Cloud Infrastructure Services</h2>
+              <p class="text-[#FFFFFF] leading-[25px] text-sm pr-[50px]">
+                Deploy, scale, and manage your cloud environment (AWS, Azure, GCP) with ease—ensuring performance,
+                security, and cost-efficiency every step of the way.
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Service Card 6 -->
+        <a href="Consulting&AdvisoryServices.html" class="h-full block">
+          <div
+            class="service-card flex flex-col items-start p-2 gap-0 md:gap-8 h-full opacity-0 translate-y-10 rotate-[-5deg] transition-all duration-700 hover:scale-105 hover:rotate-0 hover:shadow-lg">
+            <img src="assets/updated/Consulting.svg" class="h-[11rem]" />
+            <div class="flex flex-col justify-center gap-4 md:gap-8">
+              <h2 class="text-white text-xl font-semibold">Consulting & Advisory Services</h2>
+              <p class="text-[#FFFFFF] leading-[25px] text-sm pr-[50px]">
+                Drive innovation and digital maturity with strategic guidance across business and technology
+                domains—focused on sectors like energy, defence, BFSI, healthcare, and logistics.
+              </p>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Intersection Observer Script -->
+  <script>
+    const observer10 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute('data-delay') || 0;
+          setTimeout(() => {
+            entry.target.classList.remove('opacity-0', 'translate-y-10', 'rotate-[-20deg]');
+            entry.target.classList.add('opacity-100', 'translate-y-0', 'rotate-0');
+          }, delay);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    // Observe headings
+    document.querySelectorAll('section [data-delay]').forEach(el => observer10.observe(el));
+    // Observe service cards
+    document.querySelectorAll('.service-card').forEach(el => observer10.observe(el));
+  </script>
+
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+
+    .rotate-0 {
+      transform: rotate(0deg);
+    }
+  </style>
+
+  <!--Industries Section-->
+  <section class="bg-[#191919] pt-12 pb-4  ">
+    <div id="industry-focus" class="flex flex-col items-start justify-center px-10 md:px-[50px] lg:px-[120px]">
+      <div class="flex gap-2 items-start">
+        <h2 class="text-2xl md:text-4xl text-[#828282] mb-4 leading-tight">
+          Industry Focus
+        </h2>
+        <img src="/assets/updated/line.svg" class="pt-3" />
+      </div>
+      <h1 class="text-4xl md:text-4xl text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold  text-radiant">
+        Transforming Industries with Intelligent & Scalable Solutions
+      </h1>
+      <p class="text-md text-[#FFFFFF] font-normal mb-4 leading-[26px]">
+        Mindgraph empowers sector-specific transformation with AI-driven,
+        data-centric, and cloud-enabled solutions. Our deep domain expertise
+        and tailored platforms help enterprises across industries accelerate
+        innovation, streamline operations, and improve
+        decision-making—securely and at scale.
+      </p>
+    </div>
+    <!-- sliders -->
+    <section id="slider" class="relative">
+      <div class="flex  text-white gap-1  md:gap-2 mx-10 md:mx-[50px] lg:mx-[120px] mb-[40px]  ">
+        <div>
+          <p
+            class="w-[200px] md:w-[auto] industry-tab border p-4 md:p-2 opacity-50 hover:opacity-100 cursor-pointer hidden md:block">
+            <span>Energy & Utilities</span>
+          </p>
+        </div>
+        <div>
+          <p
+            class=" w-[200px] md:w-[auto] industry-tab border p-2 opacity-50 hover:opacity-100 cursor-pointer hidden md:block">
+            <span>Telecom</span>
+          </p>
+        </div>
+        <div>
+          <p
+            class=" w-[200px] md:w-[auto] industry-tab border p-2 opacity-50 hover:opacity-100 cursor-pointer hidden md:block">
+            <span>Aviation</span>
+          </p>
+        </div>
+        <div>
+          <p
+            class="w-[200px] md:w-[auto] industry-tab border p-2 opacity-50 hover:opacity-100 cursor-pointer hidden md:block">
+            <span>Transportation</span>
+          </p>
+        </div>
+        <div>
+          <p
+            class="w-[200px] md:w-[auto] industry-tab border p-2 py-0 md:py-2 opacity-50 hover:opacity-100 cursor-pointer hidden md:block">
+            <span>HealthCare</span>
+          </p>
+        </div>
+        <div>
+          <p
+            class="w-[200px] md:w-[auto] industry-tab border p-2 py-0 md:py-0 opacity-50 hover:opacity-100 cursor-pointer hidden md:hidden">
+            <span>Manufacturing</span>
+          </p>
+        </div>
+        <div>
+          <p
+            class="w-[200px] md:w-[auto] industry-tab border p-2 py-8 md:py-0 opacity-50 hover:opacity-100 cursor-pointer hidden md:hidden">
+            <span>Banking, Financial Services & Insurance (BFSI)</span>
+          </p>
+        </div>
+        <div>
+          <a href="industries.html">
+            <button class="flex text-black py-2  px-4  md:px-6 items-center bg-white">
+              See All
+              <img src="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2 w-3 h-3" /></button></a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="testimonial-slide active flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide">
+
+          <!-- Slide 1: Energy & Utilities -->
+          <div
+            class="group snap-center flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] transform opacity-50 scale-95 w-full md:w-[390px] lg:w-[300px] lg:w-[915px] h-[600px] md:h-[600px] relative mx-2 p-4 md:p-0">
+            <div class="w-full relative overflow-hidden">
+              <img src="/assets/updated/energyIndustry.png" alt="Energy & Utilities"
+                class=" object-cover h-[520px] md:h-[500px] lg:h-auto" />
+
+              <div class="absolute top-[5.5rem] md:top-0 left-0 right-0 p-4 md:p-12 text-white z-10">
+                <p
+                  class="text-3xl lg:text-4xl font-extrabold leading-[40px] md:leading-relaxed lg:leading-[56px] industry-title">
+                  Use AI to improve energy efficiency, cut consumption, and
+                  support your sustainability goals.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Telecom -->
+          <div
+            class="group snap-center flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] transform opacity-50 scale-95 w-full md:w-[390px] lg:w-[300px] lg:w-[915px] h-[400px] md:h-[600px] relative mx-2 p-4 md:p-0">
+            <div class="w-full relative overflow-hidden">
+              <img src="/assets/updated/telecomIndustry.png" alt="Telecom"
+                class="h-full w-full object-cover h-[520px] md:h-[500px] lg:h-auto" />
+
+              <div class="absolute top-[5.5rem] md:top-0 left-0 right-0 p-4 md:p-12 text-white z-10">
+                <p
+                  class="text-3xl lg:text-4xl font-extrabold leading-[40px] md:leading-relaxed lg:leading-[56px] industry-title text-black">
+                  Optimize telecomnetworks withAI-powered monitoring and secure communication.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Aviation -->
+          <div
+            class="group snap-center flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] transform opacity-50 scale-95 w-full md:w-[390px] lg:w-[300px] lg:w-[915px] h-[400px] md:h-[600px] relative mx-2 p-4 md:p-0">
+            <div class="w-full relative overflow-hidden">
+              <img src="/assets/updated/aviataionIndustry.png" alt="aviation"
+                class="h-full w-full object-cover h-[520px] md:h-[500px] lg:h-auto" />
+
+              <div class="absolute top-[5.5rem] md:top-0 left-0 right-0 p-4 md:p-12 text-white z-10">
+                <p
+                  class="text-3xl lg:text-4xl font-extrabold leading-[40px] md:leading-relaxed lg:leading-[56px] industry-title">
+                  AI-powered aviation solutions for maintenance, safety, and efficient airport operations.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 4: Transportation -->
+          <div
+            class="group snap-center flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] transform opacity-50 scale-95 w-full md:w-[390px] lg:w-[300px] lg:w-[915px] h-[400px] md:h-[600px] relative mx-2 p-4 md:p-0">
+            <div class="w-full relative overflow-hidden">
+              <img src="/assets/updated/transportationIndustry.png" alt="Transportation"
+                class="h-full w-full object-cover h-[520px] md:h-[500px] lg:h-auto" />
+
+              <div class="absolute top-[5.5rem] md:top-0 left-0 right-0 p-4 md:p-12 text-white z-10">
+                <p
+                  class="text-3xl lg:text-4xl font-extrabold leading-[40px] md:leading-relaxed lg:leading-[56px] industry-title">
+                  AI-driven logistics for smarter routing, maintenance, and live tracking.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 5: Healthcare -->
+          <div
+            class="group snap-center flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] transform opacity-50 scale-95 w-full md:w-[390px] lg:w-[300px] lg:w-[915px] h-[400px] md:h-[600px] relative mx-2 p-4 md:p-0">
+            <div class="w-full relative overflow-hidden">
+              <img src="/assets/updated/healthIndustry.png" alt="HealthCare"
+                class="h-full w-full object-cover h-[520px] md:h-[500px] lg:h-auto" />
+
+              <div class="absolute top-[5.5rem] md:top-0 left-0 right-0 p-4 md:p-12 text-white z-10">
+                <p
+                  class="text-3xl lg:text-4xl font-extrabold leading-[40px] md:leading-relaxed lg:leading-[56px] industry-title">
+                  AI-driven healthcare solutions for better care, smoother workflows, and compliance.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6: Manufacturing -->
+          <div
+            class="group snap-center flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] transform opacity-50 scale-95 w-full md:w-[390px] lg:w-[300px] lg:w-[915px] h-[400px] md:h-[600px] relative mx-2 p-4 md:p-0">
+            <div class="w-full relative overflow-hidden">
+              <img src="/assets/updated/Industry.png" alt="Manufacturing"
+                class="h-full w-full object-cover h-[520px] md:h-[500px] lg:h-auto" />
+
+              <div class="absolute top-[5.5rem] md:top-0 left-0 right-0 p-4 md:p-12 text-white z-10">
+                <p
+                  class="text-3xl lg:text-4xl font-extrabold leading-[40px] md:leading-relaxed lg:leading-[56px] industry-title">
+                  AI-powered manufacturing for smarter production, analytics, and supply chain efficiency.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 7: BFSI -->
+          <div
+            class="group snap-center flex-shrink-0 transition-all duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] transform opacity-50 scale-95 w-full md:w-[390px] lg:w-[300px] lg:w-[915px] h-[400px] md:h-[600px] relative mx-2 p-4 md:p-0">
+            <div class="w-full relative overflow-hidden">
+              <img src="/assets/updated/naturaIndustry.png" alt="BFSI"
+                class="h-full w-full object-cover  h-[520px] md:h-[500px] lg:h-auto" />
+
+              <div class="absolute top-[5.5rem] md:top-0 left-0 right-0 p-4 md:p-12 text-white z-10">
+                <p
+                  class="text-3xl lg:text-4xl font-extrabold leading-[40px] md:leading-relaxed lg:leading-[56px] industry-title">
+                  AI-powered banking for fraud prevention, credit risk insights, and personalized customer experiences.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center gap-4 ">
+          <button id="prevBtn" class=" w-10 h-10 flex items-center justify-center  transition ">
+            <img src="assets/updated/rightWhiteArrow.svg" class="w-4  ">
+          </button>
+
+          <button id="nextBtn" class=" w-10 h-10 flex items-center justify-center  transition ">
+            <img src="assets/updated/leftWhiteArrow.svg" class="w-4">
+          </button>
+        </div>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const slider = document.querySelector(".testimonial-slide");
+          const slides = Array.from(document.querySelectorAll(".snap-center"));
+          const prevBtn = document.getElementById("prevBtn");
+          const nextBtn = document.getElementById("nextBtn");
+          const tabs = Array.from(document.querySelectorAll(".industry-tab"));
+
+          let currentIndex = 0;
+          let autoSlide = null;
+          let scrollTimeout = null;
+
+          function getSlideWidth(slide) {
+            const style = window.getComputedStyle(slide);
+            const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+            return slide.offsetWidth + margin;
+          }
+
+          function getVisibleSlidesCount() {
+            if (window.innerWidth < 768) return 1;
+            return 3; // adjust if needed
+          }
+
+          // centralize highlighting & tab logic
+          function applyHighlighting(index) {
+            slides.forEach((slide, idx) => {
+              if (idx === index) {
+                slide.classList.remove("opacity-50", "scale-95");
+                slide.classList.add("opacity-100", "scale-100");
+              } else {
+                slide.classList.remove("opacity-100", "scale-100");
+                slide.classList.add("opacity-50", "scale-95");
+              }
+              slide.classList.toggle("active-card", idx === index);
+            });
+
+            tabs.forEach((tab, idx) => {
+              tab.style.opacity = idx === index ? "1" : "0.5";
+              if (idx === index) {
+                tab.classList.add("card-fill", "active");
+                // show on mobile and hide others
+                if (window.innerWidth < 768) tab.classList.remove("hidden");
+              } else {
+                tab.classList.remove("card-fill", "active");
+                if (window.innerWidth < 768) tab.classList.add("hidden");
+              }
+            });
+          }
+
+          // scroll so that the chosen slide is centered in the container
+          function centerSlide(index, smooth = true) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+            currentIndex = index;
+
+            const visibleCount = getVisibleSlidesCount();
+            // compute scrollLeft needed to show index center
+            // approach: compute the center position of the target slide relative to slider and shift so its center aligns with container center
+            const containerRect = slider.getBoundingClientRect();
+            const containerCenter = containerRect.left + containerRect.width / 2;
+
+            const targetRect = slides[index].getBoundingClientRect();
+            const slideCenter = targetRect.left + targetRect.width / 2;
+            const delta = slideCenter - containerCenter;
+
+            const newScrollLeft = slider.scrollLeft + delta;
+
+            slider.scrollTo({
+              left: newScrollLeft,
+              behavior: smooth ? "smooth" : "auto",
+            });
+
+            applyHighlighting(index);
+          }
+
+          function goToSlide(index) {
+            if (index < 0 || index >= slides.length) return;
+            centerSlide(index);
+          }
+
+          // Detect which slide is currently centered (used after manual scroll)
+          function detectCenteredSlide() {
+            const containerRect = slider.getBoundingClientRect();
+            const containerCenter = containerRect.left + containerRect.width / 2;
+
+            let closestIndex = 0;
+            let minDist = Infinity;
+            slides.forEach((slide, idx) => {
+              const rect = slide.getBoundingClientRect();
+              const slideCenter = rect.left + rect.width / 2;
+              const dist = Math.abs(slideCenter - containerCenter);
+              if (dist < minDist) {
+                minDist = dist;
+                closestIndex = idx;
+              }
+            });
+            return closestIndex;
+          }
+
+          // Called when scrolling stops (user finished swipe/drag)
+          function onScrollEnd() {
+            const idx = detectCenteredSlide();
+            if (idx !== currentIndex) {
+              currentIndex = idx;
+              // snap into precise center (no smooth jitter if already aligned)
+              centerSlide(idx, true);
+            } else {
+              // still update highlighting in case CSS classes were lost
+              applyHighlighting(currentIndex);
+            }
+            resetAutoSlide();
+          }
+
+          // debounce scroll end detection
+          slider.addEventListener("scroll", () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(onScrollEnd, 120); // 120ms after last scroll event
+          });
+
+          // also catch pointer/touch end for immediate response
+          ["pointerup", "touchend", "mouseup"].forEach(evt =>
+            slider.addEventListener(evt, () => {
+              clearTimeout(scrollTimeout);
+              // small delay gives browser a moment to finish fling; call after 60ms if not further scrolling
+              // scrollTimeout = setTimeout(onScrollEnd, 60);
+            })
+          );
+
+          // Button listeners
+          prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
+          nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
+
+          // Tab click listeners
+          tabs.forEach((tab, idx) => {
+            tab.addEventListener("click", () => goToSlide(idx));
+          });
+
+          // Auto-slide every 5 seconds
+          function startAutoSlide() {
+            if (autoSlide) clearInterval(autoSlide);
+            autoSlide = setInterval(() => {
+              let nextIndex = currentIndex + 1;
+              if (nextIndex >= slides.length) nextIndex = 0;
+              goToSlide(nextIndex);
+            }, 5000);
+          }
+
+          function resetAutoSlide() {
+            if (autoSlide) {
+              clearInterval(autoSlide);
+              startAutoSlide();
+            } else {
+              startAutoSlide();
+            }
+          }
+
+          // Pause auto-slide while user is interacting (optional)
+          let userInteracting = false;
+          slider.addEventListener("pointerdown", () => {
+            userInteracting = true;
+            if (autoSlide) clearInterval(autoSlide);
+          });
+          ["pointerup", "touchend", "mouseup"].forEach(evt => {
+            slider.addEventListener(evt, () => {
+              userInteracting = false;
+              resetAutoSlide();
+            });
+          });
+
+          // re-center on resize
+          window.addEventListener("resize", () => centerSlide(currentIndex, false));
+
+          // initialize
+          applyHighlighting(currentIndex);
+          startAutoSlide();
+        });
+      </script>
+
+
+
+
+    </section>
+  </section>
+
+  <!-- What we offer section -->
+  <section id="offer-section" class="bg-[#000000] pt-[100px]">
+    <div class="flex  flex-col items-start justify-center px-10 md:px-[50px] lg:px-[120px] space-y-6">
+      <div class="flex gap-2 md:items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="100">
+        <h2 class="text-4xl text-[#828282] mb-4 leading-tight">
+          What we offer
+        </h2>
+        <img src="/assets/updated/line.svg" class="pt-0 md:pt-3" />
+      </div>
+
+      <h1
+        class="text-4xl text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold text-center text-radiant opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="200">
+        Our Capabilities
+      </h1>
+
+      <p class="text-md text-[#FFFFFF] font-normal mb-4 leading-[26px] opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="300">
+        Mindgraph empowers sector-specific transformation with AI-driven, data-centric, and cloud-enabled solutions. Our
+        deep domain expertise and tailored platforms help enterprises across industries accelerate innovation,
+        streamline operations, and improve decision-making—securely and at scale.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-4  px-10  md:px-[50px] lg:px-[130px] gap-6 mt-12">
+      <!-- Card 1 -->
+      <div class="text-white w-[264px] md:w-[300px] opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="400">
+        <div class="relative h-[300px] border p-6 overflow-hidden flex flex-col justify-between">
+          <div class="absolute right-[-17px] bottom-[-17px] h-full flex items-end justify-end pointer-events-none">
+            <img src="assets/updated/AI_Cap.svg" class="w-[180px] object-contain" />
+          </div>
+          <p class="text-2xl mt-4 pr-16 font-semibold relative z-10">AI & Machine Learning</p>
+          <p class="text-4xl font-bold mt-20 relative z-10">01.</p>
+        </div>
+        <p class="text-lg mt-6 leading-relaxed relative z-10 px-4">
+          Custom AI solutions with deep learning, NLP, computer vision, and predictive analytics for faster decisions
+          and better automation.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="text-white w-[264px] md:w-[300px] opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="500">
+        <div class="relative h-[300px] border p-6 overflow-hidden flex flex-col justify-between">
+          <div class="absolute right-[-17px] bottom-[-24px] h-full flex items-end justify-end pointer-events-none">
+            <img src="assets/updated/Cyber_Cap.svg" class="w-[180px] object-contain" />
+          </div>
+          <p class="text-2xl mt-4 pr-16 font-semibold relative z-10">Cybersecurity</p>
+          <p class="text-4xl font-bold mt-20 relative z-10">02.</p>
+        </div>
+        <p class="text-lg mt-6 leading-relaxed relative z-10 px-4">
+          In today’s hyper-connected world, cybersecurity is more than just a technical requirement — it’s a strategic
+          imperative.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="text-white w-[264px] md:w-[300px] opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="600">
+        <div class="relative h-[300px] border p-6 overflow-hidden flex flex-col justify-between">
+          <div class="absolute right-[-17px] bottom-[-17px] h-full flex items-end justify-end pointer-events-none">
+            <img src="assets/updated/Cloud_Cap.svg" class="w-[180px] object-contain" />
+          </div>
+          <p class="text-2xl mt-4 pr-16 font-semibold relative z-10">Cloud & Infra Services</p>
+          <p class="text-4xl font-bold mt-20 relative z-10">03.</p>
+        </div>
+        <p class="text-lg mt-6 leading-relaxed relative z-10 px-4">
+          In an era driven by digital agility and scalability, Mindgraph empowers enterprises to modernize their
+          infrastructure and unlock the full potential of the cloud.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="text-white w-[264px] md:w-[300px] opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="700">
+        <div class="relative h-[300px] border p-6 overflow-hidden flex flex-col justify-between">
+          <div class="absolute right-[-32px] bottom-[-61px] h-full flex items-end justify-end pointer-events-none">
+            <img src="assets/updated/Erp_Cap.svg" class="w-[220px] object-contain" />
+          </div>
+          <p class="text-2xl mt-4 pr-16 font-semibold relative z-10">ERP, CRM & AI Ecosystem</p>
+          <p class="text-4xl font-bold mt-20 relative z-10">04.</p>
+        </div>
+        <p class="text-lg mt-6 leading-relaxed relative z-10 px-4">
+          In today’s fast-paced digital economy, organizations require more than just standalone systems — they need a
+          connected ecosystem that seamlessly unifies operations, customer engagement, and data intelligence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intersection Observer Script -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute('data-delay') || 0;
+          setTimeout(() => {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+          }, delay);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const animatedElements = document.querySelectorAll('#offer-section [data-delay]');
+    animatedElements.forEach(el => observer.observe(el));
+  </script>
+
+  <!-- Optional Tailwind overrides for final state -->
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+  </style>
+
+  <!-- Solutions section -->
+  <section id="solutions-section" class="bg-[#000000] pt-[100px] pb-[100px]">
+    <div
+      class="px-10 md:px-[50px] lg:px-20 py-8 sm:py-12 lg:py-16 space-y-6 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+      data-delay="100">
+      <!-- heading -->
+      <div class="flex gap-2 items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="200">
+        <h2 class="text-4xl text-[#828282] mb-4 leading-tight">
+          Solutions
+        </h2>
+        <img src="/assets/updated/line.svg" class="pt-3" />
+      </div>
+
+      <h1
+        class="text-4xl text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold text-radiant opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="300">
+        AI Frameworks That Power Transformation
+      </h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-10 md:px-[50px] lg:px-[70px]">
+      <!-- Left side: List of solutions -->
+      <div class="flex flex-col justify-start text-white space-y-2">
+        <!-- Solution Items -->
+        <a href="mathops.html">
+          <div id="MathOps"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="400">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#FFFFFF"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">MATHOPS</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="smartSustain.html">
+          <div id="SmartSustain"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="500">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#FFFFFF"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">SmartSustain.AI</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="opsbeat.html">
+          <div id="OpsBeat"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#FFFFFF"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">OpsBeat</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="customerDlens.html">
+          <div id="CustomerDlens"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#FFFFFF"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">CustomerDlens</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="optiSaas.html">
+          <div id="SaaSBeamAI"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#FFFFFF"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">OptiSaas.AI</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="customerDlens.html">
+          <div id="Patient360"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#FFFFFF"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">Patient360.AI</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+        <a href="#">
+          <div id="ResponsibleAI"
+            class="solution-item hover:font-semibold group p-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            data-delay="550">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="rotate-[-45deg]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#FFFFFF"
+                      d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414" />
+                  </svg>
+                </div>
+                <h3 class="text-xl">Responsible AI</h3>
+              </div>
+              <div class="self-end rotate-[90deg] hidden group-hover:block">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"
+                    d="M12.013 21L12 3.211m7 6.777L12 3L5 9.988" stroke-width="1" />
+                </svg>
+              </div>
+            </div>
+            <hr class="mt-6">
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Right side: Image + text -->
+      <div class="relative hidden md:flex items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="400">
+        <div class="relative flex items-start pt-12">
+          <img id="solution-image" src="/assets/mathOps.png"
+            class="w-[550px] h-auto transition-opacity duration-700 z-10" />
+          <div class="absolute right-[-30px] top-[70px] w-[450px] md:h-[300px] lg:h-[380px] xl:h-[450px] 
+                bg-[url('/assets/dottedBg.png')] bg-contain bg-no-repeat bg-right">
+          </div>
+        </div>
+
+        <!-- TEXT CARD BELOW IMAGE -->
+        <div
+          class="absolute md:top-[380px] lg:top-[480px] left-[10px] w-[90%] max-w-[440px] p-6 text-xl text-white z-20"
+          id="solution-text">
+          MathOps is a next-gen analytics and monitoring platform built to optimize IT.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observer1 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute('data-delay') || 0;
+          setTimeout(() => {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+          }, delay);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    // Observe all elements with data-delay
+    const animatedElements1 = document.querySelectorAll('#solutions-section [data-delay]');
+    animatedElements1.forEach(el => observer1.observe(el));
+
+    // --- Solution section image hover interaction ---
+    const solutionImage = document.getElementById('solution-image');
+    const solutionText = document.getElementById('solution-text');
+
+    const items1 = [
+      { selector: '#MathOps', image: '/assets/mathOps.png', text: 'MathOps is a next-gen analytics and monitoring platform built to optimize IT.' },
+      { selector: '#SmartSustain', image: 'assets/prd-smartSustain.png', text: 'Simplify and scale ESG reporting. SmartSustain.AI enables accurate tracking of carbon emissions, water usage, governance, and social impact.' },
+      { selector: '#OpsBeat', image: 'assets/opsBeatPrd.png', text: 'Revolutionize your IT operations with smart automation, real-time visibility, and seamless integrations.' },
+      { selector: '#CustomerDlens', image: 'assets/customerDlens.png', text: 'AI-powered customer data fabric for 360° operational insights.' },
+      { selector: '#SaaSBeamAI', image: 'assets/optiSaas.png', text: 'Enterprise SaaS and Cloud Management Platform.' },
+      { selector: '#Patient360', image: '/assets/prd-patient.png', text: 'AI-powered patient data fabric for 360° operational insights.' },
+      { selector: '#ResponsibleAI', image: '/assets/prd-patient.png', text: 'Responsible AI fabric for 360° operational insights.' },
+    ];
+
+    const defaultImage = '/assets/mathOps.png';
+    const defaultText = 'MathOps is a next-gen analytics and monitoring platform built to optimize IT.';
+
+    items1.forEach(({ selector, image, text }) => {
+      const element = document.querySelector(selector);
+      if (!element) return;
+      element.addEventListener('mouseenter', () => fadeSolutionImageChange(image, text));
+      element.addEventListener('mouseleave', () => fadeSolutionImageChange(defaultImage, defaultText));
+    });
+
+    function fadeSolutionImageChange(newSrc, newText) {
+      solutionImage.style.opacity = 0;
+      setTimeout(() => {
+        solutionImage.src = newSrc;
+        solutionText.innerHTML = newText;
+        solutionImage.onload = () => solutionImage.style.opacity = 1;
+      }, 100);
+    }
+  </script>
+
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+  </style>
+
+  <!-- Offerings Section -->
+  <section class="bg-[#191919] pt-[100px]" id="offerings-section">
+    <div class="px-10 md:px-[50px] lg:px-[120px] sm:py-12 lg:py-16 pb-0">
+      <!-- Heading -->
+      <div class="flex gap-2 items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="100">
+        <h2 class="text-3xl md:text-4xl text-[#828282] mb-4 leading-tight">
+          Offerings
+        </h2>
+        <img src="/assets/updated/line.svg" class="pt-3" />
+      </div>
+
+      <h1
+        class="text-4xl text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold text-radiant opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="200">
+        Our Solutions by Function
+      </h1>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 px-10 md:px-[50px] lg:px-[120px]">
+      <!-- Card 1 -->
+      <div
+        class="relative bg-white opacity-0 translate-y-10 transition-all duration-700 ease-in hover:scale-105 "
+        data-delay="300">
+        <div class="absolute inset-0 flex items-start justify-start">
+          <div class="text-black z-10 p-2 md:p-8 md:pr-[50px] md:pr-0">
+            <h2 class="text-2xl lg:text-3xl font-extrabold mb-2">Data<br> Innovation</h2>
+            <p class="text-base lg:text-base font-normal md:pr-8">
+              Unlock competitive advantage through advanced AI analytics and data modeling.
+            </p>
+          </div>
+        </div>
+        <img src="/assets/updated/DataInnovation.png" alt="Data Innovation" class="h-full w-full object-cover" />
+      </div>
+
+      <!-- Card 2 -->
+      <div class="relative bg-white opacity-0 translate-y-10 transition-all duration-700 ease-in hover:scale-105 "
+        data-delay="450">
+        <div class="absolute inset-0 flex items-start justify-start">
+          <div class="text-black z-10 p-2 md:p-8 md:pr-[50px] md:pr-0">
+            <h2 class="text-2xl lg:text-3xl font-extrabold mb-2">AI Products Gateway for ASEAN</h2>
+            <p class="text-base lg:text-base font-normal md:pr-8">
+              Localized AI products marketing, and regulatory support for ASEAN expansion.
+            </p>
+          </div>
+        </div>
+        <img src="/assets/updated/Apac.png" alt="APAC" class="h-full w-full object-cover " />
+      </div>
+
+      <!-- Card 3 -->
+      <div class="relative bg-white opacity-0 translate-y-10 transition-all duration-700 ease-in hover:scale-105"
+        data-delay="600">
+        <div class="absolute inset-0 flex items-start justify-start">
+          <div class="text-black z-10 p-2 md:p-8 md:pr-[50px] md:pr-0">
+            <h2 class="text-2xl lg:text-3xl font-extrabold mb-2">Global Capability Centers (GCCs)</h2>
+            <p class="text-base lg:text-base font-normal md:pr-8">
+              Talent, governance, and operational AI for enterprise scalability.
+            </p>
+          </div>
+        </div>
+        <img src="/assets/updated/Gccs.png" alt="GCCs" class="h-full w-full object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Intersection Observer Script -->
+  <script>
+    const observer2 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(() => {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+          }, delay);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const animatedElements2 = document.querySelectorAll('#offerings-section [data-delay]');
+    animatedElements2.forEach(el => observer2.observe(el));
+  </script>
+
+  <!-- Tailwind overrides for final state -->
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+  </style>
+
+  <!-- Why Choose Us section -->
+  <section class="bg-[#191919] pt-[100px] pb-[100px]" id="choose-us-section">
+    <div class="px-10 lg:px-20 py-8 sm:py-12 lg:py-16">
+
+      <!-- Heading -->
+      <div class="flex gap-2 md:items-start opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="100">
+        <h2 class="text-3xl md:text-4xl text-[#828282] mb-4 leading-tight">
+          Why Choose Us?
+        </h2>
+        <img src="/assets/updated/line.svg" class="pt-3 mr-4" />
+      </div>
+      <h1
+        class="text-4xl text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold text-radiant opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="200">
+        Shaping Purpose fit AI Innovation
+      </h1>
+      <p class="text-md text-[#FFFFFF] font-normal mb-4 leading-[26px] opacity-0 translate-y-10 transition-all duration-700 ease-out"
+        data-delay="300">
+        We deliver more than services — we deliver outcomes. At Mindgraph, we fuse deep industry insight with
+        intelligent technology to build future-ready enterprises. Our approach is bold, agile, and engineered for
+        business impact—from rapid deployments to long-term transformation.
+      </p>
+    </div>
+
+    <!-- Content Grid -->
+    <div
+      class="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 overflow-x-auto px-[20px] md:px-[80px] gap-6 flex flex-wrap justify-start mt-8">
+      <!-- Box 1 -->
+      <!-- <div
+        class="choose-box  p-6 pb-4 border w-[250px] h-[240px] flex flex-col items-center justify-center opacity-0 scale-75 transition-all duration-700 ease-out"
+        data-delay="400">
+        <img src="/assets/updated/choose1.svg" alt="AI Platform" class="mb-4">
+        <h3 class="text-white text-sm md:text-xl font-extrabold text-center">AI-Driven Platforms Built for Performance
+        </h3>
+      </div> -->
+
+
+      <div
+        class="choose-box grid p-6 pb-4 border w-[250px] h-[240px] items-center-safe opacity-0 scale-75 transition-all duration-700 ease-out"
+        data-delay="400">
+        <img src="/assets/updated/choose1.svg " alt="AI Platform" class="">
+        <h3 class="text-white text-lg md:text-xl font-extrabold">AI-Driven Platforms Built for Performance</h3>
+      </div>
+
+      <!-- Box 2 -->
+      <div
+        class="choose-box grid p-6 pb-4 border w-[250px] h-[240px] items-center-safe opacity-0 scale-75 transition-all duration-700 ease-out"
+        data-delay="500">
+        <img src="/assets/updated/choose2.svg" alt="Ownership" class="mb-4">
+        <h3 class="text-white text-lg md:text-xl font-extrabold ">Complete Ownership — From Vision to Value
+        </h3>
+      </div>
+
+      <!-- Box 3 -->
+      <div
+        class="choose-box grid p-6 pb-4 border w-[250px] h-[240px] items-center-safe opacity-0 scale-75 transition-all duration-700 ease-out"
+        data-delay="600">
+        <img src="/assets/updated/choose3.svg" alt="Implementation" class="mb-4">
+        <h3 class="text-white text-lg md:text-xl font-extrabold ">Accelerated Implementation, Measurable
+          Results</h3>
+      </div>
+
+      <!-- Box 4 -->
+      <div
+        class="choose-box grid p-6 pb-4 border w-[250px] h-[240px] items-center-safe opacity-0 scale-75 transition-all duration-700 ease-out"
+        data-delay="700">
+        <img src="/assets/updated/choose4.svg" alt="Integration" class="mb-4">
+        <h3 class="text-white text-lg md:text-xl font-extrabold ">Seamless Integration with Your Ecosystem
+        </h3>
+      </div>
+
+      <!-- Box 5 -->
+      <div
+        class="choose-box grid p-6 pb-4 border w-[250px] h-[240px] items-center-safe opacity-0 scale-75 transition-all duration-700 ease-out"
+        data-delay="800">
+        <img src="/assets/updated/choose5.svg" alt="Support" class="mb-4">
+        <h3 class="text-white text-lg md:text-xl font-extrabold ">Enterprise-Grade Support. Always On. Always
+          Aligned.</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intersection Observer Script -->
+  <script>
+    const observer3 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(() => {
+            // If the element is a choose-box, animate zoom in
+            if (entry.target.classList.contains('choose-box')) {
+              entry.target.classList.remove('opacity-0', 'scale-75');
+              entry.target.classList.add('opacity-100', 'scale-100');
+            } else {
+              // For headings and paragraphs, animate from bottom
+              entry.target.classList.remove('opacity-0', 'translate-y-10');
+              entry.target.classList.add('opacity-100', 'translate-y-0');
+            }
+          }, delay);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const animatedElements3 = document.querySelectorAll('#choose-us-section [data-delay]');
+    animatedElements3.forEach(el => observer3.observe(el));
+  </script>
+
+  <!-- Tailwind overrides for final state -->
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+
+    .scale-100 {
+      transform: scale(1);
+    }
+  </style>
+
+  <!--Blogs Section-->
+  <section id="Blogs" class="bg-[#000000] pb-[100px]">
+    <div class="px-10 md:p-4 lg:px-20 pt-8 sm:pt-12 lg:pt-16">
+
+      <!-- Heading -->
+      <div class="flex gap-2 items-start">
+        <h2 class="text-2xl md:text-4xl text-[#828282] mb-4 leading-tight">
+          Blog & News
+        </h2>
+
+      </div>
+      <h1 class="text-2xl md:text-4xl text-[#055CC0] mb-4 leading-tight  md:px-0 font-extrabold  text-radiant">
+        Latest News and Expert Advice
+      </h1>
+      <p class="text-md text-[#FFFFFF] font-normal mb-4 leading-[26px]">
+        Stay ahead in the digital era with our expert insights on AI innovation, automation, and business
+        transformation for every industry
+      </p>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1  ">
+
+      <div class="flex flex-col gap-4 px-10 px-[30px] lg:px-[80px] lg:pr-[120px]">
+        <div id="blog-container" class="grid grid-cols-1 md:grid-cols-4 gap-6"></div>
+      </div>
+
+      <!-- View All Button -->
+      <div class="flex justify-center mt-6">
+        <a href="Blogs.html">
+          <button class="px-4 py-2  text-black bg-white border flex items-center gap-2  transition">
+            View All
+            <img src="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2 w-3 h-3">
+          </button></a>
+      </div>
+
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <script src="js/blogs.js"></script>
+
+  <!-- Script to inject data -->
+  <script>
+    const container = document.getElementById("blog-container");
+
+    // Show only first 3 blogs for this section
+    data.slice(0, 3).forEach((blog, index) => {
+      let cardHTML = "";
+      const shortDescription = blog.description1.split(".")[0] + ".";
+
+      if (index === 2) {
+        // Overlay style for 3rd card
+        cardHTML = `
+  <div class="relative  flex-col shadow hover:shadow-lg transition overflow-hidden 
+              col-span-1 md:col-span-2 hidden md:flex"> 
+
+    <img src="assets/updated/blogImage.png" alt="${blog.title}" 
+         class="w-full h-48 md:h-[400px] object-cover">
+
+
+    <!-- Text block (kept fully white) -->
+    <div class="absolute inset-0 p-4 flex flex-col justify-center lg:justify-end z-10 pr-[130px]">
+      <span class="text-sm text-white">${blog.date}</span>
+      <h3 class="text-lg font-semibold text-white hover:underline cursor-pointer">
+        ${blog.title}
+      </h3>
+      <p class="text-[#D2D2D2] text-sm mt-1">${shortDescription}</p>
+    </div>
+
+  </div>
+`;
+
+      } else {
+        // Normal white card
+        cardHTML = `
+    <div class="flex flex-col  shadow hover:shadow-lg transition overflow-hidden">
+      <img src="assets/${blog.image}" alt="${blog.title}" 
+           class="w-full h-48 object-cover">
+      <div class="p-4 flex flex-col gap-2">
+        <span class="text-sm text-[#7E7E7E]">${blog.date}</span>
+        <h3 class="text-lg font-semibold text-white hover:underline cursor-pointer">
+          ${blog.title}
+        </h3>
+        <p class="text-white text-sm">${shortDescription}</p>
+      </div>
+    </div>
+  `;
+      }
+
+
+      container.innerHTML += cardHTML;
+    });
+  </script>
+
+  <!-- Review Section -->
+  <section class="flex justify-center px-4 bg-[#000000]  lg:px-[100px]">
+    <div class="relative p-6 md:py-20 flex flex-col justify-center border-1 border-t border-b border-[#808080]">
+
+      <!-- Background Quote SVG -->
+      <div class="absolute inset-0 flex justify-center items-start pointer-events-none ">
+        <img src="assets/updated/quoteBg.svg" alt="quote" class="w-[100px] md:w-[100px] mt-[25px]">
+      </div>
+
+      <!-- Testimonial Text -->
+      <div class="relative flex flex-col justify-center items-center z-10">
+        <p class="text-white mb-6 mt-[40px] md:mt-0 text-center md:px-[120px]">
+          Using adboom is fantastic. Build momentum by engaging your followers, building relationships,
+          and engaging with your target audience on all the social media channels.
+        </p>
+        <div>
+          <p class="font-semibold text-white">Jean Woodruff</p>
+          <p class="text-sm text-white">Lorem Ipsum.co</p>
+        </div>
+      </div>
+
+      <!-- Arrows at bottom center -->
+      <div class="relative flex justify-center gap-4 mt-8 z-10">
+        <button class="hover:text-[#1783F7] transition">
+          <img src="assets/arrowL.svg" alt="Previous">
+        </button>
+        <button class="hover:text-[#1783F7] transition">
+          <img src="assets/arrowR.svg" alt="Next">
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script>
+    // Load footer dynamically
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        const footerContainer = document.getElementById("footer");
+        footerContainer.innerHTML = data;
+
+        // After footer is added, initialize footer animations
+        initFooterAnimations();
+      })
+      .catch(err => console.error("Error loading footer:", err));
+
+    function initFooterAnimations() {
+      const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+            setTimeout(() => {
+              entry.target.classList.remove('opacity-0', 'translate-y-10');
+              entry.target.classList.add('opacity-100', 'translate-y-0');
+            }, delay);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      const footerElements = document.querySelectorAll('#footer [data-delay]');
+      footerElements.forEach(el => footerObserver.observe(el));
+      // Zoom-in animation for social icons
+      const socialIcons = document.querySelectorAll('#footer img'); // target your social icons
+      socialIcons.forEach(icon => {
+        icon.classList.add('scale-0', 'transition-transform', 'duration-700', 'ease-out');
+      });
+
+      const iconObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('scale-0');
+            entry.target.classList.add('scale-100');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      socialIcons.forEach(icon => iconObserver.observe(icon));
+    }
+
+  </script>
+
+  <!-- Tailwind overrides -->
+  <style>
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+
+    .scale-0 {
+      transform: scale(0);
+    }
+
+    .scale-100 {
+      transform: scale(1);
+    }
+  </style>
+
+</body>
+
+</html>

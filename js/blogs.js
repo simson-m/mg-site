@@ -14,9 +14,9 @@ const data = [
         image: "Blogs2.png"
     },
     {
-        title: "Redefining Tech: AI as the Catalyst for Disruption",
+        title: "How AI Tech Companies Are Reshaping the Future: Trends, Tools, and Industry Impact",
         date: "July 23, 2025",
-        description1: "Delve into the transformative role of artificial intelligence in driving disruption within the tech sector. Gain actionable guidance on how tech companies can adopt AI to optimize workflows, accelerate innovation cycles, and set new standards for industry excellence.",
+        description1: "In just a few years, artificial intelligence (AI) has gone from an experimental technology to a core driver of innovation in business and society.",
         description2: "Artificial intelligence (AI) is fundamentally reshaping the technology landscape. Tech companies are leveraging AI to innovate faster, streamline complex operations, and create personalized experiences. As AI continues to advance, it is becoming central to defining how tech companies compete, deliver value, and adapt to future market demands.",
         image: "Blogs3.png"
     },

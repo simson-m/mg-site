@@ -8,9 +8,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
+        function updateArrowImages() {
+            arrows.forEach(img => {
+                if (document.documentElement.classList.contains('dark')) {
+                    img.src = img.dataset.dark;
+                } else {
+                    img.src = img.dataset.light;
+                }
+            });
+        }
         window.addEventListener("DOMContentLoaded", () => {
             fetch("/navbar.html")
                 .then((res) => res.text())
@@ -18,6 +31,41 @@
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
+
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+
+                    }
+                    updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
 
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
@@ -117,6 +165,7 @@
             }
         }
     </style>
+
 </head>
 
 <body>
@@ -138,13 +187,13 @@
     </div>
 
     <!-- AI Service Section-->
-    <section class="py-16 px-4 md:pl-20 bg-white">
+    <section class="py-16 px-4 md:pl-20 bg-white dark:bg-black transition-all duration-500 ease-in">
         <!-- Heading -->
         <div class="mb-10 text-left">
-            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] dark:text-white mb-2">
                 AI & Data Intelligence Services
             </h2>
-            <p class="text-[#666666] ">
+            <p class="text-[#666666] dark:text-white dark:text-white ">
                 Unlock the power of data and AI to automate decisions, predict outcomes, and drive business growth.
                 We handle everything from strategy and pipelines to real-time analytics and model deployment.
             </p>
@@ -162,26 +211,31 @@
             <div class="flex flex-col gap-10 text-gray-800">
                 <!-- What We Offer -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>AI strategy development and roadmap planning</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Data engineering and pipeline automation</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Advanced analytics and machine learning model deployment</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Real-time dashboards and decision intelligence platforms</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>MLOps and model lifecycle management</span>
                         </li>
                     </ul>
@@ -189,36 +243,50 @@
 
                 <!-- Why Choose Us -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>AI-first approach tailored to business goals</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Proven frameworks for scalable data and ML operations</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Domain-specific use case accelerators</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Expertise in cloud-native AI and governance</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>End-to-end service from strategy to insight delivery</span>
                         </li>
                     </ul>
                     <div class="flex md:block justify-center">
                         <a href="AI_DI_Services.html">
-                            <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
-       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
-                                Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
-                            </button></a>
+                            <button class="font-semibold py-2 px-6 rounded-full flex items-center mt-5
+             bg-gradient-to-r from-[#8B8B8B] to-[#1783F7]
+             hover:from-[#787878] hover:to-[#0653A7]
+             text-white
+             dark:from-white dark:to-white
+             dark:hover:from-gray-200 dark:hover:to-gray-400
+             dark:text-black">
+                                Read More
+                                <img src="assets/getInArrow.svg" class="pl-2 theme-image" id="readMoreArrow"
+                                    data-light="assets/getInArrow.svg" data-dark="assets/updated/crossArrow.svg">
+                            </button>
+                        </a>
                     </div>
+
                 </div>
 
             </div>
@@ -227,13 +295,13 @@
 
 
     <!-- Application Developement Section-->
-    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF]">
+    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF] dark:bg-[#181818] transition-all duration-500 ease-in">
         <!-- Heading -->
         <div class="mb-10 text-left">
-            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] dark:text-white mb-2">
                 Application & Development Services
             </h2>
-            <p class="text-[#666666] ">
+            <p class="text-[#666666] dark:text-white ">
                 Design, build, and support powerful business applications with a focus on performance, scalability, and
                 user experience. From custom development to lifecycle management, we ensure your apps evolve with your
                 business.
@@ -252,26 +320,31 @@
             <div class="flex flex-col gap-10 text-gray-800">
                 <!-- What We Offer -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Custom application development (web, mobile, enterprise)</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Application modernization and migration</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>End-to-end product lifecycle management</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>API integration and microservices architecture</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Performance tuning and ongoing enhancements</span>
                         </li>
                     </ul>
@@ -279,34 +352,45 @@
 
                 <!-- Why Choose Us -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7]  dark:text-white text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>User-first design with enterprise-grade development</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Agile delivery and DevOps-driven processes</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Cross-platform expertise for seamless UX</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Rapid MVP to production pipeline</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Strong focus on scalability and security</span>
                         </li>
                     </ul>
                     <div class="flex md:block justify-center">
                         <a href="Application&DevelopementServices.html">
-                            <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
-       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
-                                Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
+                            <button class="font-semibold py-2 px-6 rounded-full flex items-center mt-5
+             bg-gradient-to-r from-[#8B8B8B] to-[#1783F7]
+             hover:from-[#787878] hover:to-[#0653A7]
+             text-white
+             dark:from-white dark:to-white
+             dark:hover:from-gray-200 dark:hover:to-gray-400
+             dark:text-black">
+                                Read More <img src="assets/getInArrow.svg" class="pl-2 theme-image" id="readMoreArrow"
+                                    data-light="assets/getInArrow.svg" data-dark="assets/updated/crossArrow.svg">
                             </button></a>
                     </div>
                 </div>
@@ -315,13 +399,13 @@
     </section>
 
     <!-- SAP Service Section-->
-    <section class="py-16 px-4 md:pl-20 bg-white">
+    <section class="py-16 px-4 md:pl-20 bg-white dark:bg-[#000000] transition-all duration-500 ease-in">
         <!-- Heading -->
         <div class="mb-10 text-left">
-            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] dark:text-white mb-2">
                 SAP Enterprise Services
             </h2>
-            <p class="text-[#666666] ">
+            <p class="text-[#666666] dark:text-white ">
                 Keep your SAP systems running smoothly with expert support across application performance, cloud
                 hosting, upgrades, and business continuity planning.</p>
         </div>
@@ -338,26 +422,31 @@
             <div class="flex flex-col gap-10 text-gray-800">
                 <!-- What We Offer -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>SAP BASIS and application management</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>SAP on Cloud hosting and optimization</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>SAP S/4HANA migration readiness and support</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Business continuity and disaster recovery planning</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Performance and version upgrades</span>
                         </li>
                     </ul>
@@ -365,34 +454,45 @@
 
                 <!-- Why Choose Us -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Certified SAP professionals with multi-industry experience</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Cloud-native SAP deployment expertise</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>End-to-end operational support with SLAs</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Risk-free migration strategy and governance</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Optimized for performance and business alignment</span>
                         </li>
                     </ul>
                     <div class="flex md:block justify-center">
                         <a href="SapEnterpriseServices.html">
-                            <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
-       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
-                                Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
+                            <button class="font-semibold py-2 px-6 rounded-full flex items-center mt-5
+             bg-gradient-to-r from-[#8B8B8B] to-[#1783F7]
+             hover:from-[#787878] hover:to-[#0653A7]
+             text-white
+             dark:from-white dark:to-white
+             dark:hover:from-gray-200 dark:hover:to-gray-400
+             dark:text-black">
+                                Read More <img src="assets/getInArrow.svg" class="pl-2 theme-image" id="readMoreArrow"
+                                    data-light="assets/getInArrow.svg" data-dark="assets/updated/crossArrow.svg">
                             </button></a>
                     </div>
                 </div>
@@ -400,15 +500,14 @@
         </div>
     </section>
 
-
     <!-- CRM Section-->
-    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF]">
+    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF] dark:bg-[#181818] transition-all duration-500 ease-in">
         <!-- Heading -->
         <div class="mb-10 text-left">
-            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] dark:text-white mb-2">
                 CRM & ERP Solutions
             </h2>
-            <p class="text-[#666666] ">
+            <p class="text-[#666666] dark:text-white ">
                 Connect customer engagement and business operations with smart, scalable CRM and ERP platforms tailored
                 to your needs.
             </p>
@@ -426,26 +525,31 @@
             <div class="flex flex-col gap-10 text-gray-800">
                 <!-- What We Offer -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Salesforce, Zoho, and Microsoft Dynamics CRM implementation</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>SAP, Oracle, and Microsoft Dynamics ERP support</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>System integration and automation</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Custom workflows and reporting dashboards</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>CRM and ERP security, compliance, and training</span>
                         </li>
                     </ul>
@@ -453,34 +557,45 @@
 
                 <!-- Why Choose Us -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Expertise in both CRM and ERP ecosystems</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Tailored configurations aligned to business needs</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Focus on automation and user adoption</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Secure and compliant architecture</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Data-driven personalization and reporting</span>
                         </li>
                     </ul>
                     <div class="flex md:block justify-center">
                         <a href="CRM&ERP_Services.html">
-                            <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
-       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
-                                Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
+                            <button class="font-semibold py-2 px-6 rounded-full flex items-center mt-5
+             bg-gradient-to-r from-[#8B8B8B] to-[#1783F7]
+             hover:from-[#787878] hover:to-[#0653A7]
+             text-white
+             dark:from-white dark:to-white
+             dark:hover:from-gray-200 dark:hover:to-gray-400
+             dark:text-black">
+                                Read More <img src="assets/getInArrow.svg" class="pl-2 theme-image" id="readMoreArrow"
+                                    data-light="assets/getInArrow.svg" data-dark="assets/updated/crossArrow.svg">
                             </button></a>
                     </div>
                 </div>
@@ -490,13 +605,13 @@
 
 
     <!-- Cloud Infra Section-->
-    <section class="py-16 px-4 md:pl-20 bg-white">
+    <section class="py-16 px-4 md:pl-20 bg-white dark:bg-black transition-all duration-500 ease-in">
         <!-- Heading -->
         <div class="mb-10 text-left">
-            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] dark:text-white mb-2">
                 Cloud Infrastructure Services
             </h2>
-            <p class="text-[#666666] ">
+            <p class="text-[#666666] dark:text-white ">
                 Deploy, scale, and manage your cloud environment (AWS, Azure, GCP) with ease—ensuring performance,
                 security, and cost-efficiency every step of the way.
             </p>
@@ -514,26 +629,31 @@
             <div class="flex flex-col gap-10 text-gray-800">
                 <!-- What We Offer -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Cloud strategy and architecture design</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Cloud migration and modernization</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Infrastructure as code and automation</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Monitoring, optimization, and governance</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Security and compliance management</span>
                         </li>
                     </ul>
@@ -542,34 +662,45 @@
 
                 <!-- Why Choose Us -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Cloud-agnostic approach across AWS, Azure, GCP</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Automated infrastructure and CI/CD pipelines</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Built-in security and performance monitoring</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Cost optimization and resource planning</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Seamless integration with enterprise systems</span>
                         </li>
                     </ul>
                     <div class="flex md:block justify-center">
                         <a href="CloudInfrastructureServices.html">
-                            <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
-       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
-                                Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
+                            <button class="font-semibold py-2 px-6 rounded-full flex items-center mt-5
+             bg-gradient-to-r from-[#8B8B8B] to-[#1783F7]
+             hover:from-[#787878] hover:to-[#0653A7]
+             text-white
+             dark:from-white dark:to-white
+             dark:hover:from-gray-200 dark:hover:to-gray-400
+             dark:text-black">
+                                Read More <img src="assets/getInArrow.svg" class="pl-2 theme-image" id="readMoreArrow"
+                                    data-light="assets/getInArrow.svg" data-dark="assets/updated/crossArrow.svg">
                             </button></a>
                     </div>
                 </div>
@@ -579,13 +710,13 @@
 
 
     <!-- Consulting Section-->
-    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF]">
+    <section class="py-16 px-4 md:pl-20 bg-[#F7FBFF] dark:bg-[#181818] transition-all duration-500 ease-in">
         <!-- Heading -->
         <div class="mb-10 text-left">
-            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] mb-2">
+            <h2 class="text-3xl md:text-4xl font-semibold text-[#687DA9] dark:text-white mb-2">
                 Consulting & Advisory Services
             </h2>
-            <p class="text-[#666666] ">
+            <p class="text-[#666666] dark:text-white ">
                 Drive innovation and digital maturity with strategic guidance across business and technology
                 domains—focused on sectors like energy, defence, BFSI, healthcare, and logistics.
             </p>
@@ -603,26 +734,31 @@
             <div class="flex flex-col gap-10 text-gray-800">
                 <!-- What We Offer -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">What We Offer</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">What We Offer</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Industry-specific digital transformation consulting</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>AI and data strategy development</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Technology architecture and innovation planning</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Process modernization and change management</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Regulatory and compliance consulting</span>
                         </li>
                     </ul>
@@ -630,26 +766,31 @@
 
                 <!-- Why Choose Us -->
                 <div>
-                    <h3 class="text-[#1783F7] text-base text-xl mb-4">Why Choose Us</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    <h3 class="text-[#1783F7] dark:text-white text-base text-xl mb-4">Why Choose Us</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Deep domain expertise in complex industries</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>End-to-end alignment of business and tech goals</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Strategic and execution-ready recommendations</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Flexible engagement models for advisory and execution</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image"></span>
                             <span>Trusted by leading enterprises and public sector clients
 
                             </span>
@@ -657,15 +798,22 @@
                     </ul>
                     <div class="flex md:block justify-center">
                         <a href="Consulting&AdvisoryServices.html">
-                            <button class=" text-white font-semibold py-2 px-6 rounded-full flex items-center mt-[20px] [background:linear-gradient(141deg,#8B8B8B_0%,#1783F7_100%)]
-       hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
-                                Read More <img src="assets/getInArrow.svg" class="pl-2"></img>
+                            <button class="font-semibold py-2 px-6 rounded-full flex items-center mt-5
+             bg-gradient-to-r from-[#8B8B8B] to-[#1783F7]
+             hover:from-[#787878] hover:to-[#0653A7]
+             text-white
+             dark:from-white dark:to-white
+             dark:hover:from-gray-200 dark:hover:to-gray-400
+             dark:text-black">
+                                Read More <img src="assets/getInArrow.svg" class="pl-2 theme-image" id="readMoreArrow"
+                                    data-light="assets/getInArrow.svg" data-dark="assets/updated/crossArrow.svg">
                             </button></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- Review Section -->
     <section class="flex justify-center py-12 px-4 bg-white pt-[150px] md:px-[130px] hidden">
         <div
@@ -696,7 +844,7 @@
 
             <!-- Arrows at bottom center -->
             <div class="flex justify-center gap-4 mt-8">
-                <button class="hover:text-[#1783F7] transition">
+                <button class="hover:text-[#1783F7] dark:text-white transition">
                     <img src="assets/arrowL.svg" alt="Previous">
                 </button>
                 <button class="hover:text-[#1783F7] transition">
@@ -707,16 +855,73 @@
     </section>
 
     <!-- Footer -->
-      <div id="footer"></div>
-  <script>
-    // Load footer dynamically
-    fetch("footer.html")
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("footer").innerHTML = data;
-      })
-      .catch(err => console.error("Error loading footer:", err));
-  </script>
+    <div id="footer"></div>
+    <script>
+        // Load footer dynamically
+        fetch("footer.html")
+            .then(res => res.text())
+            .then(data => {
+                const footerContainer = document.getElementById("footer");
+                footerContainer.innerHTML = data;
+
+                // After footer is added, initialize footer animations
+                initFooterAnimations();
+            })
+            .catch(err => console.error("Error loading footer:", err));
+
+        function initFooterAnimations() {
+            const footerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+                        setTimeout(() => {
+                            entry.target.classList.remove('opacity-0', 'translate-y-10');
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        }, delay);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            const footerElements = document.querySelectorAll('#footer [data-delay]');
+            footerElements.forEach(el => footerObserver.observe(el));
+            // Zoom-in animation for social icons
+            const socialIcons = document.querySelectorAll('#footer img'); // target your social icons
+            socialIcons.forEach(icon => {
+                icon.classList.add('scale-0', 'transition-transform', 'duration-700', 'ease-out');
+            });
+
+            const iconObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('scale-0');
+                        entry.target.classList.add('scale-100');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            socialIcons.forEach(icon => iconObserver.observe(icon));
+        }
+
+    </script>
+
+    <!-- Tailwind overrides -->
+    <style>
+        .opacity-100 {
+            opacity: 1;
+        }
+
+        .translate-y-0 {
+            transform: translateY(0);
+        }
+
+        .scale-0 {
+            transform: scale(0);
+        }
+
+        .scale-100 {
+            transform: scale(1);
+        }
+    </style>
 
 </body>
 
