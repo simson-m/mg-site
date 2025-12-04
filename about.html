@@ -25,33 +25,36 @@
 
           const toggle = document.getElementById('dark-mode-toggle');
           if (toggle) {
-              // Use change event on the checkbox
-              toggle.addEventListener('change', () => {
-                if (toggle.checked) {
-                  document.documentElement.classList.add('dark');
-                  localStorage.setItem('theme', 'dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                  localStorage.setItem('theme', 'light');
-                }
-                updateThemeImages();
-              });
-
-              // Set initial checkbox state based on localStorage
-              if (localStorage.getItem('theme') === 'dark') {
-                toggle.checked = true;
+            // Use change event on the checkbox
+            toggle.addEventListener('change', () => {
+              if (toggle.checked) {
                 document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
               }
-            }
-            // updateArrowImages();
-            function updateThemeImages() {
-              const isDark = document.documentElement.classList.contains("dark");
+              updateThemeImages();
+            });
 
-              document.querySelectorAll(".theme-image").forEach(img => {
-                const newSrc = isDark ? img.dataset.dark : img.dataset.light;
-                img.src = newSrc;
-              });
+            // Set initial checkbox state based on localStorage
+            if (localStorage.getItem('theme') === 'dark') {
+              toggle.checked = true;
+              document.documentElement.classList.add('dark');
+              updateThemeImages(); // <-- ADD THIS LINE
+            } else {
+              updateThemeImages(); // also handle light mode on first load
             }
+          }
+          // updateArrowImages();
+          function updateThemeImages() {
+            const isDark = document.documentElement.classList.contains("dark");
+
+            document.querySelectorAll(".theme-image").forEach(img => {
+              const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+              img.src = newSrc;
+            });
+          }
 
 
           // Highlight desktop links
@@ -184,7 +187,7 @@
   </style>
 </head>
 
-<body>
+<body class="dark:bg-black">
 
   <div id="navbar"></div>
 
@@ -209,7 +212,7 @@
     <div class="order-1 lg:order-2">
       <div class=" pl-[20px] pr-[10px] md:pr-0 md:pl-[60px]">
         <div
-          class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] dark:text-white text-3xl tracking-[0] leading-[39.6px]">
+          class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] dark:text-white text-3xl tracking-[0] leading-[39.6px] dark:text-opacity-80">
           Overview
         </div>
         <p
@@ -225,8 +228,8 @@
 
       </div>
       <div class="pl-[20px]  md:pl-[40px] pr-[10px] md:pr-0">
-        <div
-          class=" mt-[30px] [background:linear-gradient(132deg,rgba(234,249,253,0.5)_0%,rgba(222,248,255,0.5)_100%)] p-[20px] rounded-3xl">
+        <div class=" mt-[30px]  bg-[linear-gradient(132deg,rgba(234,249,253,0.5)_0%,rgba(222,248,255,0.5)_100%)]
+  dark:bg-[linear-gradient(91.52deg,rgba(161,161,161,0.5)_3.07%,rgba(24,24,24,0.5)_102.02%)] p-[20px] rounded-3xl">
           <div class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] dark:text-white text-3xl tracking-[0] leading-[39.6px]
                     ">
             Vision
@@ -241,8 +244,8 @@
         </div>
       </div>
       <div class="pl-[20px]  md:pl-[40px] pr-[10px] md:pr-0">
-        <div
-          class="mt-[30px] [background:linear-gradient(132deg,rgba(234,249,253,0.5)_0%,rgba(222,248,255,0.5)_100%)] p-[20px] rounded-3xl">
+        <div class="mt-[30px]  bg-[linear-gradient(132deg,rgba(234,249,253,0.5)_0%,rgba(222,248,255,0.5)_100%)]
+  dark:bg-[linear-gradient(91.52deg,rgba(161,161,161,0.5)_3.07%,rgba(24,24,24,0.5)_102.02%)] p-[20px] rounded-3xl">
           <div
             class=" [font-family:'Roboto',Helvetica] font-normal text-[#1783F7] dark:text-white text-3xl tracking-[0] leading-[39.6px]">
             Mission

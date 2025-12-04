@@ -8,7 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -18,6 +22,40 @@
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
+
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
 
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
@@ -38,6 +76,8 @@
                             link.classList.add("text-[#687DA9]");
                         }
                     });
+
+
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -118,12 +158,12 @@
     </style>
 </head>
 
-<body>
+<body class="dark:bg-black">
 
 
     <div id="navbar"></div>
 
-    <div class="w-full">
+    <div class="w-full ">
         <div class="relative h-[180px] md:h-[280px] w-full">
             <img src="assets/industryBanner.jpg" alt="Hero Background"
                 class="absolute inset-0 w-full h-full object-cover" />
@@ -137,7 +177,7 @@
     </div>
 
     <!-- Energy & Utilities Section-->
-    <section class="bg-white py-8 sm:py-12 lg:py-16">
+    <section class="bg-white dark:bg-black py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Heading + Image -->
@@ -152,12 +192,12 @@
             </div>
 
             <!-- Three Columns (manual borders) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-800">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-800 dark:text-white ">
 
                 <!-- Overview -->
                 <div>
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
-                    <p class="text-lg">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
+                    <p class="text-lg ">
                         We help energy providers and utility companies transition into intelligent, sustainable
                         enterprises.
                         Our AI-powered platforms and IoT integrations offer real-time insights into energy flow, asset
@@ -167,50 +207,68 @@
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
                 <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0 pt-[20px] md:pt-0">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B]  px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0 pt-[20px] md:pt-0">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Smart grid optimization and energy distribution modeling</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Predictive maintenance for transmission and distribution infrastructure</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>IoT-based smart meter data aggregation and real-time analytics</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Carbon emissions tracking and ESG reporting dashboards</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Outage management and disaster recovery automation</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact (no borders on mobile) -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0 border-gray-300 px-0 md:px-6">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Reduced energy loss and improved load balancing</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Faster fault detection and resolution</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Enhanced regulatory compliance and sustainability reporting</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Proactive asset lifecycle management</span>
                         </li>
                     </ul>
@@ -222,7 +280,7 @@
 
 
     <!-- HealthCare Section-->
-    <section class="bg-[#F7FBFF] py-8 sm:py-12 lg:py-16">
+    <section class="bg-[#F7FBFF] dark:bg-[#181818] py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Heading + Image -->
@@ -241,8 +299,8 @@
 
                 <!-- Overview -->
                 <div>
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
-                    <p class="text-lg">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
+                    <p class="text-lg dark:text-white">
                         Mindgraph enables healthcare providers to modernize operations and improve patient outcomes
                         through AI, secure data platforms, and predictive diagnostics. We support clinical
                         decision-making and operational efficiency.
@@ -251,50 +309,68 @@
 
                 <!-- Key Solutions -->
                 <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Predictive analytics for early diagnosis and patient risk scoring</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>AI-driven triage, treatment planning, and workflow automation</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Secure patient data integration across HIS, EHR, and wearable devices</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Medical image analysis using computer vision models</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>HIPAA-compliant infrastructure and access controls</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0 border-gray-300 px-0 md:px-6">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Reduced diagnosis time and improved treatment accuracy</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Streamlined patient journeys and reduced administrative overhead</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Improved care personalization and preventive healthcare delivery</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Stronger data security and regulatory alignment</span>
                         </li>
                     </ul>
@@ -307,7 +383,7 @@
 
 
     <!-- Airports Section-->
-    <section class="bg-white py-8 sm:py-12 lg:py-16">
+    <section class="bg-white dark:bg-black py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Heading + Image -->
@@ -326,8 +402,8 @@
 
                 <!-- Overview -->
                 <div>
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
-                    <p class="text-lg">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
+                    <p class="text-lg dark:text-white">
                         From landside to airside, we help airports digitize their infrastructure, optimize resource
                         allocation, and enhance the passenger experience. Our intelligent solutions support operational
                         visibility and real-time responsiveness.
@@ -336,50 +412,68 @@
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
                 <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Passenger flow analysis and queue prediction</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Predictive maintenance for runway and terminal equipment</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>AI-powered baggage handling and lost item tracking</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Smart terminal energy management and surveillance systems</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Integrated dashboards for turnaround and staff scheduling</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact (no borders on mobile) -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0 border-gray-300 px-0 md:px-6">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Reduced passenger wait times and operational delays</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Real-time situational awareness across airport systems</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Optimized use of resources and reduced operating costs</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Enhanced passenger safety, comfort, and satisfaction</span>
                         </li>
                     </ul>
@@ -392,7 +486,7 @@
 
 
     <!-- Banking Section-->
-    <section class="bg-[#F7FBFF] py-8 sm:py-12 lg:py-16">
+    <section class="bg-[#F7FBFF] dark:bg-[#181818] py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Heading + Image -->
@@ -412,8 +506,8 @@
 
                 <!-- Overview -->
                 <div>
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
-                    <p class="text-lg">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
+                    <p class="text-lg dark:text-white">
                         Mindgraph empowers financial institutions with AI-first digital solutions to reduce risk, detect
                         fraud, enhance customer journeys, and meet regulatory demands.
                     </p>
@@ -421,50 +515,68 @@
 
                 <!-- Key Solutions -->
                 <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Real-time fraud detection and transaction scoring using ML</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Credit risk modeling and financial forecasting</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Personalized banking experiences and customer 360 profiling</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>RegTech compliance automation and audit trails</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Chatbots and virtual agents for service efficiency</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0 border-gray-300 px-0 md:px-6">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Lower financial risk and reduced fraud-related losses</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Improved underwriting accuracy and faster approvals</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Increased customer retention and engagement</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Streamlined compliance reporting and risk governance</span>
                         </li>
                     </ul>
@@ -476,7 +588,7 @@
     </section>
 
     <!-- Telecom Section-->
-    <section class="bg-white py-8 sm:py-12 lg:py-16">
+    <section class="bg-white dark:bg-black py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Heading + Image -->
@@ -495,8 +607,8 @@
 
                 <!-- Overview -->
                 <div>
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
-                    <p class="text-lg">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
+                    <p class="text-lg dark:text-white">
                         We support telecom operators in improving service quality, customer retention, and network
                         intelligence with scalable AI and real-time data analytics.
                     </p>
@@ -504,50 +616,68 @@
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
                 <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Network performance monitoring and anomaly detection</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Churn prediction and subscriber behavior analytics</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Automated ticketing and self-healing workflows</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>5G resource orchestration and smart planning</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Customer sentiment and SLA tracking with NLP</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact (no borders on mobile) -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0 border-gray-300 px-0 md:px-6">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Enhanced service availability and customer satisfaction</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Data-driven customer retention strategies</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Optimized network investment and resource utilization</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Reduced manual intervention in support operations</span>
                         </li>
                     </ul>
@@ -561,7 +691,7 @@
 
 
     <!-- Manufacturing Section-->
-    <section class="bg-[#F7FBFF] py-8 sm:py-12 lg:py-16">
+    <section class="bg-[#F7FBFF] dark:bg-[#181818] py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Heading + Image -->
@@ -581,8 +711,8 @@
 
                 <!-- Overview -->
                 <div>
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Overview</h3>
-                    <p class="text-lg">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
+                    <p class="text-lg dark:text-white">
                         We help manufacturers digitize plant operations, optimize supply chains, and improve product
                         quality using AI and IoT-enabled solutions.
                     </p>
@@ -590,50 +720,68 @@
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
                 <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r border-gray-300 px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Key Solutions</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Predictive maintenance for production machinery</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Quality inspection using computer vision</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>AI-based production scheduling and capacity planning</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Connected factory insights via IoT data integration</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Supply chain risk analysis and automation</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact (no borders on mobile) -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0 border-gray-300 px-0 md:px-6">
-                    <h3 class="text-3xl text-[#1783F7] mb-2">Business Impact</h3>
-                    <ul class="space-y-2 text-[#666666]">
+                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                    <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
+                    <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Reduced unplanned downtime and maintenance costs</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Improved defect detection and product consistency</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Optimized throughput and on-time delivery</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg" /></span>
+                            <span><img src="assets/arrow.svg"
+                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
+                                class="theme-image" /></span>
                             <span>Real-time visibility into production and logistics</span>
                         </li>
                     </ul>

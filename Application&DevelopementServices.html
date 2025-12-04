@@ -11,7 +11,11 @@
     <!-- SwiperJS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -21,6 +25,40 @@
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
+
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
 
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
@@ -41,6 +79,8 @@
                             link.classList.add("text-[#687DA9]");
                         }
                     });
+
+
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -121,7 +161,7 @@
     </style>
 </head>
 
-<body class="bg-white text-[#1D1B20] overflow-x-hidden  max-w-full">
+<body class="bg-white dark:bg-black text-[#1D1B20] overflow-x-hidden  max-w-full transition-all duration-500 ease-in">
     <div id="navbar"></div>
 
     <!-- Hero Section -->
@@ -137,13 +177,13 @@
     </section>
 
     <!-- Overview Section -->
-    <section class="relative bg-white pb-12 px-4 sm:px-8 lg:px-16">
+    <section class="relative bg-white  dark:bg-black pb-12 px-4 sm:px-8 lg:px-16 transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
 
             <!-- Text Content -->
             <div class="md:w-1/2 mt-8 md:mt-0 order-2 md:order-1">
-                <h2 class="text-blue-600 text-xl font-semibold mb-4">Overview</h2>
-                <p class="text-[#667085] text-base leading-relaxed">
+                <h2 class="text-blue-600 dark:text-white text-xl font-semibold mb-4">Overview</h2>
+                <p class="text-[#667085] dark:text-white text-base leading-relaxed">
                     At Mindgraph, we specialize in building next-generation digital applications that fuel business
                     transformation and customer engagement. Whether you're launching a new product, modernizing a legacy
                     system, or enhancing user experiences, our end-to-end development services cover the full
@@ -165,25 +205,29 @@
 
             <!-- Left: White Content -->
             <div class="md:w-1/3 w-full px-6 py-12 lg:pl-[120px]">
-                <h3 class="text-[#1783F7] text-lg font-semibold mb-3">What We Offer</h3>
-                <p class="text-lg md:text-3xl text-[#687DA9]  font-medium leading-relaxed ">
+                <h3 class="text-[#1783F7] dark:text-white text-lg font-semibold mb-3">What We Offer</h3>
+                <p class="text-lg md:text-3xl text-[#687DA9] dark:text-white  font-medium leading-relaxed ">
                     Our comprehensive application development services are tailored to deliver robust, scalable, and
                     future-ready solutions
                 </p>
             </div>
 
             <!-- Right: Full-bleed Blue Panel -->
-            <div class="md:w-2/3 w-full px-6 py-12 md:rounded-tl-3xl md:rounded-bl-3xl md:pl-16 lg:pr-[220px] lg:ml-[100px]
-                bg-[linear-gradient(to_bottom_right,_#E8F5FF,_#FBFFFA,_#E8F1EF,_#D3ECFF)]">
+            <div
+                class="md:w-2/3 w-full px-6 py-12 md:rounded-tl-3xl md:rounded-bl-3xl md:pl-16 lg:pr-[220px] lg:ml-[100px]
+                bg-[linear-gradient(to_bottom_right,_#E8F5FF,_#FBFFFA,_#E8F1EF,_#D3ECFF)] dark:bg-none dark:bg-[#181818] transition-all duration-500 ease-in">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 max-w-6xl mx-auto">
 
                     <!-- Feature 1 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/apiServiceIcon1.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/apiServiceIcon1.svg" data-light="/assets/apiServiceIcon1.svg"
+                            data-dark="/assets/updated/apiServiceIcon1Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold  text-xl  text-[#687DA9] ">Custom Web, Mobile, and Enterprise App
+                            <h4 class="font-semibold  text-xl  text-[#687DA9] dark:text-white ">Custom Web, Mobile, and
+                                Enterprise App
                                 Development</h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Full-stack development of responsive, cross-platform applications that meet your
                                 business goals and technical requirements. </p>
                         </div>
@@ -191,12 +235,15 @@
 
                     <!-- Feature 2 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/apiServiceIcon2.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/apiServiceIcon2.svg" data-light="/assets/apiServiceIcon2.svg"
+                            data-dark="/assets/updated/apiServiceIcon2Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold text-xl text-[#687DA9] ">User Interface and Experience (UI/UX)
+                            <h4 class="font-semibold text-xl text-[#687DA9] dark:text-white ">User Interface and
+                                Experience (UI/UX)
                                 Design
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Human-centered design strategies focused on usability, accessibility, and aesthetic
                                 appeal to elevate customer satisfaction and brand consistency. </p>
                         </div>
@@ -204,11 +251,13 @@
 
                     <!-- Feature 3 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/apiServiceIcon3.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/apiServiceIcon3.svg" data-light="/assets/apiServiceIcon3.svg"
+                            data-dark="/assets/updated/apiServiceIcon3Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold text-xl text-[#687DA9] ">Platform Modernization
+                            <h4 class="font-semibold text-xl text-[#687DA9] dark:text-white ">Platform Modernization
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Migration of legacy systems to cloud-native, microservices-based architectures to
                                 enhance performance, maintainability, and agility.
                             </p>
@@ -217,11 +266,14 @@
 
                     <!-- Feature 4 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/apiServiceIcon4.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/apiServiceIcon4.svg" data-light="/assets/apiServiceIcon3.svg"
+                            data-dark="/assets/updated/apiServiceIcon4Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold text-xl text-[#687DA9]">API Development and Third-Party Integration
+                            <h4 class="font-semibold text-xl text-[#687DA9] dark:text-white">API Development and
+                                Third-Party Integration
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Development of secure APIs and seamless integration with enterprise systems, payment
                                 gateways, CRMs, and external data services. </p>
                         </div>
@@ -229,11 +281,14 @@
 
                     <!-- Feature 5 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/apiServiceIcon5.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/apiServiceIcon5.svg" data-light="/assets/apiServiceIcon5.svg"
+                            data-dark="/assets/updated/apiServiceIcon5Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold text-xl text-[#687DA9]">Agile Product Lifecycle and DevSecOps
+                            <h4 class="font-semibold text-xl text-[#687DA9] dark:text-white">Agile Product Lifecycle and
+                                DevSecOps
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Iterative development frameworks and secure CI/CD pipelines that ensure faster time to
                                 market, continuous improvement, and embedded security. </p>
                         </div>
@@ -248,8 +303,8 @@
     <section class="py-16 px-4 sm:px-8 lg:px-20">
         <!-- Title and Intro -->
         <div class="max-w-7xl mx-auto ">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Key Capabilities</h2>
-            <p class="text-[#667085] text-base sm:text-lg xl:pr-[400px]">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] dark:text-white mb-2">Key Capabilities</h2>
+            <p class="text-[#667085] dark:text-white text-base sm:text-lg xl:pr-[400px]">
                 Our technical expertise and domain experience enable us to build solutions that are both innovative and
                 enterprise-grade
         </div>
@@ -261,18 +316,19 @@
         </div>
 
         <div
-            class="relative max-w-7xl mx-auto bg-[#F8FBFE]   p-6 sm:p-10 flex flex-col lg:flex-row items-start gap-10 mt-[20px]">
+            class="relative max-w-7xl mx-auto bg-[#F8FBFE] dark:bg-[#181818] transition-all duration-500 ease-in   p-6 sm:p-10 flex flex-col lg:flex-row items-start gap-10 mt-[20px]">
 
             <!-- Left: Feature List -->
             <div class="w-full lg:w-2/3 space-y-8 lg:pr-[50px]">
                 <!-- Item 1 -->
                 <div class="flex items-start">
-                    <img src="assets/arrow.svg" class="mt-1">
+                    <img src="assets/arrow.svg" class="mt-1 theme-image" data-light="assets/arrow.svg"
+                        data-dark="assets/updated/crossArrowWhite.svg">
                     <div class="ml-2">
-                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] dark:text-white flex items-center gap-2">
                             Cross-Platform Mobile App Development
                         </h3>
-                        <p class="text-sm text-[#667085] mt-1">
+                        <p class="text-sm text-[#667085] dark:text-white mt-1">
                             Unified codebase applications built using React Native, Flutter, or Kotlin Multiplatform for
                             efficient development and consistent user experiences
                         </p>
@@ -281,12 +337,13 @@
 
                 <!-- Item 2 -->
                 <div class="flex items-start">
-                    <img src="assets/arrow.svg" class="mt-1">
+                    <img src="assets/arrow.svg" class="mt-1 theme-image" data-light="assets/arrow.svg"
+                        data-dark="assets/updated/crossArrowWhite.svg">
                     <div class="ml-2">
-                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] dark:text-white flex items-center gap-2">
                             Enterprise Portals & Dashboards
                         </h3>
-                        <p class="text-sm text-[#667085] mt-1">
+                        <p class="text-sm text-[#667085] dark:text-white mt-1">
                             Scalable web platforms tailored for internal and external stakeholders—whether for customer
                             self-service, employee productivity, or partner collaboration
                         </p>
@@ -295,13 +352,14 @@
 
                 <!-- Item 3 -->
                 <div class="flex items-start">
-                    <img src="assets/arrow.svg" class="mt-1">
+                    <img src="assets/arrow.svg" class="mt-1 theme-image" data-light="assets/arrow.svg"
+                        data-dark="assets/updated/crossArrowWhite.svg">
                     <div class="ml-2">
-                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] dark:text-white flex items-center gap-2">
                             Low-Code/No-Code Prototyping & MVP Validation
                         </h3>
 
-                        <p class="text-sm text-[#667085] mt-1">
+                        <p class="text-sm text-[#667085] dark:text-white mt-1">
                             Rapid development using platforms like OutSystems, Mendix, or PowerApps to build, test, and
                             iterate MVPs with minimal development overhead
                         </p>
@@ -310,12 +368,14 @@
 
                 <!-- Item 4 -->
                 <div class="flex items-start">
-                    <img src="assets/arrow.svg" class="mt-1">
+                    <img src="assets/arrow.svg" class="mt-1 theme-image" data-light="assets/arrow.svg"
+                        data-dark="assets/updated/crossArrowWhite.svg">
+
                     <div class="ml-2">
-                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9] dark:text-white flex items-center gap-2">
                             In-App Analytics & Engagement Tools
                         </h3>
-                        <p class="text-sm text-[#667085] mt-1">
+                        <p class="text-sm text-[#667085] dark:text-white mt-1">
                             Integration of real-time analytics, A/B testing, user behavior tracking, and personalization
                             engines to optimize product performance
                         </p>
@@ -338,8 +398,8 @@
     <section class="py-16 px-4 sm:px-8 lg:px-20 text-center">
         <!-- Title -->
         <div class="mb-12">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Why Choose Us</h2>
-            <p class="text-gray-600 text-base sm:text-lg">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] dark:text-white mb-2">Why Choose Us</h2>
+            <p class="text-gray-600 dark:text-white text-base sm:text-lg">
                 Mindgraph is the trusted development partner for companies looking to innovate fast, scale smart, and
                 stay secure
             </p>
@@ -358,17 +418,17 @@
                 <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
                     style="scroll-snap-align: start;">
                     <img src="/assets/api1.png" alt="AI Cloud" class="mb-4 object-contain" />
-                    <div class="relative z-10 bg-white mb-4">
+                    <div class="relative z-10 bg-white dark:bg-black mb-4 rounded-[50%]">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500  dark:border-white dark:text-white  flex items-center justify-center font-bold text-lg">
                             1
                         </span>
                     </div>
                     <div class="px-4">
-                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                        <h3 class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">
                             Agile Delivery with Rapid MVP-to-Product Evolution
                         </h3>
-                        <p class="text-sm text-[#667085]">
+                        <p class="text-sm text-[#667085] dark:text-white">
                             Accelerate your go-to-market journey with agile sprints, lean methodologies, and quick
                             iterations from prototype to production.
                         </p>
@@ -379,17 +439,17 @@
                 <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
                     style="scroll-snap-align: start;">
                     <img src="/assets/api2.png" alt="AI Delivery" class="mb-4 object-contain" />
-                    <div class="relative z-10 bg-white mb-4">
+                    <div class="relative z-10 bg-white dark:bg-black mb-4 rounded-[50%]">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500  dark:border-white dark:text-white flex items-center justify-center font-bold text-lg">
                             2
                         </span>
                     </div>
                     <div class="px-4">
-                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                        <h3 class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">
                             User-Centric Design with Business Impact
                         </h3>
-                        <p class="text-sm text-[#667085]">
+                        <p class="text-sm text-[#667085] dark:text-white">
                             Every application we build prioritizes user needs, resulting in higher adoption rates,
                             improved usability scores, and tangible ROI.
                         </p>
@@ -400,17 +460,17 @@
                 <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
                     style="scroll-snap-align: start;">
                     <img src="/assets/api3.png" alt="Modular" class="mb-4 object-contain" />
-                    <div class="relative z-10 bg-white mb-4">
+                    <div class="relative z-10 bg-white dark:bg-black mb-4 rounded-[50%]">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 dark:border-white dark:text-white  flex items-center justify-center font-bold text-lg">
                             3
                         </span>
                     </div>
                     <div class="px-4">
-                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                        <h3 class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">
                             Performance, Scalability & Security by Design
                         </h3>
-                        <p class="text-sm text-[#667085]">
+                        <p class="text-sm text-[#667085] dark:text-white">
                             Our applications are built to handle scale, ensure data security, and maintain peak
                             performance even under high load.
                         </p>
@@ -421,17 +481,17 @@
                 <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
                     style="scroll-snap-align: start;">
                     <img src="/assets/api4.png" alt="Security" class="mb-4 object-contain" />
-                    <div class="relative z-10 bg-white mb-4">
+                    <div class="relative z-10 bg-white dark:bg-black mb-4 rounded-[50%]">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 dark:border-white dark:text-white  flex items-center justify-center font-bold text-lg">
                             4
                         </span>
                     </div>
                     <div class="px-4">
-                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                        <h3 class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">
                             Integrated Ecosystem Ready
                         </h3>
-                        <p class="text-sm text-[#667085]">
+                        <p class="text-sm text-[#667085] dark:text-white">
                             Seamless alignment with modern cloud infrastructures (AWS, Azure, GCP), AI capabilities, and
                             enterprise systems like Salesforce, SAP, and Microsoft Dynamics.
                         </p>
@@ -444,10 +504,10 @@
         <!-- CTA -->
         <div class="border-t mt-16 mb-6 max-w-7xl mx-auto bg-[#C8C7CC]"></div>
         <div class="mt-12">
-            <p class="text-[#687DA9] text-3xl mb-2 md:px-[250px]">
+            <p class="text-[#687DA9] dark:text-white text-3xl mb-2 md:px-[250px]">
                 Let Mindgraph be your partner in creating intelligent, scalable, and delightful digital experiences
             </p>
-            <p class="text-[#1783F7] font-semibold text-2xl">
+            <p class="text-[#1783F7] dark:text-white font-semibold text-2xl">
                 Build faster. Launch smarter. Grow stronger
             </p>
         </div>

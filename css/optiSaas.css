@@ -10,7 +10,7 @@
 @media screen and (max-width: 769px) {
   .overview {
     /* height: 800px; */
-    margin-top: 30px;
+    padding-top: 30px;
     height: 630px;
   }
 }
@@ -70,7 +70,7 @@
   padding: 40px;
   justify-items: center;
   align-items: start;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .section-4 {
@@ -79,7 +79,7 @@
   justify-content: space-evenly;
   height: 640px;
   width: 100%;
-  margin-bottom: 35px;
+  padding-bottom: 35px;
 }
 
 .section-5 {

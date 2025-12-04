@@ -107,14 +107,14 @@ function renderContent() {
     let i = 0, bgClass;
    items.forEach(item => {
   if (i % 2 == 1) {
-    bgClass = "bg-[#F7FBFF]";
+    bgClass = "bg-[#F7FBFF] dark:bg-[#181818]";
   } else {
-    bgClass = "bg-white";
+    bgClass = "bg-white dark:bg-black";
   }
 
   contentEl.innerHTML += `
     <div class="${bgClass} p-6 sm:p-8 lg:px-[100px] lg:py-[60px] 
-                flex flex-col md:flex-row gap-6">
+                flex flex-col md:flex-row gap-6 transition-all duration-300 ease-in">
       
       <!-- Image -->
       <img src="assets/${item.image}" 
@@ -123,16 +123,16 @@ function renderContent() {
       
       <!-- Text Content -->
       <div class="flex-1">
-        <p class="text-sm text-[#1783F7] mb-2">${item.date}</p>
-        <h2 class="text-xl sm:text-2xl font-semibold text-[#055CC0] mb-2">
+        <p class="text-sm text-[#1783F7] dark:text-white mb-2">${item.date}</p>
+        <h2 class="text-xl sm:text-2xl font-semibold text-[#055CC0] dark:text-white mb-2">
           ${item.title}
         </h2>
-        <p class="text-[#667085] mb-4 text-sm sm:text-base">${item.description1}</p>
-        <p class="text-[#667085] mb-4 text-sm sm:text-base">${item.description2}</p>
+        <p class="text-[#667085] dark:text-white mb-4 text-sm sm:text-base">${item.description1}</p>
+        <p class="text-[#667085] dark:text-white mb-4 text-sm sm:text-base">${item.description2}</p>
         <a href="BlogDetail.html" 
-           class="text-[#1783F7] underline inline-flex items-center gap-1 text-sm sm:text-base">
+           class="text-[#1783F7] dark:text-white underline inline-flex items-center gap-1 text-sm sm:text-base">
           Read More
-          <img src="/assets/home/navarrow.svg" alt="arrow" class="w-5 h-5 sm:w-6 sm:h-6">
+          <img src="/assets/home/navarrow.svg" data-light="/assets/home/navarrow.svg" data-dark="assets/updated/darkNavIcon.svg"  alt="arrow" class="w-5 h-5   sm:w-6 sm:h-6 theme-image">
         </a>
       </div>
     </div>
@@ -154,7 +154,7 @@ function renderPagination() {
       onclick="goToPage(${currentPage - 1})"
       style="border: 2px solid #E8F0FC"
       class="p-2 rounded  text-bold text-[#0764E3]  hover:bg-gray-100 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}">
-      <img src="assets/LeftArrowIcon.svg" alt="arrow">
+      <img src="assets/LeftArrowIcon.svg"  data-light="assets/LeftArrowIcon.svg" data-dark="assets/updated/rightWhiteArrow.svg" alt="arrow" class="theme-image dark:h-4">
     </button></div>
   `;
 
@@ -163,7 +163,7 @@ function renderPagination() {
     for (let i = 1; i <= totalPages; i++) {
         content += `
       <button onclick="goToPage(${i})"
-        class="px-3 py-1 rounded-md border ${currentPage === i ? 'bg-[#1783F7] text-white' : 'text-[#0764E3] hover:bg-gray-100'}">
+        class="px-3 py-1 rounded-lg border ${currentPage === i ? 'bg-[#1783F7] dark:bg-white dark:text-black text-white' : 'text-[#0764E3]  hover:bg-gray-100 '}">
         ${i}
       </button>
     `;
@@ -175,8 +175,8 @@ function renderPagination() {
     <div><button ${currentPage === totalPages ? 'disabled' : ''}
       onclick="goToPage(${currentPage + 1})"
       style="border: 2px solid #E8F0FC"
-      class="p-2 rounded  text-[#0764E3] hover:bg-gray-100 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}">
-      <img src="assets/LeftArrowIcon.svg" alt="arrow" style="transform: rotate(180deg);">
+      class="p-2  rounded-lg  text-[#0764E3] hover:bg-gray-100 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}">
+      <img src="assets/LeftArrowIcon.svg"  data-light="assets/LeftArrowIcon.svg" data-dark="assets/updated/rightWhiteArrow.svg" class="theme-image dark:h-4" alt="arrow" style="transform: rotate(180deg);">
     </button></div>
   `;
 }

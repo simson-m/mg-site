@@ -10,19 +10,7 @@
     <script>
         /** @type {import('tailwindcss').Config} */
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        black: "var(--black)",
-                        gray: "var(--gray)",
-                        "textbody-text": "var(--textbody-text)",
-                    },
-                    fontFamily: {
-                        "body-body-1-regular": "var(--body-body-1-regular-font-family)",
-                    },
-                },
-            },
-            plugins: [],
+            darkMode: 'class',
         };
     </script>
 
@@ -42,16 +30,28 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Default view: Bangalore
-            const map = L.map("map").setView([12.9716, 77.5946], 10);
+            const map = L.map("map").setView([12.9550333, 77.7128925], 10);
 
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution:
-                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            }).addTo(map);
+            // Light mode tiles
+            const lightTiles = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                { attribution: '&copy; OpenStreetMap contributors' }
+            );
+
+            // Dark mode tiles (Carto Dark Matter)
+            const darkTiles = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                { attribution: '&copy; CARTO' }
+            );
+
+            // Add initial tiles
+            const isDark = document.documentElement.classList.contains("dark");
+            (isDark ? darkTiles : lightTiles).addTo(map);
+
 
             const locations = [
-                { name: "Coimbatore", coords: [11.0168, 76.9558], address: "Coimbatore, Tamil Nadu, India" },
-                { name: "Bangalore", coords: [12.9716, 77.5946], address: "Bangalore, Karnataka, India" },
+                { name: "Coimbatore", coords: [11.0005776,76.9588358], address: "Coimbatore, Tamil Nadu, India" },
+                { name: "Bangalore", coords: [12.9550333, 77.7128925], address: "Bangalore, Karnataka, India" },
                 { name: "Hyderabad", coords: [17.385, 78.4867], address: "Hyderabad, Telangana, India" },
                 { name: "Bhubaneswar", coords: [20.2961, 85.8245], address: "Bhubaneswar, Odisha, India" },
                 { name: "Kuala Lumpur", coords: [3.139, 101.6869], address: "Kuala Lumpur, Malaysia" },
@@ -192,6 +192,51 @@
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
 
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+
+
+                        if (window.map && window.lightTiles && window.darkTiles) {
+                            if (isDark) {
+                                map.removeLayer(lightTiles);
+                                map.addLayer(darkTiles);
+                            } else {
+                                map.removeLayer(darkTiles);
+                                map.addLayer(lightTiles);
+                            }
+                        }
+                    }
+
+
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
                         const linkPath = new URL(link.href).pathname;
@@ -211,6 +256,8 @@
                             link.classList.add("text-[#687DA9]");
                         }
                     });
+
+
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -254,7 +301,7 @@
     </script>
 </head>
 
-<body>
+<body class="dark:bg-black">
 
     <div id="navbar"></div>
 
@@ -272,25 +319,28 @@
         </div>
     </div>
 
-    <div
-        class="min-h-screen flex items-center justify-center  [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] py-16">
+    <div class="min-h-screen flex items-center justify-center  
+     bg-[linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)]
+         dark:bg-none dark:bg-[#181818]
+            py-16">
         <div class="container mx-auto flex flex-col lg:flex-row gap-10 px-6 lg:px-[200px]">
             <!-- Left Column: Text Content -->
             <div class="lg:w-1/2">
-                <h2 class="text-4xl font-bold text-[#687DA9] mb-4">Get in Touch</h2>
-                <p class="text-[#667085] mb-6">
+                <h2 class="text-4xl font-bold text-[#687DA9] dark:text-white mb-4">Get in Touch</h2>
+                <p class="text-[#667085] dark:text-white mb-6">
                     At Mindgraph, we’re dedicated to providing innovative solutions to meet your unique
                     challenges. Whether you have questions, need support, or want to explore how our services
                     can benefit you, we’re here to help.
                     <br>
                     <br>
-                    <a href="mailto:info@mind-graph.com" class="text-[#687DA9] hover:underline">info@mind-graph.com</a>
+                    <a href="mailto:info@mind-graph.com"
+                        class="text-[#687DA9] font-extrabold dark:text-white hover:underline dark:opacity-70">info@mind-graph.com</a>
                 </p>
-                <div class="flex flex-col md:flex-row gap-6 mt-[60px] hidden md:block">
+                <div class="flex flex-col md:flex-row gap-6 mt-[60px] hidden md:flex">
                     <!-- Contact Support -->
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
-                        <p class="text-[#667085]">
+                        <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Contact Support</h3>
+                        <p class="text-[#667085] dark:text-white dark:opacity-70">
                             At Mindgraph, your satisfaction is our top priority. Our dedicated support team
                             is ready to assist you promptly with any technical issues, billing inquiries, or
                             service needs.
@@ -298,8 +348,9 @@
                     </div>
                     <!-- Feedback & Suggestions -->
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
-                        <p class="text-[#667085]">
+                        <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Feedback & Suggestions
+                        </h3>
+                        <p class="text-[#667085] dark:text-white dark:opacity-70">
                             We value your feedback and suggestions to help us improve. Share your ideas for
                             enhancing our services or new features you’d like to see to create better experiences
                             for all our clients.
@@ -376,7 +427,7 @@
         </div>
     </div>
 
-    <div class="w-full flex justify-center px-4 sm:px-6 md:px-8 lg:px-16 py-12">
+    <div class="w-full flex justify-center px-4 sm:px-6 md:px-8 lg:px-16 py-12 dark:bg-black">
         <div class="w-full max-w-6xl">
             <div class="flex flex-col lg:flex-row">
                 <!-- Left Part: Map Section -->
@@ -387,7 +438,7 @@
                 <!-- Right Part: Locations List -->
                 <div class="lg:w-2/5 md:p-4 pl-[10px] md:pl-0  md:p-8 flex flex-col md:items-center order-1 md:order-2">
                     <h3 class="text-lg font-semibold text-[#1783F7] mb-4">Our Locations</h3>
-                    <ul class="space-y-4 text-[#5F6368] md:pl-[60px] ">
+                    <ul class="space-y-4 text-[#5F6368] dark:text-white md:pl-[60px] ">
                         <li class="hover:text-[#202124]" data-location="Bangalore">Bangalore, India</li>
                         <li class="hover:text-[#202124]" data-location="Hyderabad">Hyderabad, India</li>
                         <li class="hover:text-[#202124]" data-location="Kuala Lumpur">Kuala Lumpur, Malaysia</li>

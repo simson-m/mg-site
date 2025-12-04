@@ -8,7 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -17,8 +21,41 @@
                 .then((data) => {
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
-
                     const currentPath = window.location.pathname;
+
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
 
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
@@ -26,7 +63,7 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white dark:text-white dark:text-white dark:text-white dark:text-white  dark:text-white");
                         }
                     });
 
@@ -36,9 +73,11 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white dark:text-white dark:text-white dark:text-white dark:text-white  dark:text-white");
                         }
                     });
+
+
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -118,32 +157,41 @@
     </style>
 </head>
 
-<body class="bg-white ">
+<body class="bg-white dark:bg-black transition-all duration-500 ease-in">
 
     <div id="navbar"></div>
 
 
     <!-- Hero Banner Section-->
-    <div class=" flex flex-col md:flex-row " style="width: 100%;">
+    <div class=" flex flex-col md:flex-row transition-all duration-500 ease-in" style="width: 100%;">
         <div
             class="flex flex-col justify-center  pl-[20px] md:pl-[50px] pr-[3px] md:pr-[180px]  md:w-[50%] mt-[70px] md:mt-0 ">
             <div>
-                <img src="assets/smartSustainLogo.svg" class="h-[35px] max-w-lg md:max-w-full md:items-start">
+                <img src="assets/smartSustainLogo.svg" data-light="assets/smartSustainLogo.svg"
+                    data-dark="assets/updated/smartSustainLogoDark.svg"
+                    class="h-[35px] max-w-lg md:max-w-full md:items-start theme-image">
             </div>
 
             <div class="">
-                <p class="text-[#1783F7] text-[35px] md:text-5xl mt-4 font-semibold">AI-Powered ESG Platform for a
+                <p class="text-[#1783F7] dark:text-white text-[35px] md:text-5xl mt-4 font-semibold">AI-Powered ESG
+                    Platform for a
                     Greener Tomorrow</p>
-                <p class="text-[#667085] md:text-lg mt-4">Track, assess, and improve your sustainability performance
+                <p class="text-[#667085] dark:text-white md:text-lg mt-4">Track, assess, and improve your sustainability
+                    performance
                     with
                     real-time ESG dashboards, intelligent assessments, and global reporting standards—all in one
                     powerful platform.</p>
             </div>
 
-            <button class="mt-6  w-[240px] text-white font-semibold py-3 px-8 rounded-full flex items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
-                hover:[background:linear-gradient(141deg,#787878_0%,#0653A7_100%)]">
+            <button class="mt-6  w-[240px] text-white dark:text-black font-semibold py-3 px-8 rounded-full flex items-center 
+                bg-[linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                hover:bg-[linear-gradient(141deg,#787878_0%,#0653A7_100%)] 
+                dark:bg-none dark:bg-white  
+                dark:bg-gradient-to-r dark:from-white dark:to-gray-100
+         dark:text-black dark:hover:from-gray-200 dark:hover:to-gray-400">
                 Talk to Our Experts
-                <img src="assets/getInArrow.svg" alt="Arrow" class="ml-2  h-3">
+                <img src="assets/getInArrow.svg" data-light="assets/getInArrow.svg"
+                    data-dark="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2  h-3 theme-image">
             </button>
         </div>
         <div class="mt-[50px] md:mt-0">
@@ -152,21 +200,22 @@
     </div>
 
     <!-- What is smart sustain Section-->
-    <div class="mt-[100px] md:mx-[40px]">
-        <div class="flex flex-col justify-center items-center xl:px-[370px] lg:px-[150px] px-[20px]">
-            <h2 class="text-[#1783F7] font-bold text-2xl">What is SmartSustain.AI?</h2>
-            <p class="text-[#687DA9] text-center text-5xl mt-4">Designed for Responsible Growth</p>
-            <p class="text-[#667085] text-center mt-4">SmartSustain.AI is an advanced ESG management platform designed
+    <div class="">
+        <div class="pt-[100px] md:px-[40px] flex flex-col justify-center items-center xl:px-[370px] lg:px-[150px] px-[20px] dark:bg-[#181818] md:pb-[50px]">
+            <h2 class="text-[#1783F7] dark:text-white font-bold text-2xl">What is SmartSustain.AI?</h2>
+            <p class="text-[#687DA9] dark:text-white text-center text-5xl mt-4">Designed for Responsible Growth</p>
+            <p class="text-[#667085] dark:text-white text-center mt-4">SmartSustain.AI is an advanced ESG management
+                platform designed
                 to help organizations measure, report, and improve their environmental and social impact. With
                 category-specific dashboards and intelligent tools, businesses can align with global standards, assess
                 readiness, and set actionable sustainability goals.</p>
         </div>
-        <div class="grid md:grid-cols-2 px-[20px] md:px-[30px] mt-[80px]">
+        <div class="grid md:grid-cols-2 px-[20px] md:px-[40px] pt-[80px]">
             <div class="lg:pr-[80px]">
-                <h2 class="text-[#687DA9] text-3xl font-bold">
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold">
                     Why Choose SmartSustain.AI?
                 </h2>
-                <ul style="list-style: disc;" class="text-[#666666] mt-4 pl-[20px]">
+                <ul style="list-style: disc;" class="text-[#666666] dark:text-white mt-4 pl-[20px]">
                     <li>Unified ESG Dashboards – All your data in one place, clearly visualized</li>
                     <li>Global Standards Compliance – GRI, ISSB, and more</li>
                     <li>Customizable & Scalable – Fits diverse industries and regulatory needs</li>
@@ -177,10 +226,10 @@
             </div>
 
             <div class="lg:pr-[80px] mt-[50px] md:mt-0">
-                <h2 class="text-[#687DA9] text-3xl font-bold">
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold">
                     Ideal For
                 </h2>
-                <ul style="list-style: disc;" class="text-[#666666] mt-4 pl-[20px]">
+                <ul style="list-style: disc;" class="text-[#666666] dark:text-white mt-4 pl-[20px]">
                     <li>Sustainability & ESG Managers</li>
                     <li>Compliance Teams</li>
                     <li>CSR and Impact Reporting Teams</li>
@@ -198,59 +247,67 @@
     </div>
 
     <!-- Key Features  Section-->
-    <div class="mt-[100px] mx-[10px] md:mx-[0px] bg-[#F6FAFF] pt-[30px] pb-[50px]">
+    <div class="mt-[100px] mx-[10px] md:mx-[0px] bg-[#F6FAFF] dark:bg-[#181818] pt-[30px] pb-[50px] transition-all duration-500 ease-in">
         <div class="flex flex-col justify-center items-center lg:px-[400px]">
-            <h2 class="text-[#1783F7] text-2xl">Key Features</h2>
-            <p class="text-[#687DA9] text-center  text-5xl mt-4">
+            <h2 class="text-[#1783F7] dark:text-white text-2xl">Key Features</h2>
+            <p class="text-[#687DA9] dark:text-white text-center  text-5xl mt-4">
                 Smarter ESG Decisions, Backed by Real-Time Data and AI
             </p>
         </div>
 
         <div class="grid md:grid-cols-3 px-[20px]  md:px-[50px] mt-[80px]">
             <div class="lg:pr-[80px]">
-                <h2 class="text-[#687DA9] text-3xl font-bold">Scope 1, 2, and 3 Emissions Dashboards</h2>
-                <p class="text-[#667085] mt-6 md:mt-4">Visualize and manage your direct and indirect emissions data in
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold">Scope 1, 2, and 3 Emissions Dashboards
+                </h2>
+                <p class="text-[#667085] dark:text-white mt-6 md:mt-4">Visualize and manage your direct and indirect
+                    emissions data in
                     real time
                 </p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-0">
-                <h2 class="text-[#687DA9] text-3xl font-bold">Waste & Water Management</h2>
-                <p class="text-[#667085] mt-6 md:mt-4">Track resource usage, monitor disposal trends, and implement
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold">Waste & Water Management</h2>
+                <p class="text-[#667085] dark:text-white mt-6 md:mt-4">Track resource usage, monitor disposal trends,
+                    and implement
                     conservation
                     strategies</p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-0">
-                <h2 class="text-[#687DA9] text-3xl font-bold pr-[100px]">Maturity Assessment</h2>
-                <p class="text-[#667085] mt-6 md:mt-4">Evaluate your organization’s ESG readiness across key
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold pr-[100px]">Maturity Assessment</h2>
+                <p class="text-[#667085] dark:text-white mt-6 md:mt-4">Evaluate your organization’s ESG readiness across
+                    key
                     sustainability
                     dimensions</p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-[80px]">
-                <h2 class="text-[#687DA9] text-3xl font-bold">Peer Benchmarking</h2>
-                <p class="text-[#667085] mt-6 md:mt-4">Compare ESG performance with industry peers to identify gaps and
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold">Peer Benchmarking</h2>
+                <p class="text-[#667085] dark:text-white mt-6 md:mt-4">Compare ESG performance with industry peers to
+                    identify gaps and
                     opportunities</p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-[80px] md:ml-[30px] ml-0 lg:ml-0">
-                <h2 class="text-[#687DA9] text-3xl font-bold">Target Setting</h2>
-                <p class="text-[#667085] mt-6 md:mt-4">Define clear sustainability objectives and track progress against
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold">Target Setting</h2>
+                <p class="text-[#667085] dark:text-white mt-6 md:mt-4">Define clear sustainability objectives and track
+                    progress against
                     them
                 </p>
             </div>
 
             <div class="lg:pr-[80px] mt-[40px] md:mt-[80px]">
-                <h2 class="text-[#687DA9] text-3xl font-bold">GRI Framework</h2>
-                <p class="text-[#667085] mt-6 md:mt-4">Align reporting with the Global Reporting Initiative standards
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold">GRI Framework</h2>
+                <p class="text-[#667085] dark:text-white mt-6 md:mt-4">Align reporting with the Global Reporting
+                    Initiative standards
                     for
                     transparency</p>
             </div>
             <div></div>
             <div class="lg:pr-[80px] mt-[80px] ">
-                <h2 class="text-[#687DA9] text-3xl font-bold">ISSB Gap Assessment</h2>
-                <p class="text-[#667085] mt-6 md:mt-4">Identify reporting gaps and align with ISSB sustainability
+                <h2 class="text-[#687DA9] dark:text-white text-3xl font-bold">ISSB Gap Assessment</h2>
+                <p class="text-[#667085] dark:text-white mt-6 md:mt-4">Identify reporting gaps and align with ISSB
+                    sustainability
                     disclosure
                     standards</p>
             </div>
@@ -258,7 +315,7 @@
         </div>
     </div>
 
-    <div class="flex justify-center">
+    <div class="flex justify-center dark:bg-[#181818] md:pb-[20px] transition-all duration-500 ease-in">
         <img src="assets/issbGap.png">
     </div>
 
@@ -292,10 +349,10 @@
 
             <!-- Arrows at bottom center -->
             <div class="flex justify-center gap-4 mt-8">
-                <button class="hover:text-[#1783F7] transition">
+                <button class="hover:text-[#1783F7] dark:text-white transition">
                     <img src="assets/arrowL.svg" alt="Previous">
                 </button>
-                <button class="hover:text-[#1783F7] transition">
+                <button class="hover:text-[#1783F7] dark:text-white transition">
                     <img src="assets/arrowR.svg" alt="Next">
                 </button>
             </div>

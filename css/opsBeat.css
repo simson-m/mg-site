@@ -84,8 +84,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
-  padding-top: 30px;
+  /* margin-top: 80px; */
+  padding-top: 110px;
   /* margin-bottom: 30px; */
 }
 
@@ -121,9 +121,9 @@
 .section-between {
 
   justify-content: start;
-  margin-top: 80px;
-  margin-bottom: 30px;
-  margin-left: 50px;
+  padding: 80px;
+  padding-bottom: 30px;
+  padding-left: 50px;
 }
 
 .section-between-2 {

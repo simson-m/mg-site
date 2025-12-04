@@ -11,7 +11,11 @@
     <!-- SwiperJS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -22,13 +26,47 @@
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
 
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
+
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
                         const linkPath = new URL(link.href).pathname;
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9]  dark:text-white");
                         }
                     });
 
@@ -38,9 +76,11 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9]  dark:text-white");
                         }
                     });
+
+
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -121,7 +161,7 @@
     </style>
 </head>
 
-<body class="bg-white text-[#1D1B20] overflow-x-hidden  max-w-full">
+<body class="bg-white dark:bg-black text-[#1D1B20] overflow-x-hidden  max-w-full  transition-all duration-500 ease-in">
     <div id="navbar"></div>
 
     <!-- Hero Section -->
@@ -136,13 +176,14 @@
     </section>
 
     <!-- Overview Section -->
-    <section class="relative bg-white pb-12 px-4 sm:px-8 lg:px-16 mt-[30px] lg:mt-0 ">
+    <section
+        class="relative bg-white dark:bg-black pb-12 px-4 sm:px-8 lg:px-16 mt-[30px] lg:mt-0  transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
 
             <!-- Text Content -->
             <div class="md:w-1/2 mt-8 md:mt-0 order-2 md:order-1">
-                <h2 class="text-blue-600 text-xl font-semibold mb-4">Overview</h2>
-                <p class="text-[#667085] text-base leading-relaxed">
+                <h2 class="text-blue-600 dark:text-white text-xl font-semibold mb-4">Overview</h2>
+                <p class="text-[#667085] dark:text-white text-base leading-relaxed">
                     At Mindgraph, we help organizations build, scale, and secure cloud environments that drive agility,
                     resilience, and cost efficiency. Our Cloud Infrastructure Services are designed to modernize
                     traditional IT operations and support business transformation. Whether you're operating in AWS,
@@ -164,26 +205,30 @@
 
             <!-- Left: White Content -->
             <div class="md:w-1/3 w-full px-6 py-12 lg:pl-[120px]">
-                <h3 class="text-[#1783F7] text-lg font-semibold mb-3">What We Offer</h3>
-                <p class="text-lg md:text-3xl text-[#687DA9] font-medium leading-relaxed ">
+                <h3 class="text-[#1783F7] dark:text-white text-lg font-semibold mb-3">What We Offer</h3>
+                <p
+                    class="text-lg md:text-3xl text-[#687DA9]  dark:text-white dark:text-white font-medium leading-relaxed ">
                     Our offerings cover every phase of cloud adoption, enabling you to accelerate transformation while
                     maintaining control and compliance
                 </p>
             </div>
 
             <!-- Right: Full-bleed Blue Panel -->
-            <div class="md:w-2/3 w-full px-6 py-12 md:rounded-tl-3xl md:rounded-bl-3xl md:pl-16 lg:pr-[220px] lg:ml-[100px]
-                bg-[linear-gradient(to_bottom_right,_#E8F5FF,_#FBFFFA,_#E8F1EF,_#D3ECFF)]">
+            <div
+                class="md:w-2/3 w-full px-6 py-12 md:rounded-tl-3xl md:rounded-bl-3xl md:pl-16 lg:pr-[220px] lg:ml-[100px]
+                bg-[linear-gradient(to_bottom_right,_#E8F5FF,_#FBFFFA,_#E8F1EF,_#D3ECFF)] dark:bg-none dark:bg-[#181818] transition-all duration-500 ease-in">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 max-w-6xl mx-auto">
 
                     <!-- Feature 1 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/cloudIcon1.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/cloudIcon1.svg" data-light="/assets/cloudIcon1.svg"
+                            data-dark="/assets/updated/cloudIcon1Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold  text-xl  text-[#687DA9]">
+                            <h4 class="font-semibold  text-xl  text-[#687DA9]  dark:text-white ">
                                 Cloud Readiness Assessment & Architecture Design
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Evaluate your current infrastructure, define a cloud adoption roadmap, and design
                                 scalable, secure architectures tailored to business needs.
                             </p>
@@ -192,12 +237,14 @@
 
                     <!-- Feature 2 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/cloudIcon2.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/cloudIcon2.svg" data-light="/assets/cloudIcon2.svg"
+                            data-dark="/assets/updated/cloudIcon2Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold text-xl text-[#687DA9]">
+                            <h4 class="font-semibold text-xl text-[#687DA9]  dark:text-white ">
                                 Cloud Migration & Hybrid Cloud Enablement
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Execute smooth and secure migrations of workloads, applications, and databases with
                                 minimal downtime. Enable hybrid models for flexibility and continuity.
                             </p>
@@ -206,12 +253,15 @@
 
                     <!-- Feature 3 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/cloudIcon3.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/cloudIcon3.svg" data-light="/assets/cloudIcon3.svg"
+                            data-dark="/assets/updated/cloudIcon3Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold text-xl text-[#687DA9]">Infrastructure as Code (IaC) & DevOps
+                            <h4 class="font-semibold text-xl text-[#687DA9]  dark:text-white ">Infrastructure as Code
+                                (IaC) & DevOps
                                 Automation
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Automate infrastructure provisioning and management using tools like Terraform, Ansible,
                                 and CloudFormation—aligned with CI/CD practices.
                             </p>
@@ -220,11 +270,14 @@
 
                     <!-- Feature 4 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/cloudIcon4.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/cloudIcon4.svg" data-light="/assets/cloudIcon4.svg"
+                            data-dark="/assets/updated/cloudIcon4Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold text-xl text-[#687DA9]">Cloud Monitoring, Security & Governance
+                            <h4 class="font-semibold text-xl text-[#687DA9]  dark:text-white ">Cloud Monitoring,
+                                Security & Governance
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Implement real-time monitoring, automated threat detection, and cloud-native security
                                 controls for visibility, compliance, and risk mitigation. </p>
                         </div>
@@ -232,11 +285,14 @@
 
                     <!-- Feature 5 -->
                     <div class=" items-start gap-3">
-                        <img src="/assets/cloudIcon5.svg" alt="Icon" class="w-[35px] h-[45px] mt-1" />
+                        <img src="/assets/cloudIcon5.svg" data-light="/assets/cloudIcon5.svg"
+                            data-dark="/assets/updated/cloudIcon5Dark.svg" alt="Icon"
+                            class="w-[35px] h-[45px] mt-1 theme-image" />
                         <div>
-                            <h4 class="font-semibold text-xl text-[#687DA9]">Cost Control & Performance Optimization
+                            <h4 class="font-semibold text-xl text-[#687DA9]  dark:text-white ">Cost Control &
+                                Performance Optimization
                             </h4>
-                            <p class="text-base text-[#667085] mt-4">
+                            <p class="text-base text-[#667085] dark:text-white mt-4">
                                 Optimize cloud resources, eliminate waste, and right-size infrastructure to align with
                                 usage patterns and budget goals. </p>
                         </div>
@@ -252,29 +308,31 @@
         <!-- Title and Intro -->
         <div class="max-w-7xl mx-auto mb-1 ">
             <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Key Capabilities</h2>
-            <p class="text-[#667085] text-base sm:text-lg xl:pr-[700px]">
+            <p class="text-[#667085] dark:text-white text-base sm:text-lg xl:pr-[700px]">
                 We bring deep cloud engineering expertise and automation-first practices to every engagement</p>
         </div>
 
         <div class="w-full lg:w-1/3 flex justify-center lg:justify-end lg:-mt-20 z-10 md:hidden">
-            <div class="max-w-sm lg:max-w-md  overflow-hidden bg-white px-[20px] pt-[10px]">
+            <div
+                class="max-w-sm lg:max-w-md  overflow-hidden bg-white dark:bg-none dark:bg-[#181818] px-[20px] pt-[10px]">
                 <img src="/assets/capabilitiesCloud.png" alt="AI Hand"
                     class="md:w-full md:h-auto object-cover aspect-square" />
             </div>
         </div>
         <div
-            class="relative max-w-7xl mx-auto bg-[#F8FBFE]   p-6 sm:p-10 flex flex-col lg:flex-row items-start gap-10 mt-[40px]">
+            class="relative max-w-7xl mx-auto bg-[#F8FBFE] dark:bg-none dark:bg-[#181818] transition-all duration-500 ease-in   p-6 sm:p-10 flex flex-col lg:flex-row items-start gap-10 mt-[40px]">
 
             <!-- Left: Feature List -->
             <div class="w-full lg:w-2/3 space-y-8 lg:pr-[50px]">
                 <!-- Item 1 -->
                 <div class="flex items-start">
-                    <img src="assets/arrow.svg" class="mt-1">
+                    <img src="assets/arrow.svg" class="mt-1 theme-image" data-light="assets/arrow.svg"
+                        data-dark="assets/updated/crossArrowWhite.svg">
                     <div class="ml-2">
-                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9]  dark:text-white flex items-center gap-2">
                             Multi-Cloud Expertise (AWS, Azure, GCP)
                         </h3>
-                        <p class="text-sm text-[#667085] mt-1">
+                        <p class="text-sm text-[#667085] dark:text-white mt-1">
                             Proven delivery across all major public cloud providers with hybrid and multi-cloud strategy
                             support.
                         </p>
@@ -283,11 +341,12 @@
 
                 <!-- Item 2 -->
                 <div class="flex items-start">
-                    <img src="assets/arrow.svg" class="mt-1">
+                    <img src="assets/arrow.svg" class="mt-1 theme-image" data-light="assets/arrow.svg"
+                        data-dark="assets/updated/crossArrowWhite.svg">
                     <div class="ml-2">
-                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9]  dark:text-white flex items-center gap-2">
                             Automated Pipelines & Backup Strategies </h3>
-                        <p class="text-sm text-[#667085] mt-1">
+                        <p class="text-sm text-[#667085] dark:text-white mt-1">
                             Set up fully automated deployment pipelines, disaster recovery setups, and backup systems to
                             ensure business continuity.
                         </p>
@@ -296,12 +355,13 @@
 
                 <!-- Item 3 -->
                 <div class="flex items-start">
-                    <img src="assets/arrow.svg" class="mt-1">
+                    <img src="assets/arrow.svg" class="mt-1 theme-image" data-light="assets/arrow.svg"
+                        data-dark="assets/updated/crossArrowWhite.svg">
                     <div class="ml-2">
-                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9]  dark:text-white flex items-center gap-2">
                             Security, Compliance & Access Control</h3>
 
-                        <p class="text-sm text-[#667085] mt-1">
+                        <p class="text-sm text-[#667085] dark:text-white mt-1">
                             Design robust role-based access controls (RBAC), encryption protocols, identity management,
                             and regulatory compliance frameworks (e.g., HIPAA, GDPR, SOC 2).
                     </div>
@@ -309,12 +369,13 @@
 
                 <!-- Item 4 -->
                 <div class="flex items-start">
-                    <img src="assets/arrow.svg" class="mt-1">
+                    <img src="assets/arrow.svg" class="mt-1 theme-image" data-light="assets/arrow.svg"
+                        data-dark="assets/updated/crossArrowWhite.svg">
                     <div class="ml-2">
-                        <h3 class="text-lg font-semibold text-[#687DA9] flex items-center gap-2">
+                        <h3 class="text-lg font-semibold text-[#687DA9]  dark:text-white flex items-center gap-2">
                             Real-Time Monitoring & Auto-Scaling
                         </h3>
-                        <p class="text-sm text-[#667085] mt-1">
+                        <p class="text-sm text-[#667085] dark:text-white mt-1">
                             Enable intelligent scaling and real-time resource usage insights to maintain application
                             performance and avoid over-provisioning.
                         </p>
@@ -336,8 +397,8 @@
     <section class="py-16 px-4 sm:px-8 lg:px-20 text-center">
         <!-- Title -->
         <div class="mb-12">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] mb-2">Why Choose Us</h2>
-            <p class="text-gray-600 text-base sm:text-lg">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1783F7] dark:text-white mb-2">Why Choose Us</h2>
+            <p class="text-gray-600 dark:text-white text-base sm:text-lg">
                 Mindgraph delivers cloud success with the right mix of expertise, automation, and proactive support
             </p>
         </div>
@@ -348,22 +409,22 @@
 
                 <!-- Horizontal line -->
                 <div
-                    class="absolute top-[236px] left-0 right-0 h-0.5 bg-[#C8C7CC] opacity-40 z-0 mx-[55px] lg:mx-[30px] pointer-events-none">
+                    class="absolute top-[236px] left-0 right-0 h-0.5 bg-[#C8C7CC]  opacity-40 z-0 mx-[55px] lg:mx-[30px] pointer-events-none">
                 </div>
 
                 <!-- Card 1 -->
                 <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
                     style="scroll-snap-align: start;">
                     <img src="/assets/cloud1.png" alt="AI Cloud" class="mb-4 object-contain" />
-                    <div class="relative z-10 bg-white mb-4">
+                    <div class="relative z-10 bg-white dark:bg-black mb-4 rounded-[50%]">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">1</span>
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 dark:border-white dark:text-white flex items-center justify-center font-bold text-lg">1</span>
                     </div>
                     <div class="px-4">
-                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                        <h3 class="font-semibold text-[#687DA9]  dark:text-white mb-1 text-xl">
                             Cloud-Agnostic Expertise with Certified Engineers
                         </h3>
-                        <p class="text-sm text-[#667085]">
+                        <p class="text-sm text-[#667085] dark:text-white">
                             Our architects and engineers hold certifications across AWS, Azure, and GCP—ensuring
                             best-fit, vendor-neutral solutions.
                         </p>
@@ -374,15 +435,15 @@
                 <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
                     style="scroll-snap-align: start;">
                     <img src="/assets/cloud2.png" alt="AI Delivery" class="mb-4 object-contain" />
-                    <div class="relative z-10 bg-white mb-4">
+                    <div class="relative z-10 bg-white dark:bg-black mb-4 rounded-[50%]">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">2</span>
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 dark:border-white dark:text-white flex items-center justify-center font-bold text-lg">2</span>
                     </div>
                     <div class="px-4">
-                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                        <h3 class="font-semibold text-[#687DA9]  dark:text-white mb-1 text-xl">
                             Accelerated Migration with Zero Data Loss
                         </h3>
-                        <p class="text-sm text-[#667085]">
+                        <p class="text-sm text-[#667085] dark:text-white">
                             Streamlined, secure migrations backed by proven frameworks and rigorous testing to ensure no
                             business disruption.
                         </p>
@@ -393,15 +454,15 @@
                 <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
                     style="scroll-snap-align: start;">
                     <img src="/assets/crm3.png" alt="Modular" class="mb-4 object-contain" />
-                    <div class="relative z-10 bg-white mb-4">
+                    <div class="relative z-10 bg-white dark:bg-black mb-4 rounded-[50%]">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">3</span>
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 dark:border-white dark:text-white flex items-center justify-center font-bold text-lg">3</span>
                     </div>
                     <div class="px-4">
-                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                        <h3 class="font-semibold text-[#687DA9]  dark:text-white mb-1 text-xl">
                             Automation-Driven, DevOps-First Approach
                         </h3>
-                        <p class="text-sm text-[#667085]">
+                        <p class="text-sm text-[#667085] dark:text-white">
                             Embrace infrastructure agility and speed with CI/CD pipelines, IaC, and container
                             orchestration (Docker, Kubernetes).
                         </p>
@@ -412,15 +473,15 @@
                 <div class="flex-shrink-0 w-[280px] lg:w-auto flex flex-col items-center text-center"
                     style="scroll-snap-align: start;">
                     <img src="/assets/crm4.png" alt="Security" class="mb-4 object-contain" />
-                    <div class="relative z-10 bg-white mb-4">
+                    <div class="relative z-10 bg-white dark:bg-black mb-4 rounded-[50%]">
                         <span
-                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 flex items-center justify-center font-bold text-lg">4</span>
+                            class="w-14 h-14 rounded-full border-2 border-blue-300 text-blue-500 dark:border-white dark:text-white flex items-center justify-center font-bold text-lg">4</span>
                     </div>
                     <div class="px-4">
-                        <h3 class="font-semibold text-[#687DA9] mb-1 text-xl">
+                        <h3 class="font-semibold text-[#687DA9]  dark:text-white mb-1 text-xl">
                             24/7 Monitoring & Continuous Optimization
                         </h3>
-                        <p class="text-sm text-[#667085]">
+                        <p class="text-sm text-[#667085] dark:text-white">
                             Proactive support models with always-on monitoring, incident response, and continuous tuning
                             for performance and cost efficiency.
                         </p>
@@ -432,10 +493,10 @@
         <!-- CTA -->
         <div class="border-t mt-16 mb-6 max-w-7xl mx-auto bg-[#C8C7CC]"></div>
         <div class="mt-12">
-            <p class="text-[#1783F7] font-semibold text-2xl">
+            <p class="text-[#1783F7] dark:text-white font-semibold text-2xl">
                 Build a cloud infrastructure that scales with your vision.
             </p>
-            <p class="text-[#687DA9] text-2xl md:text-3xl mb-2 lg:px-[250px]">
+            <p class="text-[#687DA9]  dark:text-white text-2xl md:text-3xl mb-2 lg:px-[250px]">
                 Partner with Mindgraph to transform your IT operations—securely, efficiently, and intelligently.
             </p>
         </div>
