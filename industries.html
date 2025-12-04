@@ -155,11 +155,59 @@
                 object-fit: cover;
             }
         }
+
+        /* global.css or Tailwind layer */
+        .fade-in,
+        .slide-left,
+        .slide-right,
+        .slide-up {
+            opacity: 0;
+            transition: all 0.7s ease-in;
+            transition-delay: var(--delay, 0ms);
+            /* use CSS variable for delay */
+        }
+
+        /* initial transform directions */
+        .fade-in {
+            transform: translateY(20px);
+        }
+
+        .slide-up {
+            transform: translateY(50px);
+        }
+
+        .slide-left {
+            transform: translateX(-50px);
+        }
+
+        .slide-right {
+            transform: translateX(50px);
+        }
+
+        /* active state */
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 
-<body class="dark:bg-black">
-
+<body class="dark:bg-black transition-all duration-500 ease-in">
 
     <div id="navbar"></div>
 
@@ -182,7 +230,7 @@
 
             <!-- Heading + Image -->
             <div class="mb-10">
-                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md fade-in" data-delay="0">
                     <img src="assets/energyUtilites.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
                     <div
                         class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
@@ -195,7 +243,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-800 dark:text-white ">
 
                 <!-- Overview -->
-                <div>
+                <div class="slide-left" data-delay="100">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
                     <p class="text-lg ">
                         We help energy providers and utility companies transition into intelligent, sustainable
@@ -206,78 +254,92 @@
                 </div>
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
-                <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B]  px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0 pt-[20px] md:pt-0">
+                <div data-delay="200"
+                    class="slide-up border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B]  px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0 pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Smart grid optimization and energy distribution modeling</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Predictive maintenance for transmission and distribution infrastructure</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>IoT-based smart meter data aggregation and real-time analytics</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Carbon emissions tracking and ESG reporting dashboards</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Outage management and disaster recovery automation</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact (no borders on mobile) -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                <div data-delay="300"
+                    class="slide-right border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Reduced energy loss and improved load balancing</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Faster fault detection and resolution</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Enhanced regulatory compliance and sustainability reporting</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Proactive asset lifecycle management</span>
                         </li>
                     </ul>
                 </div>
 
             </div>
+
+
+            <div class="pt-10 flex slide-up" data-delay="400">
+                <div class="w-[50%]">
+                    <h2 class="text-black font-medium text-[35px] dark:text-white md:pr-[100px]">AI-Driven ESG Platform
+                        for
+                        Sustainable Infrastructure Projects</h2>
+                    <a href="casestudies/Energy&Utilities">
+                        <button class="mt-6  w-[240px] text-white dark:text-black font-semibold py-3 px-8 rounded-full flex items-center 
+                bg-[linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                hover:bg-[linear-gradient(141deg,#787878_0%,#0653A7_100%)] 
+                dark:bg-none dark:bg-white  
+                dark:bg-gradient-to-r dark:from-white dark:to-gray-100
+         dark:text-black dark:hover:from-gray-200 dark:hover:to-gray-400">
+                            View our Casestudy
+                            <img src="assets/getInArrow.svg" data-light="assets/getInArrow.svg"
+                                data-dark="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2  h-3 theme-image">
+                        </button></a>
+                </div>
+                <div>
+                    <img src="assets/updated/energyUtilitesCaseStudy.png">
+                </div>
+            </div>
         </div>
     </section>
-
 
     <!-- HealthCare Section-->
     <section class="bg-[#F7FBFF] dark:bg-[#181818] py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
@@ -285,7 +347,7 @@
 
             <!-- Heading + Image -->
             <div class="mb-10">
-                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md fade-in" data-delay="0">
                     <img src="assets/healthcareIndustry.jpg" alt="Energy Utilities"
                         class="w-full h-full object-cover" />
                     <div class="absolute inset-0 bg-gradient-to-r  via-white/70 to-transparent flex items-center pl-6">
@@ -298,7 +360,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                 <!-- Overview -->
-                <div>
+                <div class="slide-left" data-delay="100">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
                     <p class="text-lg dark:text-white">
                         Mindgraph enables healthcare providers to modernize operations and improve patient outcomes
@@ -308,69 +370,61 @@
                 </div>
 
                 <!-- Key Solutions -->
-                <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div data-delay="200"
+                    class=" slide-up border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Predictive analytics for early diagnosis and patient risk scoring</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>AI-driven triage, treatment planning, and workflow automation</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Secure patient data integration across HIS, EHR, and wearable devices</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Medical image analysis using computer vision models</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>HIPAA-compliant infrastructure and access controls</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                <div data-delay="300"
+                    class="slide-right border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Reduced diagnosis time and improved treatment accuracy</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Streamlined patient journeys and reduced administrative overhead</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Improved care personalization and preventive healthcare delivery</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Stronger data security and regulatory alignment</span>
                         </li>
                     </ul>
@@ -378,9 +432,29 @@
 
 
             </div>
+
+            <div class="pt-10 flex slide-up" data-delay="400">
+                <div class="w-[50%]">
+                    <h2 class="text-black font-medium text-[35px] dark:text-white md:pr-[100px]">Integrated Mobile
+                        Platform for National Employment & Upskilling</h2>
+                    <a href="casestudies/Healthcare">
+                        <button class="mt-6  w-[240px] text-white dark:text-black font-semibold py-3 px-8 rounded-full flex items-center 
+                bg-[linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                hover:bg-[linear-gradient(141deg,#787878_0%,#0653A7_100%)] 
+                dark:bg-none dark:bg-white  
+                dark:bg-gradient-to-r dark:from-white dark:to-gray-100
+         dark:text-black dark:hover:from-gray-200 dark:hover:to-gray-400">
+                            View our Casestudy
+                            <img src="assets/getInArrow.svg" data-light="assets/getInArrow.svg"
+                                data-dark="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2  h-3 theme-image">
+                        </button></a>
+                </div>
+                <div>
+                    <img src="assets/updated/healthCareCaseStudy.png">
+                </div>
+            </div>
         </div>
     </section>
-
 
     <!-- Airports Section-->
     <section class="bg-white dark:bg-black py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
@@ -388,7 +462,7 @@
 
             <!-- Heading + Image -->
             <div class="mb-10">
-                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md fade-in" data-delay="0">
                     <img src="assets/airportIndustry.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
                     <div
                         class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
@@ -401,7 +475,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                 <!-- Overview -->
-                <div>
+                <div class="slide-left" data-delay="100">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
                     <p class="text-lg dark:text-white">
                         From landside to airside, we help airports digitize their infrastructure, optimize resource
@@ -411,69 +485,61 @@
                 </div>
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
-                <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div data-delay="200"
+                    class="slide-up border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Passenger flow analysis and queue prediction</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Predictive maintenance for runway and terminal equipment</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>AI-powered baggage handling and lost item tracking</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Smart terminal energy management and surveillance systems</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Integrated dashboards for turnaround and staff scheduling</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact (no borders on mobile) -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                <div data-delay="300"
+                    class="slide-right  border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Reduced passenger wait times and operational delays</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Real-time situational awareness across airport systems</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Optimized use of resources and reduced operating costs</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Enhanced passenger safety, comfort, and satisfaction</span>
                         </li>
                     </ul>
@@ -481,9 +547,29 @@
 
 
             </div>
+
+            <div class="pt-10 flex slide-up" data-delay="400">
+                <div class="w-[50%]">
+                    <h2 class="text-black font-medium text-[35px] dark:text-white md:pr-[100px]">End-to-End Airport Data
+                        Platform & AI Forecasting Engine</h2>
+                    <a href="casestudies/Airports">
+                        <button class="mt-6  w-[240px] text-white dark:text-black font-semibold py-3 px-8 rounded-full flex items-center 
+                bg-[linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                hover:bg-[linear-gradient(141deg,#787878_0%,#0653A7_100%)] 
+                dark:bg-none dark:bg-white  
+                dark:bg-gradient-to-r dark:from-white dark:to-gray-100
+         dark:text-black dark:hover:from-gray-200 dark:hover:to-gray-400">
+                            View our Casestudy
+                            <img src="assets/getInArrow.svg" data-light="assets/getInArrow.svg"
+                                data-dark="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2  h-3 theme-image">
+                        </button></a>
+                </div>
+                <div>
+                    <img src="assets/updated/airportsCaseStudy.png">
+                </div>
+            </div>
         </div>
     </section>
-
 
     <!-- Banking Section-->
     <section class="bg-[#F7FBFF] dark:bg-[#181818] py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
@@ -491,7 +577,7 @@
 
             <!-- Heading + Image -->
             <div class="mb-10">
-                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md fade-in" data-delay="0">
                     <img src="assets/bankingIndustry.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
                     <div class="absolute inset-0 bg-gradient-to-r  via-white/70 to-transparent flex items-center pl-6">
                         <h2 class="text-2xl sm:text-3xl font-semibold text-[#687DA9] lg:pr-[700px]">Banking, Financial
@@ -505,7 +591,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                 <!-- Overview -->
-                <div>
+                <div class="slide-left" data-delay="100">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
                     <p class="text-lg dark:text-white">
                         Mindgraph empowers financial institutions with AI-first digital solutions to reduce risk, detect
@@ -514,75 +600,88 @@
                 </div>
 
                 <!-- Key Solutions -->
-                <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div data-delay="200"
+                    class="slide-up border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Real-time fraud detection and transaction scoring using ML</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Credit risk modeling and financial forecasting</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Personalized banking experiences and customer 360 profiling</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>RegTech compliance automation and audit trails</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Chatbots and virtual agents for service efficiency</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                <div data-delay="300"
+                    class="slide-right border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Lower financial risk and reduced fraud-related losses</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Improved underwriting accuracy and faster approvals</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Increased customer retention and engagement</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Streamlined compliance reporting and risk governance</span>
                         </li>
                     </ul>
                 </div>
 
 
+            </div>
+
+            <div class="pt-10 flex slide-up" data-delay="400">
+                <div class="w-[50%]">
+                    <h2 class="text-black font-medium text-[35px] dark:text-white md:pr-[100px]">AI-Driven Loan
+                        Origination & Collection Optimization</h2>
+                    <a href="/casestudies/BFSI">
+                        <button class="mt-6  w-[240px] text-white dark:text-black font-semibold py-3 px-8 rounded-full flex items-center 
+                bg-[linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                hover:bg-[linear-gradient(141deg,#787878_0%,#0653A7_100%)] 
+                dark:bg-none dark:bg-white  
+                dark:bg-gradient-to-r dark:from-white dark:to-gray-100
+         dark:text-black dark:hover:from-gray-200 dark:hover:to-gray-400">
+                            View our Casestudy
+                            <img src="assets/getInArrow.svg" data-light="assets/getInArrow.svg"
+                                data-dark="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2  h-3 theme-image">
+                        </button></a>
+                </div>
+                <div>
+                    <img src="assets/updated/bfsiCaseStudy.png">
+                </div>
             </div>
         </div>
     </section>
@@ -593,7 +692,7 @@
 
             <!-- Heading + Image -->
             <div class="mb-10">
-                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md fade-in" data-delay="0">
                     <img src="assets/telecomIndustry.jpg" alt="Energy Utilities" class="w-full h-full object-cover" />
                     <div
                         class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent flex items-center pl-6">
@@ -606,7 +705,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                 <!-- Overview -->
-                <div>
+                <div class="slide-left" data-delay="100">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
                     <p class="text-lg dark:text-white">
                         We support telecom operators in improving service quality, customer retention, and network
@@ -615,69 +714,61 @@
                 </div>
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
-                <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div data-delay="200"
+                    class="border-t slide-up md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Network performance monitoring and anomaly detection</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Churn prediction and subscriber behavior analytics</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Automated ticketing and self-healing workflows</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>5G resource orchestration and smart planning</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Customer sentiment and SLA tracking with NLP</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact (no borders on mobile) -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                <div data-delay="300"
+                    class=" border-t slide-right md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Enhanced service availability and customer satisfaction</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Data-driven customer retention strategies</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Optimized network investment and resource utilization</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Reduced manual intervention in support operations</span>
                         </li>
                     </ul>
@@ -686,9 +777,30 @@
 
 
             </div>
+
+            <div class="pt-10 flex slide-up" data-delay="400">
+                <div class="w-[50%]">
+                    <h2 class="text-black font-medium text-[35px] dark:text-white md:pr-[100px]">Enhance telecom
+                        networks with smart monitoring, automation, and secure communication</h2>
+                    <a href="/casestudies/Telecom">
+                        <button class="mt-6  w-[240px] text-white dark:text-black font-semibold py-3 px-8 rounded-full flex items-center 
+                bg-[linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                hover:bg-[linear-gradient(141deg,#787878_0%,#0653A7_100%)] 
+                dark:bg-none dark:bg-white  
+                dark:bg-gradient-to-r dark:from-white dark:to-gray-100
+         dark:text-black dark:hover:from-gray-200 dark:hover:to-gray-400">
+                            View our Casestudy
+                            <img src="assets/getInArrow.svg" data-light="assets/getInArrow.svg"
+                                data-dark="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2  h-3 theme-image">
+                        </button>
+                    </a>
+                </div>
+                <div>
+                    <img src="assets/updated/telecomCaseStudy.png">
+                </div>
+            </div>
         </div>
     </section>
-
 
     <!-- Manufacturing Section-->
     <section class="bg-[#F7FBFF] dark:bg-[#181818] py-8 sm:py-12 lg:py-16 transition-all duration-500 ease-in">
@@ -696,7 +808,7 @@
 
             <!-- Heading + Image -->
             <div class="mb-10">
-                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md">
+                <div class="relative w-full h-56 sm:h-64 lg:h-72 overflow-hidden rounded-md fade-in" data-delay="0">
                     <img src="assets/manufacturingIndus.jpg" alt="Energy Utilities"
                         class="w-full h-full object-cover" />
                     <div
@@ -710,7 +822,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                 <!-- Overview -->
-                <div>
+                <div class="slide-left" data-delay="100">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Overview</h3>
                     <p class="text-lg dark:text-white">
                         We help manufacturers digitize plant operations, optimize supply chains, and improve product
@@ -719,69 +831,61 @@
                 </div>
 
                 <!-- Key Solutions (with vertical border in desktop only) -->
-                <div
-                    class="border-t  md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
+                <div data-delay="200"
+                    class="border-t slide-up md:border-t-0 md:border-l md:border-r  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6 md:pl-[30px] pt-[20px] md:pt-0">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Key Solutions</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Predictive maintenance for production machinery</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Quality inspection using computer vision</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>AI-based production scheduling and capacity planning</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Connected factory insights via IoT data integration</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Supply chain risk analysis and automation</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Business Impact (no borders on mobile) -->
-                <div class=" border-t md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
+                <div data-delay="300"
+                    class=" border-t slide-right md:border-t-0 pt-[20px] md:pt-0  border-gray-300 dark:border-[#6B6B6B] px-0 md:px-6">
                     <h3 class="text-3xl text-[#1783F7] dark:text-white mb-2">Business Impact</h3>
                     <ul class="space-y-2 text-[#666666] dark:text-white">
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Reduced unplanned downtime and maintenance costs</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Improved defect detection and product consistency</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Optimized throughput and on-time delivery</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <span><img src="assets/arrow.svg"
-                                data-light="assets/arrow.svg" data-dark="assets/updated/crossArrowWhite.svg"
-                                class="theme-image" /></span>
+                            <span><img src="assets/arrow.svg" data-light="assets/arrow.svg"
+                                    data-dark="assets/updated/crossArrowWhite.svg" class="theme-image" /></span>
                             <span>Real-time visibility into production and logistics</span>
                         </li>
                     </ul>
@@ -790,8 +894,53 @@
 
 
             </div>
+
+            <div class="pt-10 flex slide-up" data-delay="400">
+                <div class="w-[50%]">
+                    <h2 class="text-black font-medium text-[35px] dark:text-white md:pr-[100px]">AI-Driven Jewelry
+                        Design Innovation – GenAI Design Smith Platform</h2>
+                    <a href="casestudies/Manufacturing">
+                        <button class="mt-6  w-[240px] text-white dark:text-black font-semibold py-3 px-8 rounded-full flex items-center 
+                bg-[linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                hover:bg-[linear-gradient(141deg,#787878_0%,#0653A7_100%)] 
+                dark:bg-none dark:bg-white  
+                dark:bg-gradient-to-r dark:from-white dark:to-gray-100
+         dark:text-black dark:hover:from-gray-200 dark:hover:to-gray-400">
+                            View our Casestudy
+                            <img src="assets/getInArrow.svg" data-light="assets/getInArrow.svg"
+                                data-dark="assets/updated/crossArrow.svg" alt="Arrow" class="ml-2  h-3 theme-image">
+                        </button>
+                    </a>
+                </div>
+                <div>
+                    <img src="assets/updated/manufacturingCaseStudy.png">
+                </div>
+            </div>
         </div>
     </section>
+
+
+    <!--Script for animations-->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.dataset.delay || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('active');
+                        }, delay);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll('.fade-in, .slide-left, .slide-right, .slide-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+
 
     <!-- Footer -->
     <div id="footer"></div>

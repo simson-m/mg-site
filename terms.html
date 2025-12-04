@@ -8,7 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -19,13 +23,47 @@
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
 
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
+
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
                         const linkPath = new URL(link.href).pathname;
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white dark:text-white dark:text-white");
                         }
                     });
 
@@ -35,7 +73,7 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white dark:text-white dark:text-white");
                         }
                     });
 
@@ -80,8 +118,6 @@
                     });
                 });
         });
-
-
     </script>
 
 
@@ -148,12 +184,13 @@
     </style>
 </head>
 
-<body>
+<body class="dark:bg-black transition-all duration-500 ease-in">
 
     <div id="navbar"></div>
 
     <!-- Hero Section -->
-    <section class="relative h-[300px] bg-cover bg-center bg-[#204596]">
+    <section
+        class="relative h-[300px] bg-cover bg-center bg-[#204596] dark:bg-black transition-all duration-500 ease-in">
         <!-- style="background-image: url('assets/blog_banner.png');" -->
 
         <div class="absolute inset-0  flex items-center justify-center">
@@ -165,8 +202,8 @@
 
     <!-- heading-->
     <section class="pt-[20px] md:pt-[50px] px-4 md:px-[60px]">
-        <h1 class="uppercase text-[#055CC0] text-2xl font-bold">Terms & Condition - Mindgraph</h1>
-        <p class="text-[#667085] text-[16px] leading-[32px] mt-[20px]  pr-0 md:pr-[50px]">This Policy applies to all
+        <h1 class="uppercase text-[#055CC0] dark:text-white text-2xl font-bold">Terms & Condition - Mindgraph</h1>
+        <p class="text-[#667085] dark:text-white text-[16px] leading-[32px] mt-[20px]  pr-0 md:pr-[50px]">This Policy applies to all
             users and
             visitors of the website www.mind-graph.com, owned and operated by
             Mindgraph Technologies Private Limited, Mindgraph Solutions Sdn. Bhd., Mindgraph Pte. Ltd., and Mindgraph
@@ -199,29 +236,29 @@
 
         <!-- Sidebar -->
         <aside id="sidebar" class="md:col-span-1 border-r border-gray-200 pr-4">
-            <h1 class="text-xl font-bold text-[#055CC0] mb-6">TERMS & CONDITION</h1>
-            <p class="text-lg font-bold text-[#055CC0] mb-6">1. Ownership and Use of Site Contents</p>
+            <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6">TERMS & CONDITION</h1>
+            <p class="text-lg font-bold text-[#055CC0] dark:text-white mb-6">1. Ownership and Use of Site Contents</p>
             <nav id="sidebarNav" class="space-y-3 px-4">
-                <a href="#site-contents" class="block text-gray-600">Site Contents</a>
-                <a href="#use-of-site" class="block text-gray-600">Use of Site and Restrictions</a>
+                <a href="#site-contents" class="block text-gray-600 dark:text-white">Site Contents</a>
+                <a href="#use-of-site" class="block text-gray-600 dark:text-white">Use of Site and Restrictions</a>
                 <a href="#online-conduct" class="block text-gray-700">Online Conduct</a>
-                <a href="#accuracy" class="block text-gray-600">Accuracy of Information</a>
-                <a href="#links" class="block text-gray-600">Links to Third-Party Sites</a>
-                <a href="#disclaimer" class="block text-gray-600">Disclaimer of Warranties and Limitations of
+                <a href="#accuracy" class="block text-gray-600 dark:text-white">Accuracy of Information</a>
+                <a href="#links" class="block text-gray-600 dark:text-white">Links to Third-Party Sites</a>
+                <a href="#disclaimer" class="block text-gray-600 dark:text-white">Disclaimer of Warranties and Limitations of
                     Liability</a>
-                <a href="#indemnification" class="block text-gray-600">Indemnification</a>
+                <a href="#indemnification" class="block text-gray-600 dark:text-white">Indemnification</a>
             </nav>
         </aside>
 
 
         <!-- Main Content -->
         <main class="md:col-span-2 space-y-6">
-            <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">Ownership and Use of Site Contents</h1>
+            <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">Ownership and Use of Site Contents</h1>
 
             <!-- Section 1 -->
             <section id="site-contents">
-                <h3 class="text-lg text-[#1783F7] mb-3 ">Site Contents</h3>
-                <p class="text-[#667085] leading-[30px]">
+                <h3 class="text-lg text-[#1783F7] dark:text-white mb-3 ">Site Contents</h3>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     All materials, including but not limited to images, details, data, illustrations, designs, icons,
                     photographs, video clips, text, software, graphics, scripts, logos, and other materials
                     (collectively, the "Contents") displayed on this site are exclusively owned (either directly or
@@ -233,8 +270,8 @@
 
             <!-- Section 2 -->
             <section id="use-of-site">
-                <h3 class="text-lg  text-[#1783F7] mb-3 ">Use of Site and Restrictions</h3>
-                <p class="text-[#667085] leading-[30px]">
+                <h3 class="text-lg  text-[#1783F7] dark:text-white mb-3 ">Use of Site and Restrictions</h3>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The site and its Contents are intended for your personal, non-commercial use only. Any other use,
                     including modification, removal, deletion, transmission, publication, distribution, uploading,
                     posting, redistribution, re-licensing, selling, duplicating, republishing, or any other
@@ -245,8 +282,8 @@
 
             <!-- Section 3 -->
             <section id="online-conduct">
-                <h3 class="text-lg  text-[#1783F7] mb-3 ">Online Conduct</h3>
-                <p class="text-[#667085] leading-[30px]">
+                <h3 class="text-lg  text-[#1783F7] dark:text-white mb-3 ">Online Conduct</h3>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     You agree to use the site for lawful purposes only. Prohibited activities include posting or
                     transmitting
                     unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, profane, or hateful
@@ -256,8 +293,8 @@
 
             <!-- Section 4 -->
             <section id="accuracy">
-                <h3 class="text-lg  text-[#1783F7] mb-3 ">Accuracy of Information</h3>
-                <p class="text-[#667085] leading-[30px]">
+                <h3 class="text-lg  text-[#1783F7] dark:text-white mb-3 ">Accuracy of Information</h3>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     Information provided on this site is for general informational purposes and the Company makes no
                     warranties
                     regarding its accuracy or completeness.
@@ -266,8 +303,8 @@
 
             <!-- Section 5 -->
             <section id="links">
-                <h3 class="text-lg  text-[#1783F7] mb-3 ">Links to Third-Party Sites</h3>
-                <p class="text-[#667085] leading-[30px]">
+                <h3 class="text-lg  text-[#1783F7] dark:text-white mb-3 ">Links to Third-Party Sites</h3>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     This site may contain links to third-party websites. The Company is not responsible for the content
                     or
                     practices of those sites.
@@ -276,8 +313,8 @@
 
             <!-- Section 6 -->
             <section id="disclaimer">
-                <h3 class="text-lg  text-[#1783F7] mb-3 ">Disclaimer of Warranties and Limitations of Liability</h3>
-                <p class="text-[#667085] leading-[30px]">
+                <h3 class="text-lg  text-[#1783F7] dark:text-white mb-3 ">Disclaimer of Warranties and Limitations of Liability</h3>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The Company disclaims all warranties and shall not be held liable for any damages arising from the
                     use of this site.
                 </p>
@@ -285,8 +322,8 @@
 
             <!-- Section 7 -->
             <section id="indemnification">
-                <h3 class="text-lg  text-[#1783F7] mb-3 ">Indemnification</h3>
-                <p class="text-[#667085] leading-[30px]">
+                <h3 class="text-lg  text-[#1783F7] dark:text-white mb-3 ">Indemnification</h3>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     You agree to indemnify and hold harmless the Company, its affiliates, and employees from any claims
                     arising out of your use of this site.
                 </p>
@@ -299,25 +336,27 @@
     <!--Contact US-->
     <section>
         <div
-            class="min-h-screen flex items-center justify-center  [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] py-16">
+            class="min-h-screen flex items-center justify-center  
+            [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] 
+            dark:bg-none dark:bg-[#181818]  py-16">
             <div class="container mx-auto flex flex-col lg:flex-row gap-10 px-6 lg:px-[200px]">
                 <!-- Left Column: Text Content -->
                 <div class="lg:w-1/2">
-                    <h2 class="text-4xl font-bold text-[#687DA9] mb-4">Get in Touch</h2>
-                    <p class="text-[#667085] mb-6">
+                    <h2 class="text-4xl font-bold text-[#687DA9] dark:text-white mb-4">Get in Touch</h2>
+                    <p class="text-[#667085] dark:text-white mb-6">
                         At Mindgraph, we’re dedicated to providing innovative solutions to meet your unique
                         challenges. Whether you have questions, need support, or want to explore how our services
                         can benefit you, we’re here to help.
                         <br>
                         <br>
                         <a href="mailto:info@mind-graph.com"
-                            class="text-[#687DA9] hover:underline">info@mind-graph.com</a>
+                            class="text-[#687DA9] dark:text-white hover:underline">info@mind-graph.com</a>
                     </p>
                     <div class="flex flex-col md:flex-row gap-6 mt-[60px] hidden md:block">
                         <!-- Contact Support -->
                         <div class="flex-1">
-                            <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
-                            <p class="text-[#667085]">
+                            <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Contact Support</h3>
+                            <p class="text-[#667085] dark:text-white">
                                 At Mindgraph, your satisfaction is our top priority. Our dedicated support team
                                 is ready to assist you promptly with any technical issues, billing inquiries, or
                                 service needs.
@@ -325,8 +364,8 @@
                         </div>
                         <!-- Feedback & Suggestions -->
                         <div class="flex-1">
-                            <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
-                            <p class="text-[#667085]">
+                            <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Feedback & Suggestions</h3>
+                            <p class="text-[#667085] dark:text-white">
                                 We value your feedback and suggestions to help us improve. Share your ideas for
                                 enhancing our services or new features you’d like to see to create better experiences
                                 for all our clients.
@@ -383,8 +422,8 @@
                 <div class="flex flex-col md:flex-row gap-6 md:mt-[60px] black md:hidden">
                     <!-- Contact Support -->
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
-                        <p class="text-[#667085]">
+                        <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Contact Support</h3>
+                        <p class="text-[#667085] dark:text-white">
                             At Mindgraph, your satisfaction is our top priority. Our dedicated support team
                             is ready to assist you promptly with any technical issues, billing inquiries, or
                             service needs.
@@ -392,8 +431,8 @@
                     </div>
                     <!-- Feedback & Suggestions -->
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
-                        <p class="text-[#667085]">
+                        <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Feedback & Suggestions</h3>
+                        <p class="text-[#667085] dark:text-white">
                             We value your feedback and suggestions to help us improve. Share your ideas for
                             enhancing our services or new features you’d like to see to create better experiences
                             for all our clients.
@@ -484,12 +523,12 @@
                     // remove highlight from all
                     navLinks.forEach(a => {
                         a.classList.remove("font-semibold",);
-                        a.classList.add("text-gray-600");
+                        a.classList.add("text-gray-600 dark:text-white");
                     });
 
                     // add highlight to clicked
                     link.classList.add("font-semibold");
-                    link.classList.remove("text-gray-600");
+                    link.classList.remove("text-gray-600 dark:text-white");
                 });
             });
         });

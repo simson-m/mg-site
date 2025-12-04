@@ -50,7 +50,7 @@
 
 
             const locations = [
-                { name: "Coimbatore", coords: [11.0005776,76.9588358], address: "Coimbatore, Tamil Nadu, India" },
+                { name: "Coimbatore", coords: [11.0005776, 76.9588358], address: "Coimbatore, Tamil Nadu, India" },
                 { name: "Bangalore", coords: [12.9550333, 77.7128925], address: "Bangalore, Karnataka, India" },
                 { name: "Hyderabad", coords: [17.385, 78.4867], address: "Hyderabad, Telangana, India" },
                 { name: "Bhubaneswar", coords: [20.2961, 85.8245], address: "Bhubaneswar, Odisha, India" },
@@ -299,11 +299,21 @@
                 });
         });
     </script>
+    <style>
+        #map {
+            position: relative;
+            /* default is fine */
+            z-index: 0;
+            /* ensure map is below navbar */
+        }
+    </style>
 </head>
 
 <body class="dark:bg-black">
 
-    <div id="navbar"></div>
+    <div id="navbar" class="fixed top-0 left-0 w-full z-50">
+
+    </div>
 
     <!-- Hero Banner-->
     <div class="w-full">

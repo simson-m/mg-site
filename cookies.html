@@ -8,7 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -19,13 +23,47 @@
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
 
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
+
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
                         const linkPath = new URL(link.href).pathname;
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white dark:text-white");
                         }
                     });
 
@@ -35,7 +73,7 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white dark:text-white");
                         }
                     });
 
@@ -80,8 +118,6 @@
                     });
                 });
         });
-
-
     </script>
 
 
@@ -147,12 +183,13 @@
     </style>
 </head>
 
-<body>
+<body class="dark:bg-black transition-all duration-500 ease-in">
 
     <div id="navbar"></div>
 
     <!-- Hero Section -->
-    <section class="relative h-[300px] bg-cover bg-center bg-[#204596]">
+    <section
+        class="relative h-[300px] bg-cover bg-center bg-[#204596] dark:bg-black transition-all duration-500 ease-in">
         <!-- style="background-image: url('assets/blog_banner.png');" -->
 
         <div class="absolute inset-0  flex items-center justify-center">
@@ -162,28 +199,33 @@
     </section>
 
 
-
     <!-- Content Section-->
     <div class="max-w-7xl ms-[20px] md:mx-[60px]  py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
 
         <!-- Sidebar -->
         <aside id="sidebar" class="md:col-span-1 border-r border-gray-200 pr-4">
-            <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">Cookies Policy</h1>
+            <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">Cookies Policy</h1>
             <nav id="sidebarNav" class="space-y-3 px-1">
-                <a href="#objective" class="block text-[#055CC0]  font-semibold">1. Objective</a>
-                <a href="#applicability" class="block text-[#055CC0] font-semibold">2. Applicability</a>
-                <a href="#purpose" class="block text-[#055CC0] font-semibold">3. Purpose</a>
-                <a href="#definitions" class="block text-[#055CC0] font-semibold">4. Definitions</a>
-                <a href="#data" class="block text-[#055CC0] font-semibold">5. Data Usage</a>
-                <a href="#consent" class="block text-[#055CC0] font-semibold">6. Cookie Consent</a>
-                <a href="#cusotmising-cookie" class="block text-[#055CC0] font-semibold">7. Customising The Cookie
+                <a href="#objective" class="block text-[#055CC0] dark:text-white  font-semibold">1. Objective</a>
+                <a href="#applicability" class="block text-[#055CC0] dark:text-white font-semibold">2. Applicability</a>
+                <a href="#purpose" class="block text-[#055CC0] dark:text-white font-semibold">3. Purpose</a>
+                <a href="#definitions" class="block text-[#055CC0] dark:text-white font-semibold">4. Definitions</a>
+                <a href="#data" class="block text-[#055CC0] dark:text-white font-semibold">5. Data Usage</a>
+                <a href="#consent" class="block text-[#055CC0] dark:text-white font-semibold">6. Cookie Consent</a>
+                <a href="#cusotmising-cookie" class="block text-[#055CC0] dark:text-white font-semibold">7. Customising
+                    The Cookie
                     Consent</a>
-                <a href="#managing" class="block text-[#055CC0] font-semibold">8. Managing Cookies</a>
-                <a href="#third-party" class="block text-[#055CC0] font-semibold">9. Third-Party Cookies</a>
-                <a href="#compliance" class="block text-[#055CC0] font-semibold">10. Compliance with Law</a>
-                <a href="#data-retention" class="block text-[#055CC0] font-semibold">11. Data Retention</a>
-                <a href="#contact" class="block text-[#055CC0] font-semibold">12. Contact Information</a>
-                <a href="#popup-window" class="block text-[#055CC0] font-semibold">13. Popup Window Content</a>
+                <a href="#managing" class="block text-[#055CC0] dark:text-white font-semibold">8. Managing Cookies</a>
+                <a href="#third-party" class="block text-[#055CC0] dark:text-white font-semibold">9. Third-Party
+                    Cookies</a>
+                <a href="#compliance" class="block text-[#055CC0] dark:text-white font-semibold">10. Compliance with
+                    Law</a>
+                <a href="#data-retention" class="block text-[#055CC0] dark:text-white font-semibold">11. Data
+                    Retention</a>
+                <a href="#contact" class="block text-[#055CC0] dark:text-white font-semibold">12. Contact
+                    Information</a>
+                <a href="#popup-window" class="block text-[#055CC0] dark:text-white font-semibold">13. Popup Window
+                    Content</a>
 
             </nav>
         </aside>
@@ -194,8 +236,8 @@
 
             <!-- Section 1 -->
             <section id="objective">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">1. Objective</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">1. Objective</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The Cookies policy (‘Policy’) of Mindgraph Technologies Private Limited, Mindgraph Solutions Sdn.
                     Bhd., Mindgraph Pte. Ltd., and Mindgraph LLC (Hereinafter collectively referred to as “Mind-Graph”
                     or “Company”), provides external users with detailed information about the cookies that the
@@ -211,17 +253,17 @@
 
             <!-- Section 2 -->
             <section id="applicability">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">2. Applicability
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">2. Applicability
                 </h1>
-                <p class="text-[#667085] leading-[30px]">
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The Policy applies to the external users and visitors who visit the websites of the Company.
                 </p>
             </section>
 
             <!-- Section 3 -->
             <section id="purpose">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">3. Purpose</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">3. Purpose</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The purpose of the Policy is to ensure the use of cookies which are necessary to enable the user to
                     move around the Website and use its features. The company also use functional cookies to record and
                     track the information about the choices the user has made and to allow the Company to modify the
@@ -234,8 +276,8 @@
 
             <!-- Section 4 -->
             <section id="definitions">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">4. Definition</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">4. Definition</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     Cookies are unique identifiers that are stored on the hard disks of electronic devices. While
                     opening
                     or searching for content on the browser, cookies recognize the data and keep track of the content
@@ -246,8 +288,8 @@
 
             <!-- Section 5 -->
             <section id="data">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">5. Data usage</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">5. Data usage</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The company uses different kinds of cookies used in digital marketing while marketing the business
                     of the company. Advertising and retargeting Cookies save information from the user’s browsing
                     history to record the Company's interests and browsing path on the website. The Company uses
@@ -258,8 +300,8 @@
 
             <!-- Section 6 -->
             <section id="consent">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">6. Cookie Consent</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">6. Cookie Consent</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     Users must provide explicit consent to cookies code while opening the website of the Company of
                     their choice. This consent is collected via a cookie banner or pop-up that appears upon accessing
                     the website.
@@ -268,16 +310,17 @@
 
             <!-- Section 7 -->
             <section id="cusotmising-cookie">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">7. Customising the cookie consent</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">7. Customising the cookie
+                    consent</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     Users can customize their cookie preferences via the website’s cookie consent manager. When the
                     website is accessed, a pop-up window allows users to select their preferred cookie settings,
                     ensuring they have control over which cookies are enabled.
             </section>
             <!-- Section 8 -->
             <section id="managing">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">8. Managing cookies</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">8. Managing cookies</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The Company collects Personal data via cookies and other similar tracking technologies with prior
                     consent from the user. The Company will maintain a record of the types of cookies that the user has
                     authorized the Company to use and ensure adherence to the user preferences. Users who do not wish to
@@ -286,8 +329,8 @@
 
             <!-- Section 9 -->
             <section id="third-party">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">9. Third-Party Cookies</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">9. Third-Party Cookies</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The Company may allow third-party service providers, such as analytics providers or advertisers, to
                     place cookies on your device when you visit our website. These cookies are governed by the third
                     parties’ privacy policies, and we encourage you to review them. The Company does not have control
@@ -297,8 +340,8 @@
 
             <!-- Section 10 -->
             <section id="compliance">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">10. Compliance with Law</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">10. Compliance with Law</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     The Company uses all the collected information (including the personal information) through cookies
                     in compliance with the Information Technology Act, 2000, the Information Technology (Reasonable
                     Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 and any
@@ -309,8 +352,8 @@
 
             <!-- Section 11 -->
             <section id="data-retention">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">11. Data Retention</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">11. Data Retention</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     Data collected via cookies will only be retained for as long as necessary to fulfil the purpose
                     outlined in this Policy, or as required by the law. The Company periodically reviews the necessity
                     of retaining this data, ensuring compliance with legal requirements and user preferences. </p>
@@ -318,8 +361,8 @@
 
             <!-- Section 12 -->
             <section id="contact">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">12. Contact Information</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">12. Contact Information</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     Users can contact the Company at the information provided below in case of any issue or for any
                     detailed information on the Company’s Cookie Policy. Review and Amendments to this Policy The Cookie
                     Policy is subject to periodic reviews and updates from time to time or in case of a change in the
@@ -329,8 +372,9 @@
 
             <!-- Section 13 -->
             <section id="popup-window">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">13. Popup Window Content</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">13. Popup Window Content
+                </h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     Mindgraph uses cookies and similar technologies to operate this website and to provide you with a
                     more personalized user experience and track, conduct analytics such as count visits and traffic
                     sources, provide advertisements, and interact with third parties. By clicking "Accept cookies" you
@@ -343,34 +387,30 @@
         </main>
     </div>
 
-
-
-
-
-
-
     <!--Contact US-->
     <section>
-        <div
-            class="min-h-screen flex items-center justify-center  [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] py-16">
+        <div class="min-h-screen flex items-center justify-center  
+            [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] 
+            dark:bg-none dark:bg-[#181818]
+            py-16">
             <div class="container mx-auto flex flex-col lg:flex-row gap-10 px-6 lg:px-[200px]">
                 <!-- Left Column: Text Content -->
                 <div class="lg:w-1/2">
-                    <h2 class="text-4xl font-bold text-[#687DA9] mb-4">Get in Touch</h2>
-                    <p class="text-[#667085] mb-6">
+                    <h2 class="text-4xl font-bold text-[#687DA9] dark:text-white mb-4">Get in Touch</h2>
+                    <p class="text-[#667085] dark:text-white mb-6">
                         At Mindgraph, we’re dedicated to providing innovative solutions to meet your unique
                         challenges. Whether you have questions, need support, or want to explore how our services
                         can benefit you, we’re here to help.
                         <br>
                         <br>
                         <a href="mailto:info@mind-graph.com"
-                            class="text-[#687DA9] hover:underline">info@mind-graph.com</a>
+                            class="text-[#687DA9] dark:text-white hover:underline">info@mind-graph.com</a>
                     </p>
                     <div class="flex flex-col md:flex-row gap-6 mt-[60px] hidden md:block">
                         <!-- Contact Support -->
                         <div class="flex-1">
-                            <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
-                            <p class="text-[#667085]">
+                            <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Contact Support</h3>
+                            <p class="text-[#667085] dark:text-white">
                                 At Mindgraph, your satisfaction is our top priority. Our dedicated support team
                                 is ready to assist you promptly with any technical issues, billing inquiries, or
                                 service needs.
@@ -378,8 +418,9 @@
                         </div>
                         <!-- Feedback & Suggestions -->
                         <div class="flex-1">
-                            <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
-                            <p class="text-[#667085]">
+                            <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Feedback & Suggestions
+                            </h3>
+                            <p class="text-[#667085] dark:text-white">
                                 We value your feedback and suggestions to help us improve. Share your ideas for
                                 enhancing our services or new features you’d like to see to create better experiences
                                 for all our clients.
@@ -420,9 +461,11 @@
                             <textarea placeholder="How can we help you?" rows="4" id="message" name="message"
                                 class="w-full p-3 border border-[#D0D5DD] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                         </div>
-                        <button type="submit" id="submitBtn"
-                            class=" w-full text-center text-white font-semibold py-3 px-8 
-                        rounded-full flex justify-center items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        <button type="submit" id="submitBtn" class=" w-full text-center text-white  font-semibold py-3 px-8 
+                        rounded-full flex justify-center items-center 
+                        [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                        
+                        ">
                             Submit
                         </button>
                         <p class="text-[#8F94A1] md:text-lg mt-4 text-center">
@@ -436,8 +479,8 @@
                 <div class="flex flex-col md:flex-row gap-6 md:mt-[60px] black md:hidden">
                     <!-- Contact Support -->
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
-                        <p class="text-[#667085]">
+                        <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Contact Support</h3>
+                        <p class="text-[#667085] dark:text-white">
                             At Mindgraph, your satisfaction is our top priority. Our dedicated support team
                             is ready to assist you promptly with any technical issues, billing inquiries, or
                             service needs.
@@ -445,8 +488,9 @@
                     </div>
                     <!-- Feedback & Suggestions -->
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
-                        <p class="text-[#667085]">
+                        <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Feedback & Suggestions
+                        </h3>
+                        <p class="text-[#667085] dark:text-white">
                             We value your feedback and suggestions to help us improve. Share your ideas for
                             enhancing our services or new features you’d like to see to create better experiences
                             for all our clients.

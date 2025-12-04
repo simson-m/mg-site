@@ -8,7 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -19,13 +23,47 @@
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
 
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
+
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
                         const linkPath = new URL(link.href).pathname;
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white dark:text-white dark:text-white");
                         }
                     });
 
@@ -35,7 +73,7 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white dark:text-white dark:text-white");
                         }
                     });
 
@@ -80,8 +118,6 @@
                     });
                 });
         });
-
-
     </script>
 
 
@@ -147,12 +183,12 @@
     </style>
 </head>
 
-<body>
+<body class="dark:bg-black">
 
     <div id="navbar"></div>
 
     <!-- Hero Section -->
-    <section class="relative h-[300px] bg-cover bg-center bg-[#204596]">
+    <section class="relative h-[300px] bg-cover bg-center bg-[#204596] dark:bg-black transition-all duration-500 ease-in">
         <!-- style="background-image: url('assets/blog_banner.png');" -->
 
         <div class="absolute inset-0  flex items-center justify-center">
@@ -167,22 +203,22 @@
 
         <!-- Sidebar -->
         <aside id="sidebar" class="md:col-span-1 border-r border-gray-200 pr-4">
-            <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">Privacy Policy</h1>
+            <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">Privacy Policy</h1>
             <nav id="sidebarNav" class="space-y-3 px-1">
-                <a href="#introduction" class="block text-[#055CC0]  font-semibold">1. Introduction</a>
-                <a href="#information-we-collect" class="block text-[#055CC0] font-semibold">2. Information We
+                <a href="#introduction" class="block text-[#055CC0] dark:text-white  font-semibold">1. Introduction</a>
+                <a href="#information-we-collect" class="block text-[#055CC0] dark:text-white font-semibold">2. Information We
                     Collect</a>
-                <a href="#how-we-use-information" class="block text-[#055CC0] font-semibold">3. How We Use Your
+                <a href="#how-we-use-information" class="block text-[#055CC0] dark:text-white font-semibold">3. How We Use Your
                     Information</a>
-                <a href="#sharing" class="block text-[#055CC0] font-semibold">4. Sharing Your Information</a>
-                <a href="#cookies" class="block text-[#055CC0] font-semibold">5. Cookies and Other Tracking
+                <a href="#sharing" class="block text-[#055CC0] dark:text-white font-semibold">4. Sharing Your Information</a>
+                <a href="#cookies" class="block text-[#055CC0] dark:text-white font-semibold">5. Cookies and Other Tracking
                     Technologies</a>
-                <a href="#data" class="block text-[#055CC0] font-semibold">6. Data Security</a>
-                <a href="#privacy-rights" class="block text-[#055CC0] font-semibold">7. Your Privacy Rights</a>
-                <a href="#retain-data" class="block text-[#055CC0] font-semibold">8. How long we retain your personal
+                <a href="#data" class="block text-[#055CC0] dark:text-white font-semibold">6. Data Security</a>
+                <a href="#privacy-rights" class="block text-[#055CC0] dark:text-white font-semibold">7. Your Privacy Rights</a>
+                <a href="#retain-data" class="block text-[#055CC0] dark:text-white font-semibold">8. How long we retain your personal
                     data</a>
-                <a href="#updates" class="block text-[#055CC0] font-semibold">9. Updates to This Policy</a>
-                <a href="#contactUs" class="block text-[#055CC0] font-semibold">10. Contact Us</a>
+                <a href="#updates" class="block text-[#055CC0] dark:text-white font-semibold">9. Updates to This Policy</a>
+                <a href="#contactUs" class="block text-[#055CC0] dark:text-white font-semibold">10. Contact Us</a>
 
             </nav>
         </aside>
@@ -193,8 +229,8 @@
 
             <!-- Section 1 -->
             <section id="introduction">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">1. Introduction</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">1. Introduction</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     This Policy applies to all information provided to, collected, processed and otherwise utilised by
                     Mindgraph Technologies Private Limited, Mindgraph Solutions Sdn. Bhd., Mindgraph Pte. Ltd., and
                     Mindgraph LLC (Hereinafter collectively referred to as “Mind-Graph”). Welcome to Mind-Graph. We are
@@ -209,13 +245,13 @@
 
             <!-- Section 2 -->
             <section id="information-we-collect">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase"> 2. Information We Collect </h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase"> 2. Information We Collect </h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     We collect personal information that you voluntarily provide to us when you register on the website,
                     express an interest in obtaining information about us or our products and services, when you
                     participate in activities on the website, or otherwise when you contact us. The types of information
                     we collect could include: </p>
-                <ol type="1" class="text-[#667085] leading-[30px]">
+                <ol type="1" class="text-[#667085] dark:text-white leading-[30px]">
                     <li>
                         <p>1. Voluntarily provided information which may include your name, address, email address,
                             billing and/or credit card information etc., which may be used when you purchase products
@@ -226,7 +262,7 @@
                             third party tracking technologies and server logs.</p>
                     </li>
                 </ol>
-                <p class="text-[#667085] leading-[30px]">Please be rest assured that we shall only collect personal
+                <p class="text-[#667085] dark:text-white leading-[30px]">Please be rest assured that we shall only collect personal
                     information that you knowingly and
                     willingly provide by way of surveys, completed membership forms, and emails. It is the intent of
                     this site to use personal information only for the purpose for which it was requested and any
@@ -244,8 +280,8 @@
 
             <!-- Section 3 -->
             <section id="how-we-use-information">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">3. How We Use Your Information</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">3. How We Use Your Information</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     We use personal information collected via our website for various business purposes described below.
                     We process your personal information for these purposes in reliance on our legitimate business
                     interests, in order to enter into or perform a contract with you, with your consent, and/or for
@@ -256,11 +292,11 @@
 
             <!-- Section 4 -->
             <section id="sharing">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">4. Sharing Your Information</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">4. Sharing Your Information</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     We only share and disclose your information in the following situations:
                 </p>
-                <ol type="1" class="text-[#667085] leading-[30px]">
+                <ol type="1" class="text-[#667085] dark:text-white leading-[30px]">
                     <li>
                         <p>1. Compliance with Laws</p>
                     </li>
@@ -283,7 +319,7 @@
                         <p>7. With your Consent</p>
                     </li>
                 </ol><br>
-                <p class="text-[#667085] leading-[30px]">
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     MindGraph does not now, nor will it in the future, sell, rent or lease any of our customer lists
                     and/or names to any third parties. We may disclose your personal information, without prior
                     notice
@@ -298,9 +334,9 @@
 
             <!-- Section 5 -->
             <section id="cookies">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">5. Cookies and Other Tracking Technologies
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">5. Cookies and Other Tracking Technologies
                 </h1>
-                <p class="text-[#667085] leading-[30px]">
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     We are dedicated to protecting your personal information and employ a variety of security measures
                     to
                     safeguard your data. This includes using industry-standard encryption technologies to protect
@@ -318,8 +354,8 @@
 
             <!-- Section 6 -->
             <section id="data">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">6. Data Security</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">6. Data Security</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     We are dedicated to protecting your personal information and employ a variety of security measures
                     to safeguard your data. This includes using industry-standard encryption technologies to protect
                     sensitive information during transmission and while stored. Access to your personal data is
@@ -337,17 +373,17 @@
 
             <!-- Section 7 -->
             <section id="privacy-rights">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">7. Your Privacy Rights</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">7. Your Privacy Rights</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     In some regions, such as the European Economic Area (EEA), you have rights that allow you greater
                     access to and control over your personal information. You may review, change, or terminate your
                     account at any time.
             </section>
             <!-- Section 8 -->
             <section id="retain-data">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">8. How long we retain your personal data
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">8. How long we retain your personal data
                 </h1>
-                <p class="text-[#667085] leading-[30px]">
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     We will retain your personal data only for as long as we need it for MindGraph’s legitimate business
                     interest in accordance with applicable laws, to perform services as you have opted for or to meet
                     legal requirements, after which we will take steps to delete your personal data or hold it in a form
@@ -356,8 +392,8 @@
 
             <!-- Section 9 -->
             <section id="updates">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">9. Updates to This Policy</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">9. Updates to This Policy</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     We may update this privacy policy from time to time in order to reflect new updates, for example,
                     changes to our practices or for other operational, legal, or regulatory reasons. On some occasions,
                     we may also actively advise you of specific data handling activities or significant changes to this
@@ -367,8 +403,8 @@
 
             <!-- Section 10 -->
             <section id="contactUs">
-                <h1 class="text-xl font-bold text-[#055CC0] mb-6 uppercase">10. Contact Us</h1>
-                <p class="text-[#667085] leading-[30px]">
+                <h1 class="text-xl font-bold text-[#055CC0] dark:text-white mb-6 uppercase">10. Contact Us</h1>
+                <p class="text-[#667085] dark:text-white leading-[30px]">
                     If you have questions or comments about this policy, you may email us at </p>
             </section>
 
@@ -377,34 +413,31 @@
         </main>
     </div>
 
-
-
-
-
-
-
     <!--Contact US-->
     <section>
         <div
-            class="min-h-screen flex items-center justify-center  [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] py-16">
+            class="min-h-screen flex items-center justify-center  
+            [background:linear-gradient(135deg,rgba(232,245,255,1)_0%,rgba(251,255,250,1)_30%,rgba(232,241,239,1)_55%,rgba(211,236,255,1)_100%)] 
+             dark:bg-none dark:bg-[#181818]
+            py-16">
             <div class="container mx-auto flex flex-col lg:flex-row gap-10 px-6 lg:px-[200px]">
                 <!-- Left Column: Text Content -->
                 <div class="lg:w-1/2">
-                    <h2 class="text-4xl font-bold text-[#687DA9] mb-4">Get in Touch</h2>
-                    <p class="text-[#667085] mb-6">
+                    <h2 class="text-4xl font-bold text-[#687DA9] dark:text-white mb-4">Get in Touch</h2>
+                    <p class="text-[#667085] dark:text-white mb-6">
                         At Mindgraph, we’re dedicated to providing innovative solutions to meet your unique
                         challenges. Whether you have questions, need support, or want to explore how our services
                         can benefit you, we’re here to help.
                         <br>
                         <br>
                         <a href="mailto:info@mind-graph.com"
-                            class="text-[#687DA9] hover:underline">info@mind-graph.com</a>
+                            class="text-[#687DA9] dark:text-white hover:underline">info@mind-graph.com</a>
                     </p>
                     <div class="flex flex-col md:flex-row gap-6 mt-[60px] hidden md:block">
                         <!-- Contact Support -->
                         <div class="flex-1">
-                            <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
-                            <p class="text-[#667085]">
+                            <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Contact Support</h3>
+                            <p class="text-[#667085] dark:text-white">
                                 At Mindgraph, your satisfaction is our top priority. Our dedicated support team
                                 is ready to assist you promptly with any technical issues, billing inquiries, or
                                 service needs.
@@ -412,8 +445,8 @@
                         </div>
                         <!-- Feedback & Suggestions -->
                         <div class="flex-1">
-                            <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
-                            <p class="text-[#667085]">
+                            <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Feedback & Suggestions</h3>
+                            <p class="text-[#667085] dark:text-white">
                                 We value your feedback and suggestions to help us improve. Share your ideas for
                                 enhancing our services or new features you’d like to see to create better experiences
                                 for all our clients.
@@ -456,7 +489,9 @@
                         </div>
                         <button type="submit" id="submitBtn"
                             class=" w-full text-center text-white font-semibold py-3 px-8 
-                        rounded-full flex justify-center items-center [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]">
+                        rounded-full flex justify-center items-center 
+                        [background:linear-gradient(141deg,rgba(139,139,139,1)_0%,rgba(23,131,247,1)_100%)]
+                        ">
                             Submit
                         </button>
                         <p class="text-[#8F94A1] md:text-lg mt-4 text-center">
@@ -470,8 +505,8 @@
                 <div class="flex flex-col md:flex-row gap-6 md:mt-[60px] black md:hidden">
                     <!-- Contact Support -->
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Contact Support</h3>
-                        <p class="text-[#667085]">
+                        <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Contact Support</h3>
+                        <p class="text-[#667085] dark:text-white">
                             At Mindgraph, your satisfaction is our top priority. Our dedicated support team
                             is ready to assist you promptly with any technical issues, billing inquiries, or
                             service needs.
@@ -479,8 +514,8 @@
                     </div>
                     <!-- Feedback & Suggestions -->
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-[#687DA9] mb-2">Feedback & Suggestions</h3>
-                        <p class="text-[#667085]">
+                        <h3 class="text-xl font-semibold text-[#687DA9] dark:text-white mb-2">Feedback & Suggestions</h3>
+                        <p class="text-[#667085] dark:text-white">
                             We value your feedback and suggestions to help us improve. Share your ideas for
                             enhancing our services or new features you’d like to see to create better experiences
                             for all our clients.

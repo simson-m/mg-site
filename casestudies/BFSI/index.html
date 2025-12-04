@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Graph</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/global.css" />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch("/navbar.html")
+                .then((res) => res.text())
+                .then((data) => {
+                    document.getElementById("navbar").innerHTML = data;
+                    lucide.createIcons(); // Initialize icons after insertion
+                    const currentPath = window.location.pathname;
+
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                            updateThemeImages(); // <-- ADD THIS LINE
+                        } else {
+                            updateThemeImages(); // also handle light mode on first load
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
+
+                    // Highlight desktop links
+                    document.querySelectorAll("#navbar nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                            link.classList.remove("text-[#7E7E7E]");
+                            link.classList.add("text-[#687DA9] dark:text-white");
+                        }
+                    });
+
+                    // Highlight mobile links
+                    document.querySelectorAll("#mobile-menu nav a").forEach((link) => {
+                        const linkPath = new URL(link.href).pathname;
+                        if (currentPath === linkPath) {
+                            link.classList.add("font-bold");
+                            link.classList.remove("text-[#7E7E7E]");
+                            link.classList.add("text-[#687DA9] dark:text-white");
+                        }
+                    });
+
+
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
+                    const mobileMenuButton = document.getElementById("mobile-menu-button");
+                    const closeMenuButton = document.getElementById("close-menu-button");
+                    const mobileMenu = document.getElementById("mobile-menu");
+
+                    if (!mobileMenuButton || !mobileMenu) {
+                        console.error("Mobile menu button or menu is missing.");
+                        return;
+                    }
+
+                    mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
+                        mobileMenu.classList.toggle("hidden");
+                        mobileMenu.classList.toggle("flex");
+                        document.body.classList.toggle("overflow-hidden");
+                    });
+
+                    closeMenuButton.addEventListener("click", function () {
+                        mobileMenu.classList.add("hidden");
+                        mobileMenu.classList.remove("flex");
+                        document.body.classList.remove("overflow-hidden");
+                    });
+
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
+
+                    mobileDropdownToggles.forEach((toggle) => {
+                        toggle.addEventListener("click", function () {
+                            const content = this.nextElementSibling;
+                            const icon = this.querySelector('[data-lucide="chevron-down"]');
+
+                            content.classList.toggle("hidden");
+                            icon.style.transform = content.classList.contains("hidden")
+                                ? "rotate(0deg)"
+                                : "rotate(180deg)";
+                        });
+                    });
+                });
+        });
+    </script>
+
+
+    <style>
+        .testimonial-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .testimonial-slide:not(.active) {
+            display: none;
+            opacity: 0;
+        }
+
+        .testimonial-slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Make images square on mobile */
+        @media (max-width: 768px) {
+            .square-on-mobile {
+                position: relative;
+                width: 100%;
+                padding-bottom: 100%;
+                /* Creates a square */
+                overflow: hidden;
+            }
+
+            .square-on-mobile img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        /* Initial hidden state for scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Visible state */
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .solution-item {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+        }
+
+        /* Visible state */
+        .solution-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="dark:bg-black transition-all duration-500 ease-in">
+
+    <div id="navbar"></div>
+
+    <!-- Header Section -->
+    <section class="scroll-animate mx-auto pl-6 py-10 dark:bg-[#000000] transition-all duration-500 ease-in">
+        <div class="flex flex-col  lg:flex-row gap-8">
+            <!-- Left Content -->
+            <div class="lg:w-2/3 lg:pl-[150px] lg:pt-[50px] lg:pr-[200px]">
+                <h1 class="text-[#1783F7] dark:text-white text-5xl font-bold mb-4">BFSI (Banking & Financial Services)
+                </h1>
+                <p class="text-2xl leading-relaxed text-[#667085] dark:text-white  mb-4">AI-Driven Loan Origination &
+                    Collection Optimization</p>
+                <p class="text-base leading-relaxed text-[#667085] dark:text-white ">
+                    A fast-growing lender needed intelligent models to improve loan conversion and reduce collection
+                    losses across their retail and SME loan portfolio.
+                </p>
+            </div>
+            <!-- Right Image -->
+            <div class=" max-w-2xl">
+                <img src="/assets/updated/BFSI.png" alt="Team hands and ESG icons" class=" w-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- At a Glance Section -->
+    <section
+        class="scroll-animate bg-[#F6FAFF] dark:bg-[#181818] transition-all duration-500 ease-in py-10 max-w-6xl relative lg:left-[150px] lg:top-[-90px]">
+        <div>
+            <p class="text-[#1783F7] dark:text-white  text-2xl px-6">At a Glance</p>
+        </div>
+        <div class="mx-auto px-6 grid md:grid-cols-2 gap-5 lg:mt-[30px]">
+
+            <div>
+                <div class="flex gap-3">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image">
+                    <p class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">Industry</p>
+                </div>
+                <p class="text-[#667085] dark:text-white pl-6">Banking, Lending, Risk Management</p>
+            </div>
+
+            <div>
+                <div class="flex gap-3">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image">
+                    <p class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">What We Delivered</p>
+                </div>
+                <p class="text-[#667085] dark:text-white pl-6">Relevancy scoring model, DPD prediction model
+                </p>
+            </div>
+
+            <div>
+                <div class="flex gap-3">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image">
+                    <p class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">Solution</p>
+                </div>
+                <p class="text-[#667085] dark:text-white pl-6">AI-powered Loan Origination & Collection Models</p>
+            </div>
+
+            <div class="lg:mt-[10px]">
+                <div class="flex gap-3">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image">
+                    <p class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">Impact</p>
+                </div>
+                <p class="text-[#667085] dark:text-white pl-6">Higher conversions, 5% loss reduction, improved portfolio
+                    quality</p>
+            </div>
+
+            <div>
+                <div class="flex gap-3">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image">
+                    <p class="font-semibold text-[#687DA9] dark:text-white mb-1 text-xl">Key Challenges</p>
+                </div>
+                <p class="text-[#667085] dark:text-white pl-6"> FIFO underwriting, missed high-value customers, rising
+                    DPD risk</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Challenge Section -->
+    <section
+        class="scroll-animate lg:pl-[150px] lg:pr-[100px] px-6 flex flex-col md:flex-row items-center  md:mt-[100px] lg:mt-[-100px]">
+        <div class="">
+            <h2 class="text-4xl font-extrabold  text-[#1783F7] dark:text-white mb-4">The Challenge</h2>
+            <ul class="list-disc mt-8 ml-5 space-y-4 text-[#667085] dark:text-white">
+
+                <li class="flex gap-3 ">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image mt-[-2px]">
+                    <p class=" text-[#687DA9] dark:text-white mb-1 text-md font-medium"> Underwriters processed loan
+                        applications in FIFO mode
+                    </p>
+                </li>
+                <li class="flex gap-3 ">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image mt-[-2px]">
+                    <p class=" text-[#687DA9] dark:text-white mb-1 text-md font-medium"> High-value applications were
+                        getting delayed, leading to lost customers
+                    </p>
+                </li>
+                <li class="flex gap-3 ">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image mt-[-2px]">
+                    <p class=" text-[#687DA9] dark:text-white mb-1 text-md font-medium"> Collections teams lacked early
+                        warnings before loans went into high DPD brackets
+                    </p>
+                </li>
+                <li class="flex gap-3 ">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image mt-[-2px]">
+                    <p class=" text-[#687DA9] dark:text-white mb-1 text-md font-medium"> Needed ML-driven strategy to
+                        reduce NPA risk
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <!-- Image of Dashboard -->
+        <div class="mt-10">
+            <img src="/assets/kpmg_challenge.png" alt="ESG Dashboard" class="mx-auto max-w-full md:max-w-2xl">
+        </div>
+    </section>
+
+    <!--Our Solution Section-->
+    <section class="lg:px-[150px] mx-auto px-4 py-12" x-data="{ open: 1 }">
+        <h2 class="text-2xl  text-[#1783F7] dark:text-white mb-6">Our Solution</h2>
+
+        ML model that ranks all loan applications by portfolio fit
+        Underwriters prioritize high-value customers
+        Integrates with AWS Redshift & PowerBI dashboards
+        <!-- Accordion Items -->
+        <template x-for="(item, index) in [
+      { id: 1, title: 'Loan Origination – Relevancy Score Model', content: [
+        'ML model that ranks all loan applications by portfolio fit',
+         'Underwriters prioritize high-value customers','Integrates with AWS Redshift & PowerBI dashboards']},
+      { id: 2, title: 'Loan Collection – DPD Movement Prediction Model', content: [
+        'ML model that ranks all loan applications by portfolio fit',
+         'Underwriters prioritize high-value customers','Integrates with AWS Redshift & PowerBI dashboards']},
+       ]" :key="item.id">
+            <div class="border border-blue-100 dark:border-[#BFBFBF] dark:border-opacity-40 rounded-lg mb-3 cursor-pointer"
+                @click="open = open === item.id ? null : item.id">
+                <div class="flex items-center justify-between p-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 flex items-center justify-center border border-[#B2F0FB] dark:border-[#FFFFFF] text-[#687DA9] dark:text-[#FFFFFF] font-semibold rounded-full"
+                            x-text="item.id"></div>
+                        <span class="text-[#687DA9] dark:text-white font-semibold text-xl" x-text="item.title"></span>
+                    </div>
+                    <div :class="{ 'rotate-180': open === item.id }" class="transition-transform duration-500">
+                        <img src="/assets/upArrow.svg" data-dark="/assets/updated/upArrowDark.svg"
+                            data-light="/assets/upArrow.svg" class="w-5 h-5 theme-image" />
+                    </div>
+
+                </div>
+
+                <div x-show="open === item.id" x-transition:enter="transition ease-out duration-500"
+                    x-transition:enter-start="opacity-0 -translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-400"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 -translate-y-2" x-collapse x-cloak
+                    class="px-12 pb-4 text-sm text-[#667085] dark:text-white space-y-2 transition-all duration-900 ease-out overflow-hidden">
+                    <ul class="list-disc  ml-7 space-y-2 text-[#667085] dark:text-white">
+                        <template x-for="line in item.content" :key="line">
+                            <li x-text="line"></li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </template>
+
+    </section>
+
+    <!--Conclusion Section-->
+    <section class="scroll-animate lg:px-[150px] px-[30px] flex flex-col gap-16">
+        <div>
+            <h2 class="text-2xl font-extrabold  text-[#1783F7] dark:text-white mb-6">Technologies Used</h2>
+            <div class="flex  bg-white rounded-2xl justify-evenly py-6 pr-[450px]">
+                <img src="/assets/updated/react.svg" class="h-[50px]">
+                <img src="/assets/updated/cloud.svg" class="h-[50px]">
+                <img src="/assets/updated/net.svg" class="h-[50px]">
+                <img src="/assets/updated/azure.svg" class="h-[50px]">
+                <img src="/assets/updated/vscode.svg" class="h-[50px]">
+            </div>
+        </div>
+        <div class="">
+            <h2 class="text-2xl font-extrabold  text-[#1783F7] dark:text-white mb-6">Outcomes and Benefits</h2>
+            <div class="flex flex-col md:pl-8 gap-4">
+                <div class="flex gap-3 ">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image mt-[-2px]">
+                    <p class=" text-[#687DA9] dark:text-white mb-1 text-xl font-medium"> Higher loan conversion from
+                        targeted origination
+                    </p>
+                </div>
+                <div class="flex gap-3 ">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image mt-[-2px]">
+                    <p class=" text-[#687DA9] dark:text-white mb-1 text-xl font-medium"> Early collection action
+                        reducing losses by ~5%
+                    </p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image mt-[2px]">
+                    <p class=" text-[#687DA9] dark:text-white mb-1 text-xl font-medium"> Greater operational efficiency
+                        for underwriters and collections
+                    </p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <img src="/assets/arrow.svg" data-light="/assets/arrow.svg"
+                        data-dark="/assets/updated/crossArrowWhite.svg" class="theme-image mt-[2px]">
+                    <p class=" text-[#687DA9] dark:text-white mb-1 text-xl font-medium"> Improved portfolio health and
+                        reduced credit risk
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Other Case Studies Section-->
+    <!-- sliders -->
+    <section id="slider"
+        class="scroll-animate relative bg-[#F6FAFF] dark:bg-[#181818] transition-all duration-500 ease-in">
+        <div class=" md:pl-16 lg:pl-32  md:pr-16 lg:pr-32 mt-1 md:mt-8 lg:pt-[40px]">
+
+            <div class="flex  justify-between  space-x-4 pt-[30px] lg:pt-0">
+                <div>
+                    <p class="text-2xl text-[#1783F7] dark:text-white">Other Case Studies</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class=" rounded-full w-8 h-8 flex items-center justify-center   transition-all"
+                        id="prevBtn">
+                        <img src="/assets/arrowL.svg" data-light="/assets/arrowR.svg"
+                            data-dark="/assets/updated/rightWhiteArrow.svg" class="theme-image">
+                    </button>
+                    <button class=" rounded-full w-8 h-8 flex items-center justify-center  transition-all" id="nextBtn">
+                        <img src="/assets/arrowR.svg" data-light="/assets/arrowR.svg"
+                            data-dark="/assets/updated/leftWhiteArrow.svg" class="theme-image">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="relative">
+            <div
+                class="testimonial-slide active flex overflow-x-hidden snap-x md:ml-[20px] lg:ml-[100px] py-[60px] px-[20px] md:px-0">
+
+                <!-- Slide 1:  -->
+                <div class="group snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[250px] md:h-[343.1px] relative mx-2 p-4 md:p-0 
+       border border-[#BFBFBF] border-opacity-100 
+       dark:border-white dark:border-opacity-40 
+       rounded-2xl transform -translate-x-20 opacity-0 transition-all duration-700 ease-out slide-in">
+                    <div class="h-full w-full relative rounded-2xl overflow-hidden">
+                        <div class="relative lg:mt-[20px] lg:left-[350px]">
+                            <button class=" rounded-full w-8 h-8 flex items-center justify-center  transition-all"
+                                id="nextBtn">
+                                <img src="/assets/arrowR.svg" data-light="/assets/arrowR.svg"
+                                    data-dark="/assets/updated/leftWhiteArrow.svg" class="theme-image">
+                            </button>
+                        </div>
+                        <!-- <img src="/assets/updated/energyUtilitesCaseStudy.png" alt="Energy & Utilities"
+                            class="h-full w-full object-cover opacity-80" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A] transition-all duration-500 ease-in-out group-hover:from-[#1783F7]/60 group-hover:to-[#173D7A]  group-hover:bg-gradient-to-b">
+                        </div> -->
+                        <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                            <h2 class="text-xl md:text-2xl font-bold mb-2 text-[#687DA9] dark:text-white">Health Care
+                            </h2>
+                            <p class="text-sm md:text-lg font-normal leading-snug text-[#667085] dark:text-white">
+                                AI-Driven ESG Platform for Sustainable Infrastructure Projects
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2:  -->
+                <div class="group snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[250px] md:h-[343.1px] relative mx-2 p-4 md:p-0 
+       border border-[#BFBFBF] border-opacity-100 
+       dark:border-white dark:border-opacity-40 
+       rounded-2xl transform -translate-x-20 opacity-0 transition-all duration-700 ease-out slide-in">
+                    <div class="h-full w-full relative rounded-2xl overflow-hidden">
+                        <!-- <img src="" alt="Energy & Utilities"
+                                class="h-full w-full object-cover opacity-80" /> -->
+                        <!-- <div
+                                class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A] transition-all duration-500 ease-in-out group-hover:from-[#1783F7]/60 group-hover:to-[#173D7A]  group-hover:bg-gradient-to-b">
+                            </div> -->
+                        <div class="relative lg:mt-[20px] lg:left-[350px]">
+                            <button class=" rounded-full w-8 h-8 flex items-center justify-center  transition-all"
+                                id="nextBtn">
+                                <img s src="/assets/arrowR.svg" data-light="/assets/arrowR.svg"
+                                    data-dark="/assets/updated/leftWhiteArrow.svg" class="theme-image">
+                            </button>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                            <h2 class="text-xl md:text-2xl font-bold mb-2 text-[#687DA9] dark:text-white">
+                                Airports</h2>
+                            <p class="text-sm md:text-lg font-normal leading-snug text-[#667085] dark:text-white">
+                                End-to-End Airport Data Platform & AI Forecasting Engine
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3:  -->
+                <div class="group snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[250px] md:h-[343.1px] relative mx-2 p-4 md:p-0 
+       border border-[#BFBFBF] border-opacity-100 
+       dark:border-white dark:border-opacity-40 
+       rounded-2xl transform -translate-x-20 opacity-0 transition-all duration-700 ease-out slide-in">
+                    <div class="h-full w-full relative rounded-2xl overflow-hidden">
+                        <!-- <img src="" alt="Energy & Utilities"
+                                class="h-full w-full object-cover opacity-80" /> -->
+                        <!-- <div
+                                class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A] transition-all duration-500 ease-in-out group-hover:from-[#1783F7]/60 group-hover:to-[#173D7A]  group-hover:bg-gradient-to-b">
+                            </div> -->
+                        <div class="relative lg:mt-[20px] lg:left-[350px]">
+                            <button class=" rounded-full w-8 h-8 flex items-center justify-center  transition-all"
+                                id="nextBtn">
+                                <img s src="/assets/arrowR.svg" data-light="/assets/arrowR.svg"
+                                    data-dark="/assets/updated/leftWhiteArrow.svg" class="theme-image">
+                            </button>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                            <h2 class="text-xl md:text-2xl font-bold mb-2 text-[#687DA9] dark:text-white">BFSI (Banking
+                                & Financial Services)</h2>
+                            <p class="text-sm md:text-lg font-normal leading-snug text-[#667085] dark:text-white">
+                                AI-Driven Loan Origination & Collection Optimization
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4:  -->
+                <div class="group snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[250px] md:h-[343.1px] relative mx-2 p-4 md:p-0 
+       border border-[#BFBFBF] border-opacity-100 
+       dark:border-white dark:border-opacity-40 
+       rounded-2xl transform -translate-x-20 opacity-0 transition-all duration-700 ease-out slide-in">
+                    <div class="h-full w-full relative rounded-2xl overflow-hidden">
+                        <!-- <img src="" alt="Energy & Utilities"
+                                class="h-full w-full object-cover opacity-80" /> -->
+                        <!-- <div
+                                class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A] transition-all duration-500 ease-in-out group-hover:from-[#1783F7]/60 group-hover:to-[#173D7A]  group-hover:bg-gradient-to-b">
+                            </div> -->
+                        <div class="relative lg:mt-[20px] lg:left-[350px]">
+                            <button class=" rounded-full w-8 h-8 flex items-center justify-center  transition-all"
+                                id="nextBtn">
+                                <img s src="/assets/arrowR.svg" data-light="/assets/arrowR.svg"
+                                    data-dark="/assets/updated/leftWhiteArrow.svg" class="theme-image">
+                            </button>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                            <h2 class="text-xl md:text-2xl font-bold mb-2 text-[#687DA9] dark:text-white">Telecom</h2>
+                            <p class="text-sm md:text-lg font-normal leading-snug text-[#667085] dark:text-white">
+                                Enhance telecom networks with smart monitoring & automation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5:  -->
+                <div class="group snap-center flex-shrink-0 w-full md:w-[300px] lg:w-[404.93px] h-[250px] md:h-[343.1px] relative mx-2 p-4 md:p-0 
+       border border-[#BFBFBF] border-opacity-100 
+       dark:border-white dark:border-opacity-40 
+       rounded-2xl transform -translate-x-20 opacity-0 transition-all duration-700 ease-out slide-in">
+                    <div class="h-full w-full relative rounded-2xl overflow-hidden">
+                        <!-- <img src="" alt="Energy & Utilities"
+                                class="h-full w-full object-cover opacity-80" /> -->
+                        <!-- <div
+                                class="absolute inset-0 bg-gradient-to-b from-transparent to-[#173D7A] transition-all duration-500 ease-in-out group-hover:from-[#1783F7]/60 group-hover:to-[#173D7A]  group-hover:bg-gradient-to-b">
+                            </div> -->
+                        <div class="relative lg:mt-[20px] lg:left-[350px]">
+                            <button class=" rounded-full w-8 h-8 flex items-center justify-center  transition-all"
+                                id="nextBtn">
+                                <img s src="/assets/arrowR.svg" data-light="/assets/arrowR.svg"
+                                    data-dark="/assets/updated/leftWhiteArrow.svg" class="theme-image">
+                            </button>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 md:p-12 text-white z-10 opacity-90">
+                            <h2 class="text-xl md:text-2xl font-bold mb-2 text-[#687DA9] dark:text-white">Manufacturing
+                            </h2>
+                            <p class="text-sm md:text-lg font-normal leading-snug text-[#667085] dark:text-white">
+                                AI-Driven Jewelry Design Innovation – GenAI DesignSmith Platform
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const slider = document.querySelector('.testimonial-slide');
+                const slides = document.querySelectorAll('.snap-center');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                let currentIndex = 0;
+
+                // Helper: calculate actual slide width including margin
+                function getSlideWidth() {
+                    const slide = slides[0];
+                    const style = window.getComputedStyle(slide);
+                    const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+                    return slide.offsetWidth + margin;
+                }
+
+                // Helper: how many slides fit in viewport
+                function getVisibleSlidesCount() {
+                    return window.innerWidth < 768 ? 1 : 3;
+                }
+
+                function updateButtons() {
+                    const visibleCount = getVisibleSlidesCount();
+                    prevBtn.disabled = currentIndex === 0;
+                    nextBtn.disabled = currentIndex >= slides.length - visibleCount;
+                }
+
+                function goToSlide(index) {
+                    const visibleCount = getVisibleSlidesCount();
+                    if (index < 0 || index > slides.length - visibleCount) return;
+                    currentIndex = index;
+                    slider.scrollTo({
+                        left: index * getSlideWidth(),
+                        behavior: 'smooth'
+                    });
+                    updateButtons();
+                }
+
+                prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+                nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    goToSlide(currentIndex); // re-align scroll
+                    updateButtons();
+                });
+
+                // Initialize
+                updateButtons();
+            });
+        </script>
+
+    </section>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+    <script>
+        // Load footer dynamically
+        fetch("/footer.html")
+            .then(res => res.text())
+            .then(data => {
+                const footerContainer = document.getElementById("footer");
+                footerContainer.innerHTML = data;
+
+                // After footer is added, initialize footer animations
+                initFooterAnimations();
+            })
+            .catch(err => console.error("Error loading footer:", err));
+
+        function initFooterAnimations() {
+            const footerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+                        setTimeout(() => {
+                            entry.target.classList.remove('opacity-0', 'translate-y-10');
+                            entry.target.classList.add('opacity-100', 'translate-y-0');
+                        }, delay);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            const footerElements = document.querySelectorAll('#footer [data-delay]');
+            footerElements.forEach(el => footerObserver.observe(el));
+            // Zoom-in animation for social icons
+            const socialIcons = document.querySelectorAll('#footer img'); // target your social icons
+            socialIcons.forEach(icon => {
+                icon.classList.add('scale-0', 'transition-transform', 'duration-700', 'ease-out');
+            });
+
+            const iconObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('scale-0');
+                        entry.target.classList.add('scale-100');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            socialIcons.forEach(icon => iconObserver.observe(icon));
+        }
+
+    </script>
+
+    <!-- Tailwind overrides -->
+    <style>
+        .opacity-100 {
+            opacity: 1;
+        }
+
+        .translate-y-0 {
+            transform: translateY(0);
+        }
+
+        .scale-0 {
+            transform: scale(0);
+        }
+
+        .scale-100 {
+            transform: scale(1);
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const scrollElements = document.querySelectorAll(".scroll-animate");
+
+            const observer = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("visible");
+                            observer.unobserve(entry.target); // animate once
+                        }
+                    });
+                },
+                { threshold: 0.2 } // trigger when 20% visible
+            );
+
+            scrollElements.forEach(el => observer.observe(el));
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            const section = document.getElementById("solution-items");
+            const items = section.querySelectorAll(".solution-item");
+
+            const observer = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            items.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add("visible");
+                                }, index * 500); // 200ms delay between each item
+                            });
+
+                            observer.unobserve(entry.target); // only animate once
+                        }
+                    });
+                },
+                { threshold: 0.3 } // triggers when 30% visible
+            );
+
+            observer.observe(section);
+        });
+
+
+    </script>
+    <script>
+        const slides = document.querySelectorAll('.slide-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('-translate-x-20', 'opacity-0');
+                    entry.target.classList.add('translate-x-0', 'opacity-100');
+                }
+            });
+        }, { threshold: 0.3 }); // trigger when 30% of slide is visible
+
+        slides.forEach(slide => observer.observe(slide));
+    </script>
+
+</body>
+
+</html>
