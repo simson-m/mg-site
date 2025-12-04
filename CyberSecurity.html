@@ -8,7 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -17,8 +21,38 @@
                 .then((data) => {
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
-
                     const currentPath = window.location.pathname;
+
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
 
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
@@ -39,6 +73,8 @@
                             link.classList.add("text-[#687DA9]");
                         }
                     });
+
+
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -81,7 +117,6 @@
         });
     </script>
 
-
     <style>
         .testimonial-slide {
             transition: opacity 0.5s ease-in-out;
@@ -119,22 +154,22 @@
     </style>
 </head>
 
-<body>
+<body class="dark:bg-black transition-all duration-500 ease-in">
 
     <div id="navbar"></div>
 
     <!-- Top Section -->
-    <section class="relative bg-white pt-16  pb-8 md:pb-32 md:px-6">
+    <section class="relative bg-white dark:bg-black transition-all duration-500 ease-in pt-16  pb-8 md:pb-32 md:px-6">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <!-- Left Text -->
             <div>
-                <h1 class="text-5xl font-bold text-[#1783F7] mb-4 lg:mr-[200px]">Cybersecurity</h1>
+                <h1 class="text-5xl font-bold text-[#1783F7] dark:text-white mb-4 lg:mr-[200px]">Cybersecurity</h1>
                 <div class="md:hidden">
                     <img src="assets/cyberOverview.png " alt="AI chip" class=" w-full h-auto object-cover" />
 
                 </div>
-                <h2 class="text-xl font-semibold text-[#1783F7] mb-2 mt-6 md:mt-0 px-4 md:px-0">Overview</h2>
-                <p class="text-[#667085] leading-relaxed px-4 md:px-0">
+                <h2 class="text-xl font-semibold text-[#1783F7] dark:text-white mb-2 mt-6 md:mt-0 px-4 md:px-0">Overview</h2>
+                <p class="text-[#667085] dark:text-white leading-relaxed px-4 md:px-0">
                     In today’s hyper-connected world, cybersecurity is more than just a technical requirement — it’s a
                     strategic imperative. At Mindgraph, we deliver comprehensive cybersecurity services that help
                     organizations stay ahead of evolving threats across both Information Technology (IT) and Operational
@@ -155,10 +190,10 @@
     </section>
 
     <!-- What We Offer Section -->
-    <section class="bg-[#EFFBFF]  py-8 md:py-20 md:px-6">
+    <section class="bg-[#EFFBFF] dark:bg-[#181818] transition-all duration-500 ease-in  py-8 md:py-20 md:px-6">
         <div class="max-w-7xl mx-auto relative z-20">
-            <h3 class="text-2xl font-semibold text-[#1783F7] mb-2 px-4 md:px-0">What We Offer</h3>
-            <p class="text-[#667085] mb-10 px-4 md:px-0">We provide a wide range of AI-driven services and solutions
+            <h3 class="text-2xl font-semibold text-[#1783F7] dark:text-white mb-2 px-4 md:px-0">What We Offer</h3>
+            <p class="text-[#667085] dark:text-white mb-10 px-4 md:px-0">We provide a wide range of AI-driven services and solutions
                 tailored to meet
                 the unique challenges of modern enterprises</p>
 
@@ -166,14 +201,14 @@
                 <div class="max-w-7xl mx-auto space-y-0 divide-y divide-[#C8C7CC] border-t border-[#C8C7CC]">
                     <!-- Card 1 -->
                     <div class="flex flex-col md:flex-row md:items-center  gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">01</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">01</span>
                         <img src="assets/cyberOffer1.png" alt="NLP" class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Security Operations Center (SOC) as a
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Security Operations Center (SOC) as a
                                     Service</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Round-the-clock monitoring, incident detection, and response through a centralized SOC
                                 powered by advanced analytics and automation.
                             </p>
@@ -182,15 +217,15 @@
 
                     <!-- Card 2 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">02</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">02</span>
                         <img src="assets/cyberOffer2.png" alt="Computer Vision"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Threat Intelligence, SIEM, and
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Threat Intelligence, SIEM, and
                                     Real-Time Monitoring</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Integration of Security Information and Event Management (SIEM) with contextual threat
                                 intelligence for dynamic, real-time threat visibility and response.
                             </p>
@@ -199,15 +234,15 @@
 
                     <!-- Card 3 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">03</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">03</span>
                         <img src="assets/cyberOffer3.png" alt="Analytics"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Vulnerability Assessment & Penetration
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Vulnerability Assessment & Penetration
                                     Testing (VAPT)</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Regular scanning, assessment, and ethical hacking to uncover and mitigate potential
                                 vulnerabilities in networks, applications, and systems.
                             </p>
@@ -216,14 +251,14 @@
 
                     <!-- Card 4 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">04</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">04</span>
                         <img src="assets/cyberOffer4.png" alt="Recommendation"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Cloud and Infrastructure Security</h4>
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Cloud and Infrastructure Security</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Secure cloud workloads, hybrid environments, and on-premises infrastructure using
                                 hardened configurations, encryption, and continuous compliance. </p>
                         </div>
@@ -231,15 +266,15 @@
 
                     <!-- Card 5 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">05</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">05</span>
                         <img src="assets/cyberOffer5.png" alt="Custom Models"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Regulatory Compliance and Governance
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Regulatory Compliance and Governance
                                 </h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Implementation and support for frameworks such as ISO 27001, NIST CSF, HIPAA, and GDPR,
                                 ensuring your business stays audit-ready and regulation-compliant.</p>
                         </div>
@@ -254,7 +289,7 @@
         <div class="max-w-7xl mx-auto">
             <!-- Heading -->
             <div class="flex justify-center md:justify-start">
-                <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
+                <h2 class="text-2xl font-semibold text-[#1783F7] dark:text-white mb-10">Key Strengths</h2>
             </div>
             <!-- Grid layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -263,8 +298,8 @@
                     <img src="assets/cyberKey1.png" alt="AI Accelerators"
                         class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Zero Trust Architecture Enablement</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Zero Trust Architecture Enablement</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Design and implementation of Zero Trust models to ensure strict access control and trust
                             verification across users, devices, and networks.
                         </p>
@@ -276,9 +311,9 @@
                     <img src="assets/cyberKey2.png" alt="MLOps"
                         class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">AI-Powered Threat Detection and Automated
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">AI-Powered Threat Detection and Automated
                             Response</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Leverage machine learning and behavioral analytics for early threat identification and
                             rapid, automated incident containment.
                         </p>
@@ -290,8 +325,8 @@
                     <img src="assets/cyberKey3.png" alt="Ethical AI"
                         class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Operational Technology (OT) Security</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Operational Technology (OT) Security</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Specialized protection for critical infrastructure and industrial environments, minimizing
                             risk to SCADA, PLCs, and other control systems.
                         </p>
@@ -303,8 +338,8 @@
                     <img src="assets/cyberKey4.png" alt="Cloud AI"
                         class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Proactive Incident Handling and Forensics</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Proactive Incident Handling and Forensics</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             End-to-end incident response capabilities including root cause analysis, threat containment,
                             and digital forensics to support recovery and legal proceedings.
                         </p>
@@ -313,7 +348,7 @@
             </div>
 
             <!-- Bottom Line -->
-            <div class="border-t border-[#C8C7CC] mt-16"></div>
+            <div class="border-t border-[#C8C7CC] dark:border-[#FFFFFF] dark:opacity-[40%] mt-16"></div>
         </div>
     </section>
 

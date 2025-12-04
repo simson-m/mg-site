@@ -8,7 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -19,13 +23,44 @@
                     lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
 
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
+
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
                         const linkPath = new URL(link.href).pathname;
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white");
                         }
                     });
 
@@ -35,9 +70,11 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white");
                         }
                     });
+
+
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -118,23 +155,23 @@
     </style>
 </head>
 
-<body>
+<body  class="dark:bg-black transition-all duration-500 ease-in">
 
     <div id="navbar"></div>
 
     <!-- Top Section -->
-    <section class="relative bg-white pt-16   md:px-6">
+    <section class="relative bg-white dark:bg-black transition-all duration-500 ease-in pt-16   md:px-6">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <!-- Left Text -->
             <div class="pb-[30px] md:pb-[50px]">
-                <h1 class="text-5xl font-bold text-[#1783F7] mb-4 lg:mr-[100px]">Cloud & Infrastructure Services</h1>
+                <h1 class="text-5xl font-bold text-[#1783F7] dark:text-white mb-4 lg:mr-[100px]">Cloud & Infrastructure Services</h1>
                 <div class="md:hidden">
                     <img src="assets/cOverview.png" alt="AI chip" class=" w-full h-auto object-cover" />
 
                 </div>
                 <div class="px-4 md:px-0 pt-6 md:pt-0">
-                    <h2 class="text-xl font-semibold text-[#1783F7] mb-2">Overview</h2>
-                    <p class="text-[#667085] leading-relaxed">
+                    <h2 class="text-xl font-semibold text-[#1783F7] dark:text-white mb-2">Overview</h2>
+                    <p class="text-[#667085] dark:text-white leading-relaxed">
                         In an era driven by digital agility and scalability, Mindgraph empowers enterprises to modernize
                         their infrastructure and unlock the full potential of the cloud. Our Cloud & Infrastructure
                         Services
@@ -158,10 +195,10 @@
     </section>
 
     <!-- What We Offer Section -->
-    <section class="bg-[#EFFBFF] py-8 md:py-20 lg:px-6">
+    <section class="bg-[#EFFBFF] dark:bg-[#181818]  transition-all duration-500 ease-in py-8 md:py-20 lg:px-6">
         <div class="max-w-7xl mx-auto relative z-20">
-            <h3 class="text-2xl font-semibold text-[#1783F7] mb-2 px-4 lg:px-0">What We Offer</h3>
-            <p class="text-[#667085] mb-10 px-4 lg:px-0">We provide a wide range of AI-driven services and solutions
+            <h3 class="text-2xl font-semibold text-[#1783F7] dark:text-white mb-2 px-4 lg:px-0">What We Offer</h3>
+            <p class="text-[#667085] dark:text-white mb-10 px-4 lg:px-0">We provide a wide range of AI-driven services and solutions
                 tailored to meet
                 the unique challenges of modern enterprises</p>
 
@@ -169,14 +206,14 @@
                 <div class="max-w-7xl mx-auto space-y-0 divide-y divide-[#C8C7CC] border-t border-[#C8C7CC]">
                     <!-- Card 1 -->
                     <div class="flex flex-col md:flex-row md:items-center  gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">01</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">01</span>
                         <img src="assets/cyberOffer1.png" alt="NLP" class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Cloud Migration & Readiness
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Cloud Migration & Readiness
                                     Assessments</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Strategic evaluation and planning for seamless migration from on-prem to cloud, with
                                 minimal disruption and aligned to business needs.
                             </p>
@@ -185,15 +222,15 @@
 
                     <!-- Card 2 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">02</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">02</span>
                         <img src="assets/cloudOffer2.png" alt="Computer Vision"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">DevOps Implementation & Automation
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">DevOps Implementation & Automation
                                     Pipelines</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 CI/CD pipeline setup, container orchestration (Kubernetes, Docker), and integrated
                                 tooling for faster, reliable, and secure software delivery.
                             </p>
@@ -202,15 +239,15 @@
 
                     <!-- Card 3 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">03</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">03</span>
                         <img src="assets/cloudOffer3.png" alt="Analytics"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Infrastructure as Code (IaC) &
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Infrastructure as Code (IaC) &
                                     Provisioning</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Automated provisioning and configuration using tools like Terraform, CloudFormation, and
                                 Ansible to ensure consistency and repeatability.
                             </p>
@@ -219,15 +256,15 @@
 
                     <!-- Card 4 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">04</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">04</span>
                         <img src="assets/cloudOffer4.png" alt="Recommendation"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Performance Optimization &
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Performance Optimization &
                                     Observability</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 End-to-end visibility, log aggregation, and real-time monitoring with tools like
                                 Prometheus, Grafana, and Datadog to improve uptime and response. </p>
                         </div>
@@ -235,15 +272,15 @@
 
                     <!-- Card 5 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">05</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">05</span>
                         <img src="assets/cloudOffer5.png" alt="Custom Models"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Disaster Recovery & Business
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Disaster Recovery & Business
                                     Continuity Planning</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Architecting high-availability solutions with automated failover, backup strategies, and
                                 geographically distributed recovery setups. </p>
                         </div>
@@ -258,7 +295,7 @@
         <div class="max-w-7xl mx-auto">
             <!-- Heading -->
             <div class="flex justify-center md:justify-start">
-                <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
+                <h2 class="text-2xl font-semibold text-[#1783F7] dark:text-white mb-10">Key Strengths</h2>
             </div>
             <!-- Grid layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -267,8 +304,8 @@
                     <img src="assets/cloudKeyOne.png" alt="AI Accelerators"
                         class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Multi-Cloud & Hybrid Cloud Expertise</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Multi-Cloud & Hybrid Cloud Expertise</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Proven experience in architecting and managing distributed environments that span across
                             AWS, Azure, GCP, and on-prem data centers.
                         </p>
@@ -280,8 +317,8 @@
                     <img src="assets/cloudKey2.png" alt="MLOps"
                         class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Cloud Cost Optimization & Governance</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Cloud Cost Optimization & Governance</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Rightsizing workloads, implementing budgets and policies, and leveraging FinOps practices to
                             control and reduce cloud spend.
                         </p>
@@ -293,8 +330,8 @@
                     <img src="assets/cloudKey3.png" alt="Ethical AI"
                         class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Security-First Cloud Deployments</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Security-First Cloud Deployments</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Built-in identity management, encryption, network hardening, and compliance with
                             cloud-native security practices.
                         </p>
@@ -306,8 +343,8 @@
                     <img src="assets/cloudKey4.png" alt="Cloud AI"
                         class="w-full md:w-48 h-[8rem] md:h-auto xl:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">24/7 Infrastructure Monitoring & Support</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">24/7 Infrastructure Monitoring & Support</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Proactive support services with real-time alerts, incident response, and SLA-backed
                             operations to ensure system reliability and continuity.
                         </p>
@@ -315,8 +352,8 @@
                 </div>
             </div>
 
-            <!-- Bottom Line -->
-            <div class="border-t border-[#C8C7CC] mt-16"></div>
+            <!-- Bottom Line --> 
+            <div class="border-t border-[#C8C7CC] mt-16 dark:border-[#FFFFFF] dark:opacity-[40%]"></div>
         </div>
     </section>
 

@@ -8,7 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -17,8 +21,38 @@
                 .then((data) => {
                     document.getElementById("navbar").innerHTML = data;
                     lucide.createIcons(); // Initialize icons after insertion
-
                     const currentPath = window.location.pathname;
+
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
 
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
@@ -26,7 +60,7 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white");
                         }
                     });
 
@@ -36,9 +70,11 @@
                         if (currentPath === linkPath) {
                             link.classList.add("font-bold");
                             link.classList.remove("text-[#7E7E7E]");
-                            link.classList.add("text-[#687DA9]");
+                            link.classList.add("text-[#687DA9] dark:text-white");
                         }
                     });
+
+
                     // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
@@ -81,7 +117,6 @@
         });
     </script>
 
-
     <style>
         .testimonial-slide {
             transition: opacity 0.5s ease-in-out;
@@ -119,24 +154,24 @@
     </style>
 </head>
 
-<body>
+<body  class="dark:bg-black transition-all duration-500 ease-in">
 
     <div id="navbar"></div>
 
     <!-- Top Section -->
-    <section class="relative bg-white pt-16  md:px-6">
+    <section class="relative bg-white dark:bg-black transition-all duration-500 ease-in pt-16  md:px-6">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <!-- Left Text -->
             <div class="pb-[30px] md:pb-[50px]">
-                <h1 class="text-4xl md:text-5xl font-bold text-[#1783F7] mb-4 lg:mr-[200px] px-2">ERP, CRM & AI
+                <h1 class="text-4xl md:text-5xl font-bold text-[#1783F7] dark:text-white mb-4 lg:mr-[200px] px-2">ERP, CRM & AI
                     Ecosystem</h1>
                 <div class="md:hidden">
                     <img src="assets/erpOverview.png" alt="AI chip" class=" w-full h-auto object-cover" />
 
                 </div>
                 <div class="px-4 md:px-0 pt-4 md:pt-0">
-                    <h2 class="text-xl font-semibold text-[#1783F7] mb-2">Overview</h2>
-                    <p class="text-[#667085] leading-relaxed">
+                    <h2 class="text-xl font-semibold text-[#1783F7] dark:text-white mb-2">Overview</h2>
+                    <p class="text-[#667085] dark:text-white leading-relaxed">
                         In today’s fast-paced digital economy, organizations require more than just standalone systems —
                         they need a connected ecosystem that seamlessly unifies operations, customer engagement, and
                         data
@@ -159,10 +194,10 @@
     </section>
 
     <!-- What We Offer Section -->
-    <section class="bg-[#EFFBFF] py-6 md:py-20 md:px-6">
+    <section class="bg-[#EFFBFF] dark:bg-[#181818] transition-all duration-500 ease-in py-6 md:py-20 md:px-6">
         <div class="max-w-7xl mx-auto relative z-20">
-            <h3 class="text-2xl font-semibold text-[#1783F7] mb-2 px-4 md:px-0">What We Offer</h3>
-            <p class="text-[#667085] mb-10 px-4 md:px-0">We provide a wide range of AI-driven services and solutions
+            <h3 class="text-2xl font-semibold text-[#1783F7] dark:text-white mb-2 px-4 md:px-0">What We Offer</h3>
+            <p class="text-[#667085] dark:text-white mb-10 px-4 md:px-0">We provide a wide range of AI-driven services and solutions
                 tailored to meet
                 the unique challenges of modern enterprises</p>
 
@@ -170,14 +205,15 @@
                 <div class="max-w-7xl mx-auto space-y-0 divide-y divide-[#C8C7CC] border-t border-[#C8C7CC]">
                     <!-- Card 1 -->
                     <div class="flex flex-col md:flex-row md:items-center  gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">01</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">01</span>
                         <img src="assets/erpOffer1.png" alt="NLP" class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Salesforce, Zoho, and Microsoft
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Salesforce, Zoho, and
+                                    Microsoft
                                     Dynamics CRM Integration</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Custom configuration and end-to-end integration of leading CRM platforms to support
                                 marketing automation, lead nurturing, sales management, and customer support.
                             </p>
@@ -186,15 +222,16 @@
 
                     <!-- Card 2 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">02</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">02</span>
                         <img src="assets/erpOffer2.png" alt="Computer Vision"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">SAP, Oracle, and Microsoft Dynamics
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">SAP, Oracle, and
+                                    Microsoft Dynamics
                                     ERP Implementation & Upgrades</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Full-cycle ERP services, including system design, data migration, custom module
                                 development, and upgrades to the latest cloud or hybrid versions.
                             </p>
@@ -203,15 +240,16 @@
 
                     <!-- Card 3 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">03</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">03</span>
                         <img src="assets/erpOffer3.png" alt="Analytics"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">AI-Enabled Dashboards & Process
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">AI-Enabled Dashboards
+                                    & Process
                                     Automation</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Smart analytics dashboards, predictive insights, and AI-powered workflows to automate
                                 approvals, forecasting, and exception handling.
                             </p>
@@ -220,15 +258,16 @@
 
                     <!-- Card 4 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">04</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">04</span>
                         <img src="assets/erpOffer4.png" alt="Recommendation"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Workflow Design, Data Synchronization
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Workflow Design, Data
+                                    Synchronization
                                     & Reporting Intelligence</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Cross-platform workflow engineering, real-time data sync between ERP-CRM systems, and
                                 generation of unified reports with actionable insights. </p>
                         </div>
@@ -236,15 +275,16 @@
 
                     <!-- Card 5 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">05</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">05</span>
                         <img src="assets/erpOffer5.png" alt="Custom Models"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">User Training, Change Management &
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">User Training, Change
+                                    Management &
                                     SLA-Based Support</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Comprehensive enablement programs to onboard teams, manage change adoption, and ensure
                                 ongoing performance with dedicated support and service-level agreements. </p>
                         </div>
@@ -259,7 +299,7 @@
         <div class="max-w-7xl mx-auto">
             <!-- Heading -->
             <div class="flex justify-center  md:justify-start">
-                <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
+                <h2 class="text-2xl font-semibold text-[#1783F7] dark:text-white mb-10">Key Strengths</h2>
             </div>
             <!-- Grid layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -268,8 +308,9 @@
                     <img src="assets/erpKey1.png" alt="AI Accelerators"
                         class="w-full md:w-48 h-[8rem] md:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Deep Expertise in ERP–CRM–AI Integration</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Deep Expertise in ERP–CRM–AI
+                            Integration</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Proven ability to connect enterprise platforms with minimal disruption, ensuring seamless
                             data flow and operational harmony.
                         </p>
@@ -280,8 +321,9 @@
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-[20px]">
                     <img src="assets/erpKey2.png" alt="MLOps" class="w-full md:w-48 h-[8rem] md:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Industry-Specific Prebuilt Workflows</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Industry-Specific Prebuilt
+                            Workflows</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Accelerators tailored for industries such as BFSI, healthcare, manufacturing, and retail to
                             reduce implementation time and enhance value realization.
                         </p>
@@ -293,9 +335,10 @@
                     <img src="assets/erpKey3.png" alt="Ethical AI"
                         class="w-full md:w-48 h-[8rem] md:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Customer 360 & Operational Visibility
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Customer 360 & Operational
+                            Visibility
                             Solutions</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Unified views of customer journeys, financial performance, and supply chain operations for
                             better planning and responsiveness.
                         </p>
@@ -306,9 +349,10 @@
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-[20px]">
                     <img src="assets/erpKey4.png" alt="Cloud AI" class="w-full md:w-48 h-[8rem] md:h-48 object-cover" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">End-to-End Ownership from Setup to
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">End-to-End Ownership from
+                            Setup to
                             Optimization</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             We take full responsibility from planning and deployment to continuous improvement, ensuring
                             your enterprise ecosystem evolves with your business needs.
                         </p>
@@ -317,7 +361,7 @@
             </div>
 
             <!-- Bottom Line -->
-            <div class="border-t border-[#C8C7CC] mt-16"></div>
+            <div class="border-t border-[#C8C7CC] mt-16 dark:border-[#FFFFFF] dark:opacity-[40%]"></div>
         </div>
     </section>
 

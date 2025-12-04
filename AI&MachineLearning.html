@@ -9,15 +9,50 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="/global.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             fetch("/navbar.html")
                 .then((res) => res.text())
                 .then((data) => {
                     document.getElementById("navbar").innerHTML = data;
-                    lucide.createIcons();
+                    lucide.createIcons(); // Initialize icons after insertion
                     const currentPath = window.location.pathname;
+
+                    const toggle = document.getElementById('dark-mode-toggle');
+                    if (toggle) {
+                        // Use change event on the checkbox
+                        toggle.addEventListener('change', () => {
+                            if (toggle.checked) {
+                                document.documentElement.classList.add('dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.classList.remove('dark');
+                                localStorage.setItem('theme', 'light');
+                            }
+                            updateThemeImages();
+                        });
+
+                        // Set initial checkbox state based on localStorage
+                        if (localStorage.getItem('theme') === 'dark') {
+                            toggle.checked = true;
+                            document.documentElement.classList.add('dark');
+                        }
+                    }
+                    // updateArrowImages();
+                    function updateThemeImages() {
+                        const isDark = document.documentElement.classList.contains("dark");
+
+                        document.querySelectorAll(".theme-image").forEach(img => {
+                            const newSrc = isDark ? img.dataset.dark : img.dataset.light;
+                            img.src = newSrc;
+                        });
+                    }
+
 
                     // Highlight desktop links
                     document.querySelectorAll("#navbar nav a").forEach((link) => {
@@ -38,6 +73,9 @@
                             link.classList.add("text-[#687DA9]");
                         }
                     });
+
+
+                    // ✅ MOVE THIS LOGIC HERE so it runs after navbar is injected
                     const mobileMenuButton = document.getElementById("mobile-menu-button");
                     const closeMenuButton = document.getElementById("close-menu-button");
                     const mobileMenu = document.getElementById("mobile-menu");
@@ -48,6 +86,7 @@
                     }
 
                     mobileMenuButton.addEventListener("click", function () {
+                        console.log("Mobile menu button clicked");
                         mobileMenu.classList.toggle("hidden");
                         mobileMenu.classList.toggle("flex");
                         document.body.classList.toggle("overflow-hidden");
@@ -59,7 +98,9 @@
                         document.body.classList.remove("overflow-hidden");
                     });
 
-                    const mobileDropdownToggles = document.querySelectorAll(".mobile-dropdown-toggle");
+                    const mobileDropdownToggles = document.querySelectorAll(
+                        ".mobile-dropdown-toggle"
+                    );
 
                     mobileDropdownToggles.forEach((toggle) => {
                         toggle.addEventListener("click", function () {
@@ -111,21 +152,23 @@
     </style>
 </head>
 
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden dark:bg-black transition-all duration-500 ease-in">
     <div id="navbar"></div>
 
     <!-- Top Section -->
-    <section class="relative bg-white pt-16  pb-12 md:pb-32 ">
+    <section class="relative bg-white pt-16  pb-12 md:pb-32 dark:bg-[#000000] transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto flex flex-col-reverse md:grid md:grid-cols-2 gap-10 items-center">
             <div class="z-10">
-                <h1 class="md:text-4xl text-5xl font-bold text-[#1783F7] mb-4 px-4">AI & Machine Learning</h1>
+                <h1 class="md:text-4xl text-5xl font-bold text-[#1783F7] dark:text-white mb-4 px-4">AI & Machine
+                    Learning</h1>
                 <div class="md:hidden">
                     <img src="assets/aiOverview.png" alt="AI chip"
                         class=" w-full h-auto object-cover max-h-[400px] lg:max-h-none" />
                 </div>
-                <h2 class="md:text-lg text-2xl font-semibold text-[#1783F7] mb-2 px-4 mt-6 md:mt-0">Overview</h2>
+                <h2 class="md:text-lg text-3xl font-semibold text-[#1783F7] dark:text-white mb-2 px-4 mt-6 md:mt-0">
+                    Overview</h2>
 
-                <p class="text-[#667085] leading-relaxed text-sm sm:text-base px-4">
+                <p class="text-[#667085] dark:text-white leading-relaxed text-sm sm:text-base px-4">
                     At Mindsight, we specialize in delivering bespoke Artificial Intelligence (AI) and Machine Learning
                     (ML)
                     solutions that drive intelligent automation, improve operational efficiency, and unlock
@@ -148,11 +191,12 @@
     </section>
 
     <!-- What We Offer Section -->
-    <section class="bg-[#EFFBFF] py-6 md:py-20 md:px-6">
+    <section class="bg-[#EFFBFF] dark:bg-[#181818] py-6 md:py-20 md:px-6 transition-all duration-500 ease-in">
         <div class="max-w-7xl mx-auto">
             <div class="px-6">
-                <h3 class="text-2xl font-semibold text-[#1783F7] mb-2">What We Offer</h3>
-                <p class="text-[#667085] mb-10">We provide a wide range of AI-driven services and solutions tailored to
+                <h3 class="text-2xl font-semibold text-[#1783F7] dark:text-white mb-2">What We Offer</h3>
+                <p class="text-[#667085] dark:text-white mb-10">We provide a wide range of AI-driven services and
+                    solutions tailored to
                     meet
                     the unique challenges of modern enterprises</p>
             </div>
@@ -161,13 +205,14 @@
 
                     <!-- Card 1 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">01</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">01</span>
                         <img src="assets/aiOffer1.png" alt="NLP" class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Natural Language Processing (NLP)</h4>
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Natural Language
+                                    Processing (NLP)</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Build conversational agents (chatbots, virtual assistants), automate document
                                 processing, and perform sentiment and intent analysis using advanced language models.
                             </p>
@@ -176,14 +221,15 @@
 
                     <!-- Card 2 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">02</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">02</span>
                         <img src="assets/aiOffer2.png" alt="Computer Vision"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Computer Vision Applications</h4>
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Computer Vision
+                                    Applications</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Implement AI models that analyze images and videos for tasks such as object detection,
                                 facial recognition, defect detection, and real-time quality control in manufacturing.
                             </p>
@@ -192,14 +238,15 @@
 
                     <!-- Card 3 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">03</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">03</span>
                         <img src="assets/aiOffer3.png" alt="Analytics"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Predictive Analytics</h4>
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Predictive Analytics
+                                </h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Use machine learning algorithms to forecast trends, identify customer churn, detect
                                 anomalies, and support proactive business planning across industries.
                             </p>
@@ -208,15 +255,16 @@
 
                     <!-- Card 4 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">04</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">04</span>
                         <img src="assets/aiOffer4.png" alt="Recommendation"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Recommendation & Personalization
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Recommendation &
+                                    Personalization
                                     Engines</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Deliver hyper-personalized user experiences with AI-powered recommendation systems for
                                 e-commerce, entertainment platforms, and digital content.
                             </p>
@@ -225,14 +273,15 @@
 
                     <!-- Card 5 -->
                     <div class="flex flex-col md:flex-row md:items-center gap-6 py-6">
-                        <span class="text-[#1783F7] text-xl font-bold w-10">05</span>
+                        <span class="text-[#1783F7] dark:text-white text-xl font-bold w-10">05</span>
                         <img src="assets/aiOffer5.png" alt="Custom Models"
                             class="md:w-36 md:h-20 object-cover rounded-md" />
                         <div class="flex flex-col md:flex-row md:justify-between w-full">
                             <div class="md:w-1/2 lg:w-1/3 mb-2 md:mb-0">
-                                <h4 class="text-2xl font-semibold text-[#687DA9]">Custom AI Model Development</h4>
+                                <h4 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Custom AI Model
+                                    Development</h4>
                             </div>
-                            <p class="text-[#667085] md:w-2/3 text-sm">
+                            <p class="text-[#667085] dark:text-white md:w-2/3 text-sm">
                                 Design and deploy AI models tailored to specific industry domains such as healthcare
                                 (diagnostic support, medical imaging), BFSI (fraud detection, risk scoring), and
                                 manufacturing (predictive maintenance, process optimization).
@@ -250,17 +299,18 @@
         <div class="max-w-7xl mx-auto">
             <!-- Heading -->
             <div class="flex justify-center md:justify-start">
-                <h2 class="text-2xl font-semibold text-[#1783F7] mb-10">Key Strengths</h2>
+                <h2 class="text-2xl font-semibold text-[#1783F7] dark:text-white mb-10">Key Strengths</h2>
             </div>
             <!-- Grid layout -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <!-- Card 1 -->
-                <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
+                <div class="md:flex border border-[#DFE7EB] dark:border-[#FFFFFF]  overflow-hidden md:pr-5">
                     <img src="assets/aiKey1.png" alt="AI Accelerators"
-                        class="w-full md:w-48 h-[10rem] md:h-full lg:h-48 object-cover" />
+                        class="w-full md:w-48 h-[10rem] md:h-full lg:h-48 object-cover object-top" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">AI Accelerators for Rapid Deployment</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">AI Accelerators for Rapid
+                            Deployment</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Pre-built models, reusable frameworks, and toolkits that reduce time-to-market and expedite
                             AI integration into existing systems.
                         </p>
@@ -270,10 +320,11 @@
                 <!-- Card 2 -->
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
                     <img src="assets/aiKey2.png" alt="MLOps"
-                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
+                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover object-top" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Model Lifecycle Management with MLOps</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Model Lifecycle Management
+                            with MLOps</h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             End-to-end machine learning operations (MLOps) to ensure scalable, reproducible, and
                             continuous model development, testing, deployment, and monitoring.
                         </p>
@@ -283,10 +334,11 @@
                 <!-- Card 3 -->
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
                     <img src="assets/aiKey3.png" alt="Ethical AI"
-                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
+                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover object-top" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Ethical and Responsible AI</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Ethical and Responsible AI
+                        </h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             We incorporate transparency, fairness, and accountability into our AI models, ensuring
                             compliance with ethical standards and regulatory requirements.
                         </p>
@@ -296,10 +348,11 @@
                 <!-- Card 4 -->
                 <div class="md:flex border border-[#DFE7EB]  overflow-hidden md:pr-5">
                     <img src="assets/aiKey4.png" alt="Cloud AI"
-                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover" />
+                        class="w-full md:w-48 h-[10rem]  md:h-full lg:h-48 object-cover object-top" />
                     <div class="p-4">
-                        <h3 class="text-2xl font-semibold text-[#687DA9]">Cloud-Native AI Architectures</h3>
-                        <p class="text-sm text-[#667085] mt-2">
+                        <h3 class="text-2xl font-semibold text-[#687DA9] dark:text-white">Cloud-Native AI Architectures
+                        </h3>
+                        <p class="text-sm text-[#667085] dark:text-white mt-2">
                             Leverage cloud platforms (AWS, Azure, GCP) to deploy and scale AI solutions securely and
                             cost-effectively, supporting hybrid and multi-cloud environments.
                         </p>
@@ -308,7 +361,7 @@
             </div>
 
             <!-- Bottom Line -->
-            <div class="border-t border-[#C8C7CC] mt-16"></div>
+            <div class="border-t border-[#C8C7CC] mt-16 dark:border-[#FFFFFF] dark:opacity-[40%]"></div>
         </div>
     </section>
 
